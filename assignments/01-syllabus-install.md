@@ -44,8 +44,9 @@ Your task is to:
 1. Create your portfolio, by [accepting the assignment]
 1. Learn about your portfolio from the README file on your repository.
 1. Follow instructions in the README to make your portfolio your own with information about yourself(not evaluated, but useful) and your own definition of data science (graded for **level 1 process**)
-1. Add a Jupyter notebook called `grading.ipynb` to the `about` folder and write a function that computes a grade for this course, with the  docstring below.
-1. Add the line `  - file: about/grading` in your `_toc.yml` file.
+2. complete the `success.md`` file as per the instructions in the comments
+3. Add a Jupyter notebook called `grading.ipynb` to the `about` folder and write a function that computes a grade for this course, with the  docstring below.
+4. Add the line `  - file: about/grading` in your `_toc.yml` file.
 
 ```{important}
 the syntax of the line added to your `_toc.yml` has to be exact
