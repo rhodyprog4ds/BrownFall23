@@ -49,7 +49,7 @@ We have several different ways to communicate in this course. This section summa
 :tags: ["remove-input"]
 
 df = df[['usage','platform','area','note']]
-display(HTML(df.style.hide()))
+df.style.hide(axis="index")
 ```
 
 ```{note}
@@ -63,7 +63,7 @@ e-mail is last because it's not collaborative; other platforms allow us (Proesso
 
 for platform, data in df.groupby('platform'):
     display(HTML('<h3> Use '+ platform + ' for </h3>'))
-    display(HTML(data.drop(columns='platform').style.hide_index()._repr_html_()))
+    data.drop(columns='platform').style.hide(axis="index")
 
 ```
 
