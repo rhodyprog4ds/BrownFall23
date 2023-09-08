@@ -41,7 +41,7 @@ If you have trouble, check the GitHub FAQ on the left first
 
 Your task is to:
 1. Install required software from the Tools & Resource page (should have been done before the first class)
-1. Create your portfolio, by [accepting the assignment]
+1. Create your portfolio, by [accepting the assignment](https://classroom.github.com/a/5YFy9MQZ)
 1. Learn about your portfolio from the README file on your repository.
 1. Follow instructions in the README to make your portfolio your own with information about yourself(not evaluated, but useful) and your own definition of data science (graded for **level 1 process**)
 2. complete the `success.md`` file as per the instructions in the comments
