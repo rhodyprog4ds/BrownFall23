@@ -47,7 +47,7 @@ Your task is to:
 2. complete the `success.md`` file as per the instructions in the comments
 3. Create a Jupyter notebook called `grading.ipynb` and write a function that computes a grade for this course, with the  docstring below.
 4. [Upload the notebook to your repo](https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository) directly on the main branch. 
-5. Add the line `  - file: about/grading` in your `_toc.yml` file.
+5. Add the line `  - file: grading` in your `_toc.yml` file.
 
 ```{important}
 the syntax of the line added to your `_toc.yml` has to be exact
