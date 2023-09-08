@@ -14,7 +14,7 @@ parts:
   - caption: Notes
     numbered: True
     chapters:
-    - file: notes/2023-00-07
+    - file: notes/2023-09-07
   - caption: Assignments
     numbered: True
     chapters:
