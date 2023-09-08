@@ -2,15 +2,10 @@
 
 Welcome to the course manual for CSC310 at URI with Professor Brown.
 
-This class meets {{ time }} in {{ location }}.
+This class meets TTh 5-6:15pm in Engineering 040.
 
 This website will contain the syllabus, class notes, and other reference material for the class.
 
-{{ bscalendar }}
-
-```{tip}
-[subscribe to that calendar](https://documentation.brightspace.com/EN/le/calendar/learner/subscribe_to_calendar.htm) in your favorite calendar application
-```
 
 ## Land University of Rhode Island Land Acknowledgment
 
