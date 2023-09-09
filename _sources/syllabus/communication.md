@@ -56,7 +56,7 @@ df.style.hide(axis="index")
 e-mail is last because it's not collaborative; other platforms allow us (Proessor + TA) to collaborate on who responds to things more easily.
 ```
 
-## By Platform
+<!-- ## By Platform
 
 ```{code-cell}
 :tags: ["remove-input"]
@@ -65,7 +65,8 @@ for platform, data in df.groupby('platform'):
     display(HTML('<h3> Use '+ platform + ' for </h3>'))
     data.drop(columns='platform').style.hide(axis="index")
 
-```
+``` 
+-->
 
 ## Tips
 
