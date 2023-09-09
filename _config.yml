@@ -1,5 +1,5 @@
 # Book settings
-title: Programming for Data Science at URI Spring 2023
+title: Programming for Data Science at URI Fall 2023
 author: Professor Sarah M Brown
 logo: img/310_2021.png
 
@@ -54,15 +54,11 @@ parse:
     - smartquotes
     - substitution
   myst_substitutions:
-    time: TTh 5-6:15pm
-    location: Tyler 108
-    repo_name: BrownSpring23
+    repo_name: BrownFall23
     repo_commits: |
-      [commit history](https://github.com/rhodyprog4ds/BrownSpring23/commits)
+      [commit history](https://github.com/rhodyprog4ds/BrownFall23/commits)
     repo_issue: |
-      [issue](https://github.com/rhodyprog4ds/BrownSpring23/issues)
-    bscalendar: |
-      [Course Calendar on BrightSpace](https://brightspace.uri.edu/d2l/le/calendar/226416)
+      [issue](https://github.com/rhodyprog4ds/BrownFall23/issues)
     ghinstructors: instructors
     p1due: TBA
     p2due: TBA
