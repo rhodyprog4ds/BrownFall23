@@ -3,7 +3,7 @@
 
 Quick Facts
 - due : 2023-09-18
-- link to be posted later
+- [accept assignment](https://classroom.github.com/a/BOG3E7Ch)
 
 
 ## Objective & Evaluation
