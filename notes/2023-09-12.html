@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Iterables and Pandas Data Frames &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>2. Iterables and Pandas Data Frames &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-12';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="3. DataFrames from other sources" href="2023-09-14.html" />
     <link rel="prev" title="1. Welcome &amp; What is Data Science" href="2023-09-07.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -173,8 +173,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -419,39 +419,39 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping">3.1. House Keeping</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-is-not-done">3.1.1. Grading is not done,</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-jupyter-server">3.1.2. Closing Jupyter server.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping">2.1. House Keeping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-is-not-done">2.1.1. Grading is not done,</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-jupyter-server">2.1.2. Closing Jupyter server.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-solution">3.2. Grading solution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">3.3. Everything is Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inspection-in-code">3.4. Why inspection in code?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-an-object">3.5. everything is an object</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">3.6. Tabular Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-familiar-with-the-datset">3.7. Getting familiar with the datset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">3.8. Loading data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">3.9. Questions After Class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing">3.9.1. I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python">3.9.2. Is the Python we use in Jupyter lab notebooks any different from traditional Python?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-index-just-list-all-the-rows">3.9.3. Does index just list all the rows?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-copied-the-file-url-from-github">3.9.4. How you copied the file url from github.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-we-change-the-index">3.9.5. How did we change the index?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-would-like-to-learn-more-about-the-panda-commands">3.9.6. I would like to learn more about the panda commands</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future">3.9.7. are we gonna have to use what we learned today in a bigger program in the future</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-use-jupyter-to-clean-data">3.9.8. How can I use Jupyter to clean data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows">3.9.9. Why is taking data from columns much more common than taking it from rows?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for">3.9.10. I was wondering more about the Index variable type and was also curious as to what that could be used for.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs">3.9.11. I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located">3.9.12. does the panda’s data start indexing at 1 because 0 is where the table headers are located?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how">3.9.13. In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done">3.9.14. How often do data sets need to be cleaned/manipulated before proper analysis can be done?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data">3.9.15. how does being able to view specific rows/columns help us make conclusions about data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment">3.9.16. Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment">3.9.17. will I be able to use data from an existing lab that I work in for certain assignment?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file">3.9.18. When we submit to GitHub, do we need to do anything other than upload the file?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet">3.9.19. Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there">3.9.20. How to better navigate github and not second guess my posts there</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-solution">2.2. Grading solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">2.3. Everything is Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inspection-in-code">2.4. Why inspection in code?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-an-object">2.5. everything is an object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">2.6. Tabular Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-familiar-with-the-datset">2.7. Getting familiar with the datset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">2.8. Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">2.9. Questions After Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing">2.9.1. I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python">2.9.2. Is the Python we use in Jupyter lab notebooks any different from traditional Python?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-index-just-list-all-the-rows">2.9.3. Does index just list all the rows?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-copied-the-file-url-from-github">2.9.4. How you copied the file url from github.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-we-change-the-index">2.9.5. How did we change the index?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-would-like-to-learn-more-about-the-panda-commands">2.9.6. I would like to learn more about the panda commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future">2.9.7. are we gonna have to use what we learned today in a bigger program in the future</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-use-jupyter-to-clean-data">2.9.8. How can I use Jupyter to clean data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows">2.9.9. Why is taking data from columns much more common than taking it from rows?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for">2.9.10. I was wondering more about the Index variable type and was also curious as to what that could be used for.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs">2.9.11. I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located">2.9.12. does the panda’s data start indexing at 1 because 0 is where the table headers are located?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how">2.9.13. In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done">2.9.14. How often do data sets need to be cleaned/manipulated before proper analysis can be done?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data">2.9.15. how does being able to view specific rows/columns help us make conclusions about data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment">2.9.16. Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment">2.9.17. will I be able to use data from an existing lab that I work in for certain assignment?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file">2.9.18. When we submit to GitHub, do we need to do anything other than upload the file?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet">2.9.19. Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there">2.9.20. How to better navigate github and not second guess my posts there</a></li>
 </ul>
 </li>
 </ul>
@@ -466,15 +466,15 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="iterables-and-pandas-data-frames">
-<h1><span class="section-number">3. </span>Iterables and Pandas Data Frames<a class="headerlink" href="#iterables-and-pandas-data-frames" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">2. </span>Iterables and Pandas Data Frames<a class="headerlink" href="#iterables-and-pandas-data-frames" title="Permalink to this headline">#</a></h1>
 <section id="house-keeping">
-<h2><span class="section-number">3.1. </span>House Keeping<a class="headerlink" href="#house-keeping" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>House Keeping<a class="headerlink" href="#house-keeping" title="Permalink to this headline">#</a></h2>
 <section id="grading-is-not-done">
-<h3><span class="section-number">3.1.1. </span>Grading is not done,<a class="headerlink" href="#grading-is-not-done" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.1.1. </span>Grading is not done,<a class="headerlink" href="#grading-is-not-done" title="Permalink to this headline">#</a></h3>
 <p>you will get a notificaiton when yours is</p>
 </section>
 <section id="closing-jupyter-server">
-<h3><span class="section-number">3.1.2. </span>Closing Jupyter server.<a class="headerlink" href="#closing-jupyter-server" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.1.2. </span>Closing Jupyter server.<a class="headerlink" href="#closing-jupyter-server" title="Permalink to this headline">#</a></h3>
 <p>In the terminal use Ctrl+C (actually control, not command on mac).</p>
 <p>It will ask you a question and give options, read and follow</p>
 <p><strong>or</strong></p>
@@ -488,7 +488,7 @@ document.write(`
 </section>
 </section>
 <section id="grading-solution">
-<h2><span class="section-number">3.2. </span>Grading solution<a class="headerlink" href="#grading-solution" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Grading solution<a class="headerlink" href="#grading-solution" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_grade</span><span class="p">(</span><span class="n">num_level1</span><span class="p">,</span><span class="n">num_level2</span><span class="p">,</span><span class="n">num_level3</span><span class="p">):</span>
@@ -626,7 +626,7 @@ compute_grade(num_level1, num_level2, num_level3)
 </div>
 </section>
 <section id="everything-is-data">
-<h2><span class="section-number">3.3. </span>Everything is Data<a class="headerlink" href="#everything-is-data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3. </span>Everything is Data<a class="headerlink" href="#everything-is-data" title="Permalink to this headline">#</a></h2>
 <p>Data we will see:</p>
 <ul class="simple">
 <li><p>tabular data</p></li>
@@ -637,7 +637,7 @@ compute_grade(num_level1, num_level2, num_level3)
 </ul>
 </section>
 <section id="why-inspection-in-code">
-<h2><span class="section-number">3.4. </span>Why inspection in code?<a class="headerlink" href="#why-inspection-in-code" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4. </span>Why inspection in code?<a class="headerlink" href="#why-inspection-in-code" title="Permalink to this headline">#</a></h2>
 <p>Some IDEs give you GUI based tools to inspect objects.  We are going to do it programmatically inline with our analyses for two reasons.</p>
 <ul class="simple">
 <li><p>(minor, logistical) it helps make for good notes</p></li>
@@ -647,7 +647,7 @@ compute_grade(num_level1, num_level2, num_level3)
 <p>If you’re curious about something, try it out, see what happens.  We’re going to use a lot of code inspection tools during class.  These are helpful both for understanding what’s going on, but the advantage to knowing how to get this information programmatically even though a different IDE would give you inspection tools  is that it helps you treat your code as data.</p>
 </section>
 <section id="everything-is-an-object">
-<h2><span class="section-number">3.5. </span>everything is an object<a class="headerlink" href="#everything-is-an-object" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.5. </span>everything is an object<a class="headerlink" href="#everything-is-an-object" title="Permalink to this headline">#</a></h2>
 <p>let’s examine the <code class="docutils literal notranslate"><span class="pre">type</span></code> of some variables:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -778,12 +778,12 @@ compute_grade(num_level1, num_level2, num_level3)
 </div>
 </section>
 <section id="tabular-data">
-<h2><span class="section-number">3.6. </span>Tabular Data<a class="headerlink" href="#tabular-data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.6. </span>Tabular Data<a class="headerlink" href="#tabular-data" title="Permalink to this headline">#</a></h2>
 <p>Structured data is easier to work with than other data.</p>
 <p>We’re going to focus on tabular data for now. At the end of the course, we’ll examine images, which are structured, but more complex and text, which is much less structured.</p>
 </section>
 <section id="getting-familiar-with-the-datset">
-<h2><span class="section-number">3.7. </span>Getting familiar with the datset<a class="headerlink" href="#getting-familiar-with-the-datset" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.7. </span>Getting familiar with the datset<a class="headerlink" href="#getting-familiar-with-the-datset" title="Permalink to this headline">#</a></h2>
 <p>We’re going to use a dataset about <a class="reference external" href="https://github.com/jldbc/coffee-quality-database/">coffee quality</a> today.</p>
 <p>How was this dataset collected?</p>
 <ul class="simple">
@@ -812,7 +812,7 @@ compute_grade(num_level1, num_level2, num_level3)
 </div>
 </section>
 <section id="loading-data">
-<h2><span class="section-number">3.8. </span>Loading data<a class="headerlink" href="#loading-data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.8. </span>Loading data<a class="headerlink" href="#loading-data" title="Permalink to this headline">#</a></h2>
 <p>Get raw url for the dataset click on the raw button on the <a class="reference external" href="https://github.com/jldbc/coffee-quality-database/blob/master/data/robusta_ratings_raw.csv">csv page</a>, then copy the url.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3880,87 +3880,87 @@ Name: 6, dtype: object
 </div>
 </section>
 <section id="questions-after-class">
-<h2><span class="section-number">3.9. </span>Questions After Class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.9. </span>Questions After Class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
 <section id="i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing">
-<h3><span class="section-number">3.9.1. </span>I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.<a class="headerlink" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.1. </span>I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.<a class="headerlink" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing" title="Permalink to this headline">#</a></h3>
 <p>For this class, you need to use jupyter notebooks without extraneous metadata.  If you use jupyter inside of vs code, it adds extraneous metadata that makes it hard to grade and VS code, in my experience, does not provide the most helpful autocomplete for Data Science.</p>
 <p>Please see office hours to get help with it.</p>
 </section>
 <section id="is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python">
-<h3><span class="section-number">3.9.2. </span>Is the Python we use in Jupyter lab notebooks any different from traditional Python?<a class="headerlink" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.2. </span>Is the Python we use in Jupyter lab notebooks any different from traditional Python?<a class="headerlink" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python" title="Permalink to this headline">#</a></h3>
 <p>the Python is mostly all the same.  There are different python interpreters that have some slightly different behaviors, but mostly only in the display.  As a matter of technicality, jupyter uses the <a class="reference external" href="https://ipython.org/documentation.html">ipython</a> python as the kernel.</p>
 </section>
 <section id="does-index-just-list-all-the-rows">
-<h3><span class="section-number">3.9.3. </span>Does index just list all the rows?<a class="headerlink" href="#does-index-just-list-all-the-rows" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.3. </span>Does index just list all the rows?<a class="headerlink" href="#does-index-just-list-all-the-rows" title="Permalink to this headline">#</a></h3>
 <p>the index is the <em>name</em> of the rows the same way that the column headers are the <em>name</em> of the columns.</p>
 </section>
 <section id="how-you-copied-the-file-url-from-github">
-<h3><span class="section-number">3.9.4. </span>How you copied the file url from github.<a class="headerlink" href="#how-you-copied-the-file-url-from-github" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.4. </span>How you copied the file url from github.<a class="headerlink" href="#how-you-copied-the-file-url-from-github" title="Permalink to this headline">#</a></h3>
 <p>Click the <a class="reference external" href="https://docs.github.com/en/repositories/working-with-files/using-files/viewing-a-file#viewing-or-copying-the-raw-file-content">raw button</a> and then copy the URL from your browswer’s url bar.</p>
 </section>
 <section id="how-did-we-change-the-index">
-<h3><span class="section-number">3.9.5. </span>How did we change the index?<a class="headerlink" href="#how-did-we-change-the-index" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.5. </span>How did we change the index?<a class="headerlink" href="#how-did-we-change-the-index" title="Permalink to this headline">#</a></h3>
 <p>we changed the index from the inferred (figured out by pandas) <code class="docutils literal notranslate"><span class="pre">RangeIndex</span></code> to a column of the data by adding the <code class="docutils literal notranslate"><span class="pre">index_col=0</span></code> parameter  to our <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> call.</p>
 </section>
 <section id="i-would-like-to-learn-more-about-the-panda-commands">
-<h3><span class="section-number">3.9.6. </span>I would like to learn more about the panda commands<a class="headerlink" href="#i-would-like-to-learn-more-about-the-panda-commands" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.6. </span>I would like to learn more about the panda commands<a class="headerlink" href="#i-would-like-to-learn-more-about-the-panda-commands" title="Permalink to this headline">#</a></h3>
 <p>We will continue learning more pandas features for the next few weeks.</p>
 </section>
 <section id="are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future">
-<h3><span class="section-number">3.9.7. </span>are we gonna have to use what we learned today in a bigger program in the future<a class="headerlink" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.7. </span>are we gonna have to use what we learned today in a bigger program in the future<a class="headerlink" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future" title="Permalink to this headline">#</a></h3>
 <p>Yes, these features we used today are the basis of all of the data analysis we will do all semester.  However, we will not be writing “programs” the way you may have for other classes, we will be doing data analyses, which are more narrative.</p>
 </section>
 <section id="how-can-i-use-jupyter-to-clean-data">
-<h3><span class="section-number">3.9.8. </span>How can I use Jupyter to clean data?<a class="headerlink" href="#how-can-i-use-jupyter-to-clean-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.8. </span>How can I use Jupyter to clean data?<a class="headerlink" href="#how-can-i-use-jupyter-to-clean-data" title="Permalink to this headline">#</a></h3>
 <p>jupyter is a way to work with python code.  We will learn what clean data looks like and more ways to manipulate dataframes to make it clean in two weeks.</p>
 </section>
 <section id="why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows">
-<h3><span class="section-number">3.9.9. </span>Why is taking data from columns much more common than taking it from rows?<a class="headerlink" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.9. </span>Why is taking data from columns much more common than taking it from rows?<a class="headerlink" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows" title="Permalink to this headline">#</a></h3>
 <p>We set our data up so that each column is a varible.  We often want to treat different variables differently, but do the same thing to all of the rows.</p>
 </section>
 <section id="i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for">
-<h3><span class="section-number">3.9.10. </span>I was wondering more about the Index variable type and was also curious as to what that could be used for.<a class="headerlink" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.10. </span>I was wondering more about the Index variable type and was also curious as to what that could be used for.<a class="headerlink" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for" title="Permalink to this headline">#</a></h3>
 <p>the <code class="docutils literal notranslate"><span class="pre">Index</span></code> type from <code class="docutils literal notranslate"><span class="pre">pandas</span></code> is a component of a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, we will use them implicitly whenever we work with a part of a dataframe and explicitly when we clean data.</p>
 </section>
 <section id="i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs">
-<h3><span class="section-number">3.9.11. </span>I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?<a class="headerlink" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.11. </span>I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?<a class="headerlink" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs" title="Permalink to this headline">#</a></h3>
 <p>using nonstandard aliases is a bad habit to develop and I cannot endorse it. Technically the code will run, but in class it will be a style violation.</p>
 </section>
 <section id="does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located">
-<h3><span class="section-number">3.9.12. </span>does the panda’s data start indexing at 1 because 0 is where the table headers are located?<a class="headerlink" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.12. </span>does the panda’s data start indexing at 1 because 0 is where the table headers are located?<a class="headerlink" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located" title="Permalink to this headline">#</a></h3>
 <p>Indexing using <code class="docutils literal notranslate"><span class="pre">loc</span></code> started at 1 because the dataset had 1 there, in the second example it started at 5.</p>
 <p>using <code class="docutils literal notranslate"><span class="pre">iloc</span></code> starts at 0.</p>
 </section>
 <section id="in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how">
-<h3><span class="section-number">3.9.13. </span>In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?<a class="headerlink" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.13. </span>In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?<a class="headerlink" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how" title="Permalink to this headline">#</a></h3>
 <p>zeros are a value, nulls are encoded in different ways.  We will learn how to deal will missing values in two weeks.</p>
 </section>
 <section id="how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done">
-<h3><span class="section-number">3.9.14. </span>How often do data sets need to be cleaned/manipulated before proper analysis can be done?<a class="headerlink" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.14. </span>How often do data sets need to be cleaned/manipulated before proper analysis can be done?<a class="headerlink" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done" title="Permalink to this headline">#</a></h3>
 <p>Real data, will almost alwasy need to be fixed a little bit.</p>
 </section>
 <section id="how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data">
-<h3><span class="section-number">3.9.15. </span>how does being able to view specific rows/columns help us make conclusions about data?<a class="headerlink" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.15. </span>how does being able to view specific rows/columns help us make conclusions about data?<a class="headerlink" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data" title="Permalink to this headline">#</a></h3>
 <p>For example, maybe one column is the thing you are interested in, you may want to know on stats on the one column.</p>
 </section>
 <section id="are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment">
-<h3><span class="section-number">3.9.16. </span>Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment<a class="headerlink" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.16. </span>Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment<a class="headerlink" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment" title="Permalink to this headline">#</a></h3>
 <p>Going forward, Assignments are always targeted at level 2. In class prismia questions will assess at level 1.  An incomplete attempt at an assignment might be evaluated only at level 1, so that can be a way to make up for missed class and then you earn the level 2 in the next assignment that assess that skill.</p>
 </section>
 <section id="will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment">
-<h3><span class="section-number">3.9.17. </span>will I be able to use data from an existing lab that I work in for certain assignment?<a class="headerlink" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.17. </span>will I be able to use data from an existing lab that I work in for certain assignment?<a class="headerlink" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment" title="Permalink to this headline">#</a></h3>
 <p>Yes, as long as the data is allowed to be shared.  Please confirm with your PI.</p>
 </section>
 <section id="when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file">
-<h3><span class="section-number">3.9.18. </span>When we submit to GitHub, do we need to do anything other than upload the file?<a class="headerlink" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.18. </span>When we submit to GitHub, do we need to do anything other than upload the file?<a class="headerlink" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file" title="Permalink to this headline">#</a></h3>
 <p>For your portfolio, no.  For other assignments, there will be a step to do, and there will be instructions in the assignment.</p>
 </section>
 <section id="are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet">
-<h3><span class="section-number">3.9.19. </span>Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?<a class="headerlink" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.19. </span>Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?<a class="headerlink" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet" title="Permalink to this headline">#</a></h3>
 <p>Assignment 2 you will build a dataset about datasets, but other than that you will mostly use datasets that you find online or that you have for another purpose.</p>
 </section>
 <section id="how-to-better-navigate-github-and-not-second-guess-my-posts-there">
-<h3><span class="section-number">3.9.20. </span>How to better navigate github and not second guess my posts there<a class="headerlink" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.9.20. </span>How to better navigate github and not second guess my posts there<a class="headerlink" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there" title="Permalink to this headline">#</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>this will be added later.</p>
@@ -4010,11 +4010,11 @@ Name: 6, dtype: object
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-09-14.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>DataFrames from other sources</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -4036,39 +4036,39 @@ Name: 6, dtype: object
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping">3.1. House Keeping</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-is-not-done">3.1.1. Grading is not done,</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-jupyter-server">3.1.2. Closing Jupyter server.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping">2.1. House Keeping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-is-not-done">2.1.1. Grading is not done,</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-jupyter-server">2.1.2. Closing Jupyter server.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-solution">3.2. Grading solution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">3.3. Everything is Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inspection-in-code">3.4. Why inspection in code?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-an-object">3.5. everything is an object</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">3.6. Tabular Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-familiar-with-the-datset">3.7. Getting familiar with the datset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">3.8. Loading data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">3.9. Questions After Class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing">3.9.1. I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python">3.9.2. Is the Python we use in Jupyter lab notebooks any different from traditional Python?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-index-just-list-all-the-rows">3.9.3. Does index just list all the rows?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-copied-the-file-url-from-github">3.9.4. How you copied the file url from github.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-we-change-the-index">3.9.5. How did we change the index?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-would-like-to-learn-more-about-the-panda-commands">3.9.6. I would like to learn more about the panda commands</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future">3.9.7. are we gonna have to use what we learned today in a bigger program in the future</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-use-jupyter-to-clean-data">3.9.8. How can I use Jupyter to clean data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows">3.9.9. Why is taking data from columns much more common than taking it from rows?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for">3.9.10. I was wondering more about the Index variable type and was also curious as to what that could be used for.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs">3.9.11. I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located">3.9.12. does the panda’s data start indexing at 1 because 0 is where the table headers are located?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how">3.9.13. In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done">3.9.14. How often do data sets need to be cleaned/manipulated before proper analysis can be done?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data">3.9.15. how does being able to view specific rows/columns help us make conclusions about data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment">3.9.16. Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment">3.9.17. will I be able to use data from an existing lab that I work in for certain assignment?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file">3.9.18. When we submit to GitHub, do we need to do anything other than upload the file?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet">3.9.19. Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there">3.9.20. How to better navigate github and not second guess my posts there</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grading-solution">2.2. Grading solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">2.3. Everything is Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-inspection-in-code">2.4. Why inspection in code?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-an-object">2.5. everything is an object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-data">2.6. Tabular Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-familiar-with-the-datset">2.7. Getting familiar with the datset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-data">2.8. Loading data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">2.9. Questions After Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-think-this-something-i-need-to-figure-but-how-do-the-localhost-or-just-utilizing-a-url-in-vs-code-i-was-late-to-the-class-i-never-got-how-to-do-the-jupyter-lab-thing">2.9.1. I think this something I need to figure but how do the localhost or just utilizing a url in VS Code? I was late to the class, I never got how to do the jupyter lab thing.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-python-we-use-in-jupyter-lab-notebooks-any-different-from-traditional-python">2.9.2. Is the Python we use in Jupyter lab notebooks any different from traditional Python?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-index-just-list-all-the-rows">2.9.3. Does index just list all the rows?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-you-copied-the-file-url-from-github">2.9.4. How you copied the file url from github.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-did-we-change-the-index">2.9.5. How did we change the index?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-would-like-to-learn-more-about-the-panda-commands">2.9.6. I would like to learn more about the panda commands</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-gonna-have-to-use-what-we-learned-today-in-a-bigger-program-in-the-future">2.9.7. are we gonna have to use what we learned today in a bigger program in the future</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-i-use-jupyter-to-clean-data">2.9.8. How can I use Jupyter to clean data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-taking-data-from-columns-much-more-common-than-taking-it-from-rows">2.9.9. Why is taking data from columns much more common than taking it from rows?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-wondering-more-about-the-index-variable-type-and-was-also-curious-as-to-what-that-could-be-used-for">2.9.10. I was wondering more about the Index variable type and was also curious as to what that could be used for.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-know-by-convention-we-use-the-typical-alias-for-importing-libraries-but-is-it-okay-to-use-our-own-alias-for-our-own-private-programs">2.9.11. I know by convention we use the typical alias for importing libraries, but is it okay to use our own alias for our own private programs?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#does-the-pandas-data-start-indexing-at-1-because-0-is-where-the-table-headers-are-located">2.9.12. does the panda’s data start indexing at 1 because 0 is where the table headers are located?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-dataset-we-loaded-i-noticed-that-there-were-some-zeros-which-are-nulls-im-guessing-we-have-to-clean-those-out-and-i-was-wondering-how">2.9.13. In the dataset we loaded, I noticed that there were some zeros, which are nulls, I’m guessing we have to clean those out, and I was wondering how?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-often-do-data-sets-need-to-be-cleaned-manipulated-before-proper-analysis-can-be-done">2.9.14. How often do data sets need to be cleaned/manipulated before proper analysis can be done?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-being-able-to-view-specific-rows-columns-help-us-make-conclusions-about-data">2.9.15. how does being able to view specific rows/columns help us make conclusions about data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-assignments-always-a-certain-level-or-can-one-assignment-be-done-to-be-a-level-1-or-a-level-2-assignment">2.9.16. Are assignments always a certain level or can one assignment be done to be a level 1 or a level 2 assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#will-i-be-able-to-use-data-from-an-existing-lab-that-i-work-in-for-certain-assignment">2.9.17. will I be able to use data from an existing lab that I work in for certain assignment?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-we-submit-to-github-do-we-need-to-do-anything-other-than-upload-the-file">2.9.18. When we submit to GitHub, do we need to do anything other than upload the file?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-we-going-to-have-to-create-our-own-datasets-for-any-future-assignments-rather-than-downloading-datasets-form-the-internet">2.9.19. Are we going to have to create our own datasets for any future assignments rather than downloading datasets form the Internet?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-better-navigate-github-and-not-second-guess-my-posts-there">2.9.20. How to better navigate github and not second guess my posts there</a></li>
 </ul>
 </li>
 </ul>
