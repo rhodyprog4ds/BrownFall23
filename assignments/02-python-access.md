@@ -49,10 +49,10 @@ In your notebook, create a markdown cell for each dataset that includes:
 
 Create a list of dictionaries in `datasets.py`, so that there is one dictionary for each dataset. Each dictionary should have the following keys:
 
-```{list-table} Meta Data Description of the dictionary to create
-:header-rows:0
+```{list-table} Meta data of the dictionaries
+:header-rows: 0
 
-*- `url`
+* - `url`
   - the full url of the dataset
 * - `short_name`
   - a short name
@@ -81,7 +81,7 @@ Then {term}`iterate` over the list of dictionaries, and:
 1. Use that to create a DataFrame with columns that match the rows of the following table.
 
 ```{list-table} Meta Data Description of the DataFrame to build
-:header-rows:0
+:header-rows: 0
 
 * - name
   - a short name for the dataset
@@ -127,9 +127,16 @@ There are two files in the data folder, both can be read in with `read_csv` but 
 
 ## Submission
 
-This time you have to separately submit from posting your code to make grading easier.  Go to the actions tab and run the action called "Submit".
+This time you have to separately submit from posting your code to make grading easier.  
 
+1. Go to the actions tab 
+2. Click the action called "Prepare & Submit" in the left hand sidebar
+3. click the run workflow button on the right hand side.
+4. Cilck run workflow
 
+```{hint}
+see the [github docs](https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow) for screenshots of how to do these steps. 
+```
 
 ## Thinking ahead
 
@@ -137,7 +144,7 @@ This time you have to separately submit from posting your code to make grading e
 This section is not required, but is intended to help you get started thinking
 about ideas for your portfolio.  If you complete it, we'll give your feedback to
 help shape your ideas to get to level 3 achievements.  If you want to focus only
-on level 2 at this moment in time, feel free to skip this part. You could also think about this after submitting the assignment, since you do not have to get a grade for it. If you want, you could discuss these ideas in office hours.
+on level 2 at this moment in time, feel free to skip this part. You could also think about these after submitting the assignment. If you want, you could discuss these ideas in office hours.
 ```
 
 
