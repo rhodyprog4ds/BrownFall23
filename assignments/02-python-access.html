@@ -445,7 +445,7 @@ document.write(`
 <p>Quick Facts</p>
 <ul class="simple">
 <li><p>due : 2023-09-18</p></li>
-<li><p>link to be posted later</p></li>
+<li><p><a class="reference external" href="https://classroom.github.com/a/BOG3E7Ch">accept assignment</a></p></li>
 </ul>
 <section id="objective-evaluation">
 <h2><span class="section-number">2.1. </span>Objective &amp; Evaluation<a class="headerlink" href="#objective-evaluation" title="Permalink to this headline">#</a></h2>
@@ -491,6 +491,24 @@ and extracting basic information about them.</p>
 <section id="store-info-about-data-for-loading">
 <h2><span class="section-number">2.5. </span>Store info about data for loading<a class="headerlink" href="#store-info-about-data-for-loading" title="Permalink to this headline">#</a></h2>
 <p>Create a list of dictionaries in <code class="docutils literal notranslate"><span class="pre">datasets.py</span></code>, so that there is one dictionary for each dataset. Each dictionary should have the following keys:</p>
+<table class="table" id="id1">
+<caption><span class="caption-number">Table 2.1 </span><span class="caption-text">Meta data of the dictionaries</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">url</span></code></p></td>
+<td><p>the full url of the dataset</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">short_name</span></code></p></td>
+<td><p>a short name</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">load_function</span></code></p></td>
+<td><p>(the actual function handle) what function should be used to load the data into a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>See below for how you will use the dictionary as help for how you should construct it</p>
@@ -513,6 +531,30 @@ Then <a class="reference internal" href="../resources/glossary.html#term-iterate
 <li><p>record attributes about the dataset as in the table below in a list or dictionary  of lists</p></li>
 <li><p>Use that to create a DataFrame with columns that match the rows of the following table.</p></li>
 </ol>
+<table class="table" id="id2">
+<caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Meta Data Description of the DataFrame to build</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>a short name for the dataset</p></td>
+</tr>
+<tr class="row-even"><td><p>source</p></td>
+<td><p>a url to where you found the data</p></td>
+</tr>
+<tr class="row-odd"><td><p>num_rows</p></td>
+<td><p>number of rows in the dataset</p></td>
+</tr>
+<tr class="row-even"><td><p>num_columns</p></td>
+<td><p>number of columns in the dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p>num_numerical</p></td>
+<td><p>number of numerical variables in the dataset</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="explore-your-datasets">
 <h2><span class="section-number">2.7. </span>Explore Your Datasets<a class="headerlink" href="#explore-your-datasets" title="Permalink to this headline">#</a></h2>
@@ -547,7 +589,17 @@ Then <a class="reference internal" href="../resources/glossary.html#term-iterate
 </section>
 <section id="submission">
 <h2><span class="section-number">2.9. </span>Submission<a class="headerlink" href="#submission" title="Permalink to this headline">#</a></h2>
-<p>This time you have to separately submit from posting your code to make grading easier.  Go to the actions tab and run the action called “Submit”.</p>
+<p>This time you have to separately submit from posting your code to make grading easier.</p>
+<ol class="arabic simple">
+<li><p>Go to the actions tab</p></li>
+<li><p>Click the action called “Prepare &amp; Submit” in the left hand sidebar</p></li>
+<li><p>click the run workflow button on the right hand side.</p></li>
+<li><p>Cilck run workflow</p></li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>see the <a class="reference external" href="https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow">github docs</a> for screenshots of how to do these steps.</p>
+</div>
 </section>
 <section id="thinking-ahead">
 <h2><span class="section-number">2.10. </span>Thinking ahead<a class="headerlink" href="#thinking-ahead" title="Permalink to this headline">#</a></h2>
@@ -556,7 +608,7 @@ Then <a class="reference internal" href="../resources/glossary.html#term-iterate
 <p>This section is not required, but is intended to help you get started thinking
 about ideas for your portfolio.  If you complete it, we’ll give your feedback to
 help shape your ideas to get to level 3 achievements.  If you want to focus only
-on level 2 at this moment in time, feel free to skip this part. You could also think about this after submitting the assignment, since you do not have to get a grade for it. If you want, you could discuss these ideas in office hours.</p>
+on level 2 at this moment in time, feel free to skip this part. You could also think about these after submitting the assignment. If you want, you could discuss these ideas in office hours.</p>
 </div>
 <ol class="arabic simple">
 <li><p>When might you prefer one datatype over another?</p></li>
