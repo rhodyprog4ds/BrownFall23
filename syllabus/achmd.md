@@ -3,7 +3,7 @@
 _python code that mostly runs, occasional pep8 adherance_ 
 
 
-- [ ] logical use of control structures
+- [ ] use of control structures
 - [ ] callable functions
 - [ ] correct calls to functions
 - [ ] correct use of variables
@@ -17,7 +17,7 @@ _python code that reliably runs, frequent pep8 adherance_
 
 - [ ] descriptive variable names
 - [ ] pythonic loops
-- [ ] efficient use of return vs side effects in functions
+- [ ] effective use of return vs side effects in functions
 - [ ] correct, effective use of builtin python iterable types (lists & dictionaries)
 
 
@@ -36,7 +36,7 @@ _reliable, efficient, pythonic code that consistently adheres to pep8_
 _Identify basic components of data science_ 
 
 
-- [ ] identify component disciplines OR
+- [ ] identify component disciplines
 - [ ] idenitfy phases
 
 
@@ -219,11 +219,11 @@ _apply data reshaping, cleaning, and filtering manipulations reliably and correc
 
 #### **evaluate-level1**
   
-_Explain basic performance metrics for different data science tasks_ 
+_Explain and compute basic performance metrics for different data science tasks_ 
 
 
-- [ ] define at least two performance metrics
-- [ ] describe how those metrics compare or compete
+- [ ] apply at least one metric
+- [ ] interpret model performance in context
 
 
 #### **evaluate-level2**
@@ -246,7 +246,7 @@ _Evaluate a model with multiple metrics and cross validation_
 - [ ] explain importance of held out test and validation data
 - [ ] describe why cross vaidation is important
 - [ ] idenitfy appropriate metrics for different types of modeling tasks
-- [ ] use multiple metriccs together to create a more complete description of a model's performance
+- [ ] use multiple metrics together to create a more complete description of a model's performance
 
 
 #### **classification-level1**
