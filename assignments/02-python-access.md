@@ -77,8 +77,8 @@ Then {term}`iterate` over the list of dictionaries, and:
 
 1. load each dataset like `dataset_dict['load_function'](dataset_dict['url'])`
 1. save it to a local csv using the short name you provided for the dataset as the file name, without writing the index column to the file.
-1. record attributes about the dataset as in the table below in a list or dictionary  of lists 
-1. Use that to create a DataFrame with columns that match the rows of the following table.
+1. record attributes about the dataset as in the table below in a list or dictionary of lists 
+1. Use that to [create a DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) with columns that match the rows of the following table.
 
 ```{list-table} Meta Data Description of the DataFrame to build
 :header-rows: 0
@@ -121,8 +121,11 @@ For the third dataset:
 There are two files in the data folder, both can be read in with `read_csv` but need some options or fixing.
 
 - try to read in the `german.data` file, what happens with the default settings? What option do you need to use to make it look right?
-- try to read in the `.csv` file that's included in the template repository (), use the error messages you get to try to fix the file manually (any text editor, including jupyter can edit a `.csv`), making notes about what changes you made in a markdown cell.
+- try to read in the `.csv` file that's included in the template repository, use the error messages you get to try to fix the file manually (any text editor, including jupyter can edit a `.csv`), making notes about what changes you made in a markdown cell.
 
+```{hint}
+For the csv file in the template's data folder, in Jupyter Lab, it will not let you edit a .csv file, but you can chagne the file name to txt (in your code too) and then it will work. 
+```
 
 
 ## Submission
