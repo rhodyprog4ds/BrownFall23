@@ -528,8 +528,8 @@ Then <a class="reference internal" href="../resources/glossary.html#term-iterate
 <ol class="arabic simple">
 <li><p>load each dataset like <code class="docutils literal notranslate"><span class="pre">dataset_dict['load_function'](dataset_dict['url'])</span></code></p></li>
 <li><p>save it to a local csv using the short name you provided for the dataset as the file name, without writing the index column to the file.</p></li>
-<li><p>record attributes about the dataset as in the table below in a list or dictionary  of lists</p></li>
-<li><p>Use that to create a DataFrame with columns that match the rows of the following table.</p></li>
+<li><p>record attributes about the dataset as in the table below in a list or dictionary of lists</p></li>
+<li><p>Use that to <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html">create a DataFrame</a> with columns that match the rows of the following table.</p></li>
 </ol>
 <table class="table" id="id2">
 <caption><span class="caption-number">Table 2.2 </span><span class="caption-text">Meta Data Description of the DataFrame to build</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
@@ -584,8 +584,12 @@ Then <a class="reference internal" href="../resources/glossary.html#term-iterate
 <p>There are two files in the data folder, both can be read in with <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> but need some options or fixing.</p>
 <ul class="simple">
 <li><p>try to read in the <code class="docutils literal notranslate"><span class="pre">german.data</span></code> file, what happens with the default settings? What option do you need to use to make it look right?</p></li>
-<li><p>try to read in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file that’s included in the template repository (), use the error messages you get to try to fix the file manually (any text editor, including jupyter can edit a <code class="docutils literal notranslate"><span class="pre">.csv</span></code>), making notes about what changes you made in a markdown cell.</p></li>
+<li><p>try to read in the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file that’s included in the template repository, use the error messages you get to try to fix the file manually (any text editor, including jupyter can edit a <code class="docutils literal notranslate"><span class="pre">.csv</span></code>), making notes about what changes you made in a markdown cell.</p></li>
 </ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For the csv file in the template’s data folder, in Jupyter Lab, it will not let you edit a .csv file, but you can chagne the file name to txt (in your code too) and then it will work.</p>
+</div>
 </section>
 <section id="submission">
 <h2><span class="section-number">2.9. </span>Submission<a class="headerlink" href="#submission" title="Permalink to this headline">#</a></h2>
