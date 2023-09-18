@@ -12,7 +12,7 @@ kernelspec:
 ---
 
 
-# Course Communications
+#  Communications & Office Hours
 
 
 ```{code-cell}
