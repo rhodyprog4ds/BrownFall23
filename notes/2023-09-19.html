@@ -1,0 +1,1513 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Exploratory Data Analysis &#8212; Programming for Data Science at URI Fall 2023</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/course-admonitions.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-19';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="3. DataFrames from other sources" href="2023-09-14.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/310_2021.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/310_2021.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/achievements.html">Data Science Achievements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/policies.html">Grading Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/style.html">Course  Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General URI Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/index.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/formatting.html">Formatting Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check1ideas.html">Portfolio Check 1 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check2ideas.html">Check 2 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check3ideas.html">Check 3 Ideas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/debugging.html">Code Errors</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/python.html">References on Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/datasets.html">Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/terminal.html">Terminals and Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall20/letters/">Advice from FA2020 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall21/letters/">Advice from FA2021 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/edit/main/notes/2023-09-19.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/issues/new?title=Issue%20on%20page%20%2Fnotes/2023-09-19.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2023-09-19.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exploratory Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-a-note-on-assignments">4.1. First, a note on assignments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-goal">4.1.1. the goal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">4.1.2. Getting help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-week-exploratory-data-analysis">4.2. This week: Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarizing-and-visualizing-data-are-very-important">4.2.1. Summarizing and Visualizing Data are <strong>very</strong> important</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-dataset">4.3. Describing a Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-quantiles">4.3.1. Understanding Quantiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-variable">4.3.2. Individual variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-statistics">4.4. Individual statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-categorical-data">4.5. Working with categorical data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-country-scores-highest-on-flavor">4.6. Which country scores highest on flavor?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-any-coffees-more-than-one-standard-deviation-above-the-average-in-flavor">4.6.1. Are any coffees more than one standard deviation above the average in <code class="docutils literal notranslate"><span class="pre">Flavor</span></code> ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">4.7. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-pycharm-access-urls">4.7.1. can pycharm access urls?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-do-what-we-did-today-in-pycharm">4.7.2. can we do what we did today in pycharm?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-the-bars-on-the-seaborn-plot-random-colors-or-do-the-colors-have-some-meaning">4.7.3. Are the bars on the Seaborn plot random colors, or do the colors have some meaning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-types-of-jobs-use-what-we-learned-today">4.7.4. what types of jobs use what we learned today</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-an-equivalent-for-the-index-of-the-minimum-value-such-as-idxmin">4.7.5. Is there an equivalent for the index of the minimum value, such as idxmin()?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-std">4.7.6. What is the std</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-can-we-not-use-matplotlib">4.7.7. Why can we not use matplotlib?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-question-i-have-is-what-exactly-the-series-object-can-be-used-for">4.7.8. One question I have is what exactly the series object can be used for</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-these-lines-of-code-can-be-used-more-efficiently-in-larger-data-sets">4.7.9. how these lines of code can be used more efficiently in larger data sets?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-change-what-the-plot-graphs-rather-than-an-index-vs-frequency">4.7.10. Can you change what the plot graphs rather than an index vs frequency?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actually-i-would-like-to-know-like-with-our-country-flavor-example-can-they-be-put-in-the-same-plot-but-with-different-colors-for-the-different-countries-to-each-country-side-by-side-for-a-given-score">4.7.11. actually I would like to know like with our country/flavor example can they be put in the same plot but with different colors for the different countries to each country side by side for a given score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-assignment-3-can-be-release-so-we-can-pre-read-it-over">4.7.12. Can assignment 3 can be release so we can pre-read it over.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-well-answer-in-class-on-thurday">4.8. Questions we’ll answer in class on thurday</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exploratory-data-analysis">
+<h1><span class="section-number">4. </span>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">#</a></h1>
+<p>Now we get to start actual data science!</p>
+<section id="first-a-note-on-assignments">
+<h2><span class="section-number">4.1. </span>First, a note on assignments<a class="headerlink" href="#first-a-note-on-assignments" title="Permalink to this headline">#</a></h2>
+<section id="the-goal">
+<h3><span class="section-number">4.1.1. </span>the goal<a class="headerlink" href="#the-goal" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>I am not looking for “an answer”</p></li>
+<li><p>You should not be either</p></li>
+<li><p>I am looking for evidence that  you <strong>understand</strong> the material (thus far including prereqs)</p></li>
+<li><p>You should be trying to <strong>understand</strong> material</p></li>
+</ul>
+<p>This means that in office hours, I am going to:</p>
+<ul class="simple">
+<li><p>ask you questions to help you think about the problem and the material</p></li>
+<li><p>help direct your attention to the right part of the error message to figure out what is wrong</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<h3><span class="section-number">4.1.2. </span>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">#</a></h3>
+<p>Sending me a screenshot is almost guaranteed to <em>not</em> get you a help.  Not because I do not want to, but because I literally do not have the information to get you an answer.</p>
+<p>Typically when someone do not know how to fix something from the error message, it is because they are reading the wrong part of the error message or looking at the wrong part of the code trying to find the problem.</p>
+<p>This means they end up screenshotting that wrong thing, so I literally <strong>cannot</strong> tell what is wrong from the screenshot.</p>
+<p>I am not being stubborn, I just literally cannot tell what is wrong because I do not have enough information.  Debugging code requires context, if you deprive me that, then I cannot help.</p>
+<p>To get asynchronous help:</p>
+<ul class="simple">
+<li><p>upload your whole notebook, errors and all</p></li>
+<li><p>create an issue on that repo</p></li>
+</ul>
+</section>
+</section>
+<section id="this-week-exploratory-data-analysis">
+<h2><span class="section-number">4.2. </span>This week: Exploratory Data Analysis<a class="headerlink" href="#this-week-exploratory-data-analysis" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>How to summarize data</p></li>
+<li><p>Interpretting summaries</p></li>
+<li><p>Visualizing data</p></li>
+<li><p>interpretting summaries</p></li>
+</ul>
+<section id="summarizing-and-visualizing-data-are-very-important">
+<h3><span class="section-number">4.2.1. </span>Summarizing and Visualizing Data are <strong>very</strong> important<a class="headerlink" href="#summarizing-and-visualizing-data-are-very-important" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>People cannot interpret high dimensional or large samples quickly</p></li>
+<li><p>Important in EDA to help you make decisions about the rest of your analysis</p></li>
+<li><p>Important in how you report your results</p></li>
+<li><p>Summaries are similar calculations to performance metrics we will see later</p></li>
+<li><p>visualizations are often essential in debugging models</p></li>
+</ul>
+<p><strong>THEREFORE</strong></p>
+<ul class="simple">
+<li><p>You have  <a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#assignments-and-skills">a lot of chances</a> to earn summarize and visualize</p></li>
+<li><p>we will be picky when we assess if you earned them or not</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/jldbc/coffee-quality-database/master/data/robusta_data_cleaned.csv&#39;</span>
+<span class="n">coffee_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">coffee_data_url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Species</th>
+      <th>Owner</th>
+      <th>Country.of.Origin</th>
+      <th>Farm.Name</th>
+      <th>Lot.Number</th>
+      <th>Mill</th>
+      <th>ICO.Number</th>
+      <th>Company</th>
+      <th>Altitude</th>
+      <th>Region</th>
+      <th>...</th>
+      <th>Color</th>
+      <th>Category.Two.Defects</th>
+      <th>Expiration</th>
+      <th>Certification.Body</th>
+      <th>Certification.Address</th>
+      <th>Certification.Contact</th>
+      <th>unit_of_measurement</th>
+      <th>altitude_low_meters</th>
+      <th>altitude_high_meters</th>
+      <th>altitude_mean_meters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Robusta</td>
+      <td>ankole coffee producers coop</td>
+      <td>Uganda</td>
+      <td>kyangundu cooperative society</td>
+      <td>NaN</td>
+      <td>ankole coffee producers</td>
+      <td>0</td>
+      <td>ankole coffee producers coop</td>
+      <td>1488</td>
+      <td>sheema south western</td>
+      <td>...</td>
+      <td>Green</td>
+      <td>2</td>
+      <td>June 26th, 2015</td>
+      <td>Uganda Coffee Development Authority</td>
+      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
+      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
+      <td>m</td>
+      <td>1488.0</td>
+      <td>1488.0</td>
+      <td>1488.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 43 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="describing-a-dataset">
+<h2><span class="section-number">4.3. </span>Describing a Dataset<a class="headerlink" href="#describing-a-dataset" title="Permalink to this headline">#</a></h2>
+<p>So far, we’ve loaded data in a few different ways and then we’ve examined
+DataFrames as a data structure, looking at what different attributes they have
+and what some of the methods are, and how to get data into them.</p>
+<p>We can also get more structural information with the <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html"><code class="docutils literal notranslate"><span class="pre">info</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Index: 28 entries, 1 to 28
+Data columns (total 43 columns):
+ #   Column                 Non-Null Count  Dtype  
+---  ------                 --------------  -----  
+ 0   Species                28 non-null     object 
+ 1   Owner                  28 non-null     object 
+ 2   Country.of.Origin      28 non-null     object 
+ 3   Farm.Name              25 non-null     object 
+ 4   Lot.Number             6 non-null      object 
+ 5   Mill                   20 non-null     object 
+ 6   ICO.Number             17 non-null     object 
+ 7   Company                28 non-null     object 
+ 8   Altitude               25 non-null     object 
+ 9   Region                 26 non-null     object 
+ 10  Producer               26 non-null     object 
+ 11  Number.of.Bags         28 non-null     int64  
+ 12  Bag.Weight             28 non-null     object 
+ 13  In.Country.Partner     28 non-null     object 
+ 14  Harvest.Year           28 non-null     int64  
+ 15  Grading.Date           28 non-null     object 
+ 16  Owner.1                28 non-null     object 
+ 17  Variety                3 non-null      object 
+ 18  Processing.Method      10 non-null     object 
+ 19  Fragrance...Aroma      28 non-null     float64
+ 20  Flavor                 28 non-null     float64
+ 21  Aftertaste             28 non-null     float64
+ 22  Salt...Acid            28 non-null     float64
+ 23  Bitter...Sweet         28 non-null     float64
+ 24  Mouthfeel              28 non-null     float64
+ 25  Uniform.Cup            28 non-null     float64
+ 26  Clean.Cup              28 non-null     float64
+ 27  Balance                28 non-null     float64
+ 28  Cupper.Points          28 non-null     float64
+ 29  Total.Cup.Points       28 non-null     float64
+ 30  Moisture               28 non-null     float64
+ 31  Category.One.Defects   28 non-null     int64  
+ 32  Quakers                28 non-null     int64  
+ 33  Color                  25 non-null     object 
+ 34  Category.Two.Defects   28 non-null     int64  
+ 35  Expiration             28 non-null     object 
+ 36  Certification.Body     28 non-null     object 
+ 37  Certification.Address  28 non-null     object 
+ 38  Certification.Contact  28 non-null     object 
+ 39  unit_of_measurement    28 non-null     object 
+ 40  altitude_low_meters    25 non-null     float64
+ 41  altitude_high_meters   25 non-null     float64
+ 42  altitude_mean_meters   25 non-null     float64
+dtypes: float64(15), int64(5), object(23)
+memory usage: 9.6+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can actually start to analyze the data itself.</p>
+<p>The <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html"><code class="docutils literal notranslate"><span class="pre">describe</span></code></a> method provides us with a set of summary statistics that broadly</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number.of.Bags</th>
+      <th>Harvest.Year</th>
+      <th>Fragrance...Aroma</th>
+      <th>Flavor</th>
+      <th>Aftertaste</th>
+      <th>Salt...Acid</th>
+      <th>Bitter...Sweet</th>
+      <th>Mouthfeel</th>
+      <th>Uniform.Cup</th>
+      <th>Clean.Cup</th>
+      <th>Balance</th>
+      <th>Cupper.Points</th>
+      <th>Total.Cup.Points</th>
+      <th>Moisture</th>
+      <th>Category.One.Defects</th>
+      <th>Quakers</th>
+      <th>Category.Two.Defects</th>
+      <th>altitude_low_meters</th>
+      <th>altitude_high_meters</th>
+      <th>altitude_mean_meters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.000000</td>
+      <td>28.0</td>
+      <td>28.000000</td>
+      <td>25.00000</td>
+      <td>25.000000</td>
+      <td>25.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>168.000000</td>
+      <td>2013.964286</td>
+      <td>7.702500</td>
+      <td>7.630714</td>
+      <td>7.559643</td>
+      <td>7.657143</td>
+      <td>7.675714</td>
+      <td>7.506786</td>
+      <td>9.904286</td>
+      <td>9.928214</td>
+      <td>7.541786</td>
+      <td>7.761429</td>
+      <td>80.868929</td>
+      <td>0.065714</td>
+      <td>2.964286</td>
+      <td>0.0</td>
+      <td>1.892857</td>
+      <td>1367.60000</td>
+      <td>1387.600000</td>
+      <td>1377.600000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>143.226317</td>
+      <td>1.346660</td>
+      <td>0.296156</td>
+      <td>0.303656</td>
+      <td>0.342469</td>
+      <td>0.261773</td>
+      <td>0.317063</td>
+      <td>0.725152</td>
+      <td>0.238753</td>
+      <td>0.211030</td>
+      <td>0.526076</td>
+      <td>0.330507</td>
+      <td>2.441233</td>
+      <td>0.058464</td>
+      <td>12.357280</td>
+      <td>0.0</td>
+      <td>2.601129</td>
+      <td>838.06205</td>
+      <td>831.884207</td>
+      <td>833.980216</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>2012.000000</td>
+      <td>6.750000</td>
+      <td>6.670000</td>
+      <td>6.500000</td>
+      <td>6.830000</td>
+      <td>6.670000</td>
+      <td>5.080000</td>
+      <td>9.330000</td>
+      <td>9.330000</td>
+      <td>5.250000</td>
+      <td>6.920000</td>
+      <td>73.750000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>40.00000</td>
+      <td>40.000000</td>
+      <td>40.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>1.000000</td>
+      <td>2013.000000</td>
+      <td>7.580000</td>
+      <td>7.560000</td>
+      <td>7.397500</td>
+      <td>7.560000</td>
+      <td>7.580000</td>
+      <td>7.500000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>7.500000</td>
+      <td>7.580000</td>
+      <td>80.170000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>795.00000</td>
+      <td>795.000000</td>
+      <td>795.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>170.000000</td>
+      <td>2014.000000</td>
+      <td>7.670000</td>
+      <td>7.710000</td>
+      <td>7.670000</td>
+      <td>7.710000</td>
+      <td>7.750000</td>
+      <td>7.670000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>7.670000</td>
+      <td>7.830000</td>
+      <td>81.500000</td>
+      <td>0.100000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1095.00000</td>
+      <td>1200.000000</td>
+      <td>1100.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>320.000000</td>
+      <td>2015.000000</td>
+      <td>7.920000</td>
+      <td>7.830000</td>
+      <td>7.770000</td>
+      <td>7.830000</td>
+      <td>7.830000</td>
+      <td>7.830000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>7.830000</td>
+      <td>7.920000</td>
+      <td>82.520000</td>
+      <td>0.120000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>2.000000</td>
+      <td>1488.00000</td>
+      <td>1488.000000</td>
+      <td>1488.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>320.000000</td>
+      <td>2017.000000</td>
+      <td>8.330000</td>
+      <td>8.080000</td>
+      <td>7.920000</td>
+      <td>8.000000</td>
+      <td>8.420000</td>
+      <td>8.250000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>8.000000</td>
+      <td>8.580000</td>
+      <td>83.750000</td>
+      <td>0.130000</td>
+      <td>63.000000</td>
+      <td>0.0</td>
+      <td>9.000000</td>
+      <td>3170.00000</td>
+      <td>3170.000000</td>
+      <td>3170.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition-further-reading admonition">
+<p class="admonition-title">further reading</p>
+<p>On the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html">documentation page for describe</a> the “<i class="fas fa-info-circle"></i>
+See Also” shows the links to the documentation of most of the individual functions.  This is a good way to learn about other things, or find something when you are not quite sure what it would be named.  Go to a function thats similar to what you want and then look at the related functions.</p>
+</div>
+</aside>
+<p>From this, we can draw several conclusions.  FOr example straightforward ones like:</p>
+<ul class="simple">
+<li><p>the smallest number of bags rated is 1 and at least 25% of the coffees rates only had 1 bag</p></li>
+<li><p>the first ratings included were 2012 and last in 2017  (min &amp; max)</p></li>
+<li><p>the mean Mouthfeel was 7.5</p></li>
+<li><p>Category One defects are not very common ( the 75th% is 0)</p></li>
+</ul>
+<p>Or more nuanced ones that compare across variables like</p>
+<ul class="simple">
+<li><p>the raters scored coffee higher on Uniformity.Cup and Clean.Cup than other scores (mean score; only on the ones that seem to have a scale of up to 8/10)</p></li>
+<li><p>the coffee varied more in Mouthfeel and Balance that most other scores (the std; only on the ones that seem to have a scale of of up to 8/10)</p></li>
+<li><p>there are 3 ratings with no altitude (count of other variables is 28; alt is 25)</p></li>
+</ul>
+<p>And these all give us a sense of the values and the distribution or spread fo the data in each column.</p>
+<section id="understanding-quantiles">
+<h3><span class="section-number">4.3.1. </span>Understanding Quantiles<a class="headerlink" href="#understanding-quantiles" title="Permalink to this headline">#</a></h3>
+<p>The 50% has another more common name: the median.  It means 50% of the data are lower (and higher) than this value.</p>
+</section>
+<section id="individual-variable">
+<h3><span class="section-number">4.3.2. </span>Individual variable<a class="headerlink" href="#individual-variable" title="Permalink to this headline">#</a></h3>
+<p>We can use the descriptive statistics on individual columns as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">descirbe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">/tmp/ipykernel_2042/957071290.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">descirbe</span><span class="p">()</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">?</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5985</span>             <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_accessors</span>
+<span class="g g-Whitespace">   </span><span class="mi">5986</span>             <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_info_axis</span><span class="o">.</span><span class="n">_can_hold_identifiers_and_holds_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5987</span>         <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">5988</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">5989</span>         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;Series&#39; object has no attribute &#39;descirbe&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is an <code class="docutils literal notranslate"><span class="pre">AttributeError</span></code> because there is no method or property of a <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code> that is named <code class="docutils literal notranslate"><span class="pre">'descirbe'</span></code> that tells me it is a typo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    28.000000
+mean      7.541786
+std       0.526076
+min       5.250000
+25%       7.500000
+50%       7.670000
+75%       7.830000
+max       8.000000
+Name: Balance, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="individual-statistics">
+<h2><span class="section-number">4.4. </span>Individual statistics<a class="headerlink" href="#individual-statistics" title="Permalink to this headline">#</a></h2>
+<p>We can also extract each of the statistics that the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method calculates individually, by name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number.of.Bags           168.000000
+Harvest.Year            2013.964286
+Fragrance...Aroma          7.702500
+Flavor                     7.630714
+Aftertaste                 7.559643
+Salt...Acid                7.657143
+Bitter...Sweet             7.675714
+Mouthfeel                  7.506786
+Uniform.Cup                9.904286
+Clean.Cup                  9.928214
+Balance                    7.541786
+Cupper.Points              7.761429
+Total.Cup.Points          80.868929
+Moisture                   0.065714
+Category.One.Defects       2.964286
+Quakers                    0.000000
+Category.Two.Defects       1.892857
+altitude_low_meters     1367.600000
+altitude_high_meters    1387.600000
+altitude_mean_meters    1377.600000
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number.of.Bags             1.00
+Harvest.Year            2012.00
+Fragrance...Aroma          6.75
+Flavor                     6.67
+Aftertaste                 6.50
+Salt...Acid                6.83
+Bitter...Sweet             6.67
+Mouthfeel                  5.08
+Uniform.Cup                9.33
+Clean.Cup                  9.33
+Balance                    5.25
+Cupper.Points              6.92
+Total.Cup.Points          73.75
+Moisture                   0.00
+Category.One.Defects       0.00
+Quakers                    0.00
+Category.Two.Defects       0.00
+altitude_low_meters       40.00
+altitude_high_meters      40.00
+altitude_mean_meters      40.00
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>The quantiles
+are tricky, we cannot just <code class="docutils literal notranslate"><span class="pre">.25%()</span></code> to get the 25% percentile, we have to use the
+<code class="docutils literal notranslate"><span class="pre">quantile</span></code> method and pass it a value between 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.83
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Aftertaste&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.559642857142856
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-categorical-data">
+<h2><span class="section-number">4.5. </span>Working with categorical data<a class="headerlink" href="#working-with-categorical-data" title="Permalink to this headline">#</a></h2>
+<p>There are different columns in the describe than the the whole dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Species&#39;, &#39;Owner&#39;, &#39;Country.of.Origin&#39;, &#39;Farm.Name&#39;, &#39;Lot.Number&#39;,
+       &#39;Mill&#39;, &#39;ICO.Number&#39;, &#39;Company&#39;, &#39;Altitude&#39;, &#39;Region&#39;, &#39;Producer&#39;,
+       &#39;Number.of.Bags&#39;, &#39;Bag.Weight&#39;, &#39;In.Country.Partner&#39;, &#39;Harvest.Year&#39;,
+       &#39;Grading.Date&#39;, &#39;Owner.1&#39;, &#39;Variety&#39;, &#39;Processing.Method&#39;,
+       &#39;Fragrance...Aroma&#39;, &#39;Flavor&#39;, &#39;Aftertaste&#39;, &#39;Salt...Acid&#39;,
+       &#39;Bitter...Sweet&#39;, &#39;Mouthfeel&#39;, &#39;Uniform.Cup&#39;, &#39;Clean.Cup&#39;, &#39;Balance&#39;,
+       &#39;Cupper.Points&#39;, &#39;Total.Cup.Points&#39;, &#39;Moisture&#39;, &#39;Category.One.Defects&#39;,
+       &#39;Quakers&#39;, &#39;Color&#39;, &#39;Category.Two.Defects&#39;, &#39;Expiration&#39;,
+       &#39;Certification.Body&#39;, &#39;Certification.Address&#39;, &#39;Certification.Contact&#39;,
+       &#39;unit_of_measurement&#39;, &#39;altitude_low_meters&#39;, &#39;altitude_high_meters&#39;,
+       &#39;altitude_mean_meters&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So far, the stats above are only for numerical features.</p>
+<p>We can get the prevalence of each one with <code class="docutils literal notranslate"><span class="pre">value_counts</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Color&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Color
+Green           20
+Blue-Green       3
+Bluish-Green     2
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-try-it-yourself admonition">
+<p class="admonition-title">Try it Yourself</p>
+<p>Note <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> does not count the <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values, but <code class="docutils literal notranslate"><span class="pre">count</span></code> counts all of the
+not missing values and the shape of the DataFrame is the total number of rows.
+How can you get the number of missing Colors?</p>
+</div>
+<p>Describe only operates on the numerical columns, but we might want to know about the others.  We can get the number of each value with <code class="docutils literal notranslate"><span class="pre">value_counts</span></code></p>
+<p>What is the most common country of origin?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Country.of.Origin
+India            13
+Uganda           10
+United States     2
+Ecuador           2
+Vietnam           1
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Value counts returns a pandas Series that has two parts: values and index</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([13, 10,  2,  2,  1])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;India&#39;, &#39;Uganda&#39;, &#39;United States&#39;, &#39;Ecuador&#39;, &#39;Vietnam&#39;], dtype=&#39;object&#39;, name=&#39;Country.of.Origin&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">max</span></code> method takes the max of the values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get the name of the most common country out of this Series using <code class="docutils literal notranslate"><span class="pre">idmax</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;India&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="which-country-scores-highest-on-flavor">
+<h2><span class="section-number">4.6. </span>Which country scores highest on flavor?<a class="headerlink" href="#which-country-scores-highest-on-flavor" title="Permalink to this headline">#</a></h2>
+<p>Let’s try to answer this with plots first</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/9300b68f519a4eaabbeb53aa3f28c47105c14a548b547d678c9bc45f6c8b4778.png" src="../_images/9300b68f519a4eaabbeb53aa3f28c47105c14a548b547d678c9bc45f6c8b4778.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Frequency&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/ce56657adde23e4b456798f1a645895d5acb19214712c075d9ef63fc8bdb3f13.png" src="../_images/ce56657adde23e4b456798f1a645895d5acb19214712c075d9ef63fc8bdb3f13.png" />
+</div>
+</div>
+<p>Seaborn give us <a class="reference external" href="https://seaborn.pydata.org/tutorial/introduction.html#opinionated-defaults-and-flexible-customization"><em>opinionated defaults</em></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>seaborn’s alias is <code class="docutils literal notranslate"><span class="pre">sns</span></code> as an inside joke among the developers to the character, <a class="reference external" href="https://en.wikipedia.org/wiki/Sam_Seaborn">Samual Norman Seaborn</a> from West Wing they named the library after <a class="reference external" href="https://seaborn.pydata.org/faq.html#why-is-seaborn-imported-as-sns">per their FAQ</a></p>
+<p>So we can choose a typoe of plot and give it the whole dataframe and pass the variables to different parameters for them to be used in different ways.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span><span class="n">coffee_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Flavor&#39;</span><span class="p">,</span><span class="n">kind</span> <span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="n">col</span><span class="o">=</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">,</span>
+           <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f2147914be0&gt;
+</pre></div>
+</div>
+<img alt="../_images/f51b4f35b7d0769e5e6f8a70ef680aba9d009123a536be03a97f821d61d8cf41.png" src="../_images/f51b4f35b7d0769e5e6f8a70ef680aba9d009123a536be03a97f821d61d8cf41.png" />
+</div>
+</div>
+<section id="are-any-coffees-more-than-one-standard-deviation-above-the-average-in-flavor">
+<h3><span class="section-number">4.6.1. </span>Are any coffees more than one standard deviation above the average in <code class="docutils literal notranslate"><span class="pre">Flavor</span></code> ?<a class="headerlink" href="#are-any-coffees-more-than-one-standard-deviation-above-the-average-in-flavor" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Flavor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(7.93437014076549, 8.08)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yes, one is more than one standard deviation from the mean.</p>
+</section>
+</section>
+<section id="questions-after-class">
+<h2><span class="section-number">4.7. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<section id="can-pycharm-access-urls">
+<h3><span class="section-number">4.7.1. </span>can pycharm access urls?<a class="headerlink" href="#can-pycharm-access-urls" title="Permalink to this headline">#</a></h3>
+<p>Probably, it should not block them and they are language features, but I do not use it to know.</p>
+</section>
+<section id="can-we-do-what-we-did-today-in-pycharm">
+<h3><span class="section-number">4.7.2. </span>can we do what we did today in pycharm?<a class="headerlink" href="#can-we-do-what-we-did-today-in-pycharm" title="Permalink to this headline">#</a></h3>
+<p>In theory, but pycharm probably will not handle the plots gracefully.</p>
+<p>For this class, you need to submit notebook files, so pycharm will not work.</p>
+<p>Pycharm is not typically used in datascience.</p>
+</section>
+<section id="are-the-bars-on-the-seaborn-plot-random-colors-or-do-the-colors-have-some-meaning">
+<h3><span class="section-number">4.7.3. </span>Are the bars on the Seaborn plot random colors, or do the colors have some meaning?<a class="headerlink" href="#are-the-bars-on-the-seaborn-plot-random-colors-or-do-the-colors-have-some-meaning" title="Permalink to this headline">#</a></h3>
+<p>here, each different value is a different color. We wil control it more on Thursday</p>
+</section>
+<section id="what-types-of-jobs-use-what-we-learned-today">
+<h3><span class="section-number">4.7.4. </span>what types of jobs use what we learned today<a class="headerlink" href="#what-types-of-jobs-use-what-we-learned-today" title="Permalink to this headline">#</a></h3>
+<p>Any data science role would use these skills daily.</p>
+</section>
+<section id="is-there-an-equivalent-for-the-index-of-the-minimum-value-such-as-idxmin">
+<h3><span class="section-number">4.7.5. </span>Is there an equivalent for the index of the minimum value, such as idxmin()?<a class="headerlink" href="#is-there-an-equivalent-for-the-index-of-the-minimum-value-such-as-idxmin" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="what-is-the-std">
+<h3><span class="section-number">4.7.6. </span>What is the std<a class="headerlink" href="#what-is-the-std" title="Permalink to this headline">#</a></h3>
+<p>standard deviation <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.std.html">pandas docs on calculation</a>.  The <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation">wikipedia</a> article on standard deviation is a good source on this.</p>
+</section>
+<section id="why-can-we-not-use-matplotlib">
+<h3><span class="section-number">4.7.7. </span>Why can we not use matplotlib?<a class="headerlink" href="#why-can-we-not-use-matplotlib" title="Permalink to this headline">#</a></h3>
+<p>You <em>can</em> and you may for some customizaiton, but seaborn usually makes things faster to code and easier to read. I will not teach much matplotlib, but if you know it, up to date, not outdated, you may use it in some cases.</p>
+</section>
+<section id="one-question-i-have-is-what-exactly-the-series-object-can-be-used-for">
+<h3><span class="section-number">4.7.8. </span>One question I have is what exactly the series object can be used for<a class="headerlink" href="#one-question-i-have-is-what-exactly-the-series-object-can-be-used-for" title="Permalink to this headline">#</a></h3>
+<p>A series is one column or one row of a dataframe.</p>
+</section>
+<section id="how-these-lines-of-code-can-be-used-more-efficiently-in-larger-data-sets">
+<h3><span class="section-number">4.7.9. </span>how these lines of code can be used more efficiently in larger data sets?<a class="headerlink" href="#how-these-lines-of-code-can-be-used-more-efficiently-in-larger-data-sets" title="Permalink to this headline">#</a></h3>
+<p>For extremely large datasets if it’s too much to plot, you might, for exaple, sample the dataset to only plot a subset.</p>
+<p>Otherwise this will still work.</p>
+</section>
+<section id="can-you-change-what-the-plot-graphs-rather-than-an-index-vs-frequency">
+<h3><span class="section-number">4.7.10. </span>Can you change what the plot graphs rather than an index vs frequency?<a class="headerlink" href="#can-you-change-what-the-plot-graphs-rather-than-an-index-vs-frequency" title="Permalink to this headline">#</a></h3>
+<p>yes, we can change the plot to whatever we want.</p>
+</section>
+<section id="actually-i-would-like-to-know-like-with-our-country-flavor-example-can-they-be-put-in-the-same-plot-but-with-different-colors-for-the-different-countries-to-each-country-side-by-side-for-a-given-score">
+<h3><span class="section-number">4.7.11. </span>actually I would like to know like with our country/flavor example can they be put in the same plot but with different colors for the different countries to each country side by side for a given score<a class="headerlink" href="#actually-i-would-like-to-know-like-with-our-country-flavor-example-can-they-be-put-in-the-same-plot-but-with-different-colors-for-the-different-countries-to-each-country-side-by-side-for-a-given-score" title="Permalink to this headline">#</a></h3>
+<p>yes</p>
+</section>
+<section id="can-assignment-3-can-be-release-so-we-can-pre-read-it-over">
+<h3><span class="section-number">4.7.12. </span>Can assignment 3 can be release so we can pre-read it over.<a class="headerlink" href="#can-assignment-3-can-be-release-so-we-can-pre-read-it-over" title="Permalink to this headline">#</a></h3>
+<p>Yes, it is posted now</p>
+</section>
+</section>
+<section id="questions-well-answer-in-class-on-thurday">
+<h2><span class="section-number">4.8. </span>Questions we’ll answer in class on thurday<a class="headerlink" href="#questions-well-answer-in-class-on-thurday" title="Permalink to this headline">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These are <strong>great</strong> questions, I’m just not going to answer them here and then again in class on Thursday</p>
+</div>
+<ul class="simple">
+<li><p>What other types of graphs could be used?</p></li>
+<li><p>Is there a way to use both x and y in sns without creating multiple charts?</p></li>
+<li><p>Using matplotlib, we never got to use it to class, and I want to know the difference between that and seanborn</p></li>
+<li><p>How to change the colors of the plots.</p></li>
+<li><p>What do we usually tend to look for in terms of patterns when trying to formulate questions about the data, or several pieces of data?</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-09-14.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>DataFrames from other sources</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-a-note-on-assignments">4.1. First, a note on assignments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-goal">4.1.1. the goal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">4.1.2. Getting help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-week-exploratory-data-analysis">4.2. This week: Exploratory Data Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarizing-and-visualizing-data-are-very-important">4.2.1. Summarizing and Visualizing Data are <strong>very</strong> important</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-a-dataset">4.3. Describing a Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-quantiles">4.3.1. Understanding Quantiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-variable">4.3.2. Individual variable</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#individual-statistics">4.4. Individual statistics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-categorical-data">4.5. Working with categorical data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#which-country-scores-highest-on-flavor">4.6. Which country scores highest on flavor?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-any-coffees-more-than-one-standard-deviation-above-the-average-in-flavor">4.6.1. Are any coffees more than one standard deviation above the average in <code class="docutils literal notranslate"><span class="pre">Flavor</span></code> ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">4.7. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-pycharm-access-urls">4.7.1. can pycharm access urls?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-do-what-we-did-today-in-pycharm">4.7.2. can we do what we did today in pycharm?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-the-bars-on-the-seaborn-plot-random-colors-or-do-the-colors-have-some-meaning">4.7.3. Are the bars on the Seaborn plot random colors, or do the colors have some meaning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-types-of-jobs-use-what-we-learned-today">4.7.4. what types of jobs use what we learned today</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-an-equivalent-for-the-index-of-the-minimum-value-such-as-idxmin">4.7.5. Is there an equivalent for the index of the minimum value, such as idxmin()?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-std">4.7.6. What is the std</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-can-we-not-use-matplotlib">4.7.7. Why can we not use matplotlib?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-question-i-have-is-what-exactly-the-series-object-can-be-used-for">4.7.8. One question I have is what exactly the series object can be used for</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-these-lines-of-code-can-be-used-more-efficiently-in-larger-data-sets">4.7.9. how these lines of code can be used more efficiently in larger data sets?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-change-what-the-plot-graphs-rather-than-an-index-vs-frequency">4.7.10. Can you change what the plot graphs rather than an index vs frequency?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actually-i-would-like-to-know-like-with-our-country-flavor-example-can-they-be-put-in-the-same-plot-but-with-different-colors-for-the-different-countries-to-each-country-side-by-side-for-a-given-score">4.7.11. actually I would like to know like with our country/flavor example can they be put in the same plot but with different colors for the different countries to each country side by side for a given score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-assignment-3-can-be-release-so-we-can-pre-read-it-over">4.7.12. Can assignment 3 can be release so we can pre-read it over.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-well-answer-in-class-on-thurday">4.8. Questions we’ll answer in class on thurday</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-14';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="4. Exploratory Data Analysis" href="2023-09-19.html" />
     <link rel="prev" title="2. Iterables and Pandas Data Frames" href="2023-09-12.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -175,11 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. DataFrames from other sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -982,76 +984,76 @@ class enumerate(object)
   </thead>
   <tbody>
     <tr>
-      <th>20</th>
+      <th>12</th>
       <td>Robusta</td>
-      <td>mannya coffee project</td>
-      <td>Uganda</td>
-      <td>mannya coffee project</td>
-      <td>NaN</td>
-      <td>mannya coffee project</td>
-      <td>0</td>
-      <td>mannya coffee project</td>
-      <td>1200</td>
-      <td>southern</td>
-      <td>...</td>
-      <td>Green</td>
-      <td>1</td>
-      <td>June 27th, 2015</td>
-      <td>Uganda Coffee Development Authority</td>
-      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
-      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
-      <td>m</td>
-      <td>1200.0</td>
-      <td>1200.0</td>
-      <td>1200.0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Robusta</td>
-      <td>katuka development trust ltd</td>
-      <td>Uganda</td>
-      <td>katikamu capca farmers association</td>
-      <td>NaN</td>
-      <td>katuka development trust</td>
-      <td>0</td>
-      <td>katuka development trust ltd</td>
-      <td>1200-1300</td>
-      <td>luwero central region</td>
-      <td>...</td>
-      <td>Green</td>
-      <td>3</td>
-      <td>June 26th, 2015</td>
-      <td>Uganda Coffee Development Authority</td>
-      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
-      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
-      <td>m</td>
-      <td>1200.0</td>
-      <td>1300.0</td>
-      <td>1250.0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Robusta</td>
-      <td>andrew hetzel</td>
+      <td>nishant gurjer</td>
       <td>India</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>(self)</td>
-      <td>NaN</td>
-      <td>cafemakers, llc</td>
-      <td>3000'</td>
-      <td>chikmagalur</td>
+      <td>sethuraman estate kaapi royale</td>
+      <td>RC AB</td>
+      <td>sethuraman estate</td>
+      <td>14/1148/2016/12</td>
+      <td>kaapi royale</td>
+      <td>1000</td>
+      <td>chikmagalur karnataka</td>
       <td>...</td>
       <td>Green</td>
       <td>0</td>
-      <td>February 28th, 2013</td>
+      <td>August 23rd, 2017</td>
       <td>Specialty Coffee Association</td>
       <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
       <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
       <td>m</td>
-      <td>3000.0</td>
-      <td>3000.0</td>
-      <td>3000.0</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Robusta</td>
+      <td>kasozi coffee farmers association</td>
+      <td>Uganda</td>
+      <td>kasozi coffee farmers</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>kasozi coffee farmers association</td>
+      <td>1367</td>
+      <td>eastern</td>
+      <td>...</td>
+      <td>Green</td>
+      <td>7</td>
+      <td>July 14th, 2015</td>
+      <td>Uganda Coffee Development Authority</td>
+      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
+      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
+      <td>m</td>
+      <td>1367.0</td>
+      <td>1367.0</td>
+      <td>1367.0</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Robusta</td>
+      <td>luis robles</td>
+      <td>Ecuador</td>
+      <td>robustasa</td>
+      <td>Lavado 3</td>
+      <td>own laboratory</td>
+      <td>NaN</td>
+      <td>robustasa</td>
+      <td>40</td>
+      <td>san juan, playas</td>
+      <td>...</td>
+      <td>Blue-Green</td>
+      <td>0</td>
+      <td>January 18th, 2017</td>
+      <td>Specialty Coffee Association</td>
+      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
+      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
+      <td>m</td>
+      <td>40.0</td>
+      <td>40.0</td>
+      <td>40.0</td>
     </tr>
   </tbody>
 </table>
@@ -1736,11 +1738,11 @@ Name: Flavor, dtype: bool
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-09-19.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Exploratory Data Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
