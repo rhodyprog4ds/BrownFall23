@@ -1,13 +1,14 @@
 
 # Assignment 3: Exploratory Data Analysis
 
-__Due:2023-09-25 __
-
-
-
+- __Due:2023-09-25 __
+  
 ```{important}
 You have the option to work with a partner. You must plan this in advance so that you have access to collaborate. If you did not find a partner in class and you would like one, try to find one [on the class discussion](https://github.com/rhodyprog4ds/sp23-discuss-sp23community/discussions). @brownsarahm if you do not get a reply. 
 ```
+
+- If working alone make a team for yourself when you  [accept the assigment](https://classroom.github.com/a/C1PeyQ1b)
+- If you are working with a partner, coordinate so that the first person makes the team when accepting and then the second joins the same team when they [accept the assigment](https://classroom.github.com/a/C1PeyQ1b)
 
 
 ## Objective & Evaluation
