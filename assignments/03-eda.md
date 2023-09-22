@@ -60,14 +60,14 @@ Use a separate notebook for each dataset, name them `dataset_01.ipynb` and `data
 For **each** dataset, in the corresponding notebook complete the following:
 
 1. Load the data to a notebook as a `DataFrame` from url or local path, if local, include the data file in your repository.
-1. Explore the dataset in a notebook enough to describe its structure use the heading `## Description`
+1. Explore the dataset in a notebook enough to describe its structure. Use the heading `## Description`
 
     - shape
     - columns
     - variable types
     - overall summary statisics
 1. Write a short description of what the data contains and what it could be used for
-2. Include overall summary for the data and interpret what that means. This should include code that generates the statistical summary and sentences in English in a markdown cell with your conclusions and explanation of the statistical summary. Are there limitations in how to safely interpre the data that the summary helps you see? are the variables what you expect? 
+2. Include an overall summary for the data and interpret what that means. This should include code that generates the statistical summary and sentences in English in a markdown cell with your conclusions and explanation of the statistical summary. Are there limitations in how to safely interpret the data that the summary helps you see? are the variables what you expect? 
 3. Ask and answer 3 questions by using and interpreting statistics and visualizations as appropriate. Include a heading for each question using a markdown cell and H2:`##`. Make sure your analyses meet the criteria in the check lists below. Use the checklists to think of what kinds of questions would use those type of analyses and help shape your questions. (if you have one really complex question that can cover the checklists below, fewer than 3 questions is okay)
 4. Describe what, if anything might need to be done to clean or prepare this data for further analysis in a finale `## Future analysis` markdown cell in your notebook.
 
