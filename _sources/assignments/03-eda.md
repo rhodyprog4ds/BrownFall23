@@ -79,7 +79,10 @@ be sure that every question (all six, 3 per dataset) has:
 - at least 1 statistic or plot
 - interpretation that answers the question
 
-
+```{important}
+The code and question versions below are supposed to convey the same information, in different ways so that you can use the version that makes
+the most sense to you.
+```
 
 ### Dataset 1 Checklist
 make sure that your `dataset_01.ipynb` has:
