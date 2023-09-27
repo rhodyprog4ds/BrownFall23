@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-21';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="6. Tidy Data" href="2023-09-26.html" />
     <link rel="prev" title="4. Exploratory Data Analysis" href="2023-09-19.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -177,12 +177,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4:</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -794,7 +796,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f31386afac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28d1992cd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/688b96e669cfd99d3c7866cca53db3a331cb278169497051cccddd694a4310bd.png" src="../_images/688b96e669cfd99d3c7866cca53db3a331cb278169497051cccddd694a4310bd.png" />
@@ -808,7 +810,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f30fc801af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28d18e6580&gt;
 </pre></div>
 </div>
 <img alt="../_images/ceaa481f1159e15f0ce640d09321bd234482ea8a2d207b0415ebb86389b07075.png" src="../_images/ceaa481f1159e15f0ce640d09321bd234482ea8a2d207b0415ebb86389b07075.png" />
@@ -834,7 +836,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f30f9fb5b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28d15a9700&gt;
 </pre></div>
 </div>
 <img alt="../_images/b2f8c51c99a108266746105e63644e3a2ee46a7f1ba0b1d7d70d7974b99a0ae6.png" src="../_images/b2f8c51c99a108266746105e63644e3a2ee46a7f1ba0b1d7d70d7974b99a0ae6.png" />
@@ -986,7 +988,7 @@ Name: Number.of.Bags, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f30f9f868b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f28d190a520&gt;
 </pre></div>
 </div>
 </div>
@@ -1300,7 +1302,7 @@ Name: Flavor, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f30fa036070&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28cd6e9df0&gt;
 </pre></div>
 </div>
 <img alt="../_images/09e28f5c2d430f95f11967b6af9db38516e8636a110c137ecb227a6aa8c92c50.png" src="../_images/09e28f5c2d430f95f11967b6af9db38516e8636a110c137ecb227a6aa8c92c50.png" />
@@ -1313,7 +1315,7 @@ Name: Flavor, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f30fa036a60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28ccf0ef40&gt;
 </pre></div>
 </div>
 <img alt="../_images/cad7a97bce545880375cb1babc3489d740c3c491d6559ad9feb8be48f6dc9fd6.png" src="../_images/cad7a97bce545880375cb1babc3489d740c3c491d6559ad9feb8be48f6dc9fd6.png" />
@@ -2544,7 +2546,7 @@ Name: Country.of.Origin, Length: 1311, dtype: bool
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f30f9fad190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f28cd0aad00&gt;
 </pre></div>
 </div>
 <img alt="../_images/67e42c607b851f6f881ad9e3fea160208ba28dd6358d5677325a88d782f46971.png" src="../_images/67e42c607b851f6f881ad9e3fea160208ba28dd6358d5677325a88d782f46971.png" />
@@ -2656,11 +2658,11 @@ The <a class="reference external" href="https://seaborn.pydata.org/examples/inde
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-09-26.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Tidy Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

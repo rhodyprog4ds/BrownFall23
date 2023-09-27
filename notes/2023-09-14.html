@@ -177,12 +177,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. DataFrames from other sources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4:</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -985,7 +987,55 @@ class enumerate(object)
   </thead>
   <tbody>
     <tr>
-      <th>22</th>
+      <th>26</th>
+      <td>Robusta</td>
+      <td>james moore</td>
+      <td>United States</td>
+      <td>fazenda cazengo</td>
+      <td>NaN</td>
+      <td>cafe cazengo</td>
+      <td>NaN</td>
+      <td>global opportunity fund</td>
+      <td>795 meters</td>
+      <td>kwanza norte province, angola</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>6</td>
+      <td>December 23rd, 2015</td>
+      <td>Specialty Coffee Association</td>
+      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
+      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
+      <td>m</td>
+      <td>795.0</td>
+      <td>795.0</td>
+      <td>795.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Robusta</td>
+      <td>nishant gurjer</td>
+      <td>India</td>
+      <td>sethuraman estate kaapi royale</td>
+      <td>RC AB</td>
+      <td>sethuraman estate</td>
+      <td>14/1148/2016/12</td>
+      <td>kaapi royale</td>
+      <td>1000</td>
+      <td>chikmagalur karnataka</td>
+      <td>...</td>
+      <td>Green</td>
+      <td>0</td>
+      <td>August 23rd, 2017</td>
+      <td>Specialty Coffee Association</td>
+      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
+      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
+      <td>m</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>17</th>
       <td>Robusta</td>
       <td>andrew hetzel</td>
       <td>India</td>
@@ -997,64 +1047,16 @@ class enumerate(object)
       <td>750m</td>
       <td>chikmagalur</td>
       <td>...</td>
-      <td>Green</td>
-      <td>0</td>
-      <td>June 20th, 2014</td>
-      <td>Specialty Coffee Association</td>
-      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
-      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
-      <td>m</td>
-      <td>750.0</td>
-      <td>750.0</td>
-      <td>750.0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Robusta</td>
-      <td>ankole coffee producers coop</td>
-      <td>Uganda</td>
-      <td>kyangundu coop society</td>
-      <td>NaN</td>
-      <td>ankole coffee producers coop union ltd</td>
-      <td>0</td>
-      <td>ankole coffee producers coop</td>
-      <td>1488</td>
-      <td>south western</td>
-      <td>...</td>
-      <td>Green</td>
-      <td>2</td>
-      <td>July 14th, 2015</td>
-      <td>Uganda Coffee Development Authority</td>
-      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
-      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
-      <td>m</td>
-      <td>1488.0</td>
-      <td>1488.0</td>
-      <td>1488.0</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>Robusta</td>
-      <td>luis robles</td>
-      <td>Ecuador</td>
-      <td>robustasa</td>
-      <td>Lavado 3</td>
-      <td>own laboratory</td>
-      <td>NaN</td>
-      <td>robustasa</td>
-      <td>40</td>
-      <td>san juan, playas</td>
-      <td>...</td>
       <td>Blue-Green</td>
       <td>0</td>
-      <td>January 18th, 2017</td>
+      <td>June 3rd, 2014</td>
       <td>Specialty Coffee Association</td>
       <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
       <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
       <td>m</td>
-      <td>40.0</td>
-      <td>40.0</td>
-      <td>40.0</td>
+      <td>750.0</td>
+      <td>750.0</td>
+      <td>750.0</td>
     </tr>
   </tbody>
 </table>
