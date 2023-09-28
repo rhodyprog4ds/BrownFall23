@@ -26,7 +26,7 @@ In the datasets you have used or come across but decided you could not work with
 in your past assignments identify at least one
 thing you could not do because the data was not in an appropriate format.
 
-Apply one fix and show one summary statistic or plot that was not possible before 
+In a notebook file called `dataset_fix.ipynb` apply one fix and show one summary statistic or plot that was not possible before 
 to show that it works.
 
 
