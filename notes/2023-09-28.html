@@ -1,0 +1,2746 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>7. Reparing values &#8212; Programming for Data Science at URI Fall 2023</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/course-admonitions.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-28';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="6. Tidy Data and Structural Repairs" href="2023-09-26.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/310_2021.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/310_2021.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/achievements.html">Data Science Achievements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/policies.html">Grading Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/style.html">Course  Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General URI Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data and Structural Repairs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Reparing values</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/index.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/formatting.html">Formatting Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check1ideas.html">Portfolio Check 1 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check2ideas.html">Check 2 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check3ideas.html">Check 3 Ideas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/debugging.html">Code Errors</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/python.html">References on Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/datasets.html">Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/terminal.html">Terminals and Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall20/letters/">Advice from FA2020 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall21/letters/">Advice from FA2021 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/edit/main/notes/2023-09-28.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/issues/new?title=Issue%20on%20page%20%2Fnotes/2023-09-28.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2023-09-28.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Reparing values</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data-review">7.1. Cleaning Data review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cleaning-data-recipe">7.1.1. A Cleaning Data Recipe</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-clean-enough">7.2. What is clean enough?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-missing-values">7.2.1. Filling missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping">7.3. Dropping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping-missing-values">7.3.1. Dropping missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inconsistent-values">7.4. Inconsistent values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsons">7.5. JSons</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casting-review">7.5.1. Casting Review</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-dicts-within-a-data-frame">7.5.2. Handling dicts within a Data Frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpacking-at-scale">7.5.3. Unpacking at scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">7.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-you-do-analysis-with-a-specific-column-and-cleaned-it-for-that-should-you-restore-the-original-dataframe-and-reclean-it-to-do-a-different-analysis">7.6.1. After you do analysis with a specific column and cleaned it for that, should you restore the original dataframe and reclean it to do a different analysis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-dont-fully-understand-the-lambda-function">7.6.2. I don’t fully understand the lambda function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-use-cases-vs-csv-use-cases">7.6.3. Json use cases vs csv use cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-so-many-datasets-so-messy-in-the-first-place">7.6.4. Why are so many datasets so messy in the first place?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-more-resources-to-see-when-its-appropriate-to-fill-in-missing-data-with-certain-values">7.6.5. Are there more resources to see when its appropriate to fill in missing data with certain values?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-get-a-more-in-depth-explanation-of-what-is-going-on-in-the-last-piece-of-code-you-provided">7.6.6. Can we get a more in-depth explanation of what is going on in the last piece of code you provided?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-normal-percent-of-nas-that-need-to-be-filled-for-most-people-to-get-rid-of-that-line">7.6.7. What is the normal percent of NAs that need to be filled for most people to get rid of that line?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="reparing-values">
+<h1><span class="section-number">7. </span>Reparing values<a class="headerlink" href="#reparing-values" title="Permalink to this headline">#</a></h1>
+<p>So far, we’ve dealt with structural issues in data. but there’s a lot more to
+cleaning.</p>
+<p>Today,  we’ll deal with how to fix the values within  the data.</p>
+<section id="cleaning-data-review">
+<h2><span class="section-number">7.1. </span>Cleaning Data review<a class="headerlink" href="#cleaning-data-review" title="Permalink to this headline">#</a></h2>
+<p>Instead of more practice with these manipulations, below are more
+examples of cleaning data to see how these types of manipulations get used.<br />
+Your goal here is not to memorize every possible thing, but to build a general
+idea of what good data looks like and good habits for cleaning data and keeping
+it reproducible.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ryanwingate.com/projects/machine-learning-data-prep/adult/adult-cleaning/">Cleaning the Adult Dataset</a></p></li>
+<li><p><a class="reference external" href="https://github.com/the-pudding/data/tree/master/foundation-names#allshadescsv--allshadesr">All Shades</a>
+Also here are some tips on general data management and organization.</p></li>
+</ul>
+<p>This article is a comprehensive <a class="reference external" href="https://towardsdatascience.com/the-ultimate-guide-to-data-cleaning-3969843991d4">discussion of data cleaning</a>.</p>
+<section id="a-cleaning-data-recipe">
+<h3><span class="section-number">7.1.1. </span>A Cleaning Data Recipe<a class="headerlink" href="#a-cleaning-data-recipe" title="Permalink to this headline">#</a></h3>
+<p><strong>not everything possible, but good enough for this course</strong></p>
+<ol class="arabic simple">
+<li><p>Can you use parameters to read the data in better?</p></li>
+<li><p>Fix the index and column headers (making these easier to use makes the rest easier)</p></li>
+<li><p>Is the data strucutred well?</p></li>
+<li><p>Are there missing values?</p></li>
+<li><p>Do the datatypes match what you expect by looking at the head or a sample?</p></li>
+<li><p>Are categorical variables represented in usable way?</p></li>
+<li><p>Does your analysis require filtering or augmenting the data?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span> <span class="s2">&quot;colorblind&quot;</span><span class="p">)</span>
+<span class="c1"># toy data set</span>
+<span class="n">na_toy_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">2</span> <span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+
+<span class="c1"># coffee data</span>
+<span class="n">arabica_data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/jldbc/coffee-quality-database/master/data/arabica_data_cleaned.csv&#39;</span>
+
+<span class="n">coffee_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">arabica_data_url</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># github api data</span>
+<span class="n">rhodyprog4ds_gh_events_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.github.com/orgs/rhodyprog4ds/events&#39;</span>
+<span class="n">course_gh_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">rhodyprog4ds_gh_events_url</span><span class="p">)</span>
+
+<span class="c1"># make plots look nicer and increase font size</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-is-clean-enough">
+<h2><span class="section-number">7.2. </span>What is clean enough?<a class="headerlink" href="#what-is-clean-enough" title="Permalink to this headline">#</a></h2>
+<p>This is a great question, without an easy answer.</p>
+<p>It depends on what you want to do.  This is why it’s important to have potential
+questions in mind if you are cleaning data for others <em>and</em> why we often have to
+do a little bit more preparation after a dataset has been “cleaned”</p>
+<p>Dealing with missing data is a whole research area. There isn’t one solution.</p>
+<p><a class="reference external" href="https://artemiss-workshop.github.io/">in 2020 there was a whole workshop on missing</a></p>
+<p>one organizer is the main developer of <a class="reference external" href="https://scikit-learn.org/stable/">sci-kit learn</a> the ML package we will use soon.  In a <a class="reference external" href="https://static.sched.com/hosted_files/ray2020/08/Keynote-%20Easier%20Machine%20Learning%20Thoughts%20From%20Scikit-Learn%20-%20Ga%C3%ABl%20Varoquaux%2C%20Research%20Director%2C%20Inria.pdf">2020 invited talk</a> he listed more automatic handling as an active area of research  and a development goal for sklearn.</p>
+<p>There are also many classic approaches both when training and when <a class="reference external" href="https://www.jmlr.org/papers/volume8/saar-tsechansky07a/saar-tsechansky07a.pdf">applying models</a>.</p>
+<p><a class="reference external" href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.701.4234&amp;rep=rep1&amp;type=pdf">example application in breast cancer detection</a></p>
+<p>Even in pandas, dealing with <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html">missing values</a> is under <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#missing-data-na">experimentation</a>
+as to how to represent it symbolically</p>
+<p>Missing values even causes the <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html#missing-data-casting-rules-and-indexing">datatypes to change</a></p>
+<p>That said, there are are om
+Pandas gives a few basic tools:</p>
+<ul class="simple">
+<li><p>dropna</p></li>
+<li><p>fillna</p></li>
+</ul>
+<p>Filling can be good if you know how to fill reasonably, but don’t have data to
+spare by dropping.  For example</p>
+<ul class="simple">
+<li><p>you can approximate with another column</p></li>
+<li><p>you can approximate with that column from other rows</p></li>
+</ul>
+<p>Special case, what if we’re filling a summary table?</p>
+<ul class="simple">
+<li><p>filling with a symbol for printing can be a good choice, but not for analysis.</p></li>
+</ul>
+<p><strong>whatever you do, document it</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_fixedcols</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df_fixedcols</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;coffee_df_fixedcols&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<section id="filling-missing-values">
+<h3><span class="section-number">7.2.1. </span>Filling missing values<a class="headerlink" href="#filling-missing-values" title="Permalink to this headline">#</a></h3>
+<p>The ‘Lot.Number’ has a lot of NaN values, how can we explore it?</p>
+<p>We can look at the type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span>
+
+<span class="ne">NameError</span>: name &#39;coffee_df_fixedcols&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can look at the value counts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;coffee_df_fixedcols&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that a lot are ‘1’, maybe we know that when the data was collected, if the Farm only has one lot, some people recorded ‘1’ and others left it as missing. So we could fill in with 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df_fixedcols</span><span class="p">[</span><span class="s1">&#39;lot_number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;coffee_df_fixedcols&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that even after we called <code class="docutils literal notranslate"><span class="pre">fillna</span></code> we display it again and the original data is unchanged.
+To save the filled in column we have a few choices:</p>
+<ul class="simple">
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">inplace</span></code> parameter. This doesn’t offer performance advantages, but does It still copies the object, but then reassigns the pointer. Its under discussion to <a class="reference external" href="https://github.com/pandas-dev/pandas/issues/16529">deprecate</a></p></li>
+<li><p>write to a new DataFrame</p></li>
+<li><p>add a column</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;lot_number_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Lot.Number&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Species</th>
+      <th>Owner</th>
+      <th>Country.of.Origin</th>
+      <th>Farm.Name</th>
+      <th>Lot.Number</th>
+      <th>Mill</th>
+      <th>ICO.Number</th>
+      <th>Company</th>
+      <th>Altitude</th>
+      <th>Region</th>
+      <th>...</th>
+      <th>Category.Two.Defects</th>
+      <th>Expiration</th>
+      <th>Certification.Body</th>
+      <th>Certification.Address</th>
+      <th>Certification.Contact</th>
+      <th>unit_of_measurement</th>
+      <th>altitude_low_meters</th>
+      <th>altitude_high_meters</th>
+      <th>altitude_mean_meters</th>
+      <th>lot_number_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Arabica</td>
+      <td>metad plc</td>
+      <td>Ethiopia</td>
+      <td>metad plc</td>
+      <td>NaN</td>
+      <td>metad plc</td>
+      <td>2014/2015</td>
+      <td>metad agricultural developmet plc</td>
+      <td>1950-2200</td>
+      <td>guji-hambela</td>
+      <td>...</td>
+      <td>0</td>
+      <td>April 3rd, 2016</td>
+      <td>METAD Agricultural Development plc</td>
+      <td>309fcf77415a3661ae83e027f7e5f05dad786e44</td>
+      <td>19fef5a731de2db57d16da10287413f5f99bc2dd</td>
+      <td>m</td>
+      <td>1950.0</td>
+      <td>2200.0</td>
+      <td>2075.0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 44 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="dropping">
+<h2><span class="section-number">7.3. </span>Dropping<a class="headerlink" href="#dropping" title="Permalink to this headline">#</a></h2>
+<p>Dropping is a good choice when you otherwise have a lot of data and the data is
+missing at random.</p>
+<p>Dropping can be risky if it’s not missing at random. For example, if we saw in
+the coffee data that one of the scores was missing for all of the rows from one
+country, or even just missing more often in one country, that could bias our
+results.</p>
+<p>We can look at dropping in this toy data set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">na_toy_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>6</td>
+      <td>&lt;NA&gt;</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">na_toy_df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     int64
+1     int64
+2    object
+3     int64
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">na_toy_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">na_toy_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>6</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">na_toy_df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    1.5
+1    4.5
+2    4.0
+3    4.0
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>why is this object?</p>
+<section id="dropping-missing-values">
+<h3><span class="section-number">7.3.1. </span>Dropping missing values<a class="headerlink" href="#dropping-missing-values" title="Permalink to this headline">#</a></h3>
+<p>To illustrate how <code class="docutils literal notranslate"><span class="pre">dropna</span></code> works, we’ll use the <code class="docutils literal notranslate"><span class="pre">shape</span></code> method:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1311, 44)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(130, 44)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could instead tell it to only drop rows with <code class="docutils literal notranslate"><span class="pre">NaN</span></code> in a subset of the columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;altitude_low_meters&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1084, 44)
+</pre></div>
+</div>
+</div>
+</div>
+<p>By default, it drops any row with one or more <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p>
+<p>In the <a class="reference external" href="https://openpolicing.stanford.edu/data/">Open Policing Project Data Summary</a> we saw that they made a summary information that showed which variables had at least 70% not missing values.  We can similarly choose to keep only variables that have more than a specific threshold of data, using the <code class="docutils literal notranslate"><span class="pre">thresh</span></code> parameter and <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> to drop along columns.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">coffee_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">thresh</span><span class="o">=</span><span class="mf">.7</span><span class="o">*</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1311, 43)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="inconsistent-values">
+<h2><span class="section-number">7.4. </span>Inconsistent values<a class="headerlink" href="#inconsistent-values" title="Permalink to this headline">#</a></h2>
+<p>This was one of the things that many of you anticipated or had observed.  A useful way to investigate for this, is to use <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> and sort them alphabetically by the values from the original data, so that similar ones will be consecutive in the list. Once we have the <code class="docutils literal notranslate"><span class="pre">value_counts()</span></code> Series, the values from the <code class="docutils literal notranslate"><span class="pre">coffee_df</span></code> become the index, so we use <code class="docutils literal notranslate"><span class="pre">sort_index</span></code>.</p>
+<p>Let’s look at the <code class="docutils literal notranslate"><span class="pre">in_country_partner</span></code> column</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;In.Country.Partner&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>In.Country.Partner
+Specialty Coffee Association                                                             295
+AMECAFE                                                                                  205
+Almacafé                                                                                 178
+Asociacion Nacional Del Café                                                             155
+Brazil Specialty Coffee Association                                                       67
+Instituto Hondureño del Café                                                              60
+Blossom Valley International                                                              58
+Africa Fine Coffee Association                                                            49
+Specialty Coffee Association of Costa Rica                                                42
+NUCOFFEE                                                                                  36
+Uganda Coffee Development Authority                                                       22
+Kenya Coffee Traders Association                                                          22
+Ethiopia Commodity Exchange                                                               18
+Specialty Coffee Institute of Asia                                                        16
+METAD Agricultural Development plc                                                        15
+Yunnan Coffee Exchange                                                                    12
+Salvadoran Coffee Council                                                                 11
+Specialty Coffee Association of Indonesia                                                 10
+Centro Agroecológico del Café A.C.                                                         8
+Asociación de Cafés Especiales de Nicaragua                                                8
+Coffee Quality Institute                                                                   7
+Asociación Mexicana De Cafés y Cafeterías De Especialidad A.C.                             6
+Tanzanian Coffee Board                                                                     6
+Torch Coffee Lab Yunnan                                                                    2
+Specialty Coffee Ass                                                                       1
+Central De Organizaciones Productoras De Café y Cacao Del Perú - Central Café &amp; Cacao      1
+Blossom Valley International\n                                                             1
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see there’s only one <code class="docutils literal notranslate"><span class="pre">Blossom</span> <span class="pre">Valley</span> <span class="pre">International\n</span></code> but 58 <code class="docutils literal notranslate"><span class="pre">Blossom</span> <span class="pre">Valley</span> <span class="pre">International</span></code>, the former is likely a typo, especially since <code class="docutils literal notranslate"><span class="pre">\n</span></code> is a special character for a newline. Similarly, with ‘Specialty Coffee Ass’ and ‘Specialty Coffee Association’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">partner_corrections</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Blossom Valley International</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">:</span><span class="s1">&#39;Blossom Valley International&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;Specialty Coffee Ass&#39;</span><span class="p">:</span><span class="s1">&#39;Specialty Coffee Association&#39;</span><span class="p">}</span>
+<span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;in_country_partner_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;In.Country.Partner&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+  <span class="n">to_replace</span><span class="o">=</span><span class="n">partner_corrections</span><span class="p">)</span>
+<span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;in_country_partner_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>in_country_partner_clean
+AMECAFE                                                                                  205
+Africa Fine Coffee Association                                                            49
+Almacafé                                                                                 178
+Asociacion Nacional Del Café                                                             155
+Asociación Mexicana De Cafés y Cafeterías De Especialidad A.C.                             6
+Asociación de Cafés Especiales de Nicaragua                                                8
+Blossom Valley International                                                              59
+Brazil Specialty Coffee Association                                                       67
+Central De Organizaciones Productoras De Café y Cacao Del Perú - Central Café &amp; Cacao      1
+Centro Agroecológico del Café A.C.                                                         8
+Coffee Quality Institute                                                                   7
+Ethiopia Commodity Exchange                                                               18
+Instituto Hondureño del Café                                                              60
+Kenya Coffee Traders Association                                                          22
+METAD Agricultural Development plc                                                        15
+NUCOFFEE                                                                                  36
+Salvadoran Coffee Council                                                                 11
+Specialty Coffee Association                                                             296
+Specialty Coffee Association of Costa Rica                                                42
+Specialty Coffee Association of Indonesia                                                 10
+Specialty Coffee Institute of Asia                                                        16
+Tanzanian Coffee Board                                                                     6
+Torch Coffee Lab Yunnan                                                                    2
+Uganda Coffee Development Authority                                                       22
+Yunnan Coffee Exchange                                                                    12
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Species&#39;, &#39;Owner&#39;, &#39;Country.of.Origin&#39;, &#39;Farm.Name&#39;, &#39;Lot.Number&#39;,
+       &#39;Mill&#39;, &#39;ICO.Number&#39;, &#39;Company&#39;, &#39;Altitude&#39;, &#39;Region&#39;, &#39;Producer&#39;,
+       &#39;Number.of.Bags&#39;, &#39;Bag.Weight&#39;, &#39;In.Country.Partner&#39;, &#39;Harvest.Year&#39;,
+       &#39;Grading.Date&#39;, &#39;Owner.1&#39;, &#39;Variety&#39;, &#39;Processing.Method&#39;, &#39;Aroma&#39;,
+       &#39;Flavor&#39;, &#39;Aftertaste&#39;, &#39;Acidity&#39;, &#39;Body&#39;, &#39;Balance&#39;, &#39;Uniformity&#39;,
+       &#39;Clean.Cup&#39;, &#39;Sweetness&#39;, &#39;Cupper.Points&#39;, &#39;Total.Cup.Points&#39;,
+       &#39;Moisture&#39;, &#39;Category.One.Defects&#39;, &#39;Quakers&#39;, &#39;Color&#39;,
+       &#39;Category.Two.Defects&#39;, &#39;Expiration&#39;, &#39;Certification.Body&#39;,
+       &#39;Certification.Address&#39;, &#39;Certification.Contact&#39;, &#39;unit_of_measurement&#39;,
+       &#39;altitude_low_meters&#39;, &#39;altitude_high_meters&#39;, &#39;altitude_mean_meters&#39;,
+       &#39;lot_number_clean&#39;, &#39;in_country_partner_clean&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_clean</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">coffee_df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species</th>
+      <th>owner</th>
+      <th>country_of_origin</th>
+      <th>farm_name</th>
+      <th>lot_number</th>
+      <th>mill</th>
+      <th>ico_number</th>
+      <th>company</th>
+      <th>altitude</th>
+      <th>region</th>
+      <th>...</th>
+      <th>expiration</th>
+      <th>certification_body</th>
+      <th>certification_address</th>
+      <th>certification_contact</th>
+      <th>unit_of_measurement</th>
+      <th>altitude_low_meters</th>
+      <th>altitude_high_meters</th>
+      <th>altitude_mean_meters</th>
+      <th>lot_number_clean</th>
+      <th>in_country_partner_clean</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Arabica</td>
+      <td>metad plc</td>
+      <td>Ethiopia</td>
+      <td>metad plc</td>
+      <td>NaN</td>
+      <td>metad plc</td>
+      <td>2014/2015</td>
+      <td>metad agricultural developmet plc</td>
+      <td>1950-2200</td>
+      <td>guji-hambela</td>
+      <td>...</td>
+      <td>April 3rd, 2016</td>
+      <td>METAD Agricultural Development plc</td>
+      <td>309fcf77415a3661ae83e027f7e5f05dad786e44</td>
+      <td>19fef5a731de2db57d16da10287413f5f99bc2dd</td>
+      <td>m</td>
+      <td>1950.0</td>
+      <td>2200.0</td>
+      <td>2075.0</td>
+      <td>1</td>
+      <td>METAD Agricultural Development plc</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 45 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="jsons">
+<h2><span class="section-number">7.5. </span>JSons<a class="headerlink" href="#jsons" title="Permalink to this headline">#</a></h2>
+<p>Some datasets have a nested structure</p>
+<p>We want to transform each one of those from a dictionary like thing into a
+row in a data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">course_gh_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>type</th>
+      <th>actor</th>
+      <th>repo</th>
+      <th>payload</th>
+      <th>public</th>
+      <th>created_at</th>
+      <th>org</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32220900702</td>
+      <td>CreateEvent</td>
+      <td>{'id': 10656079, 'login': 'brownsarahm', 'disp...</td>
+      <td>{'id': 688125102, 'name': 'rhodyprog4ds/BrownF...</td>
+      <td>{'ref': 'c7', 'ref_type': 'tag', 'master_branc...</td>
+      <td>True</td>
+      <td>2023-09-30 16:51:18+00:00</td>
+      <td>{'id': 69595187, 'login': 'rhodyprog4ds', 'gra...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32220897427</td>
+      <td>PushEvent</td>
+      <td>{'id': 10656079, 'login': 'brownsarahm', 'disp...</td>
+      <td>{'id': 688125102, 'name': 'rhodyprog4ds/BrownF...</td>
+      <td>{'repository_id': 688125102, 'push_id': 152418...</td>
+      <td>True</td>
+      <td>2023-09-30 16:50:49+00:00</td>
+      <td>{'id': 69595187, 'login': 'rhodyprog4ds', 'gra...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="casting-review">
+<h3><span class="section-number">7.5.1. </span>Casting Review<a class="headerlink" href="#casting-review" title="Permalink to this headline">#</a></h3>
+<p>If we have a variable that is not the type we want like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span><span class="s1">&#39;5&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can check type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>and we can use the name of the type we want, as a function to <em>cast</em> it to the new type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="handling-dicts-within-a-data-frame">
+<h3><span class="section-number">7.5.2. </span>Handling dicts within a Data Frame<a class="headerlink" href="#handling-dicts-within-a-data-frame" title="Permalink to this headline">#</a></h3>
+<p>We can see each row is a Series type.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">course_gh_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pandas.core.series.Series
+</pre></div>
+</div>
+</div>
+</div>
+<p>The individual values in the actor column is then a dictionary</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">course_gh_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;actor&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the series constructor to transform it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">course_gh_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;actor&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id                                                        10656079
+login                                                  brownsarahm
+display_login                                          brownsarahm
+gravatar_id                                                       
+url                       https://api.github.com/users/brownsarahm
+avatar_url       https://avatars.githubusercontent.com/u/10656079?
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html">pandas <code class="docutils literal notranslate"><span class="pre">apply</span></code></a> to do the same thing to every item in a dataset (over rows or columns as items )</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">course_gh_df</span><span class="p">[</span><span class="s1">&#39;actor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>login</th>
+      <th>display_login</th>
+      <th>gravatar_id</th>
+      <th>url</th>
+      <th>avatar_url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>compared to the original:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">course_gh_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>type</th>
+      <th>actor</th>
+      <th>repo</th>
+      <th>payload</th>
+      <th>public</th>
+      <th>created_at</th>
+      <th>org</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32220900702</td>
+      <td>CreateEvent</td>
+      <td>{'id': 10656079, 'login': 'brownsarahm', 'disp...</td>
+      <td>{'id': 688125102, 'name': 'rhodyprog4ds/BrownF...</td>
+      <td>{'ref': 'c7', 'ref_type': 'tag', 'master_branc...</td>
+      <td>True</td>
+      <td>2023-09-30 16:51:18+00:00</td>
+      <td>{'id': 69595187, 'login': 'rhodyprog4ds', 'gra...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="unpacking-at-scale">
+<h3><span class="section-number">7.5.3. </span>Unpacking at scale<a class="headerlink" href="#unpacking-at-scale" title="Permalink to this headline">#</a></h3>
+<p>here we see how the list comprehensions we looked at in isolation before start to come in handy.</p>
+<p>We want to handle several columns this way, so we’ll make alist of the names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">js_col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span><span class="s1">&#39;repo&#39;</span><span class="p">,</span><span class="s1">&#39;payload&#39;</span><span class="p">,</span><span class="s1">&#39;org&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pd.concat</span></code> takes a list of dataframes and puts the together in one DataFrame. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html">see its docs for more detail</a></p>
+<p>So, we use a list comprehension to iterate over all of the columsn that we want to transform, transform them, store the fixed <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s in a list and concat them together into a single new <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">course_gh_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">js_col</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>login</th>
+      <th>display_login</th>
+      <th>gravatar_id</th>
+      <th>url</th>
+      <th>avatar_url</th>
+      <th>id</th>
+      <th>name</th>
+      <th>url</th>
+      <th>ref</th>
+      <th>...</th>
+      <th>commits</th>
+      <th>action</th>
+      <th>issue</th>
+      <th>comment</th>
+      <th>release</th>
+      <th>id</th>
+      <th>login</th>
+      <th>gravatar_id</th>
+      <th>url</th>
+      <th>avatar_url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>c7</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 30 columns</p>
+</div></div></div>
+</div>
+<p>This is close, but a lot of columns have the same name. To fix this we will
+rename the new columns so that they have the original column
+name prepended to the new name.</p>
+<p>pandas has a rename method for this.</p>
+<p>and this is another job for lambdas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">course_gh_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">i_col</span><span class="p">:</span> <span class="n">col</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">i_col</span> <span class="p">)</span>
+           <span class="k">for</span> <span class="n">col</span>  <span class="ow">in</span> <span class="n">js_col</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>actor_id</th>
+      <th>actor_login</th>
+      <th>actor_display_login</th>
+      <th>actor_gravatar_id</th>
+      <th>actor_url</th>
+      <th>actor_avatar_url</th>
+      <th>repo_id</th>
+      <th>repo_name</th>
+      <th>repo_url</th>
+      <th>payload_ref</th>
+      <th>...</th>
+      <th>payload_commits</th>
+      <th>payload_action</th>
+      <th>payload_issue</th>
+      <th>payload_comment</th>
+      <th>payload_release</th>
+      <th>org_id</th>
+      <th>org_login</th>
+      <th>org_gravatar_id</th>
+      <th>org_url</th>
+      <th>org_avatar_url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>c7</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>refs/heads/main</td>
+      <td>...</td>
+      <td>[{'sha': '62f3b2d092e683b40812dc36f6fa2376c59c...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>closed</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>688125102</td>
+      <td>rhodyprog4ds/BrownFall23</td>
+      <td>https://api.github.com/repos/rhodyprog4ds/Brow...</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>opened</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rename</span></code> method can take a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function to rename columns in a pattern. we want to combine the original column name with the new column name.  <code class="docutils literal notranslate"><span class="pre">col</span> <span class="pre">+</span> <span class="pre">'_'</span> <span class="pre">+</span> <span class="pre">i_col</span></code> does this where <code class="docutils literal notranslate"><span class="pre">i_col</span></code> is the column name after the <code class="docutils literal notranslate"><span class="pre">.apply(pd.Series)</span></code> and the <code class="docutils literal notranslate"><span class="pre">col</span></code> is the column name of the original column before unpacking.</p>
+<p>To finish off, we can first get the columns that are not in the unpacked, put them in a list, then add the two lists together before concatenating them all together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols_not_unpacked_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">course_gh_df</span><span class="p">[[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span>
+                    <span class="n">course_gh_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">js_col</span><span class="p">)]</span> <span class="p">]]</span>
+<span class="n">unpacked_cols_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">course_gh_df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+                    <span class="n">columns</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">i_col</span><span class="p">:</span> <span class="n">col</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">i_col</span> <span class="p">)</span>
+                    <span class="k">for</span> <span class="n">col</span>  <span class="ow">in</span> <span class="n">js_col</span><span class="p">]</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">cols_not_unpacked_list</span> <span class="o">+</span><span class="n">unpacked_cols_list</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>type</th>
+      <th>public</th>
+      <th>created_at</th>
+      <th>actor_id</th>
+      <th>actor_login</th>
+      <th>actor_display_login</th>
+      <th>actor_gravatar_id</th>
+      <th>actor_url</th>
+      <th>actor_avatar_url</th>
+      <th>...</th>
+      <th>payload_commits</th>
+      <th>payload_action</th>
+      <th>payload_issue</th>
+      <th>payload_comment</th>
+      <th>payload_release</th>
+      <th>org_id</th>
+      <th>org_login</th>
+      <th>org_gravatar_id</th>
+      <th>org_url</th>
+      <th>org_avatar_url</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32220900702</td>
+      <td>CreateEvent</td>
+      <td>True</td>
+      <td>2023-09-30 16:51:18+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32220897427</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-30 16:50:49+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '62f3b2d092e683b40812dc36f6fa2376c59c...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>32219001106</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-30 12:39:27+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>closed</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>32218998992</td>
+      <td>IssueCommentEvent</td>
+      <td>True</td>
+      <td>2023-09-30 12:39:11+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>32209468908</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-29 18:41:11+00:00</td>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>opened</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32173287699</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-28 13:01:22+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': 'e3f4448c4f4564fea0a2f15d33f27d5756f6...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32173211805</td>
+      <td>IssueCommentEvent</td>
+      <td>True</td>
+      <td>2023-09-28 12:59:03+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>32173191671</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-28 12:58:25+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>closed</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>32173190959</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-28 12:58:23+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '5d38f5fbfd53d4819e4903bfb24f1f22f83d...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>32157392961</td>
+      <td>IssueCommentEvent</td>
+      <td>True</td>
+      <td>2023-09-27 22:43:25+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>32153448375</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-27 19:21:06+00:00</td>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>opened</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>32152417952</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-27 18:35:09+00:00</td>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>opened</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>32128882465</td>
+      <td>ReleaseEvent</td>
+      <td>True</td>
+      <td>2023-09-27 02:21:52+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>published</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>32128866611</td>
+      <td>CreateEvent</td>
+      <td>True</td>
+      <td>2023-09-27 02:20:39+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>32128381203</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-27 01:44:37+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': 'c4993bc5f5c492a49035f2b492cced9809d2...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>32128345630</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-27 01:41:53+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '7b7c7ded02a9844a69a6fc78c244c268f2be...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>32091616207</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-25 20:40:07+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': '51dd47b843c493f44a10ce2878504992a1a1...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>32091560922</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-25 20:37:28+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '232f525850d7152ccc9fe9c04426cb5d1e11...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>32042698548</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-22 20:55:06+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': '07d80612bdf9771df20b2b004a5d67869be3...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>32042653665</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-22 20:52:16+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '7047bfe46d21479ed98b6020e0b6701abe91...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>32019401124</td>
+      <td>ReleaseEvent</td>
+      <td>True</td>
+      <td>2023-09-22 02:15:39+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>published</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>32019385232</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-22 02:14:22+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': '636b0280408d82754d466481fd607d96993a...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>32019380297</td>
+      <td>CreateEvent</td>
+      <td>True</td>
+      <td>2023-09-22 02:13:57+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>32019355589</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-22 02:11:53+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>[{'sha': '2e05504919b3cd9d84d300a75e30f8b3fef3...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>31979841991</td>
+      <td>IssueCommentEvent</td>
+      <td>True</td>
+      <td>2023-09-20 17:59:26+00:00</td>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>31979719963</td>
+      <td>IssueCommentEvent</td>
+      <td>True</td>
+      <td>2023-09-20 17:54:04+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>created</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>31979453934</td>
+      <td>IssuesEvent</td>
+      <td>True</td>
+      <td>2023-09-20 17:42:24+00:00</td>
+      <td>90425926</td>
+      <td>MJSher</td>
+      <td>MJSher</td>
+      <td></td>
+      <td>https://api.github.com/users/MJSher</td>
+      <td>https://avatars.githubusercontent.com/u/90425926?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>opened</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>31957398487</td>
+      <td>PushEvent</td>
+      <td>True</td>
+      <td>2023-09-20 02:50:38+00:00</td>
+      <td>41898282</td>
+      <td>github-actions[bot]</td>
+      <td>github-actions</td>
+      <td></td>
+      <td>https://api.github.com/users/github-actions[bot]</td>
+      <td>https://avatars.githubusercontent.com/u/41898282?</td>
+      <td>...</td>
+      <td>[{'sha': '0c0bfb8cc56686fd1a7b60657cfe396f7d1e...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>31957385522</td>
+      <td>ReleaseEvent</td>
+      <td>True</td>
+      <td>2023-09-20 02:49:41+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>published</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>{'url': 'https://api.github.com/repos/rhodypro...</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>31957374920</td>
+      <td>CreateEvent</td>
+      <td>True</td>
+      <td>2023-09-20 02:48:48+00:00</td>
+      <td>10656079</td>
+      <td>brownsarahm</td>
+      <td>brownsarahm</td>
+      <td></td>
+      <td>https://api.github.com/users/brownsarahm</td>
+      <td>https://avatars.githubusercontent.com/u/10656079?</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69595187</td>
+      <td>rhodyprog4ds</td>
+      <td></td>
+      <td>https://api.github.com/orgs/rhodyprog4ds</td>
+      <td>https://avatars.githubusercontent.com/u/69595187?</td>
+    </tr>
+  </tbody>
+</table>
+<p>30 rows × 34 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="questions-after-class">
+<h2><span class="section-number">7.6. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<section id="after-you-do-analysis-with-a-specific-column-and-cleaned-it-for-that-should-you-restore-the-original-dataframe-and-reclean-it-to-do-a-different-analysis">
+<h3><span class="section-number">7.6.1. </span>After you do analysis with a specific column and cleaned it for that, should you restore the original dataframe and reclean it to do a different analysis?<a class="headerlink" href="#after-you-do-analysis-with-a-specific-column-and-cleaned-it-for-that-should-you-restore-the-original-dataframe-and-reclean-it-to-do-a-different-analysis" title="Permalink to this headline">#</a></h3>
+<p>You might, if the analyses are compeltely different and unrelated. More often, however, we would clean the whole dataset, save the cleaning script/notebook (can have more context), and save the cleaned dataset to a csv. Building more breadth of understanding of these practices, is what you will do with the last part of A4.  Your task there is to look at a few examples of cleaning that I have gathered for you and answer questions that start to build your intuition with this.</p>
+<p>Ultimately though, cleaning data is something that you do not know everything there is to know about it in one shot, over time you see more and more examples.</p>
+</section>
+<section id="i-dont-fully-understand-the-lambda-function">
+<h3><span class="section-number">7.6.2. </span>I don’t fully understand the lambda function<a class="headerlink" href="#i-dont-fully-understand-the-lambda-function" title="Permalink to this headline">#</a></h3>
+<p>If you want a technical specific understanding of it, I recommend the Python language documentation on <a class="reference external" href="https://docs.python.org/3/reference/expressions.html#lambda">lambda functions</a> and the <a class="reference external" href="https://en.wikipedia.org/wiki/Anonymous_function">wikipedia article on anonymous functions</a> for more breadth and other related concepts across languages.</p>
+<p>At a practial level it is a shortand syntax for defining a small function. For example the following two functions do the same thing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">repeat_lambda</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">content</span><span class="p">,</span> <span class="n">reps</span><span class="p">:</span> <span class="n">content</span><span class="o">*</span><span class="n">reps</span>
+
+<span class="k">def</span> <span class="nf">repeat_func</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">reps</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">content</span><span class="o">*</span><span class="n">reps</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we can examine them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">repeat_lambda</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span> <span class="n">repeat_func</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(function, function)
+</pre></div>
+</div>
+</div>
+</div>
+<p>they are both callable, but slightly different types.</p>
+<p>Now we can call our functions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">repeat_lambda</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="n">repeat_func</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>and this is not a specific case, but always works. We can do a small random experiment to see</p>
+<p>We’ll use the string library to get a string of the alphabet</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+<span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can pick even a random length, then random characters and a random number of repetitions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rand_length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">random_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_uppercase</span><span class="p">),</span><span class="n">size</span><span class="o">=</span><span class="n">rand_length</span><span class="p">)</span>
+<span class="n">rand_reps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">random_content</span><span class="p">,</span> <span class="n">rand_reps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([&#39;M&#39;], dtype=&#39;&lt;U1&#39;), 0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can still apply this and see that it is the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">repeat_lambda</span><span class="p">(</span><span class="n">random_content</span><span class="p">,</span> <span class="n">rand_reps</span><span class="p">)</span> <span class="o">==</span> <span class="n">repeat_func</span><span class="p">(</span><span class="n">random_content</span><span class="p">,</span> <span class="n">rand_reps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UFuncTypeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">40</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">repeat_lambda</span><span class="p">(</span><span class="n">random_content</span><span class="p">,</span> <span class="n">rand_reps</span><span class="p">)</span> <span class="o">==</span> <span class="n">repeat_func</span><span class="p">(</span><span class="n">random_content</span><span class="p">,</span> <span class="n">rand_reps</span><span class="p">)</span>
+
+<span class="nn">Cell In[35], line 1,</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(content, reps)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">repeat_lambda</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">content</span><span class="p">,</span> <span class="n">reps</span><span class="p">:</span> <span class="n">content</span><span class="o">*</span><span class="n">reps</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">repeat_func</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">reps</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">content</span><span class="o">*</span><span class="n">reps</span>
+
+<span class="ne">UFuncTypeError</span>: ufunc &#39;multiply&#39; did not contain a loop with signature matching types (dtype(&#39;&lt;U1&#39;), dtype(&#39;int64&#39;)) -&gt; None
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="json-use-cases-vs-csv-use-cases">
+<h3><span class="section-number">7.6.3. </span>Json use cases vs csv use cases<a class="headerlink" href="#json-use-cases-vs-csv-use-cases" title="Permalink to this headline">#</a></h3>
+<p>Once we read the data in, there is no difference.  Where they are <em>generated</em> there are tradeoffs. JSON is a popular way to log activity</p>
+</section>
+<section id="why-are-so-many-datasets-so-messy-in-the-first-place">
+<h3><span class="section-number">7.6.4. </span>Why are so many datasets so messy in the first place?<a class="headerlink" href="#why-are-so-many-datasets-so-messy-in-the-first-place" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="are-there-more-resources-to-see-when-its-appropriate-to-fill-in-missing-data-with-certain-values">
+<h3><span class="section-number">7.6.5. </span>Are there more resources to see when its appropriate to fill in missing data with certain values?<a class="headerlink" href="#are-there-more-resources-to-see-when-its-appropriate-to-fill-in-missing-data-with-certain-values" title="Permalink to this headline">#</a></h3>
+<p>I have not found a lot of good resources on this, unfortunately. Data Science is a complex discipline and <strong>very new</strong> especially at the undergraduate level. The first data science degrees were only at the graduate level.</p>
+<p>The complexity lies in integrating information from computer science, statistics, and <em>domain knowledge</em>. Domain knowledge is going to be different in every dataset.</p>
+<p>It is okay to now know for sure the best thing to do.  The most important thing is  document what you did and why so that you can justify the choices and consider their impact later in your analysis.</p>
+</section>
+<section id="can-we-get-a-more-in-depth-explanation-of-what-is-going-on-in-the-last-piece-of-code-you-provided">
+<h3><span class="section-number">7.6.6. </span>Can we get a more in-depth explanation of what is going on in the last piece of code you provided?<a class="headerlink" href="#can-we-get-a-more-in-depth-explanation-of-what-is-going-on-in-the-last-piece-of-code-you-provided" title="Permalink to this headline">#</a></h3>
+<p>above</p>
+</section>
+<section id="what-is-the-normal-percent-of-nas-that-need-to-be-filled-for-most-people-to-get-rid-of-that-line">
+<h3><span class="section-number">7.6.7. </span>What is the normal percent of NAs that need to be filled for most people to get rid of that line?<a class="headerlink" href="#what-is-the-normal-percent-of-nas-that-need-to-be-filled-for-most-people-to-get-rid-of-that-line" title="Permalink to this headline">#</a></h3>
+<p>Again, unfortunately there are not fixed rules.</p>
+<p>Missing 10% of only 50 samples might be detrimental, where missing 30% of 10000 could be okay.</p>
+<p>It depends what you are going to do with the data after cleaning, what the threshold is.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-09-26.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Tidy Data and Structural Repairs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-data-review">7.1. Cleaning Data review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-cleaning-data-recipe">7.1.1. A Cleaning Data Recipe</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-clean-enough">7.2. What is clean enough?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filling-missing-values">7.2.1. Filling missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping">7.3. Dropping</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropping-missing-values">7.3.1. Dropping missing values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inconsistent-values">7.4. Inconsistent values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jsons">7.5. JSons</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#casting-review">7.5.1. Casting Review</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-dicts-within-a-data-frame">7.5.2. Handling dicts within a Data Frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unpacking-at-scale">7.5.3. Unpacking at scale</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">7.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-you-do-analysis-with-a-specific-column-and-cleaned-it-for-that-should-you-restore-the-original-dataframe-and-reclean-it-to-do-a-different-analysis">7.6.1. After you do analysis with a specific column and cleaned it for that, should you restore the original dataframe and reclean it to do a different analysis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-dont-fully-understand-the-lambda-function">7.6.2. I don’t fully understand the lambda function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json-use-cases-vs-csv-use-cases">7.6.3. Json use cases vs csv use cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-so-many-datasets-so-messy-in-the-first-place">7.6.4. Why are so many datasets so messy in the first place?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-more-resources-to-see-when-its-appropriate-to-fill-in-missing-data-with-certain-values">7.6.5. Are there more resources to see when its appropriate to fill in missing data with certain values?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#can-we-get-a-more-in-depth-explanation-of-what-is-going-on-in-the-last-piece-of-code-you-provided">7.6.6. Can we get a more in-depth explanation of what is going on in the last piece of code you provided?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-normal-percent-of-nas-that-need-to-be-filled-for-most-people-to-get-rid-of-that-line">7.6.7. What is the normal percent of NAs that need to be filled for most people to get rid of that line?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

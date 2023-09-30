@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. Tidy Data &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>6. Tidy Data and Structural Repairs &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-09-26';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="7. Reparing values" href="2023-09-28.html" />
     <link rel="prev" title="5. Visualization" href="2023-09-21.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -177,14 +177,15 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Tidy Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Tidy Data and Structural Repairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-28.html">7. Reparing values</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -401,7 +402,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -412,11 +415,39 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tidy Data</h1>
+    <h1>Tidy Data and Structural Repairs</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">6.1. Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-tidy-data">6.2. What is Tidy Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tidying-data">6.3. Tidying Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-the-coffee-data">6.4. Transforming the Coffee Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">6.5. Filtering Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-manipulations">6.6. More manipulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">6.7. Questions after Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-data-we-had-about-treatment-a-and-treatment-b-say-there-was-another-column-that-provided-information-about-the-age-of-the-people-could-we-create-another-value-variable-to-or-would-we-put-it-in-the-value-vars-list-along-with-treatment-a-and-treatmentb">6.7.1. In the data we had about treatment a and treatment b.  Say there was another column that provided information about the age of the people.  Could we create another value variable to or would we put it in the value_vars list along with treatment a and treatmentb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-prebuilt-methods-to-identify-and-remove-extreme-outliers">6.7.2. Are there any prebuilt methods to identify and remove extreme outliers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-specific-metric-to-which-a-dataset-must-meet-to-consider-it-cleaned">6.7.3. Is there a specific metric to which a dataset must meet to consider it ‘cleaned’?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-melt-work-underneath-the-hood">6.7.4. how does melt work underneath the hood?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-people-ever-write-their-melted-datasets-to-new-files-for-redistribution-maybe-to-make-things-easier-for-future-researchers">6.7.5. Do people ever write their melted datasets to new files for redistribution, maybe to make things easier for future researchers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ending-graphs-are-hard-to-read-is-there-a-way-to-label-specific-countries-kde-lines">6.7.6. the ending graphs are hard to read. Is there a way to label specific countries kde lines?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-get-the-index-of-something-in-a-row">6.7.7. how do you get the index of something in a row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-trying-to-do-somthing-earlier-where-i-got-the-max-of-a-column-but-wanted-to-know-somthing-else-associated-with-that-row">6.7.8. i was trying to do somthing earlier where I got the max of a column but wanted to know somthing else associated with that row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-out-different-data-types">6.7.9. cleaning out different data types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-scenario-where-a-dataset-cannot-be-cleaned-using-pandas-methods">6.7.10. Is there a scenario where a dataset cannot be cleaned using pandas methods?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-another-standard-format-for-sharing-cleaned-datasets">6.7.11. Is there another standard format for sharing cleaned datasets?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-extremely-large-datasets-is-there-a-way-to-find-what-pieces-of-the-dataset-are-missing-values-other-than-manually-checking">6.7.12. With extremely large datasets, is there a way to find what pieces of the dataset are missing values other than manually checking</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -426,8 +457,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tidy-data">
-<h1><span class="section-number">6. </span>Tidy Data<a class="headerlink" href="#tidy-data" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tidy-data-and-structural-repairs">
+<h1><span class="section-number">6. </span>Tidy Data and Structural Repairs<a class="headerlink" href="#tidy-data-and-structural-repairs" title="Permalink to this headline">#</a></h1>
+<section id="intro">
+<h2><span class="section-number">6.1. </span>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">#</a></h2>
+<p>This week, we’ll be cleaning data.</p>
+<p>Cleaning data is <strong>labor intensive</strong> and requires making <em>subjective</em> choices.<br />
+We’ll focus on, and assess you on, manipulating data correctly, making reasonable
+choices, and documenting the choices you make carefully.</p>
+<p>We’ll focus on the programming tools that get used in cleaning data in class
+this week:</p>
+<ul class="simple">
+<li><p>reshaping data</p></li>
+<li><p>handling missing or incorrect values</p></li>
+<li><p>renaming columns</p></li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>this is incomplete, but will get filled in this week.</p>
@@ -443,6 +487,10 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="what-is-tidy-data">
+<h2><span class="section-number">6.2. </span>What is Tidy Data<a class="headerlink" href="#what-is-tidy-data" title="Permalink to this headline">#</a></h2>
+<p>Read in the three csv files described below and store them in a list of dataFrames</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url_base</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/rhodyprog4ds/rhodyds/main/data/&#39;</span>
@@ -634,6 +682,12 @@ document.write(`
 </table>
 </div></div></div>
 </div>
+<p>These three all show the same data, but let’s say we have two goals:</p>
+<ul class="simple">
+<li><p>find the average  effect per person across treatments</p></li>
+<li><p>find the average effect per treatment across people</p></li>
+</ul>
+<p>This works differently for these three versions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_a</span> <span class="o">=</span> <span class="n">study_df_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -649,6 +703,8 @@ dtype: float64
 </div>
 </div>
 </div>
+<p>we get the average per treatment, but to get the average per person, we have to go across rows, which we can do here, but doesn’t work as well with plotting</p>
+<p>we can work across rows with the <code class="docutils literal notranslate"><span class="pre">axis</span></code> parameter if needed</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -715,6 +771,7 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<p>Now we get the average per person, but what about per treatment? again we have to go across rows instead.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">study_df_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -786,6 +843,7 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<p>For the third one, however, we can use groupby, because this one is tidy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">study_df_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;treatment&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -880,59 +938,13 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_a</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>name</th>
-      <th>treatmenta</th>
-      <th>treatmentb</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>John Smith</td>
-      <td>NaN</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Jane Doe</td>
-      <td>16.0</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Mary Johnson</td>
-      <td>3.0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
+<p>The original <a class="reference external" href="https://www.jstatsoft.org/article/view/v059i10">Tidy Data</a> paper is worth reading to build a deeper understanding of these ideas.</p>
+</section>
+<section id="tidying-data">
+<h2><span class="section-number">6.3. </span>Tidying Data<a class="headerlink" href="#tidying-data" title="Permalink to this headline">#</a></h2>
+<p>Let’s reshape the first one to match the tidy one. First, we
+will save it to a DataFrame, this makes things easier to read
+and enables us to use the built in help in jupyter, because it can’t check types too many levels into a data structure.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_a</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;treatmenta&#39;</span><span class="p">,</span><span class="s1">&#39;treatmentb&#39;</span><span class="p">])</span>
@@ -1004,6 +1016,13 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<p>When we melt a dataset:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">id_vars</span></code> stay as columns</p></li>
+<li><p>the data from the <code class="docutils literal notranslate"><span class="pre">value_vars</span></code> columns become the values in the <code class="docutils literal notranslate"><span class="pre">value</span></code> column</p></li>
+<li><p>the column names from the <code class="docutils literal notranslate"><span class="pre">value_vars</span></code> become the values in the <code class="docutils literal notranslate"><span class="pre">variable</span></code> column</p></li>
+<li><p>we can rename the value and the variable columns.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_a</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;treatmenta&#39;</span><span class="p">,</span><span class="s1">&#39;treatmentb&#39;</span><span class="p">],</span>
@@ -1077,6 +1096,10 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+</section>
+<section id="transforming-the-coffee-data">
+<h2><span class="section-number">6.4. </span>Transforming the Coffee Data<a class="headerlink" href="#transforming-the-coffee-data" title="Permalink to this headline">#</a></h2>
+<p>Let’s do it for our coffee data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">arabica_data_url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/jldbc/coffee-quality-database/master/data/arabica_data_cleaned.csv&#39;</span>
@@ -1284,6 +1307,7 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<p>We can make this tall using melt to transform with that set of questions and then rename the <code class="docutils literal notranslate"><span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">variable</span></code> columns to be descriptive.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df_tall</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">,</span><span class="n">value_vars</span><span class="o">=</span><span class="n">scores_of_interest</span><span class="p">,</span>
@@ -1328,6 +1352,8 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<p>Notice that the actual column names inside the <code class="docutils literal notranslate"><span class="pre">scores_of_interest</span></code> variable become the values in the variable column.</p>
+<p>This one we can plot in more ways:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">coffee_df_tall</span><span class="p">,</span> <span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;kde&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;score&#39;</span><span class="p">,</span>
@@ -1336,17 +1362,691 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2225/2608901824.py:1: UserWarning: Dataset has 0 variance; skipping density estimate. Pass `warn_singular=False` to disable this warning.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2051/2608901824.py:1: UserWarning: Dataset has 0 variance; skipping density estimate. Pass `warn_singular=False` to disable this warning.
   sns.displot(data = coffee_df_tall, kind = &#39;kde&#39;, x=&#39;score&#39;,
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f833e03e550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f6b439e44c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/01966c2964b5299869c4504f3b25be9af6ea3bf5090c738127c5c89b25cecb50.png" src="../_images/01966c2964b5299869c4504f3b25be9af6ea3bf5090c738127c5c89b25cecb50.png" />
 </div>
 </div>
 <p>find why warning</p>
+</section>
+<section id="filtering-data">
+<h2><span class="section-number">6.5. </span>Filtering Data<a class="headerlink" href="#filtering-data" title="Permalink to this headline">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>this was not in class this week, but is added here for completeness</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">high_prod</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="p">[</span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Number.of.Bags&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">250</span><span class="p">]</span>
+<span class="n">high_prod</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(368, 43)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coffee_df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1311, 43)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that filters and reduces.  We can use any boolean expression in the square brackets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_balance</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="p">[</span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.75</span><span class="p">)]</span>
+<span class="n">top_balance</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(252, 43)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can confirm that we got only the top 25% of balance scores:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">top_balance</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number.of.Bags</th>
+      <th>Aroma</th>
+      <th>Flavor</th>
+      <th>Aftertaste</th>
+      <th>Acidity</th>
+      <th>Body</th>
+      <th>Balance</th>
+      <th>Uniformity</th>
+      <th>Clean.Cup</th>
+      <th>Sweetness</th>
+      <th>Cupper.Points</th>
+      <th>Total.Cup.Points</th>
+      <th>Moisture</th>
+      <th>Category.One.Defects</th>
+      <th>Quakers</th>
+      <th>Category.Two.Defects</th>
+      <th>altitude_low_meters</th>
+      <th>altitude_high_meters</th>
+      <th>altitude_mean_meters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.00000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>252.000000</td>
+      <td>190.000000</td>
+      <td>190.000000</td>
+      <td>190.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>153.337302</td>
+      <td>7.808889</td>
+      <td>7.837659</td>
+      <td>7.734167</td>
+      <td>7.824881</td>
+      <td>7.780159</td>
+      <td>8.003095</td>
+      <td>9.885278</td>
+      <td>9.896667</td>
+      <td>9.885952</td>
+      <td>7.865714</td>
+      <td>84.52504</td>
+      <td>0.072579</td>
+      <td>0.361111</td>
+      <td>0.150794</td>
+      <td>2.801587</td>
+      <td>1343.138168</td>
+      <td>1424.547053</td>
+      <td>1383.842611</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>126.498576</td>
+      <td>0.355319</td>
+      <td>0.318172</td>
+      <td>0.302481</td>
+      <td>0.320253</td>
+      <td>0.317712</td>
+      <td>0.213056</td>
+      <td>0.363303</td>
+      <td>0.470514</td>
+      <td>0.380433</td>
+      <td>0.383738</td>
+      <td>1.91563</td>
+      <td>0.051682</td>
+      <td>1.249923</td>
+      <td>0.692216</td>
+      <td>4.659771</td>
+      <td>480.927004</td>
+      <td>503.063351</td>
+      <td>484.286247</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>5.080000</td>
+      <td>7.170000</td>
+      <td>6.920000</td>
+      <td>7.080000</td>
+      <td>5.250000</td>
+      <td>7.830000</td>
+      <td>6.670000</td>
+      <td>5.330000</td>
+      <td>6.670000</td>
+      <td>5.170000</td>
+      <td>77.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>12.750000</td>
+      <td>7.647500</td>
+      <td>7.670000</td>
+      <td>7.500000</td>
+      <td>7.670000</td>
+      <td>7.670000</td>
+      <td>7.830000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>7.670000</td>
+      <td>83.42000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1162.500000</td>
+      <td>1200.000000</td>
+      <td>1200.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>165.500000</td>
+      <td>7.780000</td>
+      <td>7.830000</td>
+      <td>7.750000</td>
+      <td>7.830000</td>
+      <td>7.750000</td>
+      <td>7.920000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>7.830000</td>
+      <td>84.46000</td>
+      <td>0.100000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1400.000000</td>
+      <td>1500.000000</td>
+      <td>1450.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>275.000000</td>
+      <td>8.000000</td>
+      <td>8.000000</td>
+      <td>7.920000</td>
+      <td>8.000000</td>
+      <td>7.920000</td>
+      <td>8.080000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>8.080000</td>
+      <td>85.52000</td>
+      <td>0.110000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>3.000000</td>
+      <td>1695.000000</td>
+      <td>1800.000000</td>
+      <td>1750.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>360.000000</td>
+      <td>8.750000</td>
+      <td>8.830000</td>
+      <td>8.670000</td>
+      <td>8.750000</td>
+      <td>8.580000</td>
+      <td>8.750000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>9.250000</td>
+      <td>90.58000</td>
+      <td>0.210000</td>
+      <td>10.000000</td>
+      <td>6.000000</td>
+      <td>40.000000</td>
+      <td>2560.000000</td>
+      <td>2560.000000</td>
+      <td>2560.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also use the <code class="docutils literal notranslate"><span class="pre">isin</span></code> method to filter by comparing to an iterable type</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_per_country</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">)[</span><span class="s1">&#39;Number.of.Bags&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">top_countries</span> <span class="o">=</span> <span class="n">total_per_country</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+<span class="n">top_coffee_df</span> <span class="o">=</span> <span class="n">coffee_df</span><span class="p">[</span><span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Country.of.Origin&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">top_countries</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="more-manipulations">
+<h2><span class="section-number">6.6. </span>More manipulations<a class="headerlink" href="#more-manipulations" title="Permalink to this headline">#</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>this was not in class this week, but is added here for completeness</p>
+</div>
+<p>Here, we will make a tiny <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> from scratch to illustrate a couple of points</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">large_num_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> <span class="p">[[</span><span class="mi">730000000</span><span class="p">,</span><span class="mi">392000000</span><span class="p">,</span><span class="mi">580200000</span><span class="p">],</span>
+                                   <span class="p">[</span><span class="mi">315040009</span><span class="p">,</span><span class="mi">580000000</span><span class="p">,</span><span class="mi">967290000</span><span class="p">]],</span>
+                           <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="n">large_num_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>730000000</td>
+      <td>392000000</td>
+      <td>580200000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>315040009</td>
+      <td>580000000</td>
+      <td>967290000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>This dataet is not tidy, but making it this way was faster to set it up.  We could make it tidy using melt as is.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">large_num_df</span><span class="o">.</span><span class="n">melt</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>730000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>a</td>
+      <td>315040009</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b</td>
+      <td>392000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b</td>
+      <td>580000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>c</td>
+      <td>580200000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>c</td>
+      <td>967290000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>However, I want an additional variable, so I wil reset the index, which adds an index column for the original index and adds a new index that is numerical. In this case they’re the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">large_num_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>730000000</td>
+      <td>392000000</td>
+      <td>580200000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>315040009</td>
+      <td>580000000</td>
+      <td>967290000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>If I melt this one, using the index as the <code class="docutils literal notranslate"><span class="pre">id</span></code>, then I get a reasonable tidy DataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls_tall_df</span> <span class="o">=</span> <span class="n">large_num_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+<span class="n">ls_tall_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>a</td>
+      <td>730000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>a</td>
+      <td>315040009</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>b</td>
+      <td>392000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>b</td>
+      <td>580000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>c</td>
+      <td>580200000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>c</td>
+      <td>967290000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now, we can plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">ls_tall_df</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span>
+            <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f6b3eab84c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/d060f9c8a3e89818be7dbda4f280e624fe8ef6d6fb9a96e256519fd8db6e5be6.png" src="../_images/d060f9c8a3e89818be7dbda4f280e624fe8ef6d6fb9a96e256519fd8db6e5be6.png" />
+</div>
+</div>
+<p>Since the numbers are so big, this might be hard to interpret.  Displaying it with all the 0s would not be easier to read.  The best thing to do is to add a new colum with adjusted values and a corresponding title.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ls_tall_df</span><span class="p">[</span><span class="s1">&#39;value (millions)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ls_tall_df</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">1000000</span>
+<span class="n">ls_tall_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>index</th>
+      <th>variable</th>
+      <th>value</th>
+      <th>value (millions)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>a</td>
+      <td>730000000</td>
+      <td>730.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>a</td>
+      <td>315040009</td>
+      <td>315.040009</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>b</td>
+      <td>392000000</td>
+      <td>392.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>b</td>
+      <td>580000000</td>
+      <td>580.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>c</td>
+      <td>580200000</td>
+      <td>580.200000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can plot again, with the smaller values and an updated axis label.  Adding a column with the adjusted title is good practice because it does not lose any data and since we set the value and the title at the same time it keeps it clear what the values are.</p>
+</section>
+<section id="questions-after-class">
+<h2><span class="section-number">6.7. </span>Questions after Class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<section id="in-the-data-we-had-about-treatment-a-and-treatment-b-say-there-was-another-column-that-provided-information-about-the-age-of-the-people-could-we-create-another-value-variable-to-or-would-we-put-it-in-the-value-vars-list-along-with-treatment-a-and-treatmentb">
+<h3><span class="section-number">6.7.1. </span>In the data we had about treatment a and treatment b.  Say there was another column that provided information about the age of the people.  Could we create another value variable to or would we put it in the value_vars list along with treatment a and treatmentb?<a class="headerlink" href="#in-the-data-we-had-about-treatment-a-and-treatment-b-say-there-was-another-column-that-provided-information-about-the-age-of-the-people-could-we-create-another-value-variable-to-or-would-we-put-it-in-the-value-vars-list-along-with-treatment-a-and-treatmentb" title="Permalink to this headline">#</a></h3>
+<p>We can have multiple variables as the <code class="docutils literal notranslate"><span class="pre">id_vars</span></code> so that the dataset would have 4 columns instead of 3.</p>
+</section>
+<section id="are-there-any-prebuilt-methods-to-identify-and-remove-extreme-outliers">
+<h3><span class="section-number">6.7.2. </span>Are there any prebuilt methods to identify and remove extreme outliers?<a class="headerlink" href="#are-there-any-prebuilt-methods-to-identify-and-remove-extreme-outliers" title="Permalink to this headline">#</a></h3>
+<p>There may be, that is a good thing to look in the documentation for.  However, typically the definition of an outlier is best made within context, so the filtering strategy that we just used would be the way to remove them, after doign some EDA.</p>
+</section>
+<section id="is-there-a-specific-metric-to-which-a-dataset-must-meet-to-consider-it-cleaned">
+<h3><span class="section-number">6.7.3. </span>Is there a specific metric to which a dataset must meet to consider it ‘cleaned’?<a class="headerlink" href="#is-there-a-specific-metric-to-which-a-dataset-must-meet-to-consider-it-cleaned" title="Permalink to this headline">#</a></h3>
+<p>It’s “clean” when it will work for the analysis you want to do. This means clean enough for one analysis may not be enough for another goal.  Domain expertise is alwasy important.</p>
+</section>
+<section id="how-does-melt-work-underneath-the-hood">
+<h3><span class="section-number">6.7.4. </span>how does melt work underneath the hood?<a class="headerlink" href="#how-does-melt-work-underneath-the-hood" title="Permalink to this headline">#</a></h3>
+<p>The <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.melt.html">melt documentation</a> is the place to read about the details. It also includes alink to the <a class="reference external" href="https://github.com/pandas-dev/pandas/blob/v2.1.1/pandas/core/reshape/melt.py#L34-L151">source code</a> if reading how it is implemented in code is more helpful to you can reading English.</p>
+</section>
+<section id="do-people-ever-write-their-melted-datasets-to-new-files-for-redistribution-maybe-to-make-things-easier-for-future-researchers">
+<h3><span class="section-number">6.7.5. </span>Do people ever write their melted datasets to new files for redistribution, maybe to make things easier for future researchers?<a class="headerlink" href="#do-people-ever-write-their-melted-datasets-to-new-files-for-redistribution-maybe-to-make-things-easier-for-future-researchers" title="Permalink to this headline">#</a></h3>
+<p>Yes! If you look in the R Tidy Tuesday datsets most distribute the “raw” and cleaned data.</p>
+</section>
+<section id="the-ending-graphs-are-hard-to-read-is-there-a-way-to-label-specific-countries-kde-lines">
+<h3><span class="section-number">6.7.6. </span>the ending graphs are hard to read. Is there a way to label specific countries kde lines?<a class="headerlink" href="#the-ending-graphs-are-hard-to-read-is-there-a-way-to-label-specific-countries-kde-lines" title="Permalink to this headline">#</a></h3>
+<p>Yes</p>
+</section>
+<section id="how-do-you-get-the-index-of-something-in-a-row">
+<h3><span class="section-number">6.7.7. </span>how do you get the index of something in a row<a class="headerlink" href="#how-do-you-get-the-index-of-something-in-a-row" title="Permalink to this headline">#</a></h3>
+<p>I do not understand this question, please reach out with more info so that I can help you</p>
+</section>
+<section id="i-was-trying-to-do-somthing-earlier-where-i-got-the-max-of-a-column-but-wanted-to-know-somthing-else-associated-with-that-row">
+<h3><span class="section-number">6.7.8. </span>i was trying to do somthing earlier where I got the max of a column but wanted to know somthing else associated with that row<a class="headerlink" href="#i-was-trying-to-do-somthing-earlier-where-i-got-the-max-of-a-column-but-wanted-to-know-somthing-else-associated-with-that-row" title="Permalink to this headline">#</a></h3>
+<p>most pandas methods allow you to use <code class="docutils literal notranslate"><span class="pre">axis</span></code> to apply them across rows instead of columns</p>
+</section>
+<section id="cleaning-out-different-data-types">
+<h3><span class="section-number">6.7.9. </span>cleaning out different data types<a class="headerlink" href="#cleaning-out-different-data-types" title="Permalink to this headline">#</a></h3>
+<p>Once the data is loaded into pandas, we can use all of the same techniques</p>
+</section>
+<section id="is-there-a-scenario-where-a-dataset-cannot-be-cleaned-using-pandas-methods">
+<h3><span class="section-number">6.7.10. </span>Is there a scenario where a dataset cannot be cleaned using pandas methods?<a class="headerlink" href="#is-there-a-scenario-where-a-dataset-cannot-be-cleaned-using-pandas-methods" title="Permalink to this headline">#</a></h3>
+<p>yes, there are cases where cleaning the already loaded dataframe is not the best way to make the necessary fixes.  One tool that can help is called <a class="reference external" href="https://openrefine.org/">Openrefine</a> it is an open source program that provides a GUI based interface to clean data, but also outputs a script of what actions were taking, to make the cleaning replicable.</p>
+<p>This is something you could learn about and try for the level 3 prepare achievement in your portfolio. One resource for learning it is the <a class="reference external" href="https://datacarpentry.org/OpenRefine-ecology-lesson/">Data Carpentry lesson on Data Cleaning for Ecologists</a></p>
+</section>
+<section id="is-there-another-standard-format-for-sharing-cleaned-datasets">
+<h3><span class="section-number">6.7.11. </span>Is there another standard format for sharing cleaned datasets?<a class="headerlink" href="#is-there-another-standard-format-for-sharing-cleaned-datasets" title="Permalink to this headline">#</a></h3>
+<p>.csv is the widely accepted preferred format for well strucutured tabular data that is of reasonable size.  If it is too large, a database might (next week!) can be useful.</p>
+</section>
+<section id="with-extremely-large-datasets-is-there-a-way-to-find-what-pieces-of-the-dataset-are-missing-values-other-than-manually-checking">
+<h3><span class="section-number">6.7.12. </span>With extremely large datasets, is there a way to find what pieces of the dataset are missing values other than manually checking<a class="headerlink" href="#with-extremely-large-datasets-is-there-a-way-to-find-what-pieces-of-the-dataset-are-missing-values-other-than-manually-checking" title="Permalink to this headline">#</a></h3>
+<p>Using strategies like we did to day, by testing dropping and the EDA strategies that we used last week can help.  If it is a very large dataset, you may need to use more powerful system, but the basics work out the same.</p>
+<p>Also, remember in most contexts, you will have some relevant domain knowledge that can help you.</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1390,11 +2090,11 @@ dtype: float64
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-09-28.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Reparing values</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1407,6 +2107,40 @@ dtype: float64
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">6.1. Intro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-tidy-data">6.2. What is Tidy Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tidying-data">6.3. Tidying Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-the-coffee-data">6.4. Transforming the Coffee Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">6.5. Filtering Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-manipulations">6.6. More manipulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">6.7. Questions after Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-data-we-had-about-treatment-a-and-treatment-b-say-there-was-another-column-that-provided-information-about-the-age-of-the-people-could-we-create-another-value-variable-to-or-would-we-put-it-in-the-value-vars-list-along-with-treatment-a-and-treatmentb">6.7.1. In the data we had about treatment a and treatment b.  Say there was another column that provided information about the age of the people.  Could we create another value variable to or would we put it in the value_vars list along with treatment a and treatmentb?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-prebuilt-methods-to-identify-and-remove-extreme-outliers">6.7.2. Are there any prebuilt methods to identify and remove extreme outliers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-specific-metric-to-which-a-dataset-must-meet-to-consider-it-cleaned">6.7.3. Is there a specific metric to which a dataset must meet to consider it ‘cleaned’?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-melt-work-underneath-the-hood">6.7.4. how does melt work underneath the hood?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-people-ever-write-their-melted-datasets-to-new-files-for-redistribution-maybe-to-make-things-easier-for-future-researchers">6.7.5. Do people ever write their melted datasets to new files for redistribution, maybe to make things easier for future researchers?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ending-graphs-are-hard-to-read-is-there-a-way-to-label-specific-countries-kde-lines">6.7.6. the ending graphs are hard to read. Is there a way to label specific countries kde lines?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-get-the-index-of-something-in-a-row">6.7.7. how do you get the index of something in a row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-was-trying-to-do-somthing-earlier-where-i-got-the-max-of-a-column-but-wanted-to-know-somthing-else-associated-with-that-row">6.7.8. i was trying to do somthing earlier where I got the max of a column but wanted to know somthing else associated with that row</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning-out-different-data-types">6.7.9. cleaning out different data types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-scenario-where-a-dataset-cannot-be-cleaned-using-pandas-methods">6.7.10. Is there a scenario where a dataset cannot be cleaned using pandas methods?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-another-standard-format-for-sharing-cleaned-datasets">6.7.11. Is there another standard format for sharing cleaned datasets?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-extremely-large-datasets-is-there-a-way-to-find-what-pieces-of-the-dataset-are-missing-values-other-than-manually-checking">6.7.12. With extremely large datasets, is there a way to find what pieces of the dataset are missing values other than manually checking</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
