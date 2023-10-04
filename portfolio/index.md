@@ -83,7 +83,7 @@ You can view a (fake) example [in this repository](https://github.com/rhodyprog4
 ## Upcoming Checks
 
 <!-- ### Portfolio 1 -->
-- Portfolio Check 1 is due 
+- Portfolio Check 1 is due October 16
 <!-- - Portfolio Check 2 is due 
 - Portfolio check 3 is due 
 - Portfolio check 4 is due  -->
