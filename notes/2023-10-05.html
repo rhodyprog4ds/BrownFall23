@@ -1,0 +1,2198 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>9. Web Scraping &#8212; Programming for Data Science at URI Fall 2023</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/course-admonitions.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-10-05';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="8. Merging Data" href="2023-10-03.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/310_2021.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/310_2021.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/achievements.html">Data Science Achievements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/policies.html">Grading Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/style.html">Course  Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General URI Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data and Structural Repairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-28.html">7. Reparing values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-03.html">8. Merging Data</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Web Scraping</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/index.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/formatting.html">Formatting Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check1ideas.html">Portfolio Check 1 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check2ideas.html">Check 2 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check3ideas.html">Check 3 Ideas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/debugging.html">Code Errors</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/python.html">References on Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/datasets.html">Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/terminal.html">Terminals and Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall20/letters/">Advice from FA2020 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall21/letters/">Advice from FA2021 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/edit/main/notes/2023-10-05.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/issues/new?title=Issue%20on%20page%20%2Fnotes/2023-10-05.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2023-10-05.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Web Scraping</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-from-websites">9.1. Getting Data From Websites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">9.2. Everything is Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-a-uri-website">9.3. Scraping a URI website</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-tags">9.3.1. Looking at tags</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-the-source">9.3.2. Searching the source</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-more-information">9.4. Pulling more information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-and-scraping">9.5. Crawling and scraping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">9.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-do">9.6.1. what does .a do?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-worth-it-to-try-and-web-scrape-a-page-that-is-poorly-written">9.6.2. is it worth it to try and web scrape a page that is poorly written?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-way-to-check-robots-txt-through-beautifulsoup-or-must-that-be-done-manually-in-a-browser">9.6.3. Is there a way to check robots.txt through BeautifulSoup or must that be done manually in a browser?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-else-can-i-do-with-inspect">9.6.4. What else can I do with inspect?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-web-scraping-if-the-html-is-not-set-up-well-is-it-possible-to-change-the-html-to-make-it-easier-to-parse">9.6.5. when web scraping if the html is not set up well is it possible to change the html to make it easier to parse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-instances-where-you-can-get-data-from-websites-that-are-not-in-tabular-form">9.6.6. Are there instances where you can get data from websites that are not in tabular form?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-source-table-would-be-the-peoples-page-on-the-uri-website-but-when-you-click-on-their-individual-names-does-that-count-as-another-source-table">9.6.7. A source table would be the people’s page on the URI website, but when you click on their individual names does that count as another source table?﻿</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-question">9.7. Portfolio Question</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-guess-how-to-further-edit-the-submission-1-intro-i-know-about-the-chapters-you-gotta-add-but-what-else-is-submission-1-intro-the-only-file-you-gotta-edit">9.7.1. I guess how to further edit the submission_1.intro. I know about the chapters you gotta add, but what else? Is submission_1.intro the only file you gotta edit?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-portfolio-one-can-we-submit-whatever-we-want-like-as-little-or-as-much">9.7.2. for portfolio one, can we submit whatever we want? like as little OR as much?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="web-scraping">
+<h1><span class="section-number">9. </span>Web Scraping<a class="headerlink" href="#web-scraping" title="Permalink to this headline">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dates:</p>
+<ul class="simple">
+<li><p>A5 due 10/10</p></li>
+<li><p>P1 due 10/16 (ideally you have already started this)</p></li>
+<li><p>A6 due 10/18 (it’s short, I promise)</p></li>
+<li><p>then back to assignments due Monday</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If it says it cannot load one of the libraries, use pip inside your notebook to install,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">beautifulsoup4</span>
+</pre></div>
+</div>
+<p>then restart your kernel (Kernel menu, choose restart)</p>
+</div>
+<section id="getting-data-from-websites">
+<h2><span class="section-number">9.1. </span>Getting Data From Websites<a class="headerlink" href="#getting-data-from-websites" title="Permalink to this headline">#</a></h2>
+<p>We have seen that <code class="docutils literal notranslate"><span class="pre">read_html</span></code> can get content from an actual website, not a data file that is hosted somewhere on the internet, that takes tables on a website and returns a list of DataFrames.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This has a long output, so I hid it by default, but you can view it</p>
+</div>
+</aside>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="s1">&#39;https://rhodyprog4ds.github.io/BrownSpring23/syllabus/achievements.html&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[   Unnamed: 0_level_0                                             topics  \
+                  week                                 Unnamed: 1_level_1   
+ 0                   1                             [admin, python review]   
+ 1                   2                        Loading data, Python review   
+ 2                   3                          Exploratory Data Analysis   
+ 3                   4                                      Data Cleaning   
+ 4                   5                      Databases, Merging DataFrames   
+ 5                   6  Modeling, classification performance metrics, ...   
+ 6                   7                        Naive Bayes, decision trees   
+ 7                   8                                         Regression   
+ 8                   9                                         Clustering   
+ 9                  10                              SVM, parameter tuning   
+ 10                 11                              KNN, Model comparison   
+ 11                 12                                      Text Analysis   
+ 12                 13                                    Images Analysis   
+ 13                 14                                      Deep Learning   
+ 
+                              skills  
+                  Unnamed: 2_level_1  
+ 0                           process  
+ 1      [access, prepare, summarize]  
+ 2            [summarize, visualize]  
+ 3   [prepare, summarize, visualize]  
+ 4    [access, construct, summarize]  
+ 5                        [evaluate]  
+ 6        [classification, evaluate]  
+ 7            [regression, evaluate]  
+ 8            [clustering, evaluate]  
+ 9                 [optimize, tools]  
+ 10                 [compare, tools]  
+ 11                   [unstructured]  
+ 12            [unstructured, tools]  
+ 13                 [tools, compare]  ,
+    Unnamed: 0_level_0                                              skill  \
+               keyword                                 Unnamed: 1_level_1   
+ 0              python                              pythonic code writing   
+ 1             process                 describe data science as a process   
+ 2              access                    access data in multiple formats   
+ 3           construct           construct datasets from multiple sources   
+ 4           summarize                        Summarize and describe data   
+ 5           visualize                                     Visualize data   
+ 6             prepare                          prepare data for analysis   
+ 7            evaluate                         Evaluate model performance   
+ 8      classification                               Apply classification   
+ 9          regression                                   Apply Regression   
+ 10         clustering                                         Clustering   
+ 11           optimize                          Optimize model parameters   
+ 12            compare                                     compare models   
+ 13     representation          Choose representations and transform data   
+ 14           workflow  use industry standard data science tools and w...   
+ 
+                                               Level 1  \
+                                    Unnamed: 2_level_1   
+ 0   python code that mostly runs, occasional pep8 ...   
+ 1           Identify basic components of data science   
+ 2   load data from at least one format; identify t...   
+ 3   identify what should happen to merge datasets ...   
+ 4   Describe the shape and structure of a dataset ...   
+ 5   identify plot types, generate basic plots from...   
+ 6   identify if data is or is not ready for analys...   
+ 7   Explain basic performance metrics for differen...   
+ 8   identify and describe what classification is, ...   
+ 9   identify what data that can be used for regres...   
+ 10                        describe what clustering is   
+ 11  Identify when model parameters need to be opti...   
+ 12                Qualitatively compare model classes   
+ 13  Identify options for representing text and cat...   
+ 14  Solve well strucutred fully specified problems...   
+ 
+                                               Level 2  \
+                                    Unnamed: 3_level_1   
+ 0   python code that reliably runs, frequent pep8 ...   
+ 1   Describe and define each stage of the data sci...   
+ 2   Load data for processing from the most common ...   
+ 3                                  apply basic merges   
+ 4   compute summary statndard statistics of a whol...   
+ 5   generate multiple plot types with complete lab...   
+ 6   apply data reshaping, cleaning, and filtering ...   
+ 7   Apply and interpret basic model evaluation met...   
+ 8   fit, apply, and interpret preselected classifi...   
+ 9          fit and interpret linear regression models   
+ 10                             apply basic clustering   
+ 11  Optimize basic model parameters such as model ...   
+ 12  Compare model classes in specific terms and fi...   
+ 13  Apply at least one representation to transform...   
+ 14  Solve well-strucutred, open-ended problems, ap...   
+ 
+                                               Level 3  
+                                    Unnamed: 4_level_1  
+ 0   reliable, efficient, pythonic code that consis...  
+ 1   Compare different ways that data science can f...  
+ 2   access data from both common and uncommon form...  
+ 3        merge data that is not automatically aligned  
+ 4   Compute and interpret various summary statisti...  
+ 5   generate complex plots with pandas and plottin...  
+ 6   apply data reshaping, cleaning, and filtering ...  
+ 7   Evaluate a model with multiple metrics and cro...  
+ 8   fit and apply classification models and select...  
+ 9   fit and explain regrularized or nonlinear regr...  
+ 10  apply multiple clustering techniques, and inte...  
+ 11  Select optimal parameters based of mutiple qua...  
+ 12  Evaluate tradeoffs between different model com...  
+ 13  apply transformations in different contexts OR...  
+ 14  Independently scope and solve realistic data s...  ,
+    Unnamed: 0_level_0                 A1                 A2  \
+               keyword Unnamed: 1_level_1 Unnamed: 2_level_1   
+ 0              python                  1                  1   
+ 1             process                  1                  0   
+ 2              access                  0                  1   
+ 3           construct                  0                  0   
+ 4           summarize                  0                  0   
+ 5           visualize                  0                  0   
+ 6             prepare                  0                  0   
+ 7            evaluate                  0                  0   
+ 8      classification                  0                  0   
+ 9          regression                  0                  0   
+ 10         clustering                  0                  0   
+ 11           optimize                  0                  0   
+ 12            compare                  0                  0   
+ 13     representation                  0                  0   
+ 14           workflow                  0                  0   
+ 
+                    A3                 A4                 A5  \
+    Unnamed: 3_level_1 Unnamed: 4_level_1 Unnamed: 5_level_1   
+ 0                   0                  1                  1   
+ 1                   0                  0                  0   
+ 2                   1                  1                  1   
+ 3                   0                  0                  1   
+ 4                   1                  1                  1   
+ 5                   1                  1                  0   
+ 6                   0                  1                  1   
+ 7                   0                  0                  0   
+ 8                   0                  0                  0   
+ 9                   0                  0                  0   
+ 10                  0                  0                  0   
+ 11                  0                  0                  0   
+ 12                  0                  0                  0   
+ 13                  0                  0                  0   
+ 14                  0                  0                  0   
+ 
+                    A6                 A7                 A8  \
+    Unnamed: 6_level_1 Unnamed: 7_level_1 Unnamed: 8_level_1   
+ 0                   0                  0                  0   
+ 1                   1                  1                  1   
+ 2                   0                  0                  0   
+ 3                   0                  1                  1   
+ 4                   1                  1                  1   
+ 5                   1                  1                  1   
+ 6                   0                  0                  0   
+ 7                   1                  1                  1   
+ 8                   0                  1                  0   
+ 9                   0                  0                  1   
+ 10                  0                  0                  0   
+ 11                  0                  0                  0   
+ 12                  0                  0                  0   
+ 13                  0                  0                  0   
+ 14                  0                  0                  0   
+ 
+                    A9                 A10                 A11  \
+    Unnamed: 9_level_1 Unnamed: 10_level_1 Unnamed: 11_level_1   
+ 0                   0                   0                   0   
+ 1                   1                   1                   1   
+ 2                   0                   0                   0   
+ 3                   0                   0                   0   
+ 4                   1                   1                   1   
+ 5                   1                   1                   1   
+ 6                   0                   0                   0   
+ 7                   0                   1                   1   
+ 8                   0                   1                   0   
+ 9                   0                   0                   1   
+ 10                  1                   0                   1   
+ 11                  0                   1                   1   
+ 12                  0                   0                   1   
+ 13                  0                   0                   0   
+ 14                  0                   1                   1   
+ 
+                    A12                 A13       # Assignments  
+    Unnamed: 12_level_1 Unnamed: 13_level_1 Unnamed: 14_level_1  
+ 0                    0                   0                   4  
+ 1                    0                   0                   7  
+ 2                    0                   0                   4  
+ 3                    0                   0                   3  
+ 4                    1                   1                  11  
+ 5                    1                   1                  10  
+ 6                    0                   0                   2  
+ 7                    0                   0                   5  
+ 8                    0                   0                   2  
+ 9                    0                   0                   2  
+ 10                   0                   0                   2  
+ 11                   0                   0                   2  
+ 12                   0                   1                   2  
+ 13                   1                   1                   2  
+ 14                   1                   1                   4  ,
+    Unnamed: 0_level_0                                            Level 3  \
+               keyword                                 Unnamed: 1_level_1   
+ 0              python  reliable, efficient, pythonic code that consis...   
+ 1             process  Compare different ways that data science can f...   
+ 2              access  access data from both common and uncommon form...   
+ 3           construct       merge data that is not automatically aligned   
+ 4           summarize  Compute and interpret various summary statisti...   
+ 5           visualize  generate complex plots with pandas and plottin...   
+ 6             prepare  apply data reshaping, cleaning, and filtering ...   
+ 7            evaluate  Evaluate a model with multiple metrics and cro...   
+ 8      classification  fit and apply classification models and select...   
+ 9          regression  fit and explain regrularized or nonlinear regr...   
+ 10         clustering  apply multiple clustering techniques, and inte...   
+ 11           optimize  Select optimal parameters based of mutiple qua...   
+ 12            compare  Evaluate tradeoffs between different model com...   
+ 13     representation  apply transformations in different contexts OR...   
+ 14           workflow  Independently scope and solve realistic data s...   
+ 
+                    P1                 P2                 P3                 P4  
+    Unnamed: 2_level_1 Unnamed: 3_level_1 Unnamed: 4_level_1 Unnamed: 5_level_1  
+ 0                   1                  1                  0                  1  
+ 1                   0                  1                  1                  1  
+ 2                   1                  1                  0                  1  
+ 3                   1                  1                  0                  1  
+ 4                   1                  1                  0                  1  
+ 5                   1                  1                  0                  1  
+ 6                   1                  1                  0                  1  
+ 7                   0                  1                  1                  1  
+ 8                   0                  1                  1                  1  
+ 9                   0                  1                  1                  1  
+ 10                  0                  1                  1                  1  
+ 11                  0                  0                  1                  1  
+ 12                  0                  0                  1                  1  
+ 13                  0                  0                  1                  1  
+ 14                  0                  0                  1                  1  ]
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>This gives us a list of DataFrames that come from the website.  <code class="docutils literal notranslate"><span class="pre">pandas</span></code> gets tables by looking in the html for the site and finding the <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code> tags.</p>
+</section>
+<section id="everything-is-data">
+<h2><span class="section-number">9.2. </span>Everything is Data<a class="headerlink" href="#everything-is-data" title="Permalink to this headline">#</a></h2>
+<p>For the purpose of this class, it is best to think of the content on a web page like a datastructure.</p>
+<p><img alt="html anatomy" src="https://cdn2.hubspot.net/hub/53/file-1519188549-jpg/blog-files/webpage-setup.jpg" /></p>
+<p><img alt="HTML tree structure" src="http://www.w3schools.com/js/pic_htmltree.gif" /></p>
+<p>there are tags <code class="docutils literal notranslate"><span class="pre">&lt;&gt;</span></code> that define the structure, and these can be further classified with <code class="docutils literal notranslate"><span class="pre">classes</span></code></p>
+</section>
+<section id="scraping-a-uri-website">
+<h2><span class="section-number">9.3. </span>Scraping a URI website<a class="headerlink" href="#scraping-a-uri-website" title="Permalink to this headline">#</a></h2>
+<p>We’re going to create a DataFrame about URI CS &amp; Statistics Faculty.</p>
+<p>from the <a class="reference external" href="https://web.uri.edu/cs/people/">people page</a> of the department website.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>the inspect link goes to instructions for different browsers</p>
+</div>
+</aside>
+<p>We can <a class="reference external" href="https://blog.hubspot.com/website/how-to-inspect">inspect</a> the page to check that it’s well structured.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>With great power comes great responsibility.</p>
+<ul class="simple">
+<li><p>always check the <a class="reference external" href="https://web.uri.edu/robots.txt">robots.txt</a></p></li>
+<li><p>do not do things that the owner says not to do</p></li>
+<li><p>government websites are typically safe</p></li>
+</ul>
+</div>
+<p>We’ll save the URL for easy use</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people_url</span> <span class="o">=</span> <span class="s1">&#39;https://web.uri.edu/cs/people/&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can use the <code class="docutils literal notranslate"><span class="pre">requests</span></code> library to make a call to the internet.  It actually gets back a <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response">response object</a> which has a lot of extra information.  For today we only need the <code class="docutils literal notranslate"><span class="pre">content</span></code> from the page which is an attrtibute of that object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people_html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cs_people_url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is raw:</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>here I suppressed th output in class by looking only at the first few characters</p>
+</div>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people_html</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\n&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en-US&quot;&gt;\n\t\n&lt;head&gt;\n&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;script type=&quot;text/javascript&quot;&gt;(window.NREUM||(NREUM={})).init={privacy:{cookies_enabled:true},ajax:{deny_list:[&quot;bam.nr-data.net&quot;]},&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we do not need to manually write search tools, that’s what <a class="reference external" href="https://beautiful-soup-4.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code></a> is for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">cs_people_html</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">cs_people</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bs4.BeautifulSoup
+</pre></div>
+</div>
+</div>
+</div>
+<section id="looking-at-tags">
+<h3><span class="section-number">9.3.1. </span>Looking at tags<a class="headerlink" href="#looking-at-tags" title="Permalink to this headline">#</a></h3>
+<p>In this object we can use any tag from the file and get back the first instance</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a class=&quot;skip-link screen-reader-text&quot; href=&quot;#content&quot;&gt;Skip to content&lt;/a&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also see <code class="docutils literal notranslate"><span class="pre">&lt;h3&gt;</span></code> in the code so we can get the first one like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people</span><span class="o">.</span><span class="n">h3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;&lt;/h3&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>this <a class="reference external" href="https://web.stanford.edu/group/csp/cs21/htmlcheatsheet.pdf">cheatsheet</a> shows lots of html tags, but for this purpose you do not really need it. You’ll be inspecting the page and then looking for what you want</p>
+</section>
+<section id="searching-the-source">
+<h3><span class="section-number">9.3.2. </span>Searching the source<a class="headerlink" href="#searching-the-source" title="Permalink to this headline">#</a></h3>
+<p>More helpful is the <code class="docutils literal notranslate"><span class="pre">find_all</span></code> method we wnat to find all <code class="docutils literal notranslate"><span class="pre">div</span></code> tags that are “peopleitem” class. We decided this by inspecting the code on the website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="s1">&#39;peopleitem&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bs4.element.ResultSet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="s1">&#39;peopleitem&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;1600&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 1600px) 100vw, 1600px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg 1600w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-300x300.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1024x1024.jpg 1024w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-150x150.jpg 150w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-768x768.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1536x1536.jpg 1536w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-364x364.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-500x500.jpg 500w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1000x1000.jpg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1280x1280.jpg 1280w&quot; width=&quot;1600&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor |  Chair&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4388&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:gpuggioni@uri.edu&quot;&gt;gpuggioni@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/lisa-dipippo/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;126&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/lisa-dipippo-web.jpg&quot; width=&quot;125&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/lisa-dipippo/&quot;&gt;Lisa DiPippo&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Professor | Director of Undergraduate Studies&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:ldipippo@uri.edu&quot;&gt;ldipippo@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/natallia-katenka/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;200&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 200px) 100vw, 200px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/natalia-katenka-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/natalia-katenka-web.jpg 200w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/natalia-katenka-web-150x150.jpg 150w&quot; width=&quot;200&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/natallia-katenka/&quot;&gt;Natallia Katenka&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor | Director of Data Science&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:nkatenka@uri.edu&quot;&gt;nkatenka@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/krishna-venkatasubramanian/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;2703&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 2437px) 100vw, 2437px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2.jpg 2437w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-270x300.jpg 270w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-768x852.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-923x1024.jpg 923w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-364x404.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-500x555.jpg 500w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-1000x1109.jpg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-1280x1420.jpg 1280w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/KV_biopic_2-2000x2218.jpg 2000w&quot; width=&quot;2437&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/krishna-venkatasubramanian/&quot;&gt;Krishna Venkatasubramanian&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor | Director of Graduate Studies&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:krish@uri.edu&quot;&gt;krish@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/jing-wu/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;200&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 200px) 100vw, 200px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/jing-wu-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/jing-wu-web.jpg 200w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/jing-wu-web-150x150.jpg 150w&quot; width=&quot;200&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/jing-wu/&quot;&gt;Jing Wu&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor | Director of Graduate Studies&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4504&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:jing_wu@uri.edu&quot;&gt;jing_wu@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/marco-alvarez/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;120&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/marco-alvarez.png&quot; width=&quot;120&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/marco-alvarez/&quot;&gt;Marco Alvarez&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.5009&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:malvarez@uri.edu&quot;&gt;malvarez@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/samantha-armenti/&quot;&gt;Samantha Armenti&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:sarmenti@uri.edu &quot;&gt;sarmenti@uri.edu &lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/sarah-brown/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;300&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 300px) 100vw, 300px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Sarah-Brown.png&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Sarah-Brown.png 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Sarah-Brown-150x150.png 150w&quot; width=&quot;300&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/sarah-brown/&quot;&gt;Sarah Brown&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:brownsarahm@uri.edu&quot;&gt;brownsarahm@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/michael-conti/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;2475&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 2560px) 100vw, 2560px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-scaled.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-scaled.jpg 2560w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-300x290.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-1024x990.jpg 1024w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-768x743.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-1536x1485.jpg 1536w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-2048x1980.jpg 2048w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-364x352.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-500x483.jpg 500w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-1000x967.jpg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-1280x1238.jpg 1280w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/mike-conti-2000x1934.jpg 2000w&quot; width=&quot;2560&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/michael-conti/&quot;&gt;Michael Conti&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:michaelconti@uri.edu &quot;&gt;michaelconti@uri.edu &lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/noah-daniels/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;219&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 219px) 100vw, 219px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/noah-daniels-web.png&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/noah-daniels-web.png 219w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/noah-daniels-web-150x150.png 150w&quot; width=&quot;219&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/noah-daniels/&quot;&gt;Noah Daniels&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:noah_daniels@uri.edu&quot;&gt;noah_daniels@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/victor-fay-wolfe/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;125&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/victor-fay-wolfe-web.jpg&quot; width=&quot;125&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/victor-fay-wolfe/&quot;&gt;Victor Fay-Wolfe&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:vfaywolfe@uri.edu&quot;&gt;vfaywolfe@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/lutz-hamel/&quot;&gt;Lutz Hamel&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor &lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:lutzhamel@uri.edu&quot;&gt;lutzhamel@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/abdeltawab-hendawi/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;885&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 1000px) 100vw, 1000px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1.jpeg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1.jpeg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1-300x266.jpeg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1-768x680.jpeg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1-364x322.jpeg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-1-500x443.jpeg 500w&quot; width=&quot;1000&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/abdeltawab-hendawi/&quot;&gt;Abdeltawab Hendawi&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Data Science | Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.5738&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:hendawi@uri.edu&quot;&gt;hendawi@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/jean-yves-herve/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;299&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 300px) 100vw, 300px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/jean-yves-herve-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/jean-yves-herve-web.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/jean-yves-herve-web-150x150.jpg 150w&quot; width=&quot;300&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/jean-yves-herve/&quot;&gt;Jean-Yves Hervé&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:jyh@cs.uri.edu&quot;&gt;jyh@cs.uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/soheyb-kouider/&quot;&gt;Soheyb Kouider&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.2562&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:soheyb@uri.edu&quot;&gt;soheyb@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/edmund-lamagna/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;150&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/edmund-lamagna-web.jpg&quot; width=&quot;150&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/edmund-lamagna/&quot;&gt;Edmund Lamagna&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:eal@cs.uri.edu&quot;&gt;eal@cs.uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/indrani-mandal/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;280&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 278px) 100vw, 278px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/0.jpeg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/0.jpeg 278w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/0-150x150.jpeg 150w&quot; width=&quot;278&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/indrani-mandal/&quot;&gt;Indrani Mandal&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:indrani_mandal@uri.edu &quot;&gt;indrani_mandal@uri.edu &lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/jonathan-schrader/&quot;&gt;Jonathan Schrader&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:jonathan.schrader@uri.edu&quot;&gt;jonathan.schrader@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/shaun-wallace/&quot;&gt;&lt;img alt=&quot;Shaun Wallace&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;300&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 300px) 100vw, 300px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Shaun-Wallace_300.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Shaun-Wallace_300.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Shaun-Wallace_300-150x150.jpg 150w&quot; width=&quot;300&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/shaun-wallace/&quot;&gt;Shaun Wallace&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:shaun.wallace@uri.edu&quot;&gt;shaun.wallace@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/yunshu-jasmine-wang/&quot;&gt;Yunshu (Jasmine) Wang&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Teaching Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:yunshu_wang@uri.edu&quot;&gt;yunshu_wang@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/haihan-mark-yu/&quot;&gt;&lt;img alt=&quot;Haihan Yu&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;300&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 300px) 100vw, 300px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/haihan_2307.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/haihan_2307.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/haihan_2307-150x150.jpg 150w&quot; width=&quot;300&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/haihan-mark-yu/&quot;&gt;Haihan (Mark) Yu&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:haihan.yu@uri.edu&quot;&gt;haihan.yu@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/yichi-zhang/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;240&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 240px) 100vw, 240px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/yichi-zhang-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/yichi-zhang-web.jpg 240w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/yichi-zhang-web-150x150.jpg 150w&quot; width=&quot;240&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/yichi-zhang/&quot;&gt;Yichi Zhang&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor &lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:yichizhang@uri.edu&quot;&gt;yichizhang@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/guangyu-zhu/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;200&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 200px) 100vw, 200px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Guangyu-Zhu-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Guangyu-Zhu-web.jpg 200w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Guangyu-Zhu-web-150x150.jpg 150w&quot; width=&quot;200&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/guangyu-zhu/&quot;&gt;Guangyu Zhu&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:guangyuzhu@uri.edu&quot;&gt;guangyuzhu@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/ashley-buchanan/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;966&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 966px) 100vw, 966px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan.jpg 966w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan-300x300.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan-150x150.jpg 150w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan-768x768.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan-364x364.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Ashley-Buchanan-500x500.jpg 500w&quot; width=&quot;966&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/ashley-buchanan/&quot;&gt;Ashley Buchanan&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Limited Joint Appointment&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Biostatistics&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4739&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:buchanan@uri.edu&quot;&gt;buchanan@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/nina-kajiji/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;125&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/nina-kajiji-web.jpg&quot; width=&quot;125&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/nina-kajiji/&quot;&gt;Nina Kajiji&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Adjunct Associate Professor&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;a class=&quot;u-email&quot; href=&quot;mailto:nina@uri.edu&quot;&gt;nina@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/rachel-schwartz/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;120&quot; loading=&quot;lazy&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Rachel-Schwartz-web.jpg&quot; width=&quot;120&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/rachel-schwartz/&quot;&gt;Rachel Schwartz&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor – Limited Joint Appointment&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Biological Sciences&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.5404&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:rsschwartz@uri.edu&quot;&gt;rsschwartz@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;,
+ &lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+ &lt;header&gt;
+ &lt;div class=&quot;header&quot;&gt;
+ &lt;figure&gt;
+ &lt;a href=&quot;https://web.uri.edu/cs/meet/ying-zhang/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;250&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 249px) 100vw, 249px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/ying-zhang-web.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/ying-zhang-web.jpg 249w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/ying-zhang-web-150x150.jpg 150w&quot; width=&quot;249&quot;/&gt;&lt;/a&gt;
+ &lt;/figure&gt;
+ &lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/ying-zhang/&quot;&gt;Ying Zhang&lt;/a&gt;&lt;/h3&gt;
+ &lt;/div&gt;
+ &lt;/header&gt;
+ &lt;div class=&quot;inside&quot;&gt;
+ &lt;p class=&quot;people-title p-job-title&quot;&gt;Assistant Professor – Limited Joint Appointment&lt;/p&gt;
+ &lt;p class=&quot;people-department&quot;&gt;Computer Science&lt;/p&gt;
+ &lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4915&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:yingzhang@uri.edu&quot;&gt;yingzhang@uri.edu&lt;/a&gt;&lt;/p&gt;
+ &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>this is a long, object and we can see it looks iterable (<code class="docutils literal notranslate"><span class="pre">[</span></code> at the start)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span> <span class="o">=</span> <span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;div&#39;</span><span class="p">,</span><span class="s1">&#39;peopleitem&#39;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">people_items</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>answer to questions about searching <a class="reference external" href="https://beautiful-soup-4.readthedocs.io/en/latest/index.html?highlight=find_all#the-keyword-arguments">from the docs</a></p>
+</div>
+<p>We can also look at only the first instance</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+&lt;header&gt;
+&lt;div class=&quot;header&quot;&gt;
+&lt;figure&gt;
+&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;1600&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 1600px) 100vw, 1600px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg 1600w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-300x300.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1024x1024.jpg 1024w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-150x150.jpg 150w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-768x768.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1536x1536.jpg 1536w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-364x364.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-500x500.jpg 500w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1000x1000.jpg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1280x1280.jpg 1280w&quot; width=&quot;1600&quot;/&gt;&lt;/a&gt;
+&lt;/figure&gt;
+&lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/header&gt;
+&lt;div class=&quot;inside&quot;&gt;
+&lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor |  Chair&lt;/p&gt;
+&lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+&lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4388&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:gpuggioni@uri.edu&quot;&gt;gpuggioni@uri.edu&lt;/a&gt;&lt;/p&gt;
+&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We notice that the name is inside a <code class="docutils literal notranslate"><span class="pre">&lt;h3&gt;</span></code> tag with class <code class="docutils literal notranslate"><span class="pre">p-name</span></code> and then inside an a tag after that.  We also know from looking at the overall page that there are lots of other a tags, so we do not want to search all of those.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;&lt;/h3&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we see in this, there is an <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> tag, so we can pull that out next, we can use the tag attribute, because the first instance of the tag is exactly what we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>inside that there is the text in a string, so we can pull that out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Gavino Puggioni&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In the course notes, I repeat very similar cells so that the notes replicate the <em>thinking</em> process to do the analysis. In your assignments, you do not need to include intermediate steps, there the target audience is a person interested in the conclusions where here, as students, <em>you</em> are the target audience.</p>
+</div>
+</aside>
+<p>Finally, now that we know how to get one out, we can put it all in a list comprehension</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people_items</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="pulling-more-information">
+<h2><span class="section-number">9.4. </span>Pulling more information<a class="headerlink" href="#pulling-more-information" title="Permalink to this headline">#</a></h2>
+<p>First, we look at the whole person entry again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;div class=&quot;peopleitem h-card has-thumbnail&quot;&gt;
+&lt;header&gt;
+&lt;div class=&quot;header&quot;&gt;
+&lt;figure&gt;
+&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;u-photo wp-post-image&quot; height=&quot;1600&quot; loading=&quot;lazy&quot; sizes=&quot;(max-width: 1600px) 100vw, 1600px&quot; src=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg&quot; srcset=&quot;https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381.jpg 1600w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-300x300.jpg 300w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1024x1024.jpg 1024w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-150x150.jpg 150w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-768x768.jpg 768w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1536x1536.jpg 1536w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-364x364.jpg 364w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-500x500.jpg 500w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1000x1000.jpg 1000w, https://web.uri.edu/cs/wp-content/uploads/sites/1531/Gavino_headshot1-e1610666088381-1280x1280.jpg 1280w&quot; width=&quot;1600&quot;/&gt;&lt;/a&gt;
+&lt;/figure&gt;
+&lt;h3 class=&quot;p-name&quot;&gt;&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;&lt;/h3&gt;
+&lt;/div&gt;
+&lt;/header&gt;
+&lt;div class=&quot;inside&quot;&gt;
+&lt;p class=&quot;people-title p-job-title&quot;&gt;Associate Professor |  Chair&lt;/p&gt;
+&lt;p class=&quot;people-department&quot;&gt;Statistics&lt;/p&gt;
+&lt;p class=&quot;people-misc&quot;&gt;&lt;span class=&quot;p-tel&quot;&gt;401.874.4388&lt;/span&gt; &lt;br/&gt; &lt;a class=&quot;u-email&quot; href=&quot;mailto:gpuggioni@uri.edu&quot;&gt;gpuggioni@uri.edu&lt;/a&gt;&lt;/p&gt;
+&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>How to pull out the titles for each person (eg Assitatn Teaching Professor, Associate Professor)</p>
+<p>on one item, the <code class="docutils literal notranslate"><span class="pre">p</span></code> tag with the <code class="docutils literal notranslate"><span class="pre">people-title</span></code> class gets us what we want and
+then we can</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;people-title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people_items</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="p">[</span><span class="n">person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;people-title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people_items</span><span class="p">]</span>
+
+<span class="nn">Cell In[19], line 1,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="p">[</span><span class="n">person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;people-title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people_items</span><span class="p">]</span>
+
+<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;string&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This give an error because there is no <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> tag inside the <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> tag</p>
+<p>Python’s null concept (outside of pandas and numpy that have nan float values) is <code class="docutils literal notranslate"><span class="pre">None</span></code> we can assign it to a variable if we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Its type is <code class="docutils literal notranslate"><span class="pre">NoneType</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NoneType
+</pre></div>
+</div>
+</div>
+</div>
+<p>So the error message says that the thing we are applying <code class="docutils literal notranslate"><span class="pre">.string</span></code> to is <code class="docutils literal notranslate"><span class="pre">None</span></code>, since that is the <code class="docutils literal notranslate"><span class="pre">.a</span></code> which means there is no <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> inside a <code class="docutils literal notranslate"><span class="pre">&lt;p</span> <span class="pre">class</span> <span class="pre">=</span> <span class="pre">'people-title'&gt;</span></code></p>
+<p>If we take out the <code class="docutils literal notranslate"><span class="pre">a</span></code> it works and then we can iterate and store like above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="n">person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="s1">&#39;people-title&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">people_items</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can pull out two more things, the people-department indicates who is CS &amp; who is Statistics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">disciplines</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span><span class="s1">&#39;people-department&#39;</span><span class="p">)]</span>
+<span class="n">emails</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">string</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="s1">&#39;u-email&#39;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can finally use the DataFrame constructor to make it a table.  I chose to use a dictionary in class</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">css_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">names</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="n">titles</span><span class="p">,</span><span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="n">emails</span><span class="p">,</span><span class="s1">&#39;discipline&#39;</span><span class="p">:</span><span class="n">disciplines</span><span class="p">})</span>
+<span class="n">css_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>title</th>
+      <th>email</th>
+      <th>discipline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Gavino Puggioni</td>
+      <td>Associate Professor |  Chair</td>
+      <td>gpuggioni@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Lisa DiPippo</td>
+      <td>Professor | Director of Undergraduate Studies</td>
+      <td>ldipippo@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Natallia Katenka</td>
+      <td>Associate Professor | Director of Data Science</td>
+      <td>nkatenka@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Krishna Venkatasubramanian</td>
+      <td>Assistant Professor | Director of Graduate Stu...</td>
+      <td>krish@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jing Wu</td>
+      <td>Associate Professor | Director of Graduate Stu...</td>
+      <td>jing_wu@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Marco Alvarez</td>
+      <td>Associate Professor</td>
+      <td>malvarez@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Samantha Armenti</td>
+      <td>Associate Teaching Professor</td>
+      <td>sarmenti@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Sarah Brown</td>
+      <td>Assistant Professor</td>
+      <td>brownsarahm@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Michael Conti</td>
+      <td>Associate Teaching Professor</td>
+      <td>michaelconti@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Noah Daniels</td>
+      <td>Associate Professor</td>
+      <td>noah_daniels@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Victor Fay-Wolfe</td>
+      <td>Professor</td>
+      <td>vfaywolfe@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Lutz Hamel</td>
+      <td>Associate Professor</td>
+      <td>lutzhamel@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Abdeltawab Hendawi</td>
+      <td>Assistant Professor</td>
+      <td>hendawi@uri.edu</td>
+      <td>Data Science | Computer Science</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Jean-Yves Hervé</td>
+      <td>Associate Professor</td>
+      <td>jyh@cs.uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Soheyb Kouider</td>
+      <td>Associate Teaching Professor</td>
+      <td>soheyb@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Edmund Lamagna</td>
+      <td>Professor</td>
+      <td>eal@cs.uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Indrani Mandal</td>
+      <td>Associate Teaching Professor</td>
+      <td>indrani_mandal@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Jonathan Schrader</td>
+      <td>Assistant Teaching Professor</td>
+      <td>jonathan.schrader@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Shaun Wallace</td>
+      <td>Assistant Professor</td>
+      <td>shaun.wallace@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Yunshu (Jasmine) Wang</td>
+      <td>Assistant Teaching Professor</td>
+      <td>yunshu_wang@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Haihan (Mark) Yu</td>
+      <td>Assistant Professor</td>
+      <td>haihan.yu@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Yichi Zhang</td>
+      <td>Assistant Professor</td>
+      <td>yichizhang@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Guangyu Zhu</td>
+      <td>Assistant Professor</td>
+      <td>guangyuzhu@uri.edu</td>
+      <td>Statistics</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Ashley Buchanan</td>
+      <td>Limited Joint Appointment</td>
+      <td>buchanan@uri.edu</td>
+      <td>Biostatistics</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Nina Kajiji</td>
+      <td>Adjunct Associate Professor</td>
+      <td>nina@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Rachel Schwartz</td>
+      <td>Assistant Professor – Limited Joint Appointment</td>
+      <td>rsschwartz@uri.edu</td>
+      <td>Biological Sciences</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Ying Zhang</td>
+      <td>Assistant Professor – Limited Joint Appointment</td>
+      <td>yingzhang@uri.edu</td>
+      <td>Computer Science</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We could also use a list of list and separate list of column names.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">css_df_b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">names</span><span class="p">,</span><span class="n">titles</span><span class="p">,</span><span class="n">emails</span><span class="p">,</span><span class="n">disciplines</span><span class="p">],</span>
+                       <span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">,</span><span class="s1">&#39;titles&#39;</span><span class="p">,</span><span class="s1">&#39;emails&#39;</span><span class="p">,</span><span class="s1">&#39;disciplines&#39;</span><span class="p">])</span>
+<span class="n">css_df_b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/construction.py:934,</span> in <span class="ni">_finalize_columns_and_data</span><span class="nt">(content, columns, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">933</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">934</span>     <span class="n">columns</span> <span class="o">=</span> <span class="n">_validate_or_indexify_columns</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span> <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="c1"># GH#26429 do not raise user-facing AssertionError</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/construction.py:981,</span> in <span class="ni">_validate_or_indexify_columns</span><span class="nt">(content, columns)</span>
+<span class="g g-Whitespace">    </span><span class="mi">979</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_mi_list</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span>     <span class="c1"># caller&#39;s responsibility to check for this...</span>
+<span class="ne">--&gt; </span><span class="mi">981</span>     <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">982</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> columns passed, passed data had &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">983</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> columns&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">984</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">985</span> <span class="k">if</span> <span class="n">is_mi_list</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">986</span>     <span class="c1"># check if nested list column, length of each sub-list should be equal</span>
+
+<span class="ne">AssertionError</span>: 4 columns passed, passed data had 27 columns
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">css_df_b</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">names</span><span class="p">,</span><span class="n">titles</span><span class="p">,</span><span class="n">emails</span><span class="p">,</span><span class="n">disciplines</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>                        <span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">,</span><span class="s1">&#39;titles&#39;</span><span class="p">,</span><span class="s1">&#39;emails&#39;</span><span class="p">,</span><span class="s1">&#39;disciplines&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">css_df_b</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/frame.py:782,</span> in <span class="ni">DataFrame.__init__</span><span class="nt">(self, data, index, columns, dtype, copy)</span>
+<span class="g g-Whitespace">    </span><span class="mi">780</span>     <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span>         <span class="n">columns</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">782</span>     <span class="n">arrays</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">nested_data_to_arrays</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">783</span>         <span class="c1"># error: Argument 3 to &quot;nested_data_to_arrays&quot; has incompatible</span>
+<span class="g g-Whitespace">    </span><span class="mi">784</span>         <span class="c1"># type &quot;Optional[Collection[Any]]&quot;; expected &quot;Optional[Index]&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">785</span>         <span class="n">data</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">786</span>         <span class="n">columns</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="n">index</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>         <span class="n">dtype</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>     <span class="n">mgr</span> <span class="o">=</span> <span class="n">arrays_to_mgr</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>         <span class="n">arrays</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span>         <span class="n">columns</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">795</span>         <span class="n">typ</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">796</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">797</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/construction.py:498,</span> in <span class="ni">nested_data_to_arrays</span><span class="nt">(data, columns, index, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">495</span> <span class="k">if</span> <span class="n">is_named_tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span>     <span class="n">columns</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">498</span> <span class="n">arrays</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">to_arrays</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">ensure_index</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span> <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/construction.py:840,</span> in <span class="ni">to_arrays</span><span class="nt">(data, columns, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">837</span>     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span>     <span class="n">arr</span> <span class="o">=</span> <span class="n">_list_to_arrays</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">840</span> <span class="n">content</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">_finalize_columns_and_data</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span> <span class="k">return</span> <span class="n">content</span><span class="p">,</span> <span class="n">columns</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/internals/construction.py:937,</span> in <span class="ni">_finalize_columns_and_data</span><span class="nt">(content, columns, dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span>     <span class="n">columns</span> <span class="o">=</span> <span class="n">_validate_or_indexify_columns</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span> <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">936</span>     <span class="c1"># GH#26429 do not raise user-facing AssertionError</span>
+<span class="ne">--&gt; </span><span class="mi">937</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">    </span><span class="mi">939</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span> <span class="ow">and</span> <span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">object_</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">940</span>     <span class="n">contents</span> <span class="o">=</span> <span class="n">convert_object_array</span><span class="p">(</span><span class="n">contents</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: 4 columns passed, passed data had 27 columns
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="crawling-and-scraping">
+<h2><span class="section-number">9.5. </span>Crawling and scraping<a class="headerlink" href="#crawling-and-scraping" title="Permalink to this headline">#</a></h2>
+<p>Remember we pulled the names out of links, when in the browser, we click on the links, we see that they are to a profile page. On these pages, they have the office number.  Let’s add those to our dataframe.</p>
+<p>First, we will do it for one person, then make a loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;a href=&quot;https://web.uri.edu/cs/meet/gavino-puggioni/&quot;&gt;Gavino Puggioni&lt;/a&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the information that we want is in the <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute, to read that, we check the <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#attributes">documentation</a>. This tells us there is a <code class="docutils literal notranslate"><span class="pre">.attrs</span></code> attribute of the python object we are working with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">attrs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;href&#39;: &#39;https://web.uri.edu/cs/meet/gavino-puggioni/&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s a dictionary and the attribute we want is the key we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_url</span> <span class="o">=</span> <span class="n">people_items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we do the same thing we did above, request, pull the content from the response and then use the parser.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">puggioni_url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="n">puggioni_info</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">puggioni_html</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>then we find the tag and class we need from inspecting and pull that.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;li class=&quot;people-location&quot;&gt;&lt;strong&gt;Office Location:&lt;/strong&gt; Tyler Hall 254&lt;/li&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>it’s an interable, so we pull the item out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;li class=&quot;people-location&quot;&gt;&lt;strong&gt;Office Location:&lt;/strong&gt; Tyler Hall 254&lt;/li&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we try to pull the string out an that is empty</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">string</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we could go to the documentation and look up what the object contains, but insteas we can use object serialization.<br />
+We can use the python <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> to inspect the object and see where it stored what we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__dict__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;parser_class&#39;: bs4.BeautifulSoup,
+ &#39;name&#39;: &#39;li&#39;,
+ &#39;namespace&#39;: None,
+ &#39;_namespaces&#39;: {},
+ &#39;prefix&#39;: None,
+ &#39;sourceline&#39;: 372,
+ &#39;sourcepos&#39;: 303,
+ &#39;known_xml&#39;: False,
+ &#39;attrs&#39;: {&#39;class&#39;: [&#39;people-location&#39;]},
+ &#39;contents&#39;: [&lt;strong&gt;Office Location:&lt;/strong&gt;, &#39; Tyler Hall 254&#39;],
+ &#39;parent&#39;: &lt;ul class=&quot;people-list&quot;&gt;
+ &lt;li class=&quot;people-title&quot;&gt;Associate Professor |  Chair&lt;/li&gt; &lt;li class=&quot;people-department&quot;&gt;Statistics&lt;/li&gt; &lt;li class=&quot;people-phone&quot;&gt;&lt;strong&gt;Phone:&lt;/strong&gt; 401.874.4388&lt;/li&gt; &lt;li class=&quot;people-email&quot;&gt;&lt;strong&gt;Email:&lt;/strong&gt; &lt;a href=&quot;mailto:gpuggioni@uri.edu&quot;&gt;gpuggioni@uri.edu&lt;/a&gt;&lt;/li&gt; &lt;li class=&quot;people-location&quot;&gt;&lt;strong&gt;Office Location:&lt;/strong&gt; Tyler Hall 254&lt;/li&gt;
+ &lt;/ul&gt;,
+ &#39;previous_element&#39;: &#39; &#39;,
+ &#39;next_element&#39;: &lt;strong&gt;Office Location:&lt;/strong&gt;,
+ &#39;next_sibling&#39;: &#39;\n&#39;,
+ &#39;previous_sibling&#39;: &#39; &#39;,
+ &#39;hidden&#39;: False,
+ &#39;can_be_empty_element&#39;: False,
+ &#39;cdata_list_attributes&#39;: {&#39;*&#39;: [&#39;class&#39;, &#39;accesskey&#39;, &#39;dropzone&#39;],
+  &#39;a&#39;: [&#39;rel&#39;, &#39;rev&#39;],
+  &#39;link&#39;: [&#39;rel&#39;, &#39;rev&#39;],
+  &#39;td&#39;: [&#39;headers&#39;],
+  &#39;th&#39;: [&#39;headers&#39;],
+  &#39;form&#39;: [&#39;accept-charset&#39;],
+  &#39;object&#39;: [&#39;archive&#39;],
+  &#39;area&#39;: [&#39;rel&#39;],
+  &#39;icon&#39;: [&#39;sizes&#39;],
+  &#39;iframe&#39;: [&#39;sandbox&#39;],
+  &#39;output&#39;: [&#39;for&#39;]},
+ &#39;preserve_whitespace_tags&#39;: {&#39;pre&#39;, &#39;textarea&#39;},
+ &#39;interesting_string_types&#39;: (bs4.element.NavigableString, bs4.element.CData)}
+</pre></div>
+</div>
+</div>
+</div>
+<p>we see its the second element in a list in the <code class="docutils literal notranslate"><span class="pre">'content'</span></code> value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">puggioni_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; Tyler Hall 254&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now tht we know how to do it, we can put it in a loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">offices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">name_link</span> <span class="ow">in</span> <span class="n">cs_people</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;h3&#39;</span><span class="p">,</span><span class="s1">&#39;p-name&#39;</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">name_link</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
+    <span class="n">person_html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">person_info</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">person_html</span><span class="p">,</span><span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span> 
+        <span class="n">offices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">person_info</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span><span class="s1">&#39;people-location&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">offices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
+
+
+<span class="n">css_df</span><span class="p">[</span><span class="s1">&#39;office&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">offices</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We added the <a class="reference external" href="https://docs.python.org/3/tutorial/errors.html#handling-exceptions"><code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">except</span></code></a> to handle when there is no office location. This is something in practice you would often think to do due an error.</p>
+<p>Here we check the <code class="docutils literal notranslate"><span class="pre">info</span></code> and we can see how it is.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">css_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 27 entries, 0 to 26
+Data columns (total 5 columns):
+ #   Column      Non-Null Count  Dtype 
+---  ------      --------------  ----- 
+ 0   name        27 non-null     object
+ 1   title       27 non-null     object
+ 2   email       27 non-null     object
+ 3   discipline  27 non-null     object
+ 4   office      25 non-null     object
+dtypes: object(5)
+memory usage: 1.2+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also, finally save out our ready dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">css_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;css_faculty.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="questions-after-class">
+<h2><span class="section-number">9.6. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<section id="what-does-a-do">
+<h3><span class="section-number">9.6.1. </span>what does .a do?<a class="headerlink" href="#what-does-a-do" title="Permalink to this headline">#</a></h3>
+<p>it gives the first instance of the <code class="docutils literal notranslate"><span class="pre">&lt;a&gt;</span></code> tag</p>
+</section>
+<section id="is-it-worth-it-to-try-and-web-scrape-a-page-that-is-poorly-written">
+<h3><span class="section-number">9.6.2. </span>is it worth it to try and web scrape a page that is poorly written?<a class="headerlink" href="#is-it-worth-it-to-try-and-web-scrape-a-page-that-is-poorly-written" title="Permalink to this headline">#</a></h3>
+<p>If it is important information.  In these cases, you might have to do more manual parsing or even some manual fixes.</p>
+<p>For this class, no.</p>
+</section>
+<section id="is-there-a-way-to-check-robots-txt-through-beautifulsoup-or-must-that-be-done-manually-in-a-browser">
+<h3><span class="section-number">9.6.3. </span>Is there a way to check robots.txt through BeautifulSoup or must that be done manually in a browser?<a class="headerlink" href="#is-there-a-way-to-check-robots-txt-through-beautifulsoup-or-must-that-be-done-manually-in-a-browser" title="Permalink to this headline">#</a></h3>
+<p>it could maybe be read programmaticlaly, but it doesn’t necessarily save time to do it that way.</p>
+</section>
+<section id="what-else-can-i-do-with-inspect">
+<h3><span class="section-number">9.6.4. </span>What else can I do with inspect?<a class="headerlink" href="#what-else-can-i-do-with-inspect" title="Permalink to this headline">#</a></h3>
+<p>It lets you view the code.  It’s most often used to debug websites.</p>
+</section>
+<section id="when-web-scraping-if-the-html-is-not-set-up-well-is-it-possible-to-change-the-html-to-make-it-easier-to-parse">
+<h3><span class="section-number">9.6.5. </span>when web scraping if the html is not set up well is it possible to change the html to make it easier to parse<a class="headerlink" href="#when-web-scraping-if-the-html-is-not-set-up-well-is-it-possible-to-change-the-html-to-make-it-easier-to-parse" title="Permalink to this headline">#</a></h3>
+<p>Technically you could manually edit a copy of it.</p>
+</section>
+<section id="are-there-instances-where-you-can-get-data-from-websites-that-are-not-in-tabular-form">
+<h3><span class="section-number">9.6.6. </span>Are there instances where you can get data from websites that are not in tabular form?<a class="headerlink" href="#are-there-instances-where-you-can-get-data-from-websites-that-are-not-in-tabular-form" title="Permalink to this headline">#</a></h3>
+<p>Web scraping is <em>for</em> when the website is not in tabular form.  It should be strucutred, but the structure does not need to come from a single page.  It could be that there are many pages strucutred similarly and you build most of the columns from the other pages, not the starting page.</p>
+<p>For example from the <a class="reference external" href="https://www.nba.com/teams">teams page of the nba</a> you can get to a page with info about each team that includes all time records and the current rosters. On these individual pages, most info is an actual table, so you can use <code class="docutils literal notranslate"><span class="pre">pd.read_html</span></code> for those, but the crawing part from the first page would count.</p>
+</section>
+<section id="a-source-table-would-be-the-peoples-page-on-the-uri-website-but-when-you-click-on-their-individual-names-does-that-count-as-another-source-table">
+<h3><span class="section-number">9.6.7. </span>A source table would be the people’s page on the URI website, but when you click on their individual names does that count as another source table?﻿<a class="headerlink" href="#a-source-table-would-be-the-peoples-page-on-the-uri-website-but-when-you-click-on-their-individual-names-does-that-count-as-another-source-table" title="Permalink to this headline">#</a></h3>
+<p>Not as we did above because we combined the data by adding another column.  If you built a whole table on each of the sub-pages it would count.</p>
+</section>
+</section>
+<section id="portfolio-question">
+<h2><span class="section-number">9.7. </span>Portfolio Question<a class="headerlink" href="#portfolio-question" title="Permalink to this headline">#</a></h2>
+<section id="i-guess-how-to-further-edit-the-submission-1-intro-i-know-about-the-chapters-you-gotta-add-but-what-else-is-submission-1-intro-the-only-file-you-gotta-edit">
+<h3><span class="section-number">9.7.1. </span>I guess how to further edit the submission_1.intro. I know about the chapters you gotta add, but what else? Is submission_1.intro the only file you gotta edit?<a class="headerlink" href="#i-guess-how-to-further-edit-the-submission-1-intro-i-know-about-the-chapters-you-gotta-add-but-what-else-is-submission-1-intro-the-only-file-you-gotta-edit" title="Permalink to this headline">#</a></h3>
+<p>Yes you edit that file and the <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>.  There are instructions on the <a class="reference internal" href="../portfolio/index.html"><span class="doc std std-doc">portfolio page</span></a></p>
+<p>There are also <a class="reference internal" href="../portfolio/formatting.html"><span class="doc std std-doc">formatting tips</span></a> and <a class="reference internal" href="../portfolio/check1ideas.html"><span class="doc std std-doc">ideas</span></a></p>
+</section>
+<section id="for-portfolio-one-can-we-submit-whatever-we-want-like-as-little-or-as-much">
+<h3><span class="section-number">9.7.2. </span>for portfolio one, can we submit whatever we want? like as little OR as much?<a class="headerlink" href="#for-portfolio-one-can-we-submit-whatever-we-want-like-as-little-or-as-much" title="Permalink to this headline">#</a></h3>
+<p>Yes, exactly!</p>
+<p>However, I do want to <strong>really</strong> encourage you to submit whatever you are thinking of, even if it is not as complete as you want.  If you submit, you will get feedback even if you do not earn all of the achievements you try. Tht will prepare you for the next one.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-10-03.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Merging Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-data-from-websites">9.1. Getting Data From Websites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#everything-is-data">9.2. Everything is Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scraping-a-uri-website">9.3. Scraping a URI website</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-at-tags">9.3.1. Looking at tags</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-the-source">9.3.2. Searching the source</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-more-information">9.4. Pulling more information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-and-scraping">9.5. Crawling and scraping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">9.6. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-do">9.6.1. what does .a do?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-worth-it-to-try-and-web-scrape-a-page-that-is-poorly-written">9.6.2. is it worth it to try and web scrape a page that is poorly written?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-a-way-to-check-robots-txt-through-beautifulsoup-or-must-that-be-done-manually-in-a-browser">9.6.3. Is there a way to check robots.txt through BeautifulSoup or must that be done manually in a browser?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-else-can-i-do-with-inspect">9.6.4. What else can I do with inspect?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-web-scraping-if-the-html-is-not-set-up-well-is-it-possible-to-change-the-html-to-make-it-easier-to-parse">9.6.5. when web scraping if the html is not set up well is it possible to change the html to make it easier to parse</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-instances-where-you-can-get-data-from-websites-that-are-not-in-tabular-form">9.6.6. Are there instances where you can get data from websites that are not in tabular form?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-source-table-would-be-the-peoples-page-on-the-uri-website-but-when-you-click-on-their-individual-names-does-that-count-as-another-source-table">9.6.7. A source table would be the people’s page on the URI website, but when you click on their individual names does that count as another source table?﻿</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-question">9.7. Portfolio Question</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-guess-how-to-further-edit-the-submission-1-intro-i-know-about-the-chapters-you-gotta-add-but-what-else-is-submission-1-intro-the-only-file-you-gotta-edit">9.7.1. I guess how to further edit the submission_1.intro. I know about the chapters you gotta add, but what else? Is submission_1.intro the only file you gotta edit?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#for-portfolio-one-can-we-submit-whatever-we-want-like-as-little-or-as-much">9.7.2. for portfolio one, can we submit whatever we want? like as little OR as much?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
