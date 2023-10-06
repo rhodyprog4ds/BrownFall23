@@ -23,6 +23,7 @@ parts:
     - file: notes/2023-09-26
     - file: notes/2023-09-28
     - file: notes/2023-10-03
+    - file: notes/2023-10-05
   - caption: Assignments
     numbered: True
     chapters:
@@ -30,7 +31,7 @@ parts:
     - file: assignments/02-python-access
     - file: assignments/03-eda
     - file: assignments/04-prepare
-    # - file: assignments/05-construct
+    - file: assignments/05-construct
     # - file: assignments/06-evaluate
     # - file: assignments/07-classification
     # - file: assignments/08-clustering
