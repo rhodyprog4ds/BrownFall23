@@ -31,8 +31,6 @@ df = pd.read_csv('../_data/communication.csv')
 help_df = pd.read_csv('../_data/help_hours.csv')
 ```
 
-Zoom links are on the [course organization page of GitHub](https://github.com/rhodyprog4ds)
-
 ## Announcements
 
 Announcements will be made via GitHub Release. You can view them [online in the releases page](https://github.com/rhodyprog4ds/BrownFall23/releases) or you can get notifications by watching the repository, choosing "Releases" under custom [see GitHub docs for instructions with screenshots](https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository). You can choose GitHub only or e-mail notificaiton [from the notification settings page](https://github.com/settings/notifications)
