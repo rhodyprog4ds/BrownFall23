@@ -31,7 +31,7 @@ df = pd.read_csv('../_data/communication.csv')
 help_df = pd.read_csv('../_data/help_hours.csv')
 ```
 
-Zoom links are on the [course organization page of GitHub](https://github.com/rhodyprog4ds)
+
 
 ## Announcements
 
@@ -47,11 +47,13 @@ help_df.style.hide(axis="index")
 ```
 
 
-We have several different ways to communicate in this course. This section summarizes them
+Zoom links are on the [course organization page of GitHub](https://github.com/rhodyprog4ds)
+
+
 
 
 ## To reach out, By usage
-
+We have several different ways to communicate in this course. This section summarizes them
 ```{code-cell}
 :tags: ["remove-input"]
 
