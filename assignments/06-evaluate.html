@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Assignment 6: Auditing Algorithms &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>6. Assignment 6: Auditing Algorithms &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'assignments/06-evaluate';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Portfolio" href="../portfolio/index.html" />
+    <link rel="prev" title="5. Assignment 5: Constructing Datasets and Using Databases" href="05-construct.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -179,14 +181,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-09-28.html">7. Reparing values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-03.html">8. Merging Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-05.html">9. Web Scraping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-12.html">10. Evaluating ML Algorithms</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Assignment 6: Auditing Algorithms</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -426,10 +430,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">Related notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">About the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-an-audit">Complete an audit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-your-audit">Extend your Audit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">6.1. Related notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">6.2. About the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-an-audit">6.3. Complete an audit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-your-audit">6.4. Extend your Audit</a></li>
 </ul>
             </nav>
         </div>
@@ -442,7 +446,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-6-auditing-algorithms">
-<h1>Assignment 6: Auditing Algorithms<a class="headerlink" href="#assignment-6-auditing-algorithms" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">6. </span>Assignment 6: Auditing Algorithms<a class="headerlink" href="#assignment-6-auditing-algorithms" title="Permalink to this headline">#</a></h1>
 <p><a class="reference external" href="https://classroom.github.com/a/hxe28wM3">accept the assignment</a>
 _<em>Due: 2023-10-18</em></p>
 <p>Eligible skills: (links to checklists)</p>
@@ -461,14 +465,14 @@ _<em>Due: 2023-10-18</em></p>
 <li><p>python <a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level1">1</a> and <a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level2">2</a></p></li>
 </ul>
 <section id="related-notes">
-<h2>Related notes<a class="headerlink" href="#related-notes" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.1. </span>Related notes<a class="headerlink" href="#related-notes" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../notes/2023-10-12.html"><span class="doc std std-doc">Evaluating ML Algorithms</span></a></p></li>
 </ul>
 <!-- - [](../notes/2023-03-02) -->
 </section>
 <section id="about-the-data">
-<h2>About the data<a class="headerlink" href="#about-the-data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.2. </span>About the data<a class="headerlink" href="#about-the-data" title="Permalink to this headline">#</a></h2>
 <p>We have provided a <a class="reference external" href="https://github.com/socialfoundations/folktables">reconstructed version</a> of the <a class="reference external" href="https://archive.ics.uci.edu/dataset/2/adult">Adult</a> Dataset, which is a popular benchmark dataset for training machine learning models that comes from a <a class="reference external" href="https://arxiv.org/abs/2108.04884">recent paper</a> about the risks of that dataset.  The classic <a class="reference external" href="https://archive.ics.uci.edu/dataset/2/adult">Adult</a> dataset tries to predict if a person makes more or less than 50k.</p>
 <p>Researchers reconstructed the Adult dataset with the actual value of the income.  We trained models to predict <code class="docutils literal notranslate"><span class="pre">income&gt;=$10k</span></code>, <code class="docutils literal notranslate"><span class="pre">income&gt;=$20k</span></code> , etc.  We used three different learning algorithms, nicknamed ‘LR’, ‘GPR’, and ‘RPR’ for each target (<code class="docutils literal notranslate"><span class="pre">&gt;10k</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;20k</span></code> ,…, <code class="docutils literal notranslate"><span class="pre">&gt;90k</span></code>).</p>
 <ul class="simple">
@@ -482,13 +486,13 @@ _<em>Due: 2023-10-18</em></p>
 </div>
 </section>
 <section id="complete-an-audit">
-<h2>Complete an audit<a class="headerlink" href="#complete-an-audit" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.3. </span>Complete an audit<a class="headerlink" href="#complete-an-audit" title="Permalink to this headline">#</a></h2>
 <p>Thoroughly audit any one model.  In your audit, use at least three different performance metrics. Compare and contrast performance in those metrics across racial or gender groups.</p>
 <p>Include easy to read tables with your performance metrics and interpretations of the model’s overall performance and any disparities that could be understood by a general audience.</p>
 <p>If the model you chose was used for some real world decision what might the risks be?</p>
 </section>
 <section id="extend-your-audit">
-<h2>Extend your Audit<a class="headerlink" href="#extend-your-audit" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.4. </span>Extend your Audit<a class="headerlink" href="#extend-your-audit" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>optional
@@ -502,7 +506,7 @@ _<em>Due: 2023-10-18</em></p>
 <li><p>Which model (target and learning algorithm) do you think is overall the best?</p></li>
 </ol>
 <table class="table" id="id1">
-<caption><span class="caption-text">Example table format</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Example table format</span><a class="headerlink" href="#id1" title="Permalink to this table">#</a></caption>
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 20%" />
@@ -576,6 +580,24 @@ _<em>Due: 2023-10-18</em></p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="05-construct.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Assignment 5: Constructing Datasets and Using Databases</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../portfolio/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Portfolio</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -594,10 +616,10 @@ _<em>Due: 2023-10-18</em></p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">Related notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">About the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-an-audit">Complete an audit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-your-audit">Extend your Audit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">6.1. Related notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-the-data">6.2. About the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-an-audit">6.3. Complete an audit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extend-your-audit">6.4. Extend your Audit</a></li>
 </ul>
   </nav></div>
 

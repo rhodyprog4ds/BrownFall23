@@ -181,6 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-09-28.html">7. Reparing values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-03.html">8. Merging Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-05.html">9. Web Scraping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-12.html">10. Evaluating ML Algorithms</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -189,6 +190,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -991,7 +993,31 @@ class enumerate(object)
   </thead>
   <tbody>
     <tr>
-      <th>11</th>
+      <th>16</th>
+      <td>Robusta</td>
+      <td>andrew hetzel</td>
+      <td>India</td>
+      <td>sethuraman estate</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0000</td>
+      <td>sethuraman estate</td>
+      <td>1000m</td>
+      <td>chikmagalur</td>
+      <td>...</td>
+      <td>Green</td>
+      <td>0</td>
+      <td>April 29th, 2016</td>
+      <td>Specialty Coffee Association</td>
+      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
+      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
+      <td>m</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+      <td>1000.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
       <td>Robusta</td>
       <td>ugacof</td>
       <td>Uganda</td>
@@ -1000,32 +1026,8 @@ class enumerate(object)
       <td>ugacof</td>
       <td>0</td>
       <td>ugacof ltd</td>
-      <td>1095</td>
-      <td>iganga namadrope eastern</td>
-      <td>...</td>
-      <td>Green</td>
-      <td>1</td>
-      <td>June 26th, 2015</td>
-      <td>Uganda Coffee Development Authority</td>
-      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
-      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
-      <td>m</td>
-      <td>1095.0</td>
-      <td>1095.0</td>
-      <td>1095.0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Robusta</td>
-      <td>kasozi coffee farmers association</td>
-      <td>Uganda</td>
-      <td>kasozi coffee farmers</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0</td>
-      <td>kasozi coffee farmers association</td>
-      <td>1367</td>
-      <td>eastern</td>
+      <td>1212</td>
+      <td>central</td>
       <td>...</td>
       <td>Green</td>
       <td>7</td>
@@ -1034,33 +1036,33 @@ class enumerate(object)
       <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
       <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
       <td>m</td>
-      <td>1367.0</td>
-      <td>1367.0</td>
-      <td>1367.0</td>
+      <td>1212.0</td>
+      <td>1212.0</td>
+      <td>1212.0</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>19</th>
       <td>Robusta</td>
-      <td>luis robles</td>
-      <td>Ecuador</td>
-      <td>robustasa</td>
-      <td>Lavado 3</td>
-      <td>own laboratory</td>
+      <td>nitubaasa ltd</td>
+      <td>Uganda</td>
+      <td>kigezi coffee farmers association</td>
       <td>NaN</td>
-      <td>robustasa</td>
-      <td>40</td>
-      <td>san juan, playas</td>
-      <td>...</td>
-      <td>Blue-Green</td>
+      <td>nitubaasa</td>
       <td>0</td>
-      <td>January 18th, 2017</td>
-      <td>Specialty Coffee Association</td>
-      <td>ff7c18ad303d4b603ac3f8cff7e611ffc735e720</td>
-      <td>352d0cf7f3e9be14dad7df644ad65efc27605ae2</td>
+      <td>nitubaasa ltd</td>
+      <td>1745</td>
+      <td>western</td>
+      <td>...</td>
+      <td>Green</td>
+      <td>2</td>
+      <td>June 27th, 2015</td>
+      <td>Uganda Coffee Development Authority</td>
+      <td>e36d0270932c3b657e96b7b0278dfd85dc0fe743</td>
+      <td>03077a1c6bac60e6f514691634a7f6eb5c85aae8</td>
       <td>m</td>
-      <td>40.0</td>
-      <td>40.0</td>
-      <td>40.0</td>
+      <td>1745.0</td>
+      <td>1745.0</td>
+      <td>1745.0</td>
     </tr>
   </tbody>
 </table>
