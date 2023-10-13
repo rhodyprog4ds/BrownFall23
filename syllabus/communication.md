@@ -15,9 +15,7 @@ kernelspec:
 #  Communications & Office Hours
 
 ```{warning}
-Due to Indigenous People's Day: 
-
-- Dr. Brown's Monday office hours for 10/9 are moved to Tues 10/10
+Due to Dept Seminar Office hours on 10/13 will be at 5pm instead of 4pm. 
 ```
 
 ```{code-cell}
