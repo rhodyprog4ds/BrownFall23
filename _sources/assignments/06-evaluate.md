@@ -1,13 +1,6 @@
----
-substitutions:
-  accept_assignment: |
-    [accept the assignment](https://classroom.github.com/a/pJ-8jn5f)
-  date : 2023-03-09
----
-
 # Assignment 6: Auditing Algorithms
 
-[accept the assignment]()
+[accept the assignment](https://classroom.github.com/a/hxe28wM3)
 __Due: 2023-10-18_
 
 Eligible skills: (links to checklists)
