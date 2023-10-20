@@ -10,11 +10,11 @@ Eligible skills: (links to checklists)
 the definition for evaluate is going to be updated in your gradetrackers soon, the version on the site is correct
 ```
 ````
-- **first chance** evaluate [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#evaluate-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#evaluate-level2)
-- construct [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#construct-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#construct-level2)
-- summarize [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#summarize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#summarize-level2)
-- visualize [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#visualize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#visualize-level2)
-- python [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level2)
+- **first chance** evaluate [1](..syllabus/achievements.html#evaluate-level1) and [2](..syllabus/achievements.html#evaluate-level2)
+- construct [1](..syllabus/achievements.html#construct-level1) and [2](..syllabus/achievements.html#construct-level2)
+- summarize [1](..syllabus/achievements.html#summarize-level1) and [2](..syllabus/achievements.html#summarize-level2)
+- visualize [1](..syllabus/achievements.html#visualize-level1) and [2](..syllabus/achievements.html#visualize-level2)
+- python [1](..syllabus/achievements.html#python-level1) and [2](..syllabus/achievements.html#python-level2)
 
 
 

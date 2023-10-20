@@ -7,12 +7,12 @@
  date : 2023-10-10
 
 Eligible skills: (links to checklists)
-- **first chance** construct [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#construct-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#construct-level2)
-- {fa}`hourglass-end` [^expiringskill] access [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#access-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#access-level2)
-- {fa}`hourglass-end` [^expiringskill] python [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#python-level2)
-- {fa}`hourglass-end` [^expiringskill] prepare [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#prepare-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#prepare-level2)
-- summarize [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#summarize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#summarize-level2)
-- visualize [1](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#visualize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall22/syllabus/achievements.html#visualize-level2)
+- **first chance** construct [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#construct-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#construct-level2)
+- {fa}`hourglass-end` [^expiringskill] access [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#access-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#access-level2)
+- {fa}`hourglass-end` [^expiringskill] python [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#python-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#python-level2)
+- {fa}`hourglass-end` [^expiringskill] prepare [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#prepare-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#prepare-level2)
+- summarize [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#summarize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#summarize-level2)
+- visualize [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#visualize-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#visualize-level2)
 
 
 [^starredskill]: skills will be marked like this on the first time they are eligible
