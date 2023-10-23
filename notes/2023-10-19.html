@@ -433,14 +433,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">12.1. Questions After Class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-start-focusing-on-portfolio-check-2">12.1.1. When should you start focusing on portfolio check 2?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-p1-check-be-graded">12.1.2. when will p1 check be graded?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset">12.1.3. why not use a decision tree initially for the iris dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees">12.1.4. Are there any popular machine learning models that use decision trees?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard">12.1.5. Do predictive algorithms have pros and cons? Or is there a standard?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those">12.1.6. Different kinds of trees/charts, analyze what they mean and how to translate those</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it">12.1.7. is it possible after training the model to add more data to it ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-generative-model-mean">12.1. What does a generative model mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-make-the-predictions">12.2. How does it make the predictions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-the-assumptions-are-not-met">12.3. What if the assumptions are not met?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">12.3.1. Decision Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-classifier-parameters">12.4. Setting Classifier Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">12.5. Questions After Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-start-focusing-on-portfolio-check-2">12.5.1. When should you start focusing on portfolio check 2?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-p1-check-be-graded">12.5.2. when will p1 check be graded?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset">12.5.3. why not use a decision tree initially for the iris dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees">12.5.4. Are there any popular machine learning models that use decision trees?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard">12.5.5. Do predictive algorithms have pros and cons? Or is there a standard?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those">12.5.6. Different kinds of trees/charts, analyze what they mean and how to translate those</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it">12.5.7. is it possible after training the model to add more data to it ?</a></li>
 </ul>
 </li>
 </ul>
@@ -456,9 +463,10 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="understanding-classification">
 <h1><span class="section-number">12. </span>Understanding Classification<a class="headerlink" href="#understanding-classification" title="Permalink to this headline">#</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>I am goign to fill this in later. There is some on prismia though.</p>
+<p>Today we are going to work on understandign what happens when a classifier makes</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You can provide <a class="reference external" href="https://forms.gle/kggc63ASy4RWPp487">feedback on the course so far</a></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -476,6 +484,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Our goal is to predict the species from the measurements. Set up the problem by putting the variables in the correct roles (features and target) so that train test split will work.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris_df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
@@ -483,6 +492,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Today we will use a different random state, recall that the <code class="docutils literal notranslate"><span class="pre">random_state</span></code> is like a name for the sequence of psuedo random numbers that it will use.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dataset vars:</span>
@@ -495,6 +505,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Again, we will plot the data with the target as the colors</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
@@ -502,12 +513,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1b147f95b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff525cfe9d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" src="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" />
 </div>
 </div>
+<p>We notice that this data meets the  assumptions of our model:</p>
+<ul class="simple">
+<li><p>it is separable (for all classification)</p></li>
+<li><p>the classes are each one blob that is roughly a circle or oval (gaussian)</p></li>
+<li><p>the ovals are not too</p></li>
+<li></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gnb</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
@@ -543,6 +561,12 @@ document.write(`
 </div>
 </div>
 </div>
+<p>We can also get a report with a few metrics.</p>
+<ul class="simple">
+<li><p>Recall is the percent of each species that were predicted correctly.</p></li>
+<li><p>Precision is the percent of the ones predicted to be in a species that are truly that species.</p></li>
+<li><p>the F1 score is combination of the two</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
@@ -626,6 +650,25 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
+<section id="what-does-a-generative-model-mean">
+<h2><span class="section-number">12.1. </span>What does a generative model mean?<a class="headerlink" href="#what-does-a-generative-model-mean" title="Permalink to this headline">#</a></h2>
+<p>To do this, we extract the mean and variance parameters from the model
+(<code class="docutils literal notranslate"><span class="pre">gnb.theta_,gnb.sigma_</span></code>) and <code class="docutils literal notranslate"><span class="pre">zip</span></code> them together to create an iterable object
+that in each iteration returns one value from each list (<code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">th,</span> <span class="pre">sig</span> <span class="pre">in</span> <span class="pre">zip(gnb.theta_,gnb.sigma_)</span></code>).
+We do this inside of a list comprehension and for each <code class="docutils literal notranslate"><span class="pre">th,sig</span></code> where <code class="docutils literal notranslate"><span class="pre">th</span></code> is
+from <code class="docutils literal notranslate"><span class="pre">gnb.theta_</span></code> and <code class="docutils literal notranslate"><span class="pre">sig</span></code> is from <code class="docutils literal notranslate"><span class="pre">gnb.sigma_</span></code> we use <code class="docutils literal notranslate"><span class="pre">np.random.multivariate_normal</span></code>
+to get 20 samples. In a general <a class="reference external" href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution">multivariate normal distribution</a> the second parameter is actually a covariance
+matrix.  This describes both the variance of each individual feature and the
+correlation of the features.  Since Naive Bayes is Naive it assumes the features
+are independent or have 0 correlation.  So, to create the matrix from the vector
+of variances we multiply by <code class="docutils literal notranslate"><span class="pre">np.eye(4)</span></code> which is the identity matrix or a matrix
+with 1 on the diagonal and 0 elsewhere. Finally we stack the groups for each
+species together with <code class="docutils literal notranslate"><span class="pre">np.concatenate</span></code> (like <code class="docutils literal notranslate"><span class="pre">pd.concat</span></code> but works on numpy objects
+and <code class="docutils literal notranslate"><span class="pre">np.random.multivariate_normal</span></code> returns numpy arrays not data frames) and put all of that in a
+DataFrame using the feature names as the columns.</p>
+<p>Then we add a species column, by repeating each species 20 times
+<code class="docutils literal notranslate"><span class="pre">[c]*N</span> <span class="pre">for</span> <span class="pre">c</span> <span class="pre">in</span> <span class="pre">gnb.classes_</span></code> and then unpack that into a single list instead of
+as list of lists.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
@@ -638,12 +681,15 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1b0f8c2e20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff520dc4e80&gt;
 </pre></div>
 </div>
-<img alt="../_images/b4fb58a9bbc5042bbde9480d98248e3c8638a8cde4bf7cc4f9c2b69127151a96.png" src="../_images/b4fb58a9bbc5042bbde9480d98248e3c8638a8cde4bf7cc4f9c2b69127151a96.png" />
+<img alt="../_images/7eef9a40f4edb67ad8f17c5eade61a008d6d9a74059db84ac248055b2217cb57.png" src="../_images/7eef9a40f4edb67ad8f17c5eade61a008d6d9a74059db84ac248055b2217cb57.png" />
 </div>
 </div>
+</section>
+<section id="how-does-it-make-the-predictions">
+<h2><span class="section-number">12.2. </span>How does it make the predictions?<a class="headerlink" href="#how-does-it-make-the-predictions" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gnb</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -812,12 +858,16 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f1b0cc90f70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff51d29f730&gt;
 </pre></div>
 </div>
 <img alt="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" src="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" />
 </div>
 </div>
+</section>
+<section id="what-if-the-assumptions-are-not-met">
+<h2><span class="section-number">12.3. </span>What if the assumptions are not met?<a class="headerlink" href="#what-if-the-assumptions-are-not-met" title="Permalink to this headline">#</a></h2>
+<p>Using a toy dataset here shows an easy to see challenge for the classifier that we have seen so far.  Real datasets will be hard in different ways, and since they’re higher dimensional, it’s harder to visualize the cause.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corner_data</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/rhodyprog4ds/06-naive-bayes/f425ba121cc0c4dd8bcaa7ebb2ff0b40b0b03bff/data/dataset6.csv&#39;</span>
@@ -874,12 +924,13 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1b0461a5b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff51c1d5a90&gt;
 </pre></div>
 </div>
 <img alt="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" src="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" />
 </div>
 </div>
+<p>As we can see in this dataset, these classes are quite separated.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df6</span><span class="p">[[</span><span class="s1">&#39;x0&#39;</span><span class="p">,</span><span class="s1">&#39;x1&#39;</span><span class="p">]],</span><span class="n">df6</span><span class="p">[</span><span class="s1">&#39;char&#39;</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -901,6 +952,8 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
+<p>But we do not get a very good classification score.</p>
+<p>To see why, we can look at what it learned.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
@@ -914,10 +967,10 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1b01ebd190&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff5600840a0&gt;
 </pre></div>
 </div>
-<img alt="../_images/d4aa713a2796ea15a3b9af6a762d06b5b1bb382c260dd8b9a7f65262c1d1d32b.png" src="../_images/d4aa713a2796ea15a3b9af6a762d06b5b1bb382c260dd8b9a7f65262c1d1d32b.png" />
+<img alt="../_images/ac7120205355ccbcb09b865d97f72bd46ea2f3940768fcd2944a9e98a32cabe2.png" src="../_images/ac7120205355ccbcb09b865d97f72bd46ea2f3940768fcd2944a9e98a32cabe2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -935,12 +988,18 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1b0cd99850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff51324bd30&gt;
 </pre></div>
 </div>
 <img alt="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" src="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" />
 </div>
 </div>
+<p>This does not look much like the data and it’s hard to tell which is higher at any given point in the 2D space.  We know though, that it has missed the mark. We can also look at the actual predictions.</p>
+<p>If you try this again, split, fit, plot, it will learn different decisions, but always at least about 25% of the data will have to be classified incorrectly.</p>
+<section id="decision-trees">
+<h3><span class="section-number">12.3.1. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">#</a></h3>
+<p>This data does not fit the assumptions of the Niave Bayes model, but a decision tree has a different rule. It can be more complex, but for the scikit learn one relies on splitting the data at a series of points along one axis at a time.</p>
+<p>It is a <strong>discriminative</strong> model, because it describes how to discriminate (in the sense of differentiate) between the classes. This is in contrast to the <strong>generative</strong> model that describes how the data is distributed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
@@ -969,6 +1028,8 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
+<p>The sklearn estimator objects (that corresond to different models) all have the same API, so the <code class="docutils literal notranslate"><span class="pre">fit</span></code>, <code class="docutils literal notranslate"><span class="pre">predict</span></code>, and <code class="docutils literal notranslate"><span class="pre">score</span></code> methods are the same as above. We will see this also in regression and clustering.  What each method does in terms of the specific calculations will vary depending on the model, but they’re always there.</p>
+<p>the <code class="docutils literal notranslate"><span class="pre">tree</span></code> module also allows you to plot the tree to examine it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
@@ -981,33 +1042,56 @@ Name: count, dtype: int64
 <img alt="../_images/7e66790caeba1f52591ffe4758b0d9c6ac14e79ec2c0855eb3d6dca8c35690a1.png" src="../_images/7e66790caeba1f52591ffe4758b0d9c6ac14e79ec2c0855eb3d6dca8c35690a1.png" />
 </div>
 </div>
+<p>On the iris dataset, the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/tree/plot_iris_dtc.html">sklearn docs include a diagram showing the decision boundary</a> You should be able to modify this for another classifier.</p>
+</section>
+</section>
+<section id="setting-classifier-parameters">
+<h2><span class="section-number">12.4. </span>Setting Classifier Parameters<a class="headerlink" href="#setting-classifier-parameters" title="Permalink to this headline">#</a></h2>
+<p>The decision tree we had above has a lot more layers than we would expect.  This is really simple data so we still got perfect classification. However, the more complex the model, the more risk that it will learn something noisy about the training data that doesn’t hold up in the test set.</p>
+<p>Fortunately, we can control the parameters to make it find a simpler decision boundary.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dt2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dt2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">dt2</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">plot_tree</span><span class="p">(</span><span class="n">dt2</span><span class="p">,</span> <span class="n">rounded</span> <span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">],</span>
+      <span class="n">proportion</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">filled</span> <span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">impurity</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We can compute other metrics from the confusion matrix:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">sklearn</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Confusion_matrix">wiki</a></p></li>
+</ul>
+</section>
 <section id="questions-after-class">
-<h2><span class="section-number">12.1. </span>Questions After Class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">12.5. </span>Questions After Class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
 <section id="when-should-you-start-focusing-on-portfolio-check-2">
-<h3><span class="section-number">12.1.1. </span>When should you start focusing on portfolio check 2?<a class="headerlink" href="#when-should-you-start-focusing-on-portfolio-check-2" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.1. </span>When should you start focusing on portfolio check 2?<a class="headerlink" href="#when-should-you-start-focusing-on-portfolio-check-2" title="Permalink to this headline">#</a></h3>
 <p>When you get P1 feedback</p>
 </section>
 <section id="when-will-p1-check-be-graded">
-<h3><span class="section-number">12.1.2. </span>when will p1 check be graded?<a class="headerlink" href="#when-will-p1-check-be-graded" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.2. </span>when will p1 check be graded?<a class="headerlink" href="#when-will-p1-check-be-graded" title="Permalink to this headline">#</a></h3>
 <p>As soon as possible.</p>
 </section>
 <section id="why-not-use-a-decision-tree-initially-for-the-iris-dataset">
-<h3><span class="section-number">12.1.3. </span>why not use a decision tree initially for the iris dataset?<a class="headerlink" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.3. </span>why not use a decision tree initially for the iris dataset?<a class="headerlink" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset" title="Permalink to this headline">#</a></h3>
 <p>To teach the Gaussian Naive Bayes classifier, because learning different types of classifiers helps you understand the concept better.</p>
 </section>
 <section id="are-there-any-popular-machine-learning-models-that-use-decision-trees">
-<h3><span class="section-number">12.1.4. </span>Are there any popular machine learning models that use decision trees?<a class="headerlink" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.4. </span>Are there any popular machine learning models that use decision trees?<a class="headerlink" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees" title="Permalink to this headline">#</a></h3>
 <p>Yes, a lot of medical appilcations do, because since they are easy to understand, it is easier for healthcare providers to trust them.</p>
 </section>
 <section id="do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard">
-<h3><span class="section-number">12.1.5. </span>Do predictive algorithms have pros and cons? Or is there a standard?<a class="headerlink" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.5. </span>Do predictive algorithms have pros and cons? Or is there a standard?<a class="headerlink" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard" title="Permalink to this headline">#</a></h3>
 <p>Each algorithm has different properties and strengths and weaknesses.  Some are more popular than others, but they all do have weaknesses.</p>
 </section>
 <section id="different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those">
-<h3><span class="section-number">12.1.6. </span>Different kinds of trees/charts, analyze what they mean and how to translate those<a class="headerlink" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.6. </span>Different kinds of trees/charts, analyze what they mean and how to translate those<a class="headerlink" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="is-it-possible-after-training-the-model-to-add-more-data-to-it">
-<h3><span class="section-number">12.1.7. </span>is it possible after training the model to add more data to it ?<a class="headerlink" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">12.5.7. </span>is it possible after training the model to add more data to it ?<a class="headerlink" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it" title="Permalink to this headline">#</a></h3>
 <p>The models we will see in class, no.  However, there is a thing called “online learning” that involves getting more data on a regular basis to improve its performance.</p>
 </section>
 </section>
@@ -1080,14 +1164,21 @@ Name: count, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">12.1. Questions After Class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-start-focusing-on-portfolio-check-2">12.1.1. When should you start focusing on portfolio check 2?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-p1-check-be-graded">12.1.2. when will p1 check be graded?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset">12.1.3. why not use a decision tree initially for the iris dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees">12.1.4. Are there any popular machine learning models that use decision trees?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard">12.1.5. Do predictive algorithms have pros and cons? Or is there a standard?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those">12.1.6. Different kinds of trees/charts, analyze what they mean and how to translate those</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it">12.1.7. is it possible after training the model to add more data to it ?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-generative-model-mean">12.1. What does a generative model mean?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-it-make-the-predictions">12.2. How does it make the predictions?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-the-assumptions-are-not-met">12.3. What if the assumptions are not met?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">12.3.1. Decision Trees</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-classifier-parameters">12.4. Setting Classifier Parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">12.5. Questions After Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-should-you-start-focusing-on-portfolio-check-2">12.5.1. When should you start focusing on portfolio check 2?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-will-p1-check-be-graded">12.5.2. when will p1 check be graded?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-use-a-decision-tree-initially-for-the-iris-dataset">12.5.3. why not use a decision tree initially for the iris dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-popular-machine-learning-models-that-use-decision-trees">12.5.4. Are there any popular machine learning models that use decision trees?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-predictive-algorithms-have-pros-and-cons-or-is-there-a-standard">12.5.5. Do predictive algorithms have pros and cons? Or is there a standard?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#different-kinds-of-trees-charts-analyze-what-they-mean-and-how-to-translate-those">12.5.6. Different kinds of trees/charts, analyze what they mean and how to translate those</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-possible-after-training-the-model-to-add-more-data-to-it">12.5.7. is it possible after training the model to add more data to it ?</a></li>
 </ul>
 </li>
 </ul>
