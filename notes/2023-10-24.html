@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Clustering &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>13. Clustering &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -68,6 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-10-24';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Clustering Metrics" href="2023-10-26.html" />
+    <link rel="prev" title="12. Understanding Classification" href="2023-10-19.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -171,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
@@ -184,6 +186,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-10-12.html">10. Evaluating ML Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-17.html">11. Intro to ML &amp; Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-19.html">12. Understanding Classification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -194,6 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../assignments/05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/07-classification.html">7. Assignment 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/08-clustering.html">8. Assignment 8: Clustering</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -433,16 +438,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-kmeans-work">How does Kmeans work?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kmeans">Kmeans</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-kmeans">Clustering with KMeans</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are">what happens if we do not know how many clusters there are?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model">what’s the difference between synthetic data and data from the gaussian machine learning model.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data">How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on">How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-some-more-applications-for-clustering">What are some more applications for clustering?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-clustering-benefit-the-analysis-of-data">How can clustering benefit the analysis of data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-kmeans-work">13.1. How does Kmeans work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kmeans">13.2. Kmeans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-kmeans">13.3. Clustering with KMeans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">13.4. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are">13.4.1. what happens if we do not know how many clusters there are?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model">13.4.2. what’s the difference between synthetic data and data from the gaussian machine learning model.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data">13.4.3. How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on">13.4.4. How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-some-more-applications-for-clustering">13.4.5. What are some more applications for clustering?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-clustering-benefit-the-analysis-of-data">13.4.6. How can clustering benefit the analysis of data?</a></li>
 </ul>
 </li>
 </ul>
@@ -457,7 +462,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="clustering">
-<h1>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">13. </span>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">#</a></h1>
 <p>Clustering is unsupervised learning.  That means we do not have the labels to
 learn from.  We aim to learn both the labels for each point and some way of
 characterizing the classes at the same time.</p>
@@ -486,7 +491,7 @@ for other types of centers.</p>
 </div>
 </div>
 <section id="how-does-kmeans-work">
-<h2>How does Kmeans work?<a class="headerlink" href="#how-does-kmeans-work" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.1. </span>How does Kmeans work?<a class="headerlink" href="#how-does-kmeans-work" title="Permalink to this headline">#</a></h2>
 <p>We will start with some synthetics data and then see how the clustering works.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -585,33 +590,33 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.14</td>
-      <td>1.89</td>
-      <td>C</td>
+      <td>2.96</td>
+      <td>6.63</td>
+      <td>B</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.29</td>
-      <td>6.40</td>
+      <td>1.82</td>
+      <td>6.60</td>
       <td>B</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>6.22</td>
-      <td>2.30</td>
-      <td>C</td>
+      <td>1.85</td>
+      <td>1.37</td>
+      <td>A</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>5.56</td>
-      <td>5.29</td>
-      <td>D</td>
+      <td>2.16</td>
+      <td>6.52</td>
+      <td>B</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>6.86</td>
-      <td>2.19</td>
-      <td>C</td>
+      <td>6.19</td>
+      <td>5.28</td>
+      <td>D</td>
     </tr>
   </tbody>
 </table>
@@ -625,10 +630,10 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f112f729f40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f3b7f456100&gt;
 </pre></div>
 </div>
-<img alt="../_images/be7371a9ff6b97d32e5e692b9b209e1a12f89072439a88d001a420c8627f9b6b.png" src="../_images/be7371a9ff6b97d32e5e692b9b209e1a12f89072439a88d001a420c8627f9b6b.png" />
+<img alt="../_images/a248e0ed3dcd4d7b4243e1f60c77e3b9c2590510fc5b620e5034b831f45b66d8.png" src="../_images/a248e0ed3dcd4d7b4243e1f60c77e3b9c2590510fc5b620e5034b831f45b66d8.png" />
 </div>
 </div>
 <p>this is what the clustering algorithm wil see.</p>
@@ -639,15 +644,15 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f112b0793d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f3b7ad0b580&gt;
 </pre></div>
 </div>
-<img alt="../_images/18eab9270dba8aae1d0ed549fd854a493aa9b4726e8664e9d9937aaa43d4e3c9.png" src="../_images/18eab9270dba8aae1d0ed549fd854a493aa9b4726e8664e9d9937aaa43d4e3c9.png" />
+<img alt="../_images/566955a3bf269894932458eb20fc01f1ab0319c1923a41227d4a17ab95d79748.png" src="../_images/566955a3bf269894932458eb20fc01f1ab0319c1923a41227d4a17ab95d79748.png" />
 </div>
 </div>
 </section>
 <section id="kmeans">
-<h2>Kmeans<a class="headerlink" href="#kmeans" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.2. </span>Kmeans<a class="headerlink" href="#kmeans" title="Permalink to this headline">#</a></h2>
 <p>First we will make a variable that we can use to pick out the feature columns</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -666,10 +671,10 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5.57, 1.3 ],
-       [2.02, 2.2 ],
-       [6.99, 5.33],
-       [5.68, 1.95]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.47, 5.81],
+       [5.88, 2.14],
+       [2.45, 1.  ],
+       [6.23, 5.22]])
 </pre></div>
 </div>
 </div>
@@ -727,53 +732,53 @@ first by taking the difference, squaring it, then summing along each row.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0       0.6730
- 1      36.7684
- 2       1.4225
- 3      15.9202
- 4       2.4562
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0       2.8925
+ 1       0.7466
+ 2      19.8580
+ 3       0.9802
+ 4      22.5593
          ...   
- 195    14.9117
- 196    32.8018
- 197    26.5897
- 198    45.0913
- 199    13.6592
+ 195    21.5546
+ 196    16.1642
+ 197    12.7525
+ 198     8.6864
+ 199    22.9882
  Length: 200, dtype: float64,
- 0      17.0705
- 1      17.7129
- 2      17.6500
- 3      22.0797
- 4      23.4257
+ 0      28.6865
+ 1      36.3752
+ 2      16.8338
+ 3      33.0228
+ 4       9.9557
          ...   
- 195     1.1162
- 196    15.1213
- 197    41.0852
- 198    17.2008
- 199     0.0757
+ 195    17.8484
+ 196    15.8416
+ 197    14.9965
+ 198    16.6426
+ 199    15.1988
  Length: 200, dtype: float64,
- 0      12.5561
- 1      23.2349
- 2       9.7738
- 3       2.0465
- 4       9.8765
+ 0      31.9570
+ 1      31.7569
+ 2       0.4969
+ 3      30.5545
+ 4      32.3060
          ...   
- 195    45.0180
- 196    21.6157
- 197     0.8650
- 198    36.6722
- 199    37.0957
+ 195    41.9065
+ 196    35.1909
+ 197     1.8320
+ 198     3.9085
+ 199    39.7165
  Length: 200, dtype: float64,
- 0       0.2152
- 1      31.2946
- 2       0.4141
- 3      11.1700
- 4       1.4500
+ 0      12.6810
+ 1      21.3525
+ 2      34.0069
+ 3      18.2549
+ 4       0.0052
          ...   
- 195    16.3385
- 196    27.7328
- 197    20.2661
- 198    40.1353
- 199    14.0626
+ 195     1.3221
+ 196     1.3369
+ 197    26.4520
+ 198    24.4385
+ 199     0.6409
  Length: 200, dtype: float64]
 </pre></div>
 </div>
@@ -816,38 +821,38 @@ corresponding mean. We can stack these into one DataFrame.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.6730</td>
-      <td>17.0705</td>
-      <td>12.5561</td>
-      <td>0.2152</td>
+      <td>2.8925</td>
+      <td>28.6865</td>
+      <td>31.9570</td>
+      <td>12.6810</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>36.7684</td>
-      <td>17.7129</td>
-      <td>23.2349</td>
-      <td>31.2946</td>
+      <td>0.7466</td>
+      <td>36.3752</td>
+      <td>31.7569</td>
+      <td>21.3525</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1.4225</td>
-      <td>17.6500</td>
-      <td>9.7738</td>
-      <td>0.4141</td>
+      <td>19.8580</td>
+      <td>16.8338</td>
+      <td>0.4969</td>
+      <td>34.0069</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>15.9202</td>
-      <td>22.0797</td>
-      <td>2.0465</td>
-      <td>11.1700</td>
+      <td>0.9802</td>
+      <td>33.0228</td>
+      <td>30.5545</td>
+      <td>18.2549</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>2.4562</td>
-      <td>23.4257</td>
-      <td>9.8765</td>
-      <td>1.4500</td>
+      <td>22.5593</td>
+      <td>9.9557</td>
+      <td>32.3060</td>
+      <td>0.0052</td>
     </tr>
   </tbody>
 </table>
@@ -863,17 +868,17 @@ minimum across each row and returns the index (location) of that minimum.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      3
-1      1
-2      3
-3      2
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      0
+1      0
+2      2
+3      0
 4      3
       ..
-195    1
-196    1
+195    3
+196    3
 197    2
-198    1
-199    1
+198    2
+199    3
 Length: 200, dtype: int64
 </pre></div>
 </div>
@@ -916,37 +921,37 @@ Length: 200, dtype: int64
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.14</td>
-      <td>1.89</td>
-      <td>C</td>
-      <td>3</td>
+      <td>2.96</td>
+      <td>6.63</td>
+      <td>B</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.29</td>
-      <td>6.40</td>
+      <td>1.82</td>
+      <td>6.60</td>
       <td>B</td>
-      <td>1</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>6.22</td>
-      <td>2.30</td>
-      <td>C</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5.56</td>
-      <td>5.29</td>
-      <td>D</td>
+      <td>1.85</td>
+      <td>1.37</td>
+      <td>A</td>
       <td>2</td>
     </tr>
     <tr>
+      <th>3</th>
+      <td>2.16</td>
+      <td>6.52</td>
+      <td>B</td>
+      <td>0</td>
+    </tr>
+    <tr>
       <th>4</th>
-      <td>6.86</td>
-      <td>2.19</td>
-      <td>C</td>
+      <td>6.19</td>
+      <td>5.28</td>
+      <td>D</td>
       <td>3</td>
     </tr>
   </tbody>
@@ -971,7 +976,7 @@ plotting functions go on the same figure.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/3a99a65079345ff0edf02647da97c35381149877e30f4d385fc8d477386af4aa.png" src="../_images/3a99a65079345ff0edf02647da97c35381149877e30f4d385fc8d477386af4aa.png" />
+<img alt="../_images/fd31c4c0af0c64a79c99cfab92b591787d1368230170d581fef4990b09e96882.png" src="../_images/fd31c4c0af0c64a79c99cfab92b591787d1368230170d581fef4990b09e96882.png" />
 </div>
 </div>
 <p>We see that each point is assigned to the lighter shade of its matching mean.
@@ -1000,7 +1005,7 @@ groupby.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/93dedb480122a0c54a59f955d20453096d1d596dae6450901245e585b9488184.png" src="../_images/93dedb480122a0c54a59f955d20453096d1d596dae6450901245e585b9488184.png" />
+<img alt="../_images/98a7df30036160cf6417035120713ff736f62a8954c0fe050a750b7f7a6d720f.png" src="../_images/98a7df30036160cf6417035120713ff736f62a8954c0fe050a750b7f7a6d720f.png" />
 </div>
 </div>
 <p>We see that now the means are in the center of each cluster, but that there are
@@ -1043,41 +1048,41 @@ now points in one color that are assigned to other clusters.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.14</td>
-      <td>1.89</td>
-      <td>C</td>
-      <td>3</td>
-      <td>3</td>
+      <td>2.96</td>
+      <td>6.63</td>
+      <td>B</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.29</td>
-      <td>6.40</td>
+      <td>1.82</td>
+      <td>6.60</td>
       <td>B</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>6.22</td>
-      <td>2.30</td>
-      <td>C</td>
-      <td>3</td>
-      <td>3</td>
+      <td>1.85</td>
+      <td>1.37</td>
+      <td>A</td>
+      <td>2</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>5.56</td>
-      <td>5.29</td>
-      <td>D</td>
-      <td>2</td>
-      <td>2</td>
+      <td>2.16</td>
+      <td>6.52</td>
+      <td>B</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>6.86</td>
-      <td>2.19</td>
-      <td>C</td>
+      <td>6.19</td>
+      <td>5.28</td>
+      <td>D</td>
       <td>3</td>
       <td>3</td>
     </tr>
@@ -1099,7 +1104,7 @@ now points in one color that are assigned to other clusters.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/7a25d56b7fdb97c5b589f392df783e9a17ed66d4478157bd82faea71c55cc7a6.png" src="../_images/7a25d56b7fdb97c5b589f392df783e9a17ed66d4478157bd82faea71c55cc7a6.png" />
+<img alt="../_images/98a7df30036160cf6417035120713ff736f62a8954c0fe050a750b7f7a6d720f.png" src="../_images/98a7df30036160cf6417035120713ff736f62a8954c0fe050a750b7f7a6d720f.png" />
 </div>
 </div>
 <p>If we keep going back and forth like this, eventually, the assignment step will
@@ -1149,18 +1154,6 @@ was okay for the steps to be in the other order.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
-</pre></div>
-</div>
-<img alt="../_images/29f329e2004b1073f236172bcfcbad88b7a6465eee51bc8d60609a3e4646444c.png" src="../_images/29f329e2004b1073f236172bcfcbad88b7a6465eee51bc8d60609a3e4646444c.png" />
-<img alt="../_images/411f3ef81e1638477d5b8551ecf479c7cc12374fa3c8aaf9f88ae3e8df60987b.png" src="../_images/411f3ef81e1638477d5b8551ecf479c7cc12374fa3c8aaf9f88ae3e8df60987b.png" />
-<img alt="../_images/eaec7c92b2b3460c14a07ad4af9f5d1556b4439d61607bac47a4e8cdf8cd063d.png" src="../_images/eaec7c92b2b3460c14a07ad4af9f5d1556b4439d61607bac47a4e8cdf8cd063d.png" />
-<img alt="../_images/eaec7c92b2b3460c14a07ad4af9f5d1556b4439d61607bac47a4e8cdf8cd063d.png" src="../_images/eaec7c92b2b3460c14a07ad4af9f5d1556b4439d61607bac47a4e8cdf8cd063d.png" />
-</div>
 </div>
 <p>This algorithm is random.  So each time we run it, it looks a little different.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">savefig</span></code> step allows me to save the separate images and then I converted them into gifs.  I have saved some from today as well as some past ones.</p>
@@ -1186,14 +1179,14 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/546a52468e560c8e751194ced7159424d3d3609050889a1647ddc40531a18fe5.png" src="../_images/546a52468e560c8e751194ced7159424d3d3609050889a1647ddc40531a18fe5.png" />
+<img alt="../_images/51128ebc78a2edd92926abcf55e9fe63a440ff87edeb2b0e7d8749dc5409caed.png" src="../_images/51128ebc78a2edd92926abcf55e9fe63a440ff87edeb2b0e7d8749dc5409caed.png" />
 </div>
 </div>
 <p>and another run I saved that has a lot of iterations:</p>
 <p><img alt="grid of subplots of kmeans iterations" src="img/many_iterations.png" /></p>
 </section>
 <section id="clustering-with-kmeans">
-<h2>Clustering with KMeans<a class="headerlink" href="#clustering-with-kmeans" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.3. </span>Clustering with KMeans<a class="headerlink" href="#clustering-with-kmeans" title="Permalink to this headline">#</a></h2>
 <p>We can fit it with the fit method.  We have to instantiate it with the number of clusters.</p>
 <p>Splitting to test and train is not always necessary, beacuse we are not testing predictions.</p>
 <div class="cell docutils container">
@@ -1217,16 +1210,16 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 0, 1, 3, 1, 0, 1, 3, 0, 2, 3, 0, 3, 2, 0, 0, 2, 3, 3, 1, 0, 0,
-       0, 2, 1, 2, 0, 1, 3, 2, 1, 0, 0, 2, 0, 2, 2, 3, 1, 2, 1, 1, 1, 1,
-       1, 1, 0, 1, 3, 3, 2, 1, 2, 1, 0, 0, 2, 1, 3, 0, 0, 1, 1, 2, 2, 0,
-       2, 2, 0, 1, 0, 1, 2, 3, 2, 2, 3, 0, 3, 1, 0, 2, 2, 1, 3, 0, 2, 1,
-       1, 1, 0, 0, 2, 0, 3, 1, 0, 3, 2, 3, 3, 2, 3, 0, 1, 2, 2, 0, 0, 0,
-       1, 0, 3, 3, 2, 0, 2, 3, 0, 0, 1, 0, 1, 1, 3, 3, 0, 1, 1, 2, 0, 1,
-       1, 1, 2, 3, 0, 1, 0, 0, 2, 2, 3, 1, 2, 3, 3, 2, 1, 2, 0, 3, 0, 0,
-       3, 2, 2, 1, 2, 2, 0, 3, 0, 1, 1, 3, 0, 2, 2, 2, 1, 0, 3, 3, 3, 1,
-       0, 2, 3, 2, 0, 2, 0, 0, 2, 2, 0, 0, 3, 1, 3, 1, 0, 2, 3, 2, 0, 3,
-       0, 2], dtype=int32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 2, 1, 3, 0, 1, 2, 0, 2, 0, 2, 3, 3, 3, 1, 1, 0, 2, 3, 1, 1,
+       0, 3, 2, 3, 3, 2, 3, 3, 3, 2, 0, 2, 0, 1, 2, 3, 0, 1, 0, 1, 3, 0,
+       1, 3, 3, 2, 3, 1, 3, 1, 1, 1, 3, 3, 3, 3, 2, 1, 0, 1, 2, 1, 3, 2,
+       3, 3, 1, 3, 3, 3, 2, 3, 3, 3, 0, 1, 3, 0, 2, 0, 2, 3, 0, 1, 3, 1,
+       0, 1, 3, 3, 0, 1, 1, 0, 0, 2, 1, 0, 1, 3, 2, 1, 3, 0, 3, 1, 1, 0,
+       3, 0, 2, 3, 0, 2, 3, 3, 2, 2, 1, 2, 0, 1, 0, 1, 1, 1, 0, 1, 0, 3,
+       0, 2, 0, 2, 2, 3, 2, 0, 0, 0, 1, 2, 3, 1, 1, 0, 2, 3, 3, 3, 3, 2,
+       1, 2, 2, 1, 0, 3, 2, 2, 1, 2, 3, 1, 3, 0, 3, 1, 1, 1, 1, 3, 3, 0,
+       0, 1, 0, 2, 1, 3, 1, 3, 2, 0, 0, 2, 1, 0, 1, 3, 2, 1, 1, 3, 3, 2,
+       2, 3], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -1239,10 +1232,10 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.99310345, 6.09655172],
-       [5.9477551 , 2.05265306],
-       [2.04057692, 2.07173077],
-       [5.87121951, 5.92219512]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[6.01      , 2.01880952],
+       [2.05890909, 6.12763636],
+       [2.05333333, 2.04404762],
+       [6.00278689, 5.89885246]])
 </pre></div>
 </div>
 </div>
@@ -1285,23 +1278,23 @@ was okay for the steps to be in the other order.</p>
   <tbody>
     <tr>
       <th>A</th>
-      <td>2.040577</td>
-      <td>2.071731</td>
+      <td>2.053333</td>
+      <td>2.044048</td>
     </tr>
     <tr>
       <th>B</th>
-      <td>1.993103</td>
-      <td>6.096552</td>
+      <td>2.058909</td>
+      <td>6.127636</td>
     </tr>
     <tr>
       <th>C</th>
-      <td>5.947755</td>
-      <td>2.052653</td>
+      <td>6.010000</td>
+      <td>2.018810</td>
     </tr>
     <tr>
       <th>D</th>
-      <td>5.871220</td>
-      <td>5.922195</td>
+      <td>6.002787</td>
+      <td>5.898852</td>
     </tr>
   </tbody>
 </table>
@@ -1310,27 +1303,27 @@ was okay for the steps to be in the other order.</p>
 <p>However, note that they can be in different orders.</p>
 </section>
 <section id="questions">
-<h2>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">13.4. </span>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h2>
 <section id="what-happens-if-we-do-not-know-how-many-clusters-there-are">
-<h3>what happens if we do not know how many clusters there are?<a class="headerlink" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.1. </span>what happens if we do not know how many clusters there are?<a class="headerlink" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are" title="Permalink to this headline">#</a></h3>
 <p>There are some clustering algorithms that can also learn the number of clusters, for example the <a class="reference external" href="https://scikit-learn.org/0.15/modules/generated/sklearn.mixture.DPGMM.html">Dirichlet Process Gaussian Mixture Model</a>.</p>
 <p>Alternatively, you can try the algorithm with different numbers of clusters and evaluate to determine which one is the best fit.</p>
 </section>
 <section id="whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model">
-<h3>what’s the difference between synthetic data and data from the gaussian machine learning model.<a class="headerlink" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.2. </span>what’s the difference between synthetic data and data from the gaussian machine learning model.<a class="headerlink" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model" title="Permalink to this headline">#</a></h3>
 <p>They’re both Gaussian data.  This data is actually a little bit simpler than the GNB data, because all of the variances are the same.</p>
 </section>
 <section id="how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data">
-<h3>How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?<a class="headerlink" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.3. </span>How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?<a class="headerlink" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data" title="Permalink to this headline">#</a></h3>
 <p>Clustering is for a case of a different goal.  It is for when there are no labels, but you have reason to beleive that there are separate groups.</p>
 <p>If the data has a even just 3 features it is possible that the clusters are not visible in 2D plots but exist and are findable with KMeans.</p>
 </section>
 <section id="how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on">
-<h3>How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.<a class="headerlink" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.4. </span>How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.<a class="headerlink" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on" title="Permalink to this headline">#</a></h3>
 <p>Clustering can help you discover groups in the data even if they are not available in the real data.  It is a way to discover something else that is going on that was not known in advance.</p>
 </section>
 <section id="what-are-some-more-applications-for-clustering">
-<h3>What are some more applications for clustering?<a class="headerlink" href="#what-are-some-more-applications-for-clustering" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.5. </span>What are some more applications for clustering?<a class="headerlink" href="#what-are-some-more-applications-for-clustering" title="Permalink to this headline">#</a></h3>
 <p>Some example applications:</p>
 <ul class="simple">
 <li><p>one of my lab mates in grad school, used unsupervised learning in collaboration with medical doctors to discover subtypes of COPD (Chronic Obstructive Pluminary Disorder).</p></li>
@@ -1341,7 +1334,7 @@ was okay for the steps to be in the other order.</p>
 </ul>
 </section>
 <section id="how-can-clustering-benefit-the-analysis-of-data">
-<h3>How can clustering benefit the analysis of data?<a class="headerlink" href="#how-can-clustering-benefit-the-analysis-of-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">13.4.6. </span>How can clustering benefit the analysis of data?<a class="headerlink" href="#how-can-clustering-benefit-the-analysis-of-data" title="Permalink to this headline">#</a></h3>
 <p>It allows you to find groups in the data that is not an available column.</p>
 </section>
 </section>
@@ -1378,6 +1371,24 @@ was okay for the steps to be in the other order.</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-10-19.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">12. </span>Understanding Classification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="2023-10-26.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Clustering Metrics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -1396,16 +1407,16 @@ was okay for the steps to be in the other order.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-kmeans-work">How does Kmeans work?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kmeans">Kmeans</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-kmeans">Clustering with KMeans</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are">what happens if we do not know how many clusters there are?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model">what’s the difference between synthetic data and data from the gaussian machine learning model.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data">How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on">How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-some-more-applications-for-clustering">What are some more applications for clustering?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-clustering-benefit-the-analysis-of-data">How can clustering benefit the analysis of data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-kmeans-work">13.1. How does Kmeans work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kmeans">13.2. Kmeans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-with-kmeans">13.3. Clustering with KMeans</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">13.4. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-if-we-do-not-know-how-many-clusters-there-are">13.4.1. what happens if we do not know how many clusters there are?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-synthetic-data-and-data-from-the-gaussian-machine-learning-model">13.4.2. what’s the difference between synthetic data and data from the gaussian machine learning model.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-helpful-would-clustering-be-over-the-previous-classifiers-if-there-are-no-discernible-groups-within-2d-plots-of-the-data">13.4.3. How helpful would clustering be over the previous classifiers if there are no discernible groups within 2D plots of the data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-clustering-algorithms-relate-the-data-to-the-desired-output-is-it-pureley-for-humans-to-be-able-to-understand-what-the-data-is-or-is-there-some-deeper-systems-going-on">13.4.4. How do clustering algorithms relate the data to the desired output. is it pureley for humans to be able to understand what the data is or is there some deeper systems going on.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-some-more-applications-for-clustering">13.4.5. What are some more applications for clustering?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-clustering-benefit-the-analysis-of-data">13.4.6. How can clustering benefit the analysis of data?</a></li>
 </ul>
 </li>
 </ul>
