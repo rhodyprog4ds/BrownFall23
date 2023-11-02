@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Regression &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>15. Regression &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-10-31';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="14. Clustering Metrics" href="2023-10-26.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -169,7 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
@@ -184,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-10-19.html">12. Understanding Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-24.html">13. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -195,6 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/07-classification.html">7. Assignment 7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/08-clustering.html">8. Assignment 8: Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/09-regression.html">9. Assignment 9: Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -434,21 +438,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">Feedback</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">Setting up for regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">Fitting a regression model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">Regression Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">Questions after class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">How do you know if a regression model is good or works for a dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">So is regression is just used with numeric values in terms of predicting?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">Are linear models exclusively used for regression problems?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">What does a negative R2 score mean?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">What is the difference between a good and bad rscore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">why were your values coming out negative?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">What would be a common example of a real-world linear regression?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">what are the coefficient and intercept ?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">15.1. Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">15.2. Setting up for regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">15.3. Fitting a regression model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">15.4. Regression Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.5. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.5.1. How do you know if a regression model is good or works for a dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.5.2. So is regression is just used with numeric values in terms of predicting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.5.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.5.4. Are linear models exclusively used for regression problems?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.5.5. What does a negative R2 score mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.5.6. What is the difference between a good and bad rscore?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.5.7. why were your values coming out negative?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.5.8. What would be a common example of a real-world linear regression?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.5.9. what are the coefficient and intercept ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.5.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
 </ul>
 </li>
 </ul>
@@ -463,13 +467,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="regression">
-<h1>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">15. </span>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">#</a></h1>
 <section id="feedback">
-<h2>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.1. </span>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">#</a></h2>
 <p>See prismia notes for feedback qualitative comments</p>
 </section>
 <section id="setting-up-for-regression">
-<h2>Setting up for regression<a class="headerlink" href="#setting-up-for-regression" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.2. </span>Setting up for regression<a class="headerlink" href="#setting-up-for-regression" title="Permalink to this headline">#</a></h2>
 <p>We’re going to predict <strong>tip</strong> from <strong>total bill</strong>.
 This is a regression problem because the target, <em>tip</em> is:</p>
 <ol class="arabic simple">
@@ -718,7 +722,7 @@ model.</p>
 </div>
 </section>
 <section id="fitting-a-regression-model">
-<h2>Fitting a regression model<a class="headerlink" href="#fitting-a-regression-model" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.3. </span>Fitting a regression model<a class="headerlink" href="#fitting-a-regression-model" title="Permalink to this headline">#</a></h2>
 <p>We instantiate the object as we do with all other sklearn estimator objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -747,7 +751,7 @@ model.</p>
 </div>
 </section>
 <section id="regression-performance">
-<h2>Regression Performance<a class="headerlink" href="#regression-performance" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.4. </span>Regression Performance<a class="headerlink" href="#regression-performance" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
@@ -755,7 +759,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.926733633901004
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5858561697336733
 </pre></div>
 </div>
 </div>
@@ -767,7 +771,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9626700545363422
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2593078137348601
 </pre></div>
 </div>
 </div>
@@ -780,13 +784,13 @@ model.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    61.000000
-mean      2.848852
-std       1.271868
+mean      2.994918
+std       1.593837
 min       1.000000
 25%       2.000000
-50%       2.500000
-75%       3.480000
-max       6.730000
+50%       2.520000
+75%       3.500000
+max      10.000000
 Name: tip, dtype: float64
 </pre></div>
 </div>
@@ -799,7 +803,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.10585948])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.1026924])
 </pre></div>
 </div>
 </div>
@@ -811,7 +815,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9159792277237555
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9324757971609059
 </pre></div>
 </div>
 </div>
@@ -823,7 +827,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.17253122])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.81071985])
 </pre></div>
 </div>
 </div>
@@ -835,7 +839,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.1725312184085697
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8107198537396934
 </pre></div>
 </div>
 </div>
@@ -848,10 +852,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7efef81cf5e0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f945900e580&gt;]
 </pre></div>
 </div>
-<img alt="../_images/b193766255b1e6bbf391d1141173687ab51704381eef2584b3f9fd33dae92f70.png" src="../_images/b193766255b1e6bbf391d1141173687ab51704381eef2584b3f9fd33dae92f70.png" />
+<img alt="../_images/aac33e802bd98680ab227003cbd4810d0e94918dfb63151716aca75071bbf976.png" src="../_images/aac33e802bd98680ab227003cbd4810d0e94918dfb63151716aca75071bbf976.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -866,10 +870,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7efef81cfac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f9458f35730&gt;
 </pre></div>
 </div>
-<img alt="../_images/b16a22724ade147d873487f3d96fde62c49cf40a052089cb9a3bd23c0fe6e58b.png" src="../_images/b16a22724ade147d873487f3d96fde62c49cf40a052089cb9a3bd23c0fe6e58b.png" />
+<img alt="../_images/8deb936fd0ec6d57a58d468dd7dc6960f83caee331f0df11982ddba7f925acbc.png" src="../_images/8deb936fd0ec6d57a58d468dd7dc6960f83caee331f0df11982ddba7f925acbc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -879,7 +883,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4175619293648476
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
 </pre></div>
 </div>
 </div>
@@ -910,10 +914,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7efef5d69520&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9458f3d9d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/b40d4d21d0b6722fdf8b67236253909f5e543bed9be00bc43e1608b5d8a58d6f.png" src="../_images/b40d4d21d0b6722fdf8b67236253909f5e543bed9be00bc43e1608b5d8a58d6f.png" />
+<img alt="../_images/b3ded06f35452d54d480353d1437ea87245f1166d25e3ecf350d1e90714a5662.png" src="../_images/b3ded06f35452d54d480353d1437ea87245f1166d25e3ecf350d1e90714a5662.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -930,7 +934,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.926733633901004
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5858561697336733
 </pre></div>
 </div>
 </div>
@@ -942,7 +946,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4175619293648476
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
 </pre></div>
 </div>
 </div>
@@ -954,28 +958,28 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4175619293648476
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="questions-after-class">
-<h2>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.5. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
 <section id="how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">
-<h3>How do you know if a regression model is good or works for a dataset?<a class="headerlink" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.1. </span>How do you know if a regression model is good or works for a dataset?<a class="headerlink" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset" title="Permalink to this headline">#</a></h3>
 <p>Let’s break this down.  Regression is supervised learning, so there needs to be variables that you can use as features and one to use as the target. To test if supervised learning makes sense, try filling column names in place of <code class="docutils literal notranslate"><span class="pre">features</span></code> and <code class="docutils literal notranslate"><span class="pre">target</span></code> in the following sentence, that describes a prediction task: we want to predict <code class="docutils literal notranslate"><span class="pre">target</span></code> from <code class="docutils literal notranslate"><span class="pre">features</span></code>.</p>
 <p>Regression, specifically means that the target variable needs to be continuous, not discrete. For example, in today’s class, we predicted the tip in dollars, which is continous in this sense.  This is not stictly continuous in the mathematical sense, but anything that is most useful to consider as continuous.</p>
 <p><em>logisitic regression is actually a classification model despite the name</em></p>
 </section>
 <section id="so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">
-<h3>So is regression is just used with numeric values in terms of predicting?<a class="headerlink" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.2. </span>So is regression is just used with numeric values in terms of predicting?<a class="headerlink" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting" title="Permalink to this headline">#</a></h3>
 <p>Yes linear regression requires numeric values for the features as well as the target.</p>
 <p>Other types of regression can use other types of features.</p>
 <p>All regression is for a continusous target.</p>
 </section>
 <section id="what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">
-<h3>What are the strengths of a regression model as opposed to the previous models we’ve seen?<a class="headerlink" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.3. </span>What are the strengths of a regression model as opposed to the previous models we’ve seen?<a class="headerlink" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen" title="Permalink to this headline">#</a></h3>
 <p>Using regression, classification, or clustering is based on what type of problem you are solving.</p>
 <p>Our simple flowchart for what task you are doing is:</p>
 <div class="mermaid">
@@ -991,31 +995,31 @@ Name: tip, dtype: float64
         </div><p>the <a class="reference external" href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html">sklearn docs include a more detailed guide</a></p>
 </section>
 <section id="are-linear-models-exclusively-used-for-regression-problems">
-<h3>Are linear models exclusively used for regression problems?<a class="headerlink" href="#are-linear-models-exclusively-used-for-regression-problems" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.4. </span>Are linear models exclusively used for regression problems?<a class="headerlink" href="#are-linear-models-exclusively-used-for-regression-problems" title="Permalink to this headline">#</a></h3>
 <p>No, there are also linear classification models.</p>
 </section>
 <section id="what-does-a-negative-r2-score-mean">
-<h3>What does a negative R2 score mean?<a class="headerlink" href="#what-does-a-negative-r2-score-mean" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.5. </span>What does a negative R2 score mean?<a class="headerlink" href="#what-does-a-negative-r2-score-mean" title="Permalink to this headline">#</a></h3>
 <p>It’s a bad fit.</p>
 </section>
 <section id="what-is-the-difference-between-a-good-and-bad-rscore">
-<h3>What is the difference between a good and bad rscore?<a class="headerlink" href="#what-is-the-difference-between-a-good-and-bad-rscore" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.6. </span>What is the difference between a good and bad rscore?<a class="headerlink" href="#what-is-the-difference-between-a-good-and-bad-rscore" title="Permalink to this headline">#</a></h3>
 <p>1 is perfect, low is bad. What is “good enough” is context dependent.</p>
 </section>
 <section id="why-were-your-values-coming-out-negative">
-<h3>why were your values coming out negative?<a class="headerlink" href="#why-were-your-values-coming-out-negative" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.7. </span>why were your values coming out negative?<a class="headerlink" href="#why-were-your-values-coming-out-negative" title="Permalink to this headline">#</a></h3>
 <p>Mine was not a very good fit.  We’ll see why on Thursday.  Yours may have been better</p>
 </section>
 <section id="what-would-be-a-common-example-of-a-real-world-linear-regression">
-<h3>What would be a common example of a real-world linear regression?<a class="headerlink" href="#what-would-be-a-common-example-of-a-real-world-linear-regression" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.8. </span>What would be a common example of a real-world linear regression?<a class="headerlink" href="#what-would-be-a-common-example-of-a-real-world-linear-regression" title="Permalink to this headline">#</a></h3>
 <p>Lots of real models are linear regression, but with many inputs.  It is often not a perfect fit, but good enough.</p>
 </section>
 <section id="what-are-the-coefficient-and-intercept">
-<h3>what are the coefficient and intercept ?<a class="headerlink" href="#what-are-the-coefficient-and-intercept" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.9. </span>what are the coefficient and intercept ?<a class="headerlink" href="#what-are-the-coefficient-and-intercept" title="Permalink to this headline">#</a></h3>
 <p>The coefficient is the slope of the line and the intercept is the value of the label the model predicts for features =0.</p>
 </section>
 <section id="how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">
-<h3>how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?<a class="headerlink" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.5.10. </span>how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?<a class="headerlink" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data" title="Permalink to this headline">#</a></h3>
 <p>You have to transform it to be numerical.  If it is True and False, you can cast it to integers.</p>
 <p>I recommend for A9 filtering on the UCI website to pick out data with numerical features.</p>
 <p>In general, and you can for A9 if you want, use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">sklearn <code class="docutils literal notranslate"><span class="pre">LabelEncodeer</span></code></a> to transform the data.</p>
@@ -1054,6 +1058,24 @@ Name: tip, dtype: float64
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-10-26.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Clustering Metrics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -1072,21 +1094,21 @@ Name: tip, dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">Feedback</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">Setting up for regression</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">Fitting a regression model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">Regression Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">Questions after class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">How do you know if a regression model is good or works for a dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">So is regression is just used with numeric values in terms of predicting?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">Are linear models exclusively used for regression problems?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">What does a negative R2 score mean?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">What is the difference between a good and bad rscore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">why were your values coming out negative?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">What would be a common example of a real-world linear regression?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">what are the coefficient and intercept ?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">15.1. Feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">15.2. Setting up for regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">15.3. Fitting a regression model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">15.4. Regression Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.5. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.5.1. How do you know if a regression model is good or works for a dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.5.2. So is regression is just used with numeric values in terms of predicting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.5.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.5.4. Are linear models exclusively used for regression problems?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.5.5. What does a negative R2 score mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.5.6. What is the difference between a good and bad rscore?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.5.7. why were your values coming out negative?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.5.8. What would be a common example of a real-world linear regression?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.5.9. what are the coefficient and intercept ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.5.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
 </ul>
 </li>
 </ul>

@@ -186,6 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. Understanding Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-24.html">13. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -197,6 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/07-classification.html">7. Assignment 7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/08-clustering.html">8. Assignment 8: Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/09-regression.html">9. Assignment 9: Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -516,7 +518,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f59d9886790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1eb3a86730&gt;
 </pre></div>
 </div>
 <img alt="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" src="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" />
@@ -684,10 +686,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f59d3c1cc40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1ef8d574f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/971d5077c79ea675d4f8706fb89305c98197a67a5d8e0b2ca60fd08ea816ac43.png" src="../_images/971d5077c79ea675d4f8706fb89305c98197a67a5d8e0b2ca60fd08ea816ac43.png" />
+<img alt="../_images/8f0f5acb531c6b2de41554f0138c936c6df007e52dcdaf60e5c8298d8492413d.png" src="../_images/8f0f5acb531c6b2de41554f0138c936c6df007e52dcdaf60e5c8298d8492413d.png" />
 </div>
 </div>
 </section>
@@ -861,7 +863,7 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f5a14b9d7f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f1eae0028e0&gt;
 </pre></div>
 </div>
 <img alt="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" src="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" />
@@ -927,7 +929,7 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f5a16c41850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1ea38c3310&gt;
 </pre></div>
 </div>
 <img alt="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" src="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" />
@@ -970,10 +972,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f59c9961c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1ea394deb0&gt;
 </pre></div>
 </div>
-<img alt="../_images/63a75292fb078f9aefbe3b8e21baf0e3c695239e671421c4dab8505656d1ee48.png" src="../_images/63a75292fb078f9aefbe3b8e21baf0e3c695239e671421c4dab8505656d1ee48.png" />
+<img alt="../_images/65be7a402d36a45b5b0fe59bfac240bbce498699660bccddcb5c3b399bb99331.png" src="../_images/65be7a402d36a45b5b0fe59bfac240bbce498699660bccddcb5c3b399bb99331.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -991,7 +993,7 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f59c6c48640&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f1ea0e7deb0&gt;
 </pre></div>
 </div>
 <img alt="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" src="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" />

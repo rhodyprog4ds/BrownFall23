@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Assignment 9: Linear Regression &#8212; Programming for Data Science at URI Fall 2023</title>
+    <title>9. Assignment 9: Linear Regression &#8212; Programming for Data Science at URI Fall 2023</title>
   
   
   
@@ -66,6 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'assignments/09-regression';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Portfolio" href="../portfolio/index.html" />
+    <link rel="prev" title="8. Assignment 8: Clustering" href="08-clustering.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
   </head>
@@ -184,9 +186,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-19.html">12. Understanding Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-24.html">13. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-26.html">14. Clustering Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/2023-10-31.html">15. Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
@@ -195,6 +198,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07-classification.html">7. Assignment 7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08-clustering.html">8. Assignment 8: Clustering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Assignment 9: Linear Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -434,11 +438,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-facts">Quick Facts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment">Assessment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">Related notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-basics">Linear Regression Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-facts">9.1. Quick Facts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment">9.2. Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">9.3. Related notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">9.4. Instructions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-basics">9.4.1. Linear Regression Basics</a></li>
 </ul>
 </li>
 </ul>
@@ -453,16 +457,16 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="assignment-9-linear-regression">
-<h1>Assignment 9: Linear Regression<a class="headerlink" href="#assignment-9-linear-regression" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">9. </span>Assignment 9: Linear Regression<a class="headerlink" href="#assignment-9-linear-regression" title="Permalink to this headline">#</a></h1>
 <section id="quick-facts">
-<h2>Quick Facts<a class="headerlink" href="#quick-facts" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.1. </span>Quick Facts<a class="headerlink" href="#quick-facts" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://classroom.github.com/a/HlXVb4Ll">accept the assignment</a></p></li>
 <li><p><strong>Due: 2023-11-06</strong></p></li>
 </ul>
 </section>
 <section id="assessment">
-<h2>Assessment<a class="headerlink" href="#assessment" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.2. </span>Assessment<a class="headerlink" href="#assessment" title="Permalink to this headline">#</a></h2>
 <p>Eligible skills: (links to checklists)</p>
 <ul class="simple">
 <li><p><strong>first chance</strong> regression <a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#regression-level1">1</a> and <a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#regression-level2">2</a></p></li>
@@ -473,17 +477,17 @@ document.write(`
 </ul>
 </section>
 <section id="related-notes">
-<h2>Related notes<a class="headerlink" href="#related-notes" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3. </span>Related notes<a class="headerlink" href="#related-notes" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><span class="xref myst"></span></p></li>
 <li><p><span class="xref myst"></span></p></li>
 </ul>
 </section>
 <section id="instructions">
-<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.4. </span>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
 <p>Find a dataset suitable for regression. We recommend a dataset from the UCI repository. Remember that you can use the filters to choose a dataset that is well-suited for regression.</p>
 <section id="linear-regression-basics">
-<h3>Linear Regression Basics<a class="headerlink" href="#linear-regression-basics" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.4.1. </span>Linear Regression Basics<a class="headerlink" href="#linear-regression-basics" title="Permalink to this headline">#</a></h3>
 <p>TLDR: Fit a linear regression model, measure the fit with two metrics, and make a plot that helps visualize the result.</p>
 <ol class="arabic simple">
 <li><p>Include a basic description of the data(what the features are, units, size of dataset, etc)</p></li>
@@ -547,6 +551,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="08-clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Assignment 8: Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../portfolio/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Portfolio</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -565,11 +587,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-facts">Quick Facts</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment">Assessment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">Related notes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">Instructions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-basics">Linear Regression Basics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-facts">9.1. Quick Facts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessment">9.2. Assessment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#related-notes">9.3. Related notes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instructions">9.4. Instructions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-basics">9.4.1. Linear Regression Basics</a></li>
 </ul>
 </li>
 </ul>
