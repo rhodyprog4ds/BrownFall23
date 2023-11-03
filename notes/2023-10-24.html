@@ -189,6 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">13. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -592,33 +593,33 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.42</td>
-      <td>6.57</td>
-      <td>D</td>
+      <td>6.20</td>
+      <td>2.13</td>
+      <td>C</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.61</td>
-      <td>1.46</td>
-      <td>A</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>5.72</td>
-      <td>5.96</td>
-      <td>D</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.05</td>
-      <td>5.90</td>
+      <td>2.15</td>
+      <td>6.08</td>
       <td>B</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2.42</td>
-      <td>1.23</td>
+      <th>2</th>
+      <td>3.09</td>
+      <td>2.00</td>
       <td>A</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.77</td>
+      <td>1.36</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.56</td>
+      <td>5.75</td>
+      <td>D</td>
     </tr>
   </tbody>
 </table>
@@ -632,10 +633,10 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fcdf77504f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f76e8061c10&gt;
 </pre></div>
 </div>
-<img alt="../_images/1dbec62b653e9dafae45f5ee1035c0dcabdee321deebd4d2261d92f8b0461812.png" src="../_images/1dbec62b653e9dafae45f5ee1035c0dcabdee321deebd4d2261d92f8b0461812.png" />
+<img alt="../_images/6ecff104227d12d84438abccfc86d60d5d0dd49864441e5b89c395d2934da39d.png" src="../_images/6ecff104227d12d84438abccfc86d60d5d0dd49864441e5b89c395d2934da39d.png" />
 </div>
 </div>
 <p>this is what the clustering algorithm wil see.</p>
@@ -646,10 +647,10 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fcdf30c04f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f76ab118e20&gt;
 </pre></div>
 </div>
-<img alt="../_images/181af45ab9c061191c1e8579174316d57f3c78964345fc7cd660807ec7be049a.png" src="../_images/181af45ab9c061191c1e8579174316d57f3c78964345fc7cd660807ec7be049a.png" />
+<img alt="../_images/3be5d25616e31bff46ee6f907b195dc37dfb5b7847884dfcd865038ad6c8ac3c.png" src="../_images/3be5d25616e31bff46ee6f907b195dc37dfb5b7847884dfcd865038ad6c8ac3c.png" />
 </div>
 </div>
 </section>
@@ -673,10 +674,10 @@ One tricky part is <a class="reference external" href="https://docs.python.org/3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.75, 2.34],
-       [1.62, 6.6 ],
-       [1.18, 2.9 ],
-       [5.28, 5.6 ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.26, 5.68],
+       [2.15, 6.08],
+       [1.76, 5.56],
+       [5.89, 2.31]])
 </pre></div>
 </div>
 </div>
@@ -734,53 +735,53 @@ first by taking the difference, squaring it, then summing along each row.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0      39.7018
- 1       1.5140
- 2      28.8653
- 3      13.1636
- 4       1.6810
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0      28.1261
+ 1       0.1721
+ 2      14.2313
+ 3      18.9025
+ 4      18.4949
          ...   
- 195    36.7013
- 196     0.4420
- 197    14.3365
- 198     0.1954
- 199    16.5573
+ 195    32.8861
+ 196    11.6360
+ 197     0.1754
+ 198    13.3205
+ 199    15.7657
  Length: 200, dtype: float64,
- 0      23.0409
- 1      27.3997
- 2      17.2196
- 3       0.8149
- 4      29.4769
+ 0      32.0050
+ 1       0.0000
+ 2      17.5300
+ 3      22.4228
+ 4      19.5570
          ...   
- 195    14.7536
- 196    22.8157
- 197     1.5700
- 198    21.4121
- 199    41.1346
+ 195    37.1972
+ 196    14.4109
+ 197     0.0865
+ 198    14.8482
+ 199    19.0420
  Length: 200, dtype: float64,
- 0      40.9265
- 1       4.1185
- 2      29.9752
- 3       9.0169
- 4       4.3265
+ 0      31.4785
+ 1       0.4225
+ 2      14.4425
+ 3      17.6401
+ 4      23.0761
          ...   
- 195    36.1252
- 196     2.1425
- 197    11.9816
- 198     1.5337
- 199    22.4842
+ 195    36.2261
+ 196    10.6292
+ 197     0.1450
+ 198    16.9945
+ 199    14.7897
  Length: 200, dtype: float64,
- 0       2.2405
- 1      24.2685
- 2       0.3232
- 3      17.9829
- 4      27.2765
+ 0       0.1285
+ 1      28.2005
+ 2       7.9361
+ 3      17.8769
+ 4      12.2825
          ...   
- 195     2.4532
- 196    23.4125
- 197     6.7136
- 198    23.6597
- 199    15.3722
+ 195     0.6525
+ 196    16.7282
+ 197    28.8004
+ 198     7.0781
+ 199    15.7145
  Length: 200, dtype: float64]
 </pre></div>
 </div>
@@ -823,38 +824,38 @@ corresponding mean. We can stack these into one DataFrame.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>39.7018</td>
-      <td>23.0409</td>
-      <td>40.9265</td>
-      <td>2.2405</td>
+      <td>28.1261</td>
+      <td>32.0050</td>
+      <td>31.4785</td>
+      <td>0.1285</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>1.5140</td>
-      <td>27.3997</td>
-      <td>4.1185</td>
-      <td>24.2685</td>
+      <td>0.1721</td>
+      <td>0.0000</td>
+      <td>0.4225</td>
+      <td>28.2005</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>28.8653</td>
-      <td>17.2196</td>
-      <td>29.9752</td>
-      <td>0.3232</td>
+      <td>14.2313</td>
+      <td>17.5300</td>
+      <td>14.4425</td>
+      <td>7.9361</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>13.1636</td>
-      <td>0.8149</td>
-      <td>9.0169</td>
-      <td>17.9829</td>
+      <td>18.9025</td>
+      <td>22.4228</td>
+      <td>17.6401</td>
+      <td>17.8769</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.6810</td>
-      <td>29.4769</td>
-      <td>4.3265</td>
-      <td>27.2765</td>
+      <td>18.4949</td>
+      <td>19.5570</td>
+      <td>23.0761</td>
+      <td>12.2825</td>
     </tr>
   </tbody>
 </table>
@@ -871,16 +872,16 @@ minimum across each row and returns the index (location) of that minimum.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      3
-1      0
+1      1
 2      3
-3      1
-4      0
+3      2
+4      3
       ..
 195    3
-196    0
+196    2
 197    1
-198    0
-199    3
+198    3
+199    2
 Length: 200, dtype: int64
 </pre></div>
 </div>
@@ -923,38 +924,38 @@ Length: 200, dtype: int64
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.42</td>
-      <td>6.57</td>
-      <td>D</td>
+      <td>6.20</td>
+      <td>2.13</td>
+      <td>C</td>
       <td>3</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.61</td>
-      <td>1.46</td>
-      <td>A</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>5.72</td>
-      <td>5.96</td>
-      <td>D</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.05</td>
-      <td>5.90</td>
+      <td>2.15</td>
+      <td>6.08</td>
       <td>B</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2.42</td>
-      <td>1.23</td>
+      <th>2</th>
+      <td>3.09</td>
+      <td>2.00</td>
       <td>A</td>
-      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.77</td>
+      <td>1.36</td>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.56</td>
+      <td>5.75</td>
+      <td>D</td>
+      <td>3</td>
     </tr>
   </tbody>
 </table>
@@ -978,7 +979,7 @@ plotting functions go on the same figure.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/652c5d509090c62c36b2582370a3223b39155ab5b97c423d83d2f2db29d7a5c5.png" src="../_images/652c5d509090c62c36b2582370a3223b39155ab5b97c423d83d2f2db29d7a5c5.png" />
+<img alt="../_images/2c3c42bc3817816a0aefba45368e5452a94aff55852dab55458fb414b9477a87.png" src="../_images/2c3c42bc3817816a0aefba45368e5452a94aff55852dab55458fb414b9477a87.png" />
 </div>
 </div>
 <p>We see that each point is assigned to the lighter shade of its matching mean.
@@ -1007,7 +1008,7 @@ groupby.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/0cdf949111148d90e1e63125e97a83564521a3305913f03ee89797af59d769bd.png" src="../_images/0cdf949111148d90e1e63125e97a83564521a3305913f03ee89797af59d769bd.png" />
+<img alt="../_images/7b2b7337bdc460c7a867dd1a81856c10510594933f4b60dfdcb2a1cf4ca19f86.png" src="../_images/7b2b7337bdc460c7a867dd1a81856c10510594933f4b60dfdcb2a1cf4ca19f86.png" />
 </div>
 </div>
 <p>We see that now the means are in the center of each cluster, but that there are
@@ -1050,42 +1051,42 @@ now points in one color that are assigned to other clusters.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>6.42</td>
-      <td>6.57</td>
-      <td>D</td>
+      <td>6.20</td>
+      <td>2.13</td>
+      <td>C</td>
       <td>3</td>
       <td>3</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.61</td>
-      <td>1.46</td>
-      <td>A</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>5.72</td>
-      <td>5.96</td>
-      <td>D</td>
-      <td>3</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1.05</td>
-      <td>5.90</td>
+      <td>2.15</td>
+      <td>6.08</td>
       <td>B</td>
       <td>1</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>2.42</td>
-      <td>1.23</td>
+      <th>2</th>
+      <td>3.09</td>
+      <td>2.00</td>
       <td>A</td>
-      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.77</td>
+      <td>1.36</td>
+      <td>A</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.56</td>
+      <td>5.75</td>
+      <td>D</td>
+      <td>3</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -1106,7 +1107,7 @@ now points in one color that are assigned to other clusters.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;x0&#39;, ylabel=&#39;x1&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/ad87a5ff4d0c501f9600dcdad5c1fac1a270609ba04db89265b9ae686a2868a7.png" src="../_images/ad87a5ff4d0c501f9600dcdad5c1fac1a270609ba04db89265b9ae686a2868a7.png" />
+<img alt="../_images/4038f2601ba060ff1e5175161663353a07a729da63a87b5f7083cf29e4da95f6.png" src="../_images/4038f2601ba060ff1e5175161663353a07a729da63a87b5f7083cf29e4da95f6.png" />
 </div>
 </div>
 <p>If we keep going back and forth like this, eventually, the assignment step will
@@ -1158,18 +1159,15 @@ was okay for the steps to be in the other order.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
-3
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
 </pre></div>
 </div>
-<img alt="../_images/2da5f111bbd484c75bc2bc2ad6c867b49061254efa37a37eaf71343986a5e38f.png" src="../_images/2da5f111bbd484c75bc2bc2ad6c867b49061254efa37a37eaf71343986a5e38f.png" />
-<img alt="../_images/937574700e8369490da800751849575fc523e22049ef161d6bb1abc2aa7ca896.png" src="../_images/937574700e8369490da800751849575fc523e22049ef161d6bb1abc2aa7ca896.png" />
-<img alt="../_images/ff71542feb12e79223cf9d98e20307ec90258fd1f732d381f184de2345c29d95.png" src="../_images/ff71542feb12e79223cf9d98e20307ec90258fd1f732d381f184de2345c29d95.png" />
-<img alt="../_images/e5ce75a187a9a375c89be5d2c25ea82334bc91ce3e288c819fd94b334a89709e.png" src="../_images/e5ce75a187a9a375c89be5d2c25ea82334bc91ce3e288c819fd94b334a89709e.png" />
-<img alt="../_images/ba1accb7b7158ce5ed32bb93f337beb58859c9cd98c41c6e44b20dbba03b8d03.png" src="../_images/ba1accb7b7158ce5ed32bb93f337beb58859c9cd98c41c6e44b20dbba03b8d03.png" />
-<img alt="../_images/ba1accb7b7158ce5ed32bb93f337beb58859c9cd98c41c6e44b20dbba03b8d03.png" src="../_images/ba1accb7b7158ce5ed32bb93f337beb58859c9cd98c41c6e44b20dbba03b8d03.png" />
+<img alt="../_images/edd0ab6d678240f96d7c6029efee69e73b3d3c6a1dea0a64c74a329ec9a5fb0d.png" src="../_images/edd0ab6d678240f96d7c6029efee69e73b3d3c6a1dea0a64c74a329ec9a5fb0d.png" />
+<img alt="../_images/4caa6311ae822be6c0d3391f4b54631ce2843b77ba2da3e5182ec7b338beae48.png" src="../_images/4caa6311ae822be6c0d3391f4b54631ce2843b77ba2da3e5182ec7b338beae48.png" />
+<img alt="../_images/50da77ff7ad8c397cbfc4e6e11dc7b50cdc2da94936d287aa99a717c5d0fad74.png" src="../_images/50da77ff7ad8c397cbfc4e6e11dc7b50cdc2da94936d287aa99a717c5d0fad74.png" />
+<img alt="../_images/50da77ff7ad8c397cbfc4e6e11dc7b50cdc2da94936d287aa99a717c5d0fad74.png" src="../_images/50da77ff7ad8c397cbfc4e6e11dc7b50cdc2da94936d287aa99a717c5d0fad74.png" />
 </div>
 </div>
 <p>This algorithm is random.  So each time we run it, it looks a little different.</p>
@@ -1196,7 +1194,7 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a040257e484f15f31b987f6f74dcdcf6e40225190a9f7fc9d4f9887aed1b4d71.png" src="../_images/a040257e484f15f31b987f6f74dcdcf6e40225190a9f7fc9d4f9887aed1b4d71.png" />
+<img alt="../_images/2a40c6ecc19f953047423c024ee089ccb8695213695097e32b353f25b0420f6c.png" src="../_images/2a40c6ecc19f953047423c024ee089ccb8695213695097e32b353f25b0420f6c.png" />
 </div>
 </div>
 <p>and another run I saved that has a lot of iterations:</p>
@@ -1227,16 +1225,16 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 0, 3, 1, 1, 0, 3, 0, 2, 2, 0, 1, 2, 1, 3, 0, 3, 0, 3, 0, 1,
-       3, 1, 2, 1, 1, 0, 2, 1, 0, 3, 1, 0, 0, 1, 1, 1, 0, 2, 0, 0, 2, 3,
-       2, 3, 0, 1, 1, 1, 0, 3, 2, 0, 3, 3, 2, 0, 2, 2, 1, 0, 0, 0, 1, 1,
-       1, 3, 1, 0, 2, 0, 0, 0, 2, 2, 3, 2, 1, 1, 1, 1, 3, 2, 1, 2, 1, 2,
-       1, 3, 3, 3, 2, 1, 1, 0, 1, 2, 0, 2, 0, 0, 2, 0, 3, 2, 0, 3, 1, 0,
-       3, 3, 3, 3, 0, 2, 1, 0, 0, 2, 1, 0, 0, 1, 2, 2, 2, 3, 0, 3, 3, 1,
-       0, 3, 2, 1, 2, 2, 2, 1, 2, 1, 0, 1, 0, 3, 2, 0, 2, 2, 2, 2, 3, 2,
-       3, 2, 3, 2, 2, 2, 2, 1, 3, 0, 1, 2, 1, 2, 3, 1, 2, 2, 2, 2, 0, 2,
-       0, 1, 2, 3, 0, 0, 3, 3, 1, 1, 2, 0, 0, 2, 2, 2, 1, 1, 2, 0, 1, 3,
-       1, 2], dtype=int32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 0, 3, 3, 2, 3, 0, 1, 0, 2, 0, 0, 0, 1, 2, 3, 3, 3, 1, 3, 1, 0,
+       1, 2, 2, 2, 3, 2, 2, 2, 3, 0, 3, 1, 3, 0, 1, 0, 1, 2, 2, 2, 1, 3,
+       3, 1, 1, 3, 1, 0, 2, 2, 3, 2, 2, 0, 3, 2, 0, 0, 0, 2, 1, 0, 1, 1,
+       3, 0, 2, 1, 2, 0, 1, 1, 0, 0, 1, 2, 0, 1, 1, 1, 1, 0, 3, 0, 2, 3,
+       2, 0, 0, 0, 2, 3, 1, 1, 3, 0, 2, 2, 0, 1, 3, 2, 1, 3, 1, 1, 1, 0,
+       0, 3, 2, 1, 0, 2, 2, 0, 3, 3, 2, 2, 3, 1, 2, 3, 3, 1, 0, 3, 0, 2,
+       0, 2, 3, 1, 2, 2, 0, 1, 3, 2, 0, 3, 3, 0, 3, 3, 3, 1, 0, 0, 0, 3,
+       3, 3, 2, 1, 3, 0, 1, 1, 3, 1, 0, 0, 0, 3, 0, 2, 1, 2, 3, 3, 3, 1,
+       1, 2, 1, 2, 3, 3, 2, 1, 0, 3, 0, 3, 2, 0, 2, 0, 1, 0, 0, 1, 3, 0,
+       2, 3], dtype=int32)
 </pre></div>
 </div>
 </div>
@@ -1249,10 +1247,10 @@ was okay for the steps to be in the other order.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5.90823529, 6.08666667],
-       [1.99153846, 2.02096154],
-       [6.08271186, 2.10508475],
-       [2.08842105, 6.09210526]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.00018868, 5.95339623],
+       [5.96145833, 1.94416667],
+       [5.9506383 , 5.99340426],
+       [2.00692308, 2.08096154]])
 </pre></div>
 </div>
 </div>
@@ -1295,23 +1293,23 @@ was okay for the steps to be in the other order.</p>
   <tbody>
     <tr>
       <th>A</th>
-      <td>1.991538</td>
-      <td>2.020962</td>
+      <td>2.006923</td>
+      <td>2.080962</td>
     </tr>
     <tr>
       <th>B</th>
-      <td>2.088421</td>
-      <td>6.092105</td>
+      <td>2.000189</td>
+      <td>5.953396</td>
     </tr>
     <tr>
       <th>C</th>
-      <td>6.082712</td>
-      <td>2.105085</td>
+      <td>5.961458</td>
+      <td>1.944167</td>
     </tr>
     <tr>
       <th>D</th>
-      <td>5.908235</td>
-      <td>6.086667</td>
+      <td>5.950638</td>
+      <td>5.993404</td>
     </tr>
   </tbody>
 </table>

@@ -61,12 +61,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-10-31';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="16. Interpretting Regression" href="2023-11-02.html" />
     <link rel="prev" title="14. Clustering Metrics" href="2023-10-26.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -187,6 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-10-24.html">13. Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">15. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -441,18 +444,21 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">15.1. Feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">15.2. Setting up for regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">15.3. Fitting a regression model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">15.4. Regression Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.5. Questions after class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.5.1. How do you know if a regression model is good or works for a dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.5.2. So is regression is just used with numeric values in terms of predicting?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.5.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.5.4. Are linear models exclusively used for regression problems?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.5.5. What does a negative R2 score mean?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.5.6. What is the difference between a good and bad rscore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.5.7. why were your values coming out negative?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.5.8. What would be a common example of a real-world linear regression?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.5.9. what are the coefficient and intercept ?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.5.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-predictions">15.4. Regression Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-regression">15.5. Visualizing Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-regression-mean-squared-error">15.6. Evaluating Regression - Mean Squared Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-regression-r2">15.7. Evaluating Regression - R2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.8. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.8.1. How do you know if a regression model is good or works for a dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.8.2. So is regression is just used with numeric values in terms of predicting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.8.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.8.4. Are linear models exclusively used for regression problems?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.8.5. What does a negative R2 score mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.8.6. What is the difference between a good and bad rscore?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.8.7. why were your values coming out negative?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.8.8. What would be a common example of a real-world linear regression?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.8.9. what are the coefficient and intercept ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.8.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
 </ul>
 </li>
 </ul>
@@ -496,19 +502,7 @@ model.</p>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pre</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">pre</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;pre&#39;
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -750,88 +744,110 @@ model.</p>
 </div>
 </div>
 </section>
-<section id="regression-performance">
-<h2><span class="section-number">15.4. </span>Regression Performance<a class="headerlink" href="#regression-performance" title="Permalink to this headline">#</a></h2>
+<section id="regression-predictions">
+<h2><span class="section-number">15.4. </span>Regression Predictions<a class="headerlink" href="#regression-predictions" title="Permalink to this headline">#</a></h2>
+<p>Linear regression is making the assumption that the target is a linear function of the features so that we can use the equation for a line(for scalar variables):</p>
+<div class="math notranslate nohighlight">
+\[ y =mx + b\]</div>
+<p>becomes equivalent to the following code assuming they were all vectors/matrices</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># could be any number from 0 ... len(target)</span>
+<span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="o">*</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span> <span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
+</pre></div>
+</div>
+<p>You can match these up one for one.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">target</span></code> is <span class="math notranslate nohighlight">\(y\)</span> (this is why we usually put the <code class="docutils literal notranslate"><span class="pre">_y_</span></code> in the varaible name)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">regr.coef_</span></code> is the slope, <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">features</span></code> are the <span class="math notranslate nohighlight">\(x\)</span> (like for y, we label that way)</p></li>
+<li><p>adn <code class="docutils literal notranslate"><span class="pre">regr.intercept_</span></code> is the <span class="math notranslate nohighlight">\(b\)</span> or the y intercept.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>I have tried to expand the detail here substantively. Use the link at the top of the page to make an issue if you have specific questions</p>
+</div>
+<p>We will look at each of them and store them to variables here</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slope</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">slope</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5858561697336733
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2593078137348601
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_y_test</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    61.000000
-mean      2.994918
-std       1.593837
-min       1.000000
-25%       2.000000
-50%       2.520000
-75%       3.500000
-max      10.000000
-Name: tip, dtype: float64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.11221888])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intercept</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">intercept</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.1026924])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7921598186362337
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># extra import so that I can use the values of variables from the code outside of the </span>
+<span class="c1"># code cells on the website </span>
+<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
+
+<span class="c1"># &quot;gluing&quot; these variables for use</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;slope_pct&#39;</span><span class="p">,</span><span class="n">slope</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;intercept&#39;</span><span class="p">,</span><span class="n">intercept</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;slope_rnd&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">slope</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;intercept_rnd&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">intercept</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11.22188752])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7921598186362337
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11.])
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.79
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This is what our model <em>predicts</em> the tip will be based on the past data.  It is
+important to note that this is not what the tip <em>should</em> be by any sort of
+virtues. For example, a typical normative rule for tipping is to tip 15% or 20%.
+the model we learned, from this data, however is <span class="output text_plain">array([11.22188752])</span>% + $<span class="output text_plain">0.7921598186362337</span>.</p>
+</div>
+<p>now we can pull out our first <span class="math notranslate nohighlight">\(x\)</span> and calculate a predicted value of <span class="math notranslate nohighlight">\(y\)</span> manually</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">slope</span><span class="o">*</span><span class="n">tips_X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">intercept</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9324757971609059
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.6796813])
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_X_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span> <span class="o">+</span> <span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.81071985])
-</pre></div>
-</div>
-</div>
-</div>
+<p>and see that this matches exactly the prediction from the <code class="docutils literal notranslate"><span class="pre">predict</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -839,11 +855,36 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8107198537396934
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.679681299195818
 </pre></div>
 </div>
 </div>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Note that my random seed is not fixed, so the values there are going to change each time the
+website is updated, but that these values will <em>always</em> be true</p>
+</div>
+</section>
+<section id="visualizing-regression">
+<h2><span class="section-number">15.5. </span>Visualizing Regression<a class="headerlink" href="#visualizing-regression" title="Permalink to this headline">#</a></h2>
+<p>Since we only have one feature, we can visualize what was learned here.  We will use plain
+<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> plots because we are plotting from numpy arrays not data frames.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f1856ff7670&gt;
+</pre></div>
+</div>
+<img alt="../_images/cb5b076619a3b6aa5da69f1c065c01b8c283487c8f5c9c1f0136b5cc49561120.png" src="../_images/cb5b076619a3b6aa5da69f1c065c01b8c283487c8f5c9c1f0136b5cc49561120.png" />
+</div>
+</div>
+<p>This plots the predictions in blue vs the real data in black.  The above uses them both as scatter plots to make it more clear, below, like in class, I’ll use a normally inconvenient aspect of a line plot to show all the predictions the model could make in this range.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
@@ -852,30 +893,259 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f945900e580&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1854ece250&gt;]
 </pre></div>
 </div>
-<img alt="../_images/aac33e802bd98680ab227003cbd4810d0e94918dfb63151716aca75071bbf976.png" src="../_images/aac33e802bd98680ab227003cbd4810d0e94918dfb63151716aca75071bbf976.png" />
+<img alt="../_images/b67efb4ee6ecbe53abfd4391188d68ad21faa0aae6271ca23d086630052bc3f2.png" src="../_images/b67efb4ee6ecbe53abfd4391188d68ad21faa0aae6271ca23d086630052bc3f2.png" />
 </div>
 </div>
+<p>Since the predictions are prefectly in a line, if I use a line plot instead of scatter to connect them all, it makes a line.</p>
+</section>
+<section id="evaluating-regression-mean-squared-error">
+<h2><span class="section-number">15.6. </span>Evaluating Regression - Mean Squared Error<a class="headerlink" href="#evaluating-regression-mean-squared-error" title="Permalink to this headline">#</a></h2>
+<p>From the plot, we can see that there is some error for each point, so accuracy
+that we’ve been using, won’t work.  One idea is to look at how much error there
+is in each prediction, we can look at that visually first.</p>
+<p>These red lines are the <span class="xref std std-term">residuals</span>, or errors in each prediction.</p>
+<p>In this code block, I use <code class="docutils literal notranslate"><span class="pre">zip</span></code> a
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#zip">builtin function in Python</a>
+to iterate over all of the test samples and predictions (they’re all the same length)
+and plot each red line in a list comprehension.  This could have been a for loop, but
+the comprehension is slighly more compact visually.  The zip allows us to have a Pythonic,
+easy to read loop that iterates over multiple variables.</p>
+<p>To mape a vertical line, I make a line plot with just two values.  My plotted data is:
+<code class="docutils literal notranslate"><span class="pre">[x,x],[yp,yt]</span></code>  so the first point is <code class="docutils literal notranslate"><span class="pre">(x,yp)</span></code> and the second is <code class="docutils literal notranslate"><span class="pre">x,yt</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">;</span></code> at the end of each line suppressed the text output.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot line prediction</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
 
-<span class="c1"># draw vertical lines frome each data point to its predict value</span>
-<span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># draw vertical lines from each data point to its predict value</span>
+<span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">)</span>
                  <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)];</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1"># plot these last so they are visually on top</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f9458f35730&gt;
+<img alt="../_images/56b90e6138ab8f5658c5edde1e763ff73f42ea6e1ec66e5e25e3368149a01390.png" src="../_images/56b90e6138ab8f5658c5edde1e763ff73f42ea6e1ec66e5e25e3368149a01390.png" />
+</div>
+</div>
+<p>From this we can see that the errors are relatively small, which matches what we saw with the
+mean squared error.</p>
+<p>To see mroe about how the code above works:</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1"># draw vertical lines from each data point to its predict value</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">)):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tips_X_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">yp</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">yt</span> <span class="o">=</span> <span class="n">tips_y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">)</span>
+                 
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<img alt="../_images/8deb936fd0ec6d57a58d468dd7dc6960f83caee331f0df11982ddba7f925acbc.png" src="../_images/8deb936fd0ec6d57a58d468dd7dc6960f83caee331f0df11982ddba7f925acbc.png" />
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/indexes/base.py:3653,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3652</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3653</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3654</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/_libs/index.pyx:147,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/_libs/index.pyx:176,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:2606,</span> in <span class="ni">pandas._libs.hashtable.Int64HashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas/_libs/hashtable_class_helper.pxi:2630,</span> in <span class="ni">pandas._libs.hashtable.Int64HashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: 0
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">tips_X_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">yp</span> <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">yt</span> <span class="o">=</span> <span class="n">tips_y_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">);</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/series.py:1007,</span> in <span class="ni">Series.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1004</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1006</span> <span class="k">elif</span> <span class="n">key_is_scalar</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1007</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1009</span> <span class="k">if</span> <span class="n">is_hashable</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1010</span>     <span class="c1"># Otherwise index.get_value will raise InvalidIndexError</span>
+<span class="g g-Whitespace">   </span><span class="mi">1011</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1012</span>         <span class="c1"># For labels that don&#39;t resolve as scalars like tuples and frozensets</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/series.py:1116,</span> in <span class="ni">Series._get_value</span><span class="nt">(self, label, takeable)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1113</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1115</span> <span class="c1"># Similar to Index.get_value, but we do not fall back to positional</span>
+<span class="ne">-&gt; </span><span class="mi">1116</span> <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1118</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">loc</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1119</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_values</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/indexes/base.py:3655,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3654</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3655</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3656</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3657</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3658</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3659</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3660</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: 0
+</pre></div>
+</div>
+<img alt="../_images/ff9ef4d0060ea1771d9ff071d53b8f29f80e59c84bce899e7a7db60b28686cf4.png" src="../_images/ff9ef4d0060ea1771d9ff071d53b8f29f80e59c84bce899e7a7db60b28686cf4.png" />
+</div>
+</details>
+</div>
+<p>We can use the average length of these red lines to capture the error. To get
+the length, we can take the difference between the prediction and the data for
+each point. Some would be positive and others negative, so we will square each
+one then take the average.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7947789263150189
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which is equivalent to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7947789263150189
+</pre></div>
+</div>
+</div>
+</div>
+<p>To interpret this, we can take the square root to get it back into dollars. This becomes equivalent to taking the mean absolute value of the error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_abs_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
+<span class="n">mean_abs_error</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8915037444200775
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7061743084626356
+</pre></div>
+</div>
+</div>
+</div>
+<p>Still, to know if this is a big or small error, we have to compare it to the values
+we were predicting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_y_test</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    61.000000
+mean      3.135738
+std       1.124791
+min       1.250000
+25%       2.230000
+50%       3.000000
+75%       3.600000
+max       6.730000
+Name: tip, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">avg_tip</span> <span class="o">=</span> <span class="n">tips_y_test</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">tip_var</span> <span class="o">=</span> <span class="n">tips_y_test</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="n">avg_tip</span><span class="p">,</span> <span class="n">tip_var</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.1357377049180326, 1.2651548633879781)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glue</span><span class="p">(</span><span class="s1">&#39;mae&#39;</span><span class="p">,</span><span class="n">mean_abs_error</span><span class="p">)</span>
+<span class="n">glue</span><span class="p">(</span><span class="s1">&#39;avtip&#39;</span><span class="p">,</span><span class="n">avg_tip</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8915037444200775
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1357377049180326
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>We can see that the error is smaller than most of the tips.</p>
+</section>
+<section id="evaluating-regression-r2">
+<h2><span class="section-number">15.7. </span>Evaluating Regression - R2<a class="headerlink" href="#evaluating-regression-r2" title="Permalink to this headline">#</a></h2>
+<p>We can also use the <span class="math notranslate nohighlight">\(R^2\)</span> score, the <a class="reference external" href="https://scikit-learn.org/stable/modules/model_evaluation.html#r2-score">coefficient of determination</a>.</p>
+<p>If we have the following:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span> `=len(y_test)``</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> <code class="docutils literal notranslate"><span class="pre">=y_test</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\(y_i\)</span> <code class="docutils literal notranslate"><span class="pre">=y_test[i]</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{y}\)</span> = <code class="docutils literal notranslate"><span class="pre">y_pred</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{y} = \frac{1}{n}\sum_{i=0}^n y_i\)</span> = <code class="docutils literal notranslate"><span class="pre">sum(y_test)/len(y_test)</span></code></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ R^2(y, \hat{y}) = 1 = \frac{\sum_{i=0}^n (y_i - \hat{y}_i)^2}{\sum_{i=0}^n (y_i - \bar{y}_i)^2} \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2_score</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
@@ -883,11 +1153,25 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36132305606463144
 </pre></div>
 </div>
 </div>
 </div>
+<p>This is a bit harder to interpret, but we can use some additional plots to
+visualize.
+This code simulates data by randomly picking 20 points, spreading them out
+and makes the “predicted” y values by picking a slope of 3. Then I simulated various levels of noise, by sampling noise and multiplying the same noise vector by different scales and adding all of those to a data frame with the column name the r score for if that column of target values was the truth.</p>
+<p>Then I added some columns of y values that were with different slopes and different functions of x. These all have the small amount of noise.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html">Facet Grids</a> allow more customization than the figure level plotting functions
+we have used otherwise, but each of those combines a FacetGrid with a
+particular type of plot.</p>
+</div>
+</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -914,10 +1198,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f9458f3d9d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f1853d7f310&gt;
 </pre></div>
 </div>
-<img alt="../_images/b3ded06f35452d54d480353d1437ea87245f1166d25e3ecf350d1e90714a5662.png" src="../_images/b3ded06f35452d54d480353d1437ea87245f1166d25e3ecf350d1e90714a5662.png" />
+<img alt="../_images/01345b46135669c0a7d56dc19c4d4d727dd770124b941d7c80c4123391fa3edb.png" src="../_images/01345b46135669c0a7d56dc19c4d4d727dd770124b941d7c80c4123391fa3edb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -934,7 +1218,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5858561697336733
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7947789263150189
 </pre></div>
 </div>
 </div>
@@ -946,7 +1230,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36132305606463144
 </pre></div>
 </div>
 </div>
@@ -958,28 +1242,28 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36532010960011196
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.36132305606463144
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="questions-after-class">
-<h2><span class="section-number">15.5. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">15.8. </span>Questions after class<a class="headerlink" href="#questions-after-class" title="Permalink to this headline">#</a></h2>
 <section id="how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">
-<h3><span class="section-number">15.5.1. </span>How do you know if a regression model is good or works for a dataset?<a class="headerlink" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.1. </span>How do you know if a regression model is good or works for a dataset?<a class="headerlink" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset" title="Permalink to this headline">#</a></h3>
 <p>Let’s break this down.  Regression is supervised learning, so there needs to be variables that you can use as features and one to use as the target. To test if supervised learning makes sense, try filling column names in place of <code class="docutils literal notranslate"><span class="pre">features</span></code> and <code class="docutils literal notranslate"><span class="pre">target</span></code> in the following sentence, that describes a prediction task: we want to predict <code class="docutils literal notranslate"><span class="pre">target</span></code> from <code class="docutils literal notranslate"><span class="pre">features</span></code>.</p>
 <p>Regression, specifically means that the target variable needs to be continuous, not discrete. For example, in today’s class, we predicted the tip in dollars, which is continous in this sense.  This is not stictly continuous in the mathematical sense, but anything that is most useful to consider as continuous.</p>
 <p><em>logisitic regression is actually a classification model despite the name</em></p>
 </section>
 <section id="so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">
-<h3><span class="section-number">15.5.2. </span>So is regression is just used with numeric values in terms of predicting?<a class="headerlink" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.2. </span>So is regression is just used with numeric values in terms of predicting?<a class="headerlink" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting" title="Permalink to this headline">#</a></h3>
 <p>Yes linear regression requires numeric values for the features as well as the target.</p>
 <p>Other types of regression can use other types of features.</p>
 <p>All regression is for a continusous target.</p>
 </section>
 <section id="what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">
-<h3><span class="section-number">15.5.3. </span>What are the strengths of a regression model as opposed to the previous models we’ve seen?<a class="headerlink" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.3. </span>What are the strengths of a regression model as opposed to the previous models we’ve seen?<a class="headerlink" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen" title="Permalink to this headline">#</a></h3>
 <p>Using regression, classification, or clustering is based on what type of problem you are solving.</p>
 <p>Our simple flowchart for what task you are doing is:</p>
 <div class="mermaid">
@@ -995,31 +1279,31 @@ Name: tip, dtype: float64
         </div><p>the <a class="reference external" href="https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html">sklearn docs include a more detailed guide</a></p>
 </section>
 <section id="are-linear-models-exclusively-used-for-regression-problems">
-<h3><span class="section-number">15.5.4. </span>Are linear models exclusively used for regression problems?<a class="headerlink" href="#are-linear-models-exclusively-used-for-regression-problems" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.4. </span>Are linear models exclusively used for regression problems?<a class="headerlink" href="#are-linear-models-exclusively-used-for-regression-problems" title="Permalink to this headline">#</a></h3>
 <p>No, there are also linear classification models.</p>
 </section>
 <section id="what-does-a-negative-r2-score-mean">
-<h3><span class="section-number">15.5.5. </span>What does a negative R2 score mean?<a class="headerlink" href="#what-does-a-negative-r2-score-mean" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.5. </span>What does a negative R2 score mean?<a class="headerlink" href="#what-does-a-negative-r2-score-mean" title="Permalink to this headline">#</a></h3>
 <p>It’s a bad fit.</p>
 </section>
 <section id="what-is-the-difference-between-a-good-and-bad-rscore">
-<h3><span class="section-number">15.5.6. </span>What is the difference between a good and bad rscore?<a class="headerlink" href="#what-is-the-difference-between-a-good-and-bad-rscore" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.6. </span>What is the difference between a good and bad rscore?<a class="headerlink" href="#what-is-the-difference-between-a-good-and-bad-rscore" title="Permalink to this headline">#</a></h3>
 <p>1 is perfect, low is bad. What is “good enough” is context dependent.</p>
 </section>
 <section id="why-were-your-values-coming-out-negative">
-<h3><span class="section-number">15.5.7. </span>why were your values coming out negative?<a class="headerlink" href="#why-were-your-values-coming-out-negative" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.7. </span>why were your values coming out negative?<a class="headerlink" href="#why-were-your-values-coming-out-negative" title="Permalink to this headline">#</a></h3>
 <p>Mine was not a very good fit.  We’ll see why on Thursday.  Yours may have been better</p>
 </section>
 <section id="what-would-be-a-common-example-of-a-real-world-linear-regression">
-<h3><span class="section-number">15.5.8. </span>What would be a common example of a real-world linear regression?<a class="headerlink" href="#what-would-be-a-common-example-of-a-real-world-linear-regression" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.8. </span>What would be a common example of a real-world linear regression?<a class="headerlink" href="#what-would-be-a-common-example-of-a-real-world-linear-regression" title="Permalink to this headline">#</a></h3>
 <p>Lots of real models are linear regression, but with many inputs.  It is often not a perfect fit, but good enough.</p>
 </section>
 <section id="what-are-the-coefficient-and-intercept">
-<h3><span class="section-number">15.5.9. </span>what are the coefficient and intercept ?<a class="headerlink" href="#what-are-the-coefficient-and-intercept" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.9. </span>what are the coefficient and intercept ?<a class="headerlink" href="#what-are-the-coefficient-and-intercept" title="Permalink to this headline">#</a></h3>
 <p>The coefficient is the slope of the line and the intercept is the value of the label the model predicts for features =0.</p>
 </section>
 <section id="how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">
-<h3><span class="section-number">15.5.10. </span>how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?<a class="headerlink" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">15.8.10. </span>how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?<a class="headerlink" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data" title="Permalink to this headline">#</a></h3>
 <p>You have to transform it to be numerical.  If it is True and False, you can cast it to integers.</p>
 <p>I recommend for A9 filtering on the UCI website to pick out data with numerical features.</p>
 <p>In general, and you can for A9 if you want, use the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">sklearn <code class="docutils literal notranslate"><span class="pre">LabelEncodeer</span></code></a> to transform the data.</p>
@@ -1068,11 +1352,11 @@ Name: tip, dtype: float64
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-11-02.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Interpretting Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1097,18 +1381,21 @@ Name: tip, dtype: float64
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback">15.1. Feedback</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-for-regression">15.2. Setting up for regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-regression-model">15.3. Fitting a regression model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-performance">15.4. Regression Performance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.5. Questions after class</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.5.1. How do you know if a regression model is good or works for a dataset?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.5.2. So is regression is just used with numeric values in terms of predicting?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.5.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.5.4. Are linear models exclusively used for regression problems?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.5.5. What does a negative R2 score mean?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.5.6. What is the difference between a good and bad rscore?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.5.7. why were your values coming out negative?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.5.8. What would be a common example of a real-world linear regression?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.5.9. what are the coefficient and intercept ?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.5.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-predictions">15.4. Regression Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-regression">15.5. Visualizing Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-regression-mean-squared-error">15.6. Evaluating Regression - Mean Squared Error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-regression-r2">15.7. Evaluating Regression - R2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions-after-class">15.8. Questions after class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-know-if-a-regression-model-is-good-or-works-for-a-dataset">15.8.1. How do you know if a regression model is good or works for a dataset?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-is-regression-is-just-used-with-numeric-values-in-terms-of-predicting">15.8.2. So is regression is just used with numeric values in terms of predicting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-strengths-of-a-regression-model-as-opposed-to-the-previous-models-weve-seen">15.8.3. What are the strengths of a regression model as opposed to the previous models we’ve seen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-linear-models-exclusively-used-for-regression-problems">15.8.4. Are linear models exclusively used for regression problems?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-a-negative-r2-score-mean">15.8.5. What does a negative R2 score mean?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-difference-between-a-good-and-bad-rscore">15.8.6. What is the difference between a good and bad rscore?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-were-your-values-coming-out-negative">15.8.7. why were your values coming out negative?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-would-be-a-common-example-of-a-real-world-linear-regression">15.8.8. What would be a common example of a real-world linear regression?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-coefficient-and-intercept">15.8.9. what are the coefficient and intercept ?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-you-add-string-data-thats-not-binary-e-g-true-false-to-make-it-fit-in-data">15.8.10. how do you add string data thats not binary e.g ‘True’ ‘False’ to make it fit in data?</a></li>
 </ul>
 </li>
 </ul>
