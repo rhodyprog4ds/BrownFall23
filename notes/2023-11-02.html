@@ -604,6 +604,11 @@ document.write(`
 </div>
 </div>
 </div>
+<p>This is the r2 score, see <a class="reference internal" href="2023-10-31.html#r2score-intuition"><span class="std std-ref">the discussion from last class</span></a>.</p>
+<p>We can look at the estimator again and see what it learned. It describes the model like a line:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = mx+b\]</div>
+<p>First the slope</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span>
@@ -616,6 +621,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>Then the y intercept</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
@@ -628,6 +634,7 @@ document.write(`
 </div>
 </div>
 </div>
+<p>and we can get the predictions</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_y_pred</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">)</span>
@@ -646,7 +653,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f752c9ea520&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f97ee9ea580&gt;
 </pre></div>
 </div>
 <img alt="../_images/f9854f6335eca16673de79ffc70ac5c02458a6147b4920438239ee882ca246e2.png" src="../_images/f9854f6335eca16673de79ffc70ac5c02458a6147b4920438239ee882ca246e2.png" />
@@ -656,17 +663,20 @@ document.write(`
 </section>
 <section id="mutlivariate-regression">
 <h2><span class="section-number">16.3. </span>Mutlivariate Regression<a class="headerlink" href="#mutlivariate-regression" title="Permalink to this headline">#</a></h2>
-<p>We can look at the estimator again and see what it learned. It describes the model like a line:</p>
+<p>Recall the equation for a line:</p>
 <div class="math notranslate nohighlight">
 \[ \hat{y} = mx+b\]</div>
-<p>except in this case it’s multivariate, so we can write it like:</p>
+<p>When we have multiple variables instead of a scalar <span class="math notranslate nohighlight">\(x\)</span> we can have a vector <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and instead of a single slope, we have a vector of coefficients <span class="math notranslate nohighlight">\(\beta\)</span></p>
 <div class="math notranslate nohighlight">
-\[ \hat{y} = \beta^Tx + \beta_0 \]</div>
+\[ \hat{y} = \beta^T\mathbf{x} + \beta_0 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is the <code class="docutils literal notranslate"><span class="pre">regr_db.coef_</span></code> and <span class="math notranslate nohighlight">\(\beta_0\)</span> is <code class="docutils literal notranslate"><span class="pre">regr_db.intercept_</span></code> and that’s a vector multiplication and <span class="math notranslate nohighlight">\(\hat{y}\)</span> is <code class="docutils literal notranslate"><span class="pre">y_pred</span></code> and <span class="math notranslate nohighlight">\(y\)</span> is <code class="docutils literal notranslate"><span class="pre">y_test</span></code>.</p>
-<p>In scalar form it can be written like</p>
+<p>In scalar form, a vector multiplication can be written like</p>
 <div class="math notranslate nohighlight">
 \[ \hat{y} = \sum_{k=0}^d(x_k*\beta_k) + \beta_0\]</div>
-<p>where there are <span class="math notranslate nohighlight">\(d\)</span> features, that is <span class="math notranslate nohighlight">\(d\)</span>= <code class="docutils literal notranslate"><span class="pre">len(X_test[k])</span></code> and <span class="math notranslate nohighlight">\(k\)</span> indexed into it. For example in the below <span class="math notranslate nohighlight">\(k=0\)</span></p>
+<p>where there are <span class="math notranslate nohighlight">\(d\)</span> features, that is <span class="math notranslate nohighlight">\(d\)</span>= <code class="docutils literal notranslate"><span class="pre">len(X_test[k])</span></code> and <span class="math notranslate nohighlight">\(k\)</span> indexed into it.</p>
+<p>We are going to use 2 variables so it would be like:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = \beta_1*x_1 + \beta_2*x_2 + \beta_0\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_X</span> <span class="o">=</span> <span class="n">tips_df</span><span class="p">[[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span><span class="s1">&#39;size&#39;</span><span class="p">]]</span>
@@ -703,8 +713,8 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">regr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tips_X_train</span><span class="p">,</span><span class="n">tips_y_train</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr_2feat</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">regr_2feat</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tips_X_train</span><span class="p">,</span><span class="n">tips_y_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -713,14 +723,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_y_pred_2</span> <span class="o">=</span> <span class="n">regr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips_y_pred_2</span> <span class="o">=</span> <span class="n">regr_2feat</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regr_2feat</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -749,7 +759,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f752c8cc2e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f97ee8ce3d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/87055c3d7103270b9d949fe1a74dd342fa3b0c8cec148124ee79cc697edfa3c7.png" src="../_images/87055c3d7103270b9d949fe1a74dd342fa3b0c8cec148124ee79cc697edfa3c7.png" />
@@ -762,7 +772,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f752c8b18e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f97ee8b3be0&gt;
 </pre></div>
 </div>
 <img alt="../_images/765cf6330f650dc66b4f634baac9111b36e189727664f5822e82938cdf3ab43d.png" src="../_images/765cf6330f650dc66b4f634baac9111b36e189727664f5822e82938cdf3ab43d.png" />
@@ -775,7 +785,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.10108061, 0.2009679 ])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.11469301])
 </pre></div>
 </div>
 </div>
@@ -787,7 +797,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.48625594110725423
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7426466344875204
 </pre></div>
 </div>
 </div>
@@ -858,7 +868,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.85825279437057
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2073993683400492
 </pre></div>
 </div>
 </div>
@@ -870,7 +880,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.85825279437057
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">tips_X_test</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tips_X_test</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">regr</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="n">regr</span><span class="o">.</span><span class="n">intercept_</span>
+
+<span class="ne">IndexError</span>: index 1 is out of bounds for axis 0 with size 1
 </pre></div>
 </div>
 </div>
