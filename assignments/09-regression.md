@@ -53,3 +53,10 @@ TLDR: Fit a linear regression model, measure the fit with two metrics, and make 
 
 
 
+```{hint}
+For python level 2, summarize level 2 or visualize level 2 expand the "Repeat the split test and train" step a little.  
+
+
+- Use a loop to vary a variable of the analysis, repeat more times, or similar. 
+- Answer a question about regression and when it works, by putting all of the results into a dataframe
+```
