@@ -774,7 +774,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.09461771])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.1097803])
 </pre></div>
 </div>
 </div>
@@ -787,7 +787,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1327962632921946
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8170051354877765
 </pre></div>
 </div>
 </div>
@@ -812,16 +812,16 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.46177121])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.97802955])
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1327962632921946
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8170051354877765
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11.])
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.13
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.82
 </pre></div>
 </div>
 </div>
@@ -832,7 +832,7 @@ model.</p>
 <p>This is what our model <em>predicts</em> the tip will be based on the past data.  It is
 important to note that this is not what the tip <em>should</em> be by any sort of
 virtues. For example, a typical normative rule for tipping is to tip 15% or 20%.
-the model we learned, from this data, however is <span class="output text_plain">array([9.46177121])</span>% + $<span class="output text_plain">1.1327962632921946</span>.</p>
+the model we learned, from this data, however is <span class="output text_plain">array([10.97802955])</span>% + $<span class="output text_plain">0.8170051354877765</span>.</p>
 </div>
 <p>now we can pull out our first <span class="math notranslate nohighlight">\(x\)</span> and calculate a predicted value of <span class="math notranslate nohighlight">\(y\)</span> manually</p>
 <div class="cell docutils container">
@@ -842,7 +842,7 @@ the model we learned, from this data, however is <span class="output text_plain"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.40256596])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.18157421])
 </pre></div>
 </div>
 </div>
@@ -855,7 +855,7 @@ the model we learned, from this data, however is <span class="output text_plain"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.4025659597014966
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.18157420866876
 </pre></div>
 </div>
 </div>
@@ -878,10 +878,10 @@ website is updated, but that these values will <em>always</em> be true</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f7eeb9f9640&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f2f8f5f0730&gt;
 </pre></div>
 </div>
-<img alt="../_images/37ca5e45d7c78fab45a780c91871948bd88777b7b5802930eea41e721f049de1.png" src="../_images/37ca5e45d7c78fab45a780c91871948bd88777b7b5802930eea41e721f049de1.png" />
+<img alt="../_images/b1c89286d7588bb061a2a083b66e1034dc496645706d21f7e45c5296b43b60a4.png" src="../_images/b1c89286d7588bb061a2a083b66e1034dc496645706d21f7e45c5296b43b60a4.png" />
 </div>
 </div>
 <p>This plots the predictions in blue vs the real data in black.  The above uses them both as scatter plots to make it more clear, below, like in class, I’ll use a normally inconvenient aspect of a line plot to show all the predictions the model could make in this range.</p>
@@ -893,10 +893,10 @@ website is updated, but that these values will <em>always</em> be true</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7ee98caac0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f2f8f4c92e0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/cf5f8bdb602136e39fad3d1517815d317dda43f70efbca816bd9225cc32696ad.png" src="../_images/cf5f8bdb602136e39fad3d1517815d317dda43f70efbca816bd9225cc32696ad.png" />
+<img alt="../_images/4650c6f798f884d164302438e46ed3a32ff74f7e9d5880484bd6b1acd9bc1028.png" src="../_images/4650c6f798f884d164302438e46ed3a32ff74f7e9d5880484bd6b1acd9bc1028.png" />
 </div>
 </div>
 <p>Since the predictions are prefectly in a line, if I use a line plot instead of scatter to connect them all, it makes a line.</p>
@@ -923,7 +923,7 @@ easy to read loop that iterates over multiple variables.</p>
 
 <span class="c1"># draw vertical lines from each data point to its predict value</span>
 <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">)</span>
-                 <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)];</span>
+                 <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_pred</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)];</span>
 
 <span class="c1"># plot these last so they are visually on top</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">);</span>
@@ -931,20 +931,7 @@ easy to read loop that iterates over multiple variables.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_pred</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># draw vertical lines from each data point to its predict value</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">[</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">x</span><span class="p">],[</span><span class="n">yp</span><span class="p">,</span><span class="n">yt</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span> <span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span>                  <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span><span class="n">tips_y_test</span><span class="p">)];</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># plot these last so they are visually on top</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">tips_X_test</span><span class="p">,</span> <span class="n">tips_y_test</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">);</span>
-
-<span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
-</pre></div>
-</div>
-<img alt="../_images/d38985b98ac12d3c879fd9c04ae706836cc8e87fc27177eeacbafb9352d9c5e7.png" src="../_images/d38985b98ac12d3c879fd9c04ae706836cc8e87fc27177eeacbafb9352d9c5e7.png" />
+<img alt="../_images/46430563fa8726b57a85c262bf73bd3b5254070df11b6ca308811a6493ec24a4.png" src="../_images/46430563fa8726b57a85c262bf73bd3b5254070df11b6ca308811a6493ec24a4.png" />
 </div>
 </div>
 <p>From this we can see that the errors are relatively small, which matches what we saw with the
@@ -983,7 +970,7 @@ mean squared error.</p>
 <span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/d38985b98ac12d3c879fd9c04ae706836cc8e87fc27177eeacbafb9352d9c5e7.png" src="../_images/d38985b98ac12d3c879fd9c04ae706836cc8e87fc27177eeacbafb9352d9c5e7.png" />
+<img alt="../_images/6683bebe1e4857fbdc4cd300538405a94d9faccd67988438a549a6d9301355da.png" src="../_images/6683bebe1e4857fbdc4cd300538405a94d9faccd67988438a549a6d9301355da.png" />
 </div>
 </details>
 </div>
@@ -993,17 +980,12 @@ each point. Some would be positive and others negative, so we will square each
 one then take the average.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">tips_y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9675454539113806
 </pre></div>
 </div>
 </div>
@@ -1011,17 +993,12 @@ one then take the average.</p>
 <p>Which is equivalent to:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">tips_y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9675454539113806
 </pre></div>
 </div>
 </div>
@@ -1029,36 +1006,25 @@ one then take the average.</p>
 <p>To interpret this, we can take the square root to get it back into dollars. This becomes equivalent to taking the mean absolute value of the error.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_abs_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_abs_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">tips_y_pred</span><span class="p">))</span>
 <span class="n">mean_abs_error</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">mean_abs_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">tips_y_test</span><span class="p">,</span><span class="n">y_pred</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">mean_abs_error</span>
-
-<span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9836388838955995
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">tips_y_pred</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tips_y_test</span><span class="o">-</span><span class="n">y_pred</span><span class="p">))</span>
-
-<span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6799308263116046
 </pre></div>
 </div>
 </div>
@@ -1073,13 +1039,13 @@ we were predicting</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    61.000000
-mean      2.843443
-std       1.368825
+mean      2.992787
+std       1.274760
 min       1.000000
 25%       2.000000
-50%       2.750000
-75%       3.250000
-max       9.000000
+50%       2.830000
+75%       3.550000
+max       6.730000
 Name: tip, dtype: float64
 </pre></div>
 </div>
@@ -1094,7 +1060,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.84344262295082, 1.8736829508196728)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.992786885245901, 1.6250137704918033)
 </pre></div>
 </div>
 </div>
@@ -1112,13 +1078,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">glue</span><span class="p">(</span><span class="s1">&#39;mae&#39;</span><span class="p">,</span><span class="n">mean_abs_error</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">glue</span><span class="p">(</span><span class="s1">&#39;avtip&#39;</span><span class="p">,</span><span class="n">avg_tip</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;mean_abs_error&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9836388838955995
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.992786885245901
 </pre></div>
 </div>
 </div>
@@ -1146,7 +1109,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5952344866982477
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3946689995255446
 </pre></div>
 </div>
 </div>
@@ -1202,10 +1165,10 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ee98ebd90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f2f8ce4c760&gt;
 </pre></div>
 </div>
-<img alt="../_images/a5c803bbb3f8c10ef805e2ece8a37606a673a80a3bfdd56a9f6a912a1a5c52c4.png" src="../_images/a5c803bbb3f8c10ef805e2ece8a37606a673a80a3bfdd56a9f6a912a1a5c52c4.png" />
+<img alt="../_images/d048610082be3d46ed3cc2373f4703a670f56f4844197e94b6529590c12d9292.png" src="../_images/d048610082be3d46ed3cc2373f4703a670f56f4844197e94b6529590c12d9292.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1215,7 +1178,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5952344866982477
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3946689995255446
 </pre></div>
 </div>
 </div>
@@ -1228,7 +1191,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7459694177245245
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9675454539113806
 </pre></div>
 </div>
 </div>
@@ -1240,7 +1203,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5952344866982477
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3946689995255446
 </pre></div>
 </div>
 </div>
