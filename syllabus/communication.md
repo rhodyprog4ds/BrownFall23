@@ -15,7 +15,7 @@ kernelspec:
 #  Communications & Office Hours
 
 ```{warning}
-Due to Dept Seminar Office hours on 10/13 will be at 5pm instead of 4pm. 
+Due to Dept Seminar Office hours on 11/10 will be at 5pm instead of 4pm. 
 ```
 
 ```{code-cell}
