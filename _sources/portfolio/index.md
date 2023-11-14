@@ -84,9 +84,9 @@ You can view a (fake) example [in this repository](https://github.com/rhodyprog4
 
 <!-- ### Portfolio 1 -->
 - Portfolio Check 1 is due October 16
-<!-- - Portfolio Check 2 is due 
-- Portfolio check 3 is due 
-- Portfolio check 4 is due  -->
+ - Portfolio Check 2 is due November 14
+- Portfolio check 3 is due December 4
+- Portfolio check 4 is due December 19 <!---->
 
 
 
