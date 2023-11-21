@@ -18,7 +18,7 @@ __Final due date: {{ date }}__ -->
 ## Assessment
 
 Eligible skills: (links to checklists)
-- **first chance** representation [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#representation-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#representation-level2) remember this is optional
+- **first chance** representation [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#representation-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#representation-level2) 
 - **first chance** workflow [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#workflow-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#workflow-level2) psuedo code and explanation is enough for this
 - compare [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#compare-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#compare-level2)
 - optimization [1](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#optimization-level1) and [2](https://rhodyprog4ds.github.io/BrownFall23/syllabus/achievements.html#optimization-level2)
