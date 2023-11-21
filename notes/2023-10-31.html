@@ -208,6 +208,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../assignments/09-regression.html">9. Assignment 9: Linear Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/10-optimize.html">10. Assignment 10: Tuning Model Parameters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../assignments/11-compare.html">11. Assignment 11: Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/12-fake-news.html">12. Assignment 12: Fake News</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
 <ul class="nav bd-sidenav">
@@ -780,7 +781,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.12767669])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.10732369])
 </pre></div>
 </div>
 </div>
@@ -793,7 +794,7 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6129801532078374
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8992336313741736
 </pre></div>
 </div>
 </div>
@@ -818,16 +819,16 @@ model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([12.76766907])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10.73236913])
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6129801532078374
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8992336313741736
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([13.])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([11.])
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.61
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
 </pre></div>
 </div>
 </div>
@@ -838,7 +839,7 @@ model.</p>
 <p>This is what our model <em>predicts</em> the tip will be based on the past data.  It is
 important to note that this is not what the tip <em>should</em> be by any sort of
 virtues. For example, a typical normative rule for tipping is to tip 15% or 20%.
-the model we learned, from this data, however is <span class="output text_plain">array([12.76766907])</span>% + $<span class="output text_plain">0.6129801532078374</span>.</p>
+the model we learned, from this data, however is <span class="output text_plain">array([10.73236913])</span>% + $<span class="output text_plain">0.8992336313741736</span>.</p>
 </div>
 <p>now we can pull out our first <span class="math notranslate nohighlight">\(x\)</span> and calculate a predicted value of <span class="math notranslate nohighlight">\(y\)</span> manually</p>
 <div class="cell docutils container">
@@ -848,7 +849,7 @@ the model we learned, from this data, however is <span class="output text_plain"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.88817878])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.61426622])
 </pre></div>
 </div>
 </div>
@@ -861,7 +862,7 @@ the model we learned, from this data, however is <span class="output text_plain"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8881787816897933
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6142662184048016
 </pre></div>
 </div>
 </div>
@@ -884,10 +885,10 @@ website is updated, but that these values will <em>always</em> be true</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f7c66feba30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fdc0e3669d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/b7147da21b02e1fddca5d39b32cb36483e677b5c69d5aa1b636d94d150d2c52d.png" src="../_images/b7147da21b02e1fddca5d39b32cb36483e677b5c69d5aa1b636d94d150d2c52d.png" />
+<img alt="../_images/59e6721b74d52b888552317c2fd1132425d249f6cd65a8bed7ad270abd117e00.png" src="../_images/59e6721b74d52b888552317c2fd1132425d249f6cd65a8bed7ad270abd117e00.png" />
 </div>
 </div>
 <p>This plots the predictions in blue vs the real data in black.  The above uses them both as scatter plots to make it more clear, below, like in class, I’ll use a normally inconvenient aspect of a line plot to show all the predictions the model could make in this range.</p>
@@ -899,10 +900,10 @@ website is updated, but that these values will <em>always</em> be true</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7c66ec2730&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdc0bfcf940&gt;]
 </pre></div>
 </div>
-<img alt="../_images/e3be5e814c86d1209e8f639b3c30232ac2b0ab78696a5d3d620aeb3eb366b5a2.png" src="../_images/e3be5e814c86d1209e8f639b3c30232ac2b0ab78696a5d3d620aeb3eb366b5a2.png" />
+<img alt="../_images/258e7a4ada5b321756f3f204aebc045f9f52cee0e519b196a0cddc3bd0231602.png" src="../_images/258e7a4ada5b321756f3f204aebc045f9f52cee0e519b196a0cddc3bd0231602.png" />
 </div>
 </div>
 <p>Since the predictions are prefectly in a line, if I use a line plot instead of scatter to connect them all, it makes a line.</p>
@@ -937,7 +938,7 @@ easy to read loop that iterates over multiple variables.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f8a9f0d808898e437795c5b96588633dd9d692fc0954eb19e6b06b261ed94b49.png" src="../_images/f8a9f0d808898e437795c5b96588633dd9d692fc0954eb19e6b06b261ed94b49.png" />
+<img alt="../_images/e317dc0015f0543d5f365480e19227c1397f85446ead15dc42e4b4f7af99e9f0.png" src="../_images/e317dc0015f0543d5f365480e19227c1397f85446ead15dc42e4b4f7af99e9f0.png" />
 </div>
 </div>
 <p>From this we can see that the errors are relatively small, which matches what we saw with the
@@ -976,7 +977,7 @@ mean squared error.</p>
 <span class="ne">NameError</span>: name &#39;y_pred&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/4e7f3f6b73c006a4a6d5b71f7db985f06708226c65d070bd8d83d635ee5c2596.png" src="../_images/4e7f3f6b73c006a4a6d5b71f7db985f06708226c65d070bd8d83d635ee5c2596.png" />
+<img alt="../_images/afaa693a405a86226e53725c8ff0be8d3ad3b0a763c51d5eea4327e6beb38f19.png" src="../_images/afaa693a405a86226e53725c8ff0be8d3ad3b0a763c51d5eea4327e6beb38f19.png" />
 </div>
 </details>
 </div>
@@ -991,7 +992,7 @@ one then take the average.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.662835372453208
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7665990147172214
 </pre></div>
 </div>
 </div>
@@ -1004,7 +1005,7 @@ one then take the average.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.662835372453208
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7665990147172214
 </pre></div>
 </div>
 </div>
@@ -1018,7 +1019,7 @@ one then take the average.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2895097411238148
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8755564029331413
 </pre></div>
 </div>
 </div>
@@ -1030,7 +1031,7 @@ one then take the average.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0209166490020312
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6500400467637524
 </pre></div>
 </div>
 </div>
@@ -1045,13 +1046,13 @@ we were predicting</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    61.000000
-mean      3.057213
-std       1.325223
-min       1.100000
-25%       2.020000
-50%       3.000000
-75%       3.500000
-max       7.580000
+mean      2.836885
+std       1.109328
+min       1.000000
+25%       2.000000
+50%       2.740000
+75%       3.390000
+max       5.920000
 Name: tip, dtype: float64
 </pre></div>
 </div>
@@ -1066,7 +1067,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.0572131147540986, 1.7562171038251364)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.8368852459016396, 1.230608469945355)
 </pre></div>
 </div>
 </div>
@@ -1084,10 +1085,10 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2895097411238148
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8755564029331413
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0572131147540986
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8368852459016396
 </pre></div>
 </div>
 </div>
@@ -1115,7 +1116,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03739162336745283
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.366674548406841
 </pre></div>
 </div>
 </div>
@@ -1171,10 +1172,10 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7c649fef10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fdc0bc7c550&gt;
 </pre></div>
 </div>
-<img alt="../_images/aa7a9a260e8d260cb37d38972b6767b6acd90ade6fc6c3e282d3d807c7f15ab3.png" src="../_images/aa7a9a260e8d260cb37d38972b6767b6acd90ade6fc6c3e282d3d807c7f15ab3.png" />
+<img alt="../_images/9ba1a522cf827be45b3bb1b7449a224059f6911f42f71a738ea2db9ad6cd4809.png" src="../_images/9ba1a522cf827be45b3bb1b7449a224059f6911f42f71a738ea2db9ad6cd4809.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1184,7 +1185,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03739162336745283
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.366674548406841
 </pre></div>
 </div>
 </div>
@@ -1197,7 +1198,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.662835372453208
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7665990147172214
 </pre></div>
 </div>
 </div>
@@ -1209,7 +1210,7 @@ particular type of plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03739162336745283
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.366674548406841
 </pre></div>
 </div>
 </div>
