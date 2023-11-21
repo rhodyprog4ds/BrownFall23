@@ -2,12 +2,12 @@
 # Assignment 11: Model Comparison
 
 ## Quick Facts
--  [accept the assignmnt]())
+-  [accept the assignmnt](https://classroom.github.com/a/Rw_yt2rK)
 - __Due: 2023-11-21__
 
 ## Related notes
 
-- [](../notes/2023-11-14) (partial)
+- [](../notes/2023-11-14)
 - [](../notes/2023-11-16)
 
 ## Assessment

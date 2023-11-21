@@ -1,0 +1,1734 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>20. Learning Curves and more Model Comparison &#8212; Programming for Data Science at URI Fall 2023</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/course-admonitions.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-11-16';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="19. Model Comparison" href="2023-11-14.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/310_2021.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/310_2021.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/achievements.html">Data Science Achievements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/policies.html">Grading Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/style.html">Course  Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General URI Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data and Structural Repairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-28.html">7. Reparing values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-03.html">8. Merging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-05.html">9. Web Scraping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-12.html">10. Evaluating ML Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-17.html">11. Intro to ML &amp; Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-19.html">12. Understanding Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-24.html">13. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-07.html">17. Cross Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Learning Curves and more Model Comparison</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/07-classification.html">7. Assignment 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/08-clustering.html">8. Assignment 8: Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/09-regression.html">9. Assignment 9: Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/10-optimize.html">10. Assignment 10: Tuning Model Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/11-compare.html">11. Assignment 11: Model Comparison</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/index.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/formatting.html">Formatting Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check1ideas.html">Portfolio Check 1 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check2ideas.html">Check 2 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check3ideas.html">Check 3 Ideas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/debugging.html">Code Errors</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/python.html">References on Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/datasets.html">Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/terminal.html">Terminals and Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall20/letters/">Advice from FA2020 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall21/letters/">Advice from FA2021 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/edit/main/notes/2023-11-16.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/issues/new?title=Issue%20on%20page%20%2Fnotes/2023-11-16.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2023-11-16.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Learning Curves and more Model Comparison</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-timing-vary">20.1. How does the timing vary?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-training-impact-our-model">20.2. How does training impact our model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-dataset">20.3. Digits Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-with-digits-data">20.4. Decision Tree with digits data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="learning-curves-and-more-model-comparison">
+<h1><span class="section-number">20. </span>Learning Curves and more Model Comparison<a class="headerlink" href="#learning-curves-and-more-model-comparison" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cluster</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="c1"># import the whole model selection module</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">model_selection</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition-further-reading admonition">
+<p class="admonition-title">Further Reading</p>
+<p>If you struggled to understand this code excerpt to fill in the comments, some generic strategies to understand code may help, beyond applying what we have covered in class.</p>
+<p><a class="reference external" href="https://www.manning.com/books/the-programmers-brain">The Programmer’s brain</a>
+is an overview of how brains work, as applied to programming, written for working
+developers. This means that it assumes you know most CS concepts and at least two programming languages. If you don’t there may be some parts that do not make sense to you, but the general ideas should still make sense.
+The author is a professor who researchers how people learn
+programming and how to effectively teach it.</p>
+<p>This book is available for free online, including an audio version of the first chapter.</p>
+<p><strong>I strongly recommend this if you have trouble remembering things</strong></p>
+</div>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load and split the data</span>
+<span class="n">iris_X</span><span class="p">,</span> <span class="n">iris_y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_X_test</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">,</span> <span class="n">iris_y_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span>
+  <span class="n">iris_X</span><span class="p">,</span><span class="n">iris_y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+
+
+<span class="c1"># create dt,</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+
+<span class="c1"># set param grid </span>
+<span class="n">params_dt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;criterion&#39;</span><span class="p">:[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span><span class="s1">&#39;entropy&#39;</span><span class="p">],</span>
+       <span class="s1">&#39;max_depth&#39;</span><span class="p">:[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+    <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">))}</span>
+<span class="c1"># create optimizer</span>
+<span class="n">dt_opt</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="n">params_dt</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+
+<span class="c1"># optimize the dt parameters</span>
+<span class="n">dt_opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span><span class="n">iris_y_train</span><span class="p">)</span>
+
+<span class="c1"># store the results in a dataframe</span>
+<span class="n">dt_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dt_opt</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+
+
+<span class="c1"># create svm, its parameter grid and optimizer</span>
+<span class="n">svm_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:[</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span> <span class="s1">&#39;C&#39;</span><span class="p">:[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.75</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">svm_opt</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svm_clf</span><span class="p">,</span><span class="n">param_grid</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># optmize the svm put the CV results in a dataframe</span>
+<span class="n">svm_opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris_X_train</span><span class="p">,</span><span class="n">iris_y_train</span><span class="p">)</span>
+<span class="n">sv_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">svm_opt</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So we have redone some familiar code.  We have found the optimal parameters for best accuracy for two different classifiers, SVM and Decision tree on our data.</p>
+<p>This is extra detail we did not do in class for time reasons</p>
+<p>We can  use EDA to understand how the score varied across all of the parameter settings we tried.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sv_df</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    14.000000
+mean      0.980952
+std       0.006879
+min       0.966667
+25%       0.975000
+50%       0.983333
+75%       0.983333
+max       0.991667
+Name: mean_test_score, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt_df</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    90.000000
+mean      0.911574
+std       0.010796
+min       0.900000
+25%       0.900000
+50%       0.916667
+75%       0.916667
+max       0.941667
+Name: mean_test_score, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>From this we see that in both cases the standard deviation (std) is really
+low. This tells us that the parameter changes didn’t impact the performance
+much.  Combined with the overall high accuracy this tells us that the data
+is probably really easy to classify.  If the performance had been uniformly
+bad, it might have instead told us that we did not try a wide enough range
+of parameters.</p>
+<p>To confirm how many parameter settings we have used we can check a couple different ways. First, above in the count of the describe.</p>
+<p>We can also calculate directly from the parameter grids before we even do the fit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">description_vars</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;param_C&#39;</span><span class="p">,</span> <span class="s1">&#39;param_kernel&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,]</span>
+<span class="n">vars_to_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mean_fit_time&#39;</span><span class="p">,</span> <span class="s1">&#39;std_fit_time&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_score_time&#39;</span><span class="p">,</span> <span class="s1">&#39;std_score_time&#39;</span><span class="p">]</span>
+<span class="n">svm_time</span> <span class="o">=</span> <span class="n">sv_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span> <span class="n">description_vars</span><span class="p">,</span>
+           <span class="n">value_vars</span><span class="o">=</span><span class="n">vars_to_plot</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sv_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;mean_fit_time&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span>
+     <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;param_kernel&#39;</span><span class="p">,</span><span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45ecfc6730&gt;
+</pre></div>
+</div>
+<img alt="../_images/34532321e39c6e1e644fbfabb25cc30281f15857237211bc135e760e574518f5.png" src="../_images/34532321e39c6e1e644fbfabb25cc30281f15857237211bc135e760e574518f5.png" />
+</div>
+</div>
+<section id="how-does-the-timing-vary">
+<h2><span class="section-number">20.1. </span>How does the timing vary?<a class="headerlink" href="#how-does-the-timing-vary" title="Permalink to this headline">#</a></h2>
+<p>Let’s dig in and see which one is better.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sv_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_fit_time</th>
+      <th>std_fit_time</th>
+      <th>mean_score_time</th>
+      <th>std_score_time</th>
+      <th>param_C</th>
+      <th>param_kernel</th>
+      <th>params</th>
+      <th>split0_test_score</th>
+      <th>split1_test_score</th>
+      <th>split2_test_score</th>
+      <th>split3_test_score</th>
+      <th>split4_test_score</th>
+      <th>split5_test_score</th>
+      <th>split6_test_score</th>
+      <th>split7_test_score</th>
+      <th>split8_test_score</th>
+      <th>split9_test_score</th>
+      <th>mean_test_score</th>
+      <th>std_test_score</th>
+      <th>rank_test_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000654</td>
+      <td>0.000038</td>
+      <td>0.00043</td>
+      <td>0.000011</td>
+      <td>0.5</td>
+      <td>linear</td>
+      <td>{'C': 0.5, 'kernel': 'linear'}</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.916667</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.991667</td>
+      <td>0.025</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm_time</span> <span class="o">=</span> <span class="n">sv_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;param_C&#39;</span><span class="p">,</span> <span class="s1">&#39;param_kernel&#39;</span><span class="p">,</span> <span class="s1">&#39;params&#39;</span><span class="p">,],</span>
+                      <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean_fit_time&#39;</span><span class="p">,</span> <span class="s1">&#39;std_fit_time&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_score_time&#39;</span><span class="p">,</span> <span class="s1">&#39;std_score_time&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">sv_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;mean_fit_time&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">,</span>
+          <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;param_kernel&#39;</span><span class="p">,</span><span class="n">fit_reg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45a665f2b0&gt;
+</pre></div>
+</div>
+<img alt="../_images/34532321e39c6e1e644fbfabb25cc30281f15857237211bc135e760e574518f5.png" src="../_images/34532321e39c6e1e644fbfabb25cc30281f15857237211bc135e760e574518f5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm_time</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>param_C</th>
+      <th>param_kernel</th>
+      <th>params</th>
+      <th>variable</th>
+      <th>value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.5</td>
+      <td>linear</td>
+      <td>{'C': 0.5, 'kernel': 'linear'}</td>
+      <td>mean_fit_time</td>
+      <td>0.000654</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.5</td>
+      <td>rbf</td>
+      <td>{'C': 0.5, 'kernel': 'rbf'}</td>
+      <td>mean_fit_time</td>
+      <td>0.000735</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.75</td>
+      <td>linear</td>
+      <td>{'C': 0.75, 'kernel': 'linear'}</td>
+      <td>mean_fit_time</td>
+      <td>0.000639</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.75</td>
+      <td>rbf</td>
+      <td>{'C': 0.75, 'kernel': 'rbf'}</td>
+      <td>mean_fit_time</td>
+      <td>0.000711</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>linear</td>
+      <td>{'C': 1, 'kernel': 'linear'}</td>
+      <td>mean_fit_time</td>
+      <td>0.000633</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> <span class="n">svm_time</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;param_kernel&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45a65f0d30&gt;
+</pre></div>
+</div>
+<img alt="../_images/1e308dcf82764d5789a10ea85575850adbf15494327628c8cdd316834489cf71.png" src="../_images/1e308dcf82764d5789a10ea85575850adbf15494327628c8cdd316834489cf71.png" />
+</div>
+</div>
+</section>
+<section id="how-does-training-impact-our-model">
+<h2><span class="section-number">20.2. </span>How does training impact our model?<a class="headerlink" href="#how-does-training-impact-our-model" title="Permalink to this headline">#</a></h2>
+<p>Now we can create the learning curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">score_times</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">learning_curve</span><span class="p">(</span><span class="n">svm_opt</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span><span class="n">iris_X_train</span><span class="p">,</span> <span class="n">iris_y_train</span><span class="p">,</span>
+                              <span class="n">train_sizes</span><span class="o">=</span> <span class="p">[</span><span class="mf">.4</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="mf">.8</span><span class="p">],</span><span class="n">return_times</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It returns the list of the counts for each training size (we input percentages and it returns counts)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">score_times</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([38, 48, 57, 76]),
+ array([[0.97368421, 0.97368421, 1.        , 1.        , 1.        ],
+        [0.95833333, 1.        , 1.        , 1.        , 1.        ],
+        [0.98245614, 1.        , 1.        , 0.98245614, 0.98245614],
+        [1.        , 1.        , 0.98684211, 0.98684211, 0.98684211]]),
+ array([[0.91666667, 0.95833333, 0.95833333, 1.        , 1.        ],
+        [0.91666667, 1.        , 0.95833333, 1.        , 1.        ],
+        [0.91666667, 1.        , 0.95833333, 1.        , 1.        ],
+        [0.95833333, 1.        , 0.95833333, 1.        , 0.95833333]]),
+ array([[0.00093055, 0.00059509, 0.00060177, 0.00058508, 0.00058031],
+        [0.00091672, 0.00059652, 0.00063539, 0.00059772, 0.00058961],
+        [0.00068688, 0.00062037, 0.00060582, 0.00063229, 0.00059843],
+        [0.00066996, 0.00063324, 0.00061989, 0.00071502, 0.00063705]]),
+ array([[0.0005753 , 0.0004518 , 0.00042772, 0.00043178, 0.00045013],
+        [0.00048661, 0.00042772, 0.00043011, 0.00042391, 0.00042415],
+        [0.00043559, 0.00042892, 0.00043011, 0.00042272, 0.00043154],
+        [0.00043631, 0.00043535, 0.00042963, 0.00043178, 0.00043106]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use our skills in transforming data to make it easier to exmine just a subset of the scores.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is <em>one</em> thing we can analyze, but there are others. To earn prepare on assignment 11,  manipulate your results a different way.</p>
+</div>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.98947368, 0.99166667, 0.98947368, 0.99210526])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can stack these into a list, with the means for the cross validated values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">fit_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">score_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([38, 48, 57, 76]),
+ array([0.98947368, 0.99166667, 0.98947368, 0.99210526]),
+ array([0.96666667, 0.975     , 0.975     , 0.975     ]),
+ array([0.00065856, 0.00066719, 0.00062876, 0.00065503]),
+ array([0.00046735, 0.0004385 , 0.00042977, 0.00043283])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>then cast it to a numpy array</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">fit_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">score_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.80000000e+01, 9.89473684e-01, 9.66666667e-01, 6.58559799e-04,
+        4.67348099e-04],
+       [4.80000000e+01, 9.91666667e-01, 9.75000000e-01, 6.67190552e-04,
+        4.38499451e-04],
+       [5.70000000e+01, 9.89473684e-01, 9.75000000e-01, 6.28757477e-04,
+        4.29773331e-04],
+       [7.60000000e+01, 9.92105263e-01, 9.75000000e-01, 6.55031204e-04,
+        4.32825089e-04]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can put it all into a DataFrame so that we can plot it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">curve_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">fit_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">score_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span> <span class="s1">&#39;train_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;test_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;fit_times&#39;</span><span class="p">,</span> <span class="s1">&#39;score_times&#39;</span><span class="p">])</span>
+<span class="n">curve_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_sizes</th>
+      <th>train_scores</th>
+      <th>test_scores</th>
+      <th>fit_times</th>
+      <th>score_times</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>38.0</td>
+      <td>0.989474</td>
+      <td>0.966667</td>
+      <td>0.000659</td>
+      <td>0.000467</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>48.0</td>
+      <td>0.991667</td>
+      <td>0.975000</td>
+      <td>0.000667</td>
+      <td>0.000438</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>57.0</td>
+      <td>0.989474</td>
+      <td>0.975000</td>
+      <td>0.000629</td>
+      <td>0.000430</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>76.0</td>
+      <td>0.992105</td>
+      <td>0.975000</td>
+      <td>0.000655</td>
+      <td>0.000433</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>we will melt it to make it tidy and can work better with seaborn plotting functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">curve_df_tall</span> <span class="o">=</span> <span class="n">curve_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">,)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span><span class="n">curve_df_tall</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="n">hue</span> <span class="o">=</span><span class="s1">&#39;variable&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45a40a2be0&gt;
+</pre></div>
+</div>
+<img alt="../_images/36fc283925a24bf683c971ccdff1d8018ba4960fcec21baaae87caf93d29d984.png" src="../_images/36fc283925a24bf683c971ccdff1d8018ba4960fcec21baaae87caf93d29d984.png" />
+</div>
+</div>
+<p>We can see here that the training score and test score are basically the same. This means we’re doing about as well as we cana at learning the a generalizable model and we probably hav enough data for this task.</p>
+</section>
+<section id="digits-dataset">
+<h2><span class="section-number">20.3. </span>Digits Dataset<a class="headerlink" href="#digits-dataset" title="Permalink to this headline">#</a></h2>
+<p>Today, we’ll load a new dataset and use the default sklearn data structure for datasets.  We get back the default data stucture when we use a <code class="docutils literal notranslate"><span class="pre">load_</span></code> function without any parameters at all.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This shows us that the type is defined by sklearn and they called it <code class="docutils literal notranslate"><span class="pre">bunch</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sklearn.utils._bunch.Bunch
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can print it out to begin exploring it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;data&#39;: array([[ 0.,  0.,  5., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ..., 10.,  0.,  0.],
+        [ 0.,  0.,  0., ..., 16.,  9.,  0.],
+        ...,
+        [ 0.,  0.,  1., ...,  6.,  0.,  0.],
+        [ 0.,  0.,  2., ..., 12.,  0.,  0.],
+        [ 0.,  0., 10., ..., 12.,  1.,  0.]]),
+ &#39;target&#39;: array([0, 1, 2, ..., 8, 9, 8]),
+ &#39;frame&#39;: None,
+ &#39;feature_names&#39;: [&#39;pixel_0_0&#39;,
+  &#39;pixel_0_1&#39;,
+  &#39;pixel_0_2&#39;,
+  &#39;pixel_0_3&#39;,
+  &#39;pixel_0_4&#39;,
+  &#39;pixel_0_5&#39;,
+  &#39;pixel_0_6&#39;,
+  &#39;pixel_0_7&#39;,
+  &#39;pixel_1_0&#39;,
+  &#39;pixel_1_1&#39;,
+  &#39;pixel_1_2&#39;,
+  &#39;pixel_1_3&#39;,
+  &#39;pixel_1_4&#39;,
+  &#39;pixel_1_5&#39;,
+  &#39;pixel_1_6&#39;,
+  &#39;pixel_1_7&#39;,
+  &#39;pixel_2_0&#39;,
+  &#39;pixel_2_1&#39;,
+  &#39;pixel_2_2&#39;,
+  &#39;pixel_2_3&#39;,
+  &#39;pixel_2_4&#39;,
+  &#39;pixel_2_5&#39;,
+  &#39;pixel_2_6&#39;,
+  &#39;pixel_2_7&#39;,
+  &#39;pixel_3_0&#39;,
+  &#39;pixel_3_1&#39;,
+  &#39;pixel_3_2&#39;,
+  &#39;pixel_3_3&#39;,
+  &#39;pixel_3_4&#39;,
+  &#39;pixel_3_5&#39;,
+  &#39;pixel_3_6&#39;,
+  &#39;pixel_3_7&#39;,
+  &#39;pixel_4_0&#39;,
+  &#39;pixel_4_1&#39;,
+  &#39;pixel_4_2&#39;,
+  &#39;pixel_4_3&#39;,
+  &#39;pixel_4_4&#39;,
+  &#39;pixel_4_5&#39;,
+  &#39;pixel_4_6&#39;,
+  &#39;pixel_4_7&#39;,
+  &#39;pixel_5_0&#39;,
+  &#39;pixel_5_1&#39;,
+  &#39;pixel_5_2&#39;,
+  &#39;pixel_5_3&#39;,
+  &#39;pixel_5_4&#39;,
+  &#39;pixel_5_5&#39;,
+  &#39;pixel_5_6&#39;,
+  &#39;pixel_5_7&#39;,
+  &#39;pixel_6_0&#39;,
+  &#39;pixel_6_1&#39;,
+  &#39;pixel_6_2&#39;,
+  &#39;pixel_6_3&#39;,
+  &#39;pixel_6_4&#39;,
+  &#39;pixel_6_5&#39;,
+  &#39;pixel_6_6&#39;,
+  &#39;pixel_6_7&#39;,
+  &#39;pixel_7_0&#39;,
+  &#39;pixel_7_1&#39;,
+  &#39;pixel_7_2&#39;,
+  &#39;pixel_7_3&#39;,
+  &#39;pixel_7_4&#39;,
+  &#39;pixel_7_5&#39;,
+  &#39;pixel_7_6&#39;,
+  &#39;pixel_7_7&#39;],
+ &#39;target_names&#39;: array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+ &#39;images&#39;: array([[[ 0.,  0.,  5., ...,  1.,  0.,  0.],
+         [ 0.,  0., 13., ..., 15.,  5.,  0.],
+         [ 0.,  3., 15., ..., 11.,  8.,  0.],
+         ...,
+         [ 0.,  4., 11., ..., 12.,  7.,  0.],
+         [ 0.,  2., 14., ..., 12.,  0.,  0.],
+         [ 0.,  0.,  6., ...,  0.,  0.,  0.]],
+ 
+        [[ 0.,  0.,  0., ...,  5.,  0.,  0.],
+         [ 0.,  0.,  0., ...,  9.,  0.,  0.],
+         [ 0.,  0.,  3., ...,  6.,  0.,  0.],
+         ...,
+         [ 0.,  0.,  1., ...,  6.,  0.,  0.],
+         [ 0.,  0.,  1., ...,  6.,  0.,  0.],
+         [ 0.,  0.,  0., ..., 10.,  0.,  0.]],
+ 
+        [[ 0.,  0.,  0., ..., 12.,  0.,  0.],
+         [ 0.,  0.,  3., ..., 14.,  0.,  0.],
+         [ 0.,  0.,  8., ..., 16.,  0.,  0.],
+         ...,
+         [ 0.,  9., 16., ...,  0.,  0.,  0.],
+         [ 0.,  3., 13., ..., 11.,  5.,  0.],
+         [ 0.,  0.,  0., ..., 16.,  9.,  0.]],
+ 
+        ...,
+ 
+        [[ 0.,  0.,  1., ...,  1.,  0.,  0.],
+         [ 0.,  0., 13., ...,  2.,  1.,  0.],
+         [ 0.,  0., 16., ..., 16.,  5.,  0.],
+         ...,
+         [ 0.,  0., 16., ..., 15.,  0.,  0.],
+         [ 0.,  0., 15., ..., 16.,  0.,  0.],
+         [ 0.,  0.,  2., ...,  6.,  0.,  0.]],
+ 
+        [[ 0.,  0.,  2., ...,  0.,  0.,  0.],
+         [ 0.,  0., 14., ..., 15.,  1.,  0.],
+         [ 0.,  4., 16., ..., 16.,  7.,  0.],
+         ...,
+         [ 0.,  0.,  0., ..., 16.,  2.,  0.],
+         [ 0.,  0.,  4., ..., 16.,  2.,  0.],
+         [ 0.,  0.,  5., ..., 12.,  0.,  0.]],
+ 
+        [[ 0.,  0., 10., ...,  1.,  0.,  0.],
+         [ 0.,  2., 16., ...,  1.,  0.,  0.],
+         [ 0.,  0., 15., ..., 15.,  0.,  0.],
+         ...,
+         [ 0.,  4., 16., ..., 16.,  6.,  0.],
+         [ 0.,  8., 16., ..., 16.,  8.,  0.],
+         [ 0.,  1.,  8., ..., 12.,  1.,  0.]]]),
+ &#39;DESCR&#39;: &quot;.. _digits_dataset:\n\nOptical recognition of handwritten digits dataset\n--------------------------------------------------\n\n**Data Set Characteristics:**\n\n    :Number of Instances: 1797\n    :Number of Attributes: 64\n    :Attribute Information: 8x8 image of integer pixels in the range 0..16.\n    :Missing Attribute Values: None\n    :Creator: E. Alpaydin (alpaydin &#39;@&#39; boun.edu.tr)\n    :Date: July; 1998\n\nThis is a copy of the test set of the UCI ML hand-written digits datasets\nhttps://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits\n\nThe data set contains images of hand-written digits: 10 classes where\neach class refers to a digit.\n\nPreprocessing programs made available by NIST were used to extract\nnormalized bitmaps of handwritten digits from a preprinted form. From a\ntotal of 43 people, 30 contributed to the training set and different 13\nto the test set. 32x32 bitmaps are divided into nonoverlapping blocks of\n4x4 and the number of on pixels are counted in each block. This generates\nan input matrix of 8x8 where each element is an integer in the range\n0..16. This reduces dimensionality and gives invariance to small\ndistortions.\n\nFor info on NIST preprocessing routines, see M. D. Garris, J. L. Blue, G.\nT. Candela, D. L. Dimmick, J. Geist, P. J. Grother, S. A. Janet, and C.\nL. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,\n1994.\n\n|details-start|\n**References**\n|details-split|\n\n- C. Kaynak (1995) Methods of Combining Multiple Classifiers and Their\n  Applications to Handwritten Digit Recognition, MSc Thesis, Institute of\n  Graduate Studies in Science and Engineering, Bogazici University.\n- E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika.\n- Ken Tang and Ponnuthurai N. Suganthan and Xi Yao and A. Kai Qin.\n  Linear dimensionalityreduction using relevance weighted LDA. School of\n  Electrical and Electronic Engineering Nanyang Technological University.\n  2005.\n- Claudio Gentile. A New Approximate Maximal Margin Classification\n  Algorithm. NIPS. 2000.\n\n|details-end|&quot;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We note that it has key value pairs, and that the last one is called <code class="docutils literal notranslate"><span class="pre">DESCR</span></code> and is text that describes the data.  If we send that to the print function it will be formatted more readably.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">digits</span><span class="p">[</span><span class="s1">&#39;DESCR&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _digits_dataset:
+
+Optical recognition of handwritten digits dataset
+--------------------------------------------------
+
+**Data Set Characteristics:**
+
+    :Number of Instances: 1797
+    :Number of Attributes: 64
+    :Attribute Information: 8x8 image of integer pixels in the range 0..16.
+    :Missing Attribute Values: None
+    :Creator: E. Alpaydin (alpaydin &#39;@&#39; boun.edu.tr)
+    :Date: July; 1998
+
+This is a copy of the test set of the UCI ML hand-written digits datasets
+https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits
+
+The data set contains images of hand-written digits: 10 classes where
+each class refers to a digit.
+
+Preprocessing programs made available by NIST were used to extract
+normalized bitmaps of handwritten digits from a preprinted form. From a
+total of 43 people, 30 contributed to the training set and different 13
+to the test set. 32x32 bitmaps are divided into nonoverlapping blocks of
+4x4 and the number of on pixels are counted in each block. This generates
+an input matrix of 8x8 where each element is an integer in the range
+0..16. This reduces dimensionality and gives invariance to small
+distortions.
+
+For info on NIST preprocessing routines, see M. D. Garris, J. L. Blue, G.
+T. Candela, D. L. Dimmick, J. Geist, P. J. Grother, S. A. Janet, and C.
+L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
+1994.
+
+|details-start|
+**References**
+|details-split|
+
+- C. Kaynak (1995) Methods of Combining Multiple Classifiers and Their
+  Applications to Handwritten Digit Recognition, MSc Thesis, Institute of
+  Graduate Studies in Science and Engineering, Bogazici University.
+- E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika.
+- Ken Tang and Ponnuthurai N. Suganthan and Xi Yao and A. Kai Qin.
+  Linear dimensionalityreduction using relevance weighted LDA. School of
+  Electrical and Electronic Engineering Nanyang Technological University.
+  2005.
+- Claudio Gentile. A New Approximate Maximal Margin Classification
+  Algorithm. NIPS. 2000.
+
+|details-end|
+</pre></div>
+</div>
+</div>
+</div>
+<p>This tells us that we are going to be predicting what digit (0,1,2,3,4,5,6,7,8, or 9) is in the image.</p>
+<p>To get an idea of what the images look like, we can use <code class="docutils literal notranslate"><span class="pre">matshow</span></code> which is short for matrix show. It takes a 2D matrix and plots it as a grayscale image. To get the actual color bar, we use the matplotlib <code class="docutils literal notranslate"><span class="pre">plt.gray()</span></code>.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<div class="admonition-try-it-yourself admonition">
+<p class="admonition-title">Try it yourself</p>
+<p>Try using matshow without <code class="docutils literal notranslate"><span class="pre">plt.gray()</span></code>. How is it different?  What might alternatives do?  What other code in this notebook influences how plots look?</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Removing a line from an excerpt of code can help you see hat that line did and learn more about how each piece work.</p>
+</div>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f45a3f95ee0&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../_images/b9f1ea912df9b68da7625e4a8e4589b920ac0b617d07ea5807c5ce940d86e741.png" src="../_images/b9f1ea912df9b68da7625e4a8e4589b920ac0b617d07ea5807c5ce940d86e741.png" />
+</div>
+</div>
+<p>and we can pick another one</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">198</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f45a3f2cc10&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../_images/f3c43813785e9dc5fb83f6d2644f193b07a55991e1092bc69a0f5ec4cf5ef0f0.png" src="../_images/f3c43813785e9dc5fb83f6d2644f193b07a55991e1092bc69a0f5ec4cf5ef0f0.png" />
+</div>
+</div>
+<p>For easier ML, we will reload it differently:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_X</span><span class="p">,</span> <span class="n">digits_y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This has one row for each sample and has reshaped the 8x8 image into a 64 length vector. So we have one ‘feature’ for each pixel in the images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_X</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1797, 64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can train a model and generate a learning curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm_clf_digits</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">()</span>
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">score_times</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">learning_curve</span><span class="p">(</span>
+                            <span class="n">svm_clf_digits</span><span class="p">,</span><span class="n">digits_X</span><span class="p">,</span> <span class="n">digits_y</span><span class="p">,</span>
+                              <span class="n">train_sizes</span><span class="o">=</span> <span class="p">[</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.4</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="mf">.8</span><span class="p">,</span><span class="mf">.9</span><span class="p">,</span> <span class="mf">.95</span><span class="p">,</span><span class="mf">.97</span><span class="p">,</span><span class="mf">.99</span><span class="p">],</span><span class="n">return_times</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and we will make this into a DataFrame the same way as with the iris data above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">fit_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">score_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span> <span class="s1">&#39;train_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;test_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;fit_times&#39;</span><span class="p">,</span> <span class="s1">&#39;score_times&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_sizes</th>
+      <th>train_scores</th>
+      <th>test_scores</th>
+      <th>fit_times</th>
+      <th>score_times</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>143.0</td>
+      <td>0.991608</td>
+      <td>0.817487</td>
+      <td>0.002331</td>
+      <td>0.003569</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>287.0</td>
+      <td>0.993031</td>
+      <td>0.855317</td>
+      <td>0.004129</td>
+      <td>0.005330</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>431.0</td>
+      <td>0.998144</td>
+      <td>0.906541</td>
+      <td>0.006502</td>
+      <td>0.007311</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>574.0</td>
+      <td>0.996167</td>
+      <td>0.932690</td>
+      <td>0.009481</td>
+      <td>0.008898</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>718.0</td>
+      <td>0.998886</td>
+      <td>0.942696</td>
+      <td>0.012632</td>
+      <td>0.010410</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>862.0</td>
+      <td>0.996984</td>
+      <td>0.948813</td>
+      <td>0.016184</td>
+      <td>0.011847</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1149.0</td>
+      <td>0.997041</td>
+      <td>0.957722</td>
+      <td>0.022976</td>
+      <td>0.014009</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1293.0</td>
+      <td>0.997525</td>
+      <td>0.959947</td>
+      <td>0.027740</td>
+      <td>0.015209</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1365.0</td>
+      <td>0.996923</td>
+      <td>0.962730</td>
+      <td>0.029675</td>
+      <td>0.015841</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1393.0</td>
+      <td>0.997128</td>
+      <td>0.962728</td>
+      <td>0.030707</td>
+      <td>0.017458</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1422.0</td>
+      <td>0.997046</td>
+      <td>0.962171</td>
+      <td>0.031465</td>
+      <td>0.016219</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df_tall</span> <span class="o">=</span> <span class="n">digits_curve_df</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span> <span class="o">=</span> <span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;train_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;test_scores&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span><span class="n">digits_curve_df_tall</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45a3f77bb0&gt;
+</pre></div>
+</div>
+<img alt="../_images/d2a5275f2c35ec0653e07da306d08ca65ddf1c50372f5fe3b55a82d5d560f621.png" src="../_images/d2a5275f2c35ec0653e07da306d08ca65ddf1c50372f5fe3b55a82d5d560f621.png" />
+</div>
+</div>
+<p>This larger gap shows that a different model or maybe more data could help us learn better.  Th good news is that we are probably not overfitting, overfitting would occur when the training accuracy still improves but the test accuracy goes down.</p>
+</section>
+<section id="decision-tree-with-digits-data">
+<h2><span class="section-number">20.4. </span>Decision Tree with digits data<a class="headerlink" href="#decision-tree-with-digits-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dt_digits</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span><span class="p">,</span> <span class="n">fit_times</span><span class="p">,</span> <span class="n">score_times</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">learning_curve</span><span class="p">(</span>
+                            <span class="n">dt_digits</span><span class="p">,</span><span class="n">digits_X</span><span class="p">,</span> <span class="n">digits_y</span><span class="p">,</span>
+                              <span class="n">train_sizes</span><span class="o">=</span> <span class="p">[</span><span class="mf">.1</span><span class="p">,</span><span class="mf">.2</span><span class="p">,</span><span class="mf">.3</span><span class="p">,</span><span class="mf">.4</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mf">.6</span><span class="p">,</span><span class="mf">.8</span><span class="p">,</span><span class="mf">.9</span><span class="p">,</span> <span class="mf">.95</span><span class="p">,</span><span class="mf">.97</span><span class="p">,</span><span class="mf">.99</span><span class="p">],</span><span class="n">return_times</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_scores</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(11, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df_dt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                                <span class="n">fit_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">score_times</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span> <span class="s1">&#39;train_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;test_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;fit_times&#39;</span><span class="p">,</span> <span class="s1">&#39;score_times&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df_dt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train_sizes</th>
+      <th>train_scores</th>
+      <th>test_scores</th>
+      <th>fit_times</th>
+      <th>score_times</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>143.0</td>
+      <td>1.0</td>
+      <td>0.540921</td>
+      <td>0.001841</td>
+      <td>0.000494</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>287.0</td>
+      <td>1.0</td>
+      <td>0.554794</td>
+      <td>0.003166</td>
+      <td>0.000495</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>431.0</td>
+      <td>1.0</td>
+      <td>0.660559</td>
+      <td>0.004765</td>
+      <td>0.000538</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>574.0</td>
+      <td>1.0</td>
+      <td>0.727900</td>
+      <td>0.006149</td>
+      <td>0.000502</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>718.0</td>
+      <td>1.0</td>
+      <td>0.681712</td>
+      <td>0.007626</td>
+      <td>0.000504</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>862.0</td>
+      <td>1.0</td>
+      <td>0.750178</td>
+      <td>0.009758</td>
+      <td>0.000520</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1149.0</td>
+      <td>1.0</td>
+      <td>0.777448</td>
+      <td>0.012868</td>
+      <td>0.000527</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1293.0</td>
+      <td>1.0</td>
+      <td>0.788548</td>
+      <td>0.014786</td>
+      <td>0.000539</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1365.0</td>
+      <td>1.0</td>
+      <td>0.774098</td>
+      <td>0.015857</td>
+      <td>0.000534</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1393.0</td>
+      <td>1.0</td>
+      <td>0.792456</td>
+      <td>0.016208</td>
+      <td>0.000543</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1422.0</td>
+      <td>1.0</td>
+      <td>0.791348</td>
+      <td>0.016344</td>
+      <td>0.000563</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits_curve_df_tall_dt</span> <span class="o">=</span> <span class="n">digits_curve_df_dt</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span> <span class="o">=</span> <span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;train_scores&#39;</span><span class="p">,</span> <span class="s1">&#39;test_scores&#39;</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span><span class="n">digits_curve_df_tall_dt</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;train_sizes&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;variable&#39;</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f45a3e2b610&gt;
+</pre></div>
+</div>
+<img alt="../_images/537cb3b4744815b59ba9893ebe1da6396d3f2e36c8e0737b7a4b0974d3fe0db0.png" src="../_images/537cb3b4744815b59ba9893ebe1da6396d3f2e36c8e0737b7a4b0974d3fe0db0.png" />
+</div>
+</div>
+<p>This one does much worse that above.</p>
+<!-- ## Why does the score time get longer? -->
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>I spent time also giving help and answering questions for A11.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-11-14.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Model Comparison</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-timing-vary">20.1. How does the timing vary?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-training-impact-our-model">20.2. How does training impact our model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digits-dataset">20.3. Digits Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree-with-digits-data">20.4. Decision Tree with digits data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

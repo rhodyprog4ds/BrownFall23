@@ -188,6 +188,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-07.html">17. Cross Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-16.html">20. Learning Curves and more Model Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -521,10 +525,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb3f18a4b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fbd9b79fdf0&gt;
 </pre></div>
 </div>
-<img alt="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" src="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" />
+<img alt="../_images/819f4b491b246ee1c35a8e70b70cc1702304d281b902cb003789861fbe48562f.png" src="../_images/819f4b491b246ee1c35a8e70b70cc1702304d281b902cb003789861fbe48562f.png" />
 </div>
 </div>
 <p>We notice that this data meets the  assumptions of our model:</p>
@@ -689,10 +693,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb3ec4dee50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fbd95ab6f40&gt;
 </pre></div>
 </div>
-<img alt="../_images/c4db434653bd713752f4719b53b8191e1ae2949db3bc5b55f5651e1fe4524647.png" src="../_images/c4db434653bd713752f4719b53b8191e1ae2949db3bc5b55f5651e1fe4524647.png" />
+<img alt="../_images/d4c929e34ba5743ae6d1589bad722610a3037578b31097c2cf08d6332eb9822e.png" src="../_images/d4c929e34ba5743ae6d1589bad722610a3037578b31097c2cf08d6332eb9822e.png" />
 </div>
 </div>
 </section>
@@ -866,10 +870,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fb3ebd39e20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7fbd95bbfb50&gt;
 </pre></div>
 </div>
-<img alt="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" src="../_images/95e4bd60957c3a86bdf41534a02774e745b5e86d0114534272faa0ea4d9b6621.png" />
+<img alt="../_images/8e4f9ccf877940903fbec9a945be0b186959ce12f5a32eecad44bd4164f7970b.png" src="../_images/8e4f9ccf877940903fbec9a945be0b186959ce12f5a32eecad44bd4164f7970b.png" />
 </div>
 </div>
 </section>
@@ -932,10 +936,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb3e1677cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fbd8b51fc40&gt;
 </pre></div>
 </div>
-<img alt="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" src="../_images/9235f51fd20e7a590abbb63aff78260f0dc8011d1bc2430e1727a8756c80f51f.png" />
+<img alt="../_images/6b875bb21b7a67b29a2ab7ea2d46973a6140a6f0cb9f78e116c18e07ebfa43fa.png" src="../_images/6b875bb21b7a67b29a2ab7ea2d46973a6140a6f0cb9f78e116c18e07ebfa43fa.png" />
 </div>
 </div>
 <p>As we can see in this dataset, these classes are quite separated.</p>
@@ -975,10 +979,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb3deececa0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fbd8b5ff850&gt;
 </pre></div>
 </div>
-<img alt="../_images/3d015d05f480428c5ec847fa4d57b35dc205a41ab4df9e49348f63233262e65b.png" src="../_images/3d015d05f480428c5ec847fa4d57b35dc205a41ab4df9e49348f63233262e65b.png" />
+<img alt="../_images/6ce2c25be2a65dc386f9c681433061ad59e8a21ae48457b3ad298d4f30d0dc92.png" src="../_images/6ce2c25be2a65dc386f9c681433061ad59e8a21ae48457b3ad298d4f30d0dc92.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -996,10 +1000,10 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fb3dec48eb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fbd88d53100&gt;
 </pre></div>
 </div>
-<img alt="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" src="../_images/a45fdd23995c67745c5f7a2cf9935f29140221438910ce2ea831893d61b00d8e.png" />
+<img alt="../_images/e847b24ced75a097360a7a7d38ed394a00452bf5de5549c3a225788db22f6d31.png" src="../_images/e847b24ced75a097360a7a7d38ed394a00452bf5de5549c3a225788db22f6d31.png" />
 </div>
 </div>
 <p>This does not look much like the data and it’s hard to tell which is higher at any given point in the 2D space.  We know though, that it has missed the mark. We can also look at the actual predictions.</p>
@@ -1047,7 +1051,7 @@ as list of lists.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7e66790caeba1f52591ffe4758b0d9c6ac14e79ec2c0855eb3d6dca8c35690a1.png" src="../_images/7e66790caeba1f52591ffe4758b0d9c6ac14e79ec2c0855eb3d6dca8c35690a1.png" />
+<img alt="../_images/3aec99038452e2868acc0c859785dfd6a74731a2c2c7fb2ea1b755816052a88c.png" src="../_images/3aec99038452e2868acc0c859785dfd6a74731a2c2c7fb2ea1b755816052a88c.png" />
 </div>
 </div>
 <p>On the iris dataset, the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/tree/plot_iris_dtc.html">sklearn docs include a diagram showing the decision boundary</a> You should be able to modify this for another classifier.</p>

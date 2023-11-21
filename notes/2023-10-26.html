@@ -190,6 +190,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">14. Clustering Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-07.html">17. Cross Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-16.html">20. Learning Curves and more Model Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -593,10 +597,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fd7278835b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f289723fa60&gt;
 </pre></div>
 </div>
-<img alt="../_images/506c2d7d76de6214eb23a08c5a25cb2f3a20171312966f4156d569dfe684bf7d.png" src="../_images/506c2d7d76de6214eb23a08c5a25cb2f3a20171312966f4156d569dfe684bf7d.png" />
+<img alt="../_images/3086ac686636d49aaf8683da3ce66dc7efde23d13f532b4a987e23e6026b82ac.png" src="../_images/3086ac686636d49aaf8683da3ce66dc7efde23d13f532b4a987e23e6026b82ac.png" />
 </div>
 </div>
 <p>Next we need to create a copy of the data that’s appropriate for clustering. Remember that clustering is <em>unsupervised</em> so it doesn’t have a target variable. We also can do clustering on the data with or without splitting into test/train splits, since it doesn’t use a target variable, we can evaluate how good the clusters it finds are on the actual data that it learned from.</p>
@@ -751,10 +755,10 @@ remember most data frame operations return a copy of the dataframe.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fd7243c1c70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f289398ff70&gt;
 </pre></div>
 </div>
-<img alt="../_images/333b24e7aaa6c1b7656413c8118b50fe026b741c14cd32e9dbcceb2e61710088.png" src="../_images/333b24e7aaa6c1b7656413c8118b50fe026b741c14cd32e9dbcceb2e61710088.png" />
+<img alt="../_images/33b982ef6aa34dde5315c6108eec1576e8b790f840966b61e756aeaab289c709.png" src="../_images/33b982ef6aa34dde5315c6108eec1576e8b790f840966b61e756aeaab289c709.png" />
 </div>
 </div>
 </section>
@@ -783,10 +787,10 @@ remember most data frame operations return a copy of the dataframe.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fd74d7984f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f28900e65b0&gt;
 </pre></div>
 </div>
-<img alt="../_images/0e1f55d60fdcf0bdc7892f49956eb7630aa6ad7d438052eb9fbb27e9bef208ab.png" src="../_images/0e1f55d60fdcf0bdc7892f49956eb7630aa6ad7d438052eb9fbb27e9bef208ab.png" />
+<img alt="../_images/416ce10b207ac0aef3261854bc1cb436fd063ed17221164ae2199845acbb0272.png" src="../_images/416ce10b207ac0aef3261854bc1cb436fd063ed17221164ae2199845acbb0272.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -802,10 +806,10 @@ remember most data frame operations return a copy of the dataframe.</p>
   super()._check_params_vs_input(X, default_n_init=10)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fd75cfd1cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f28900fc790&gt;
 </pre></div>
 </div>
-<img alt="../_images/cd9ad92f3ffe031ab82f65b2b718b1fe92adf8c0a736159979dc8f7f9d071f91.png" src="../_images/cd9ad92f3ffe031ab82f65b2b718b1fe92adf8c0a736159979dc8f7f9d071f91.png" />
+<img alt="../_images/06692b12f7156c84bc6a0bf682f96c2d9c4549333b2a415cf601d343f2df374c.png" src="../_images/06692b12f7156c84bc6a0bf682f96c2d9c4549333b2a415cf601d343f2df374c.png" />
 </div>
 </div>
 <p>We will use a loop to add a few more.</p>
@@ -965,10 +969,10 @@ remember most data frame operations return a copy of the dataframe.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7fd7183ea280&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7f28c49c08e0&gt;
 </pre></div>
 </div>
-<img alt="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" src="../_images/c01c6857c34938a25827f2b2b95b2a12bde5eb7cd828cd5b4221c5a030766ad1.png" />
+<img alt="../_images/819f4b491b246ee1c35a8e70b70cc1702304d281b902cb003789861fbe48562f.png" src="../_images/819f4b491b246ee1c35a8e70b70cc1702304d281b902cb003789861fbe48562f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1017,7 +1021,7 @@ remember most data frame operations return a copy of the dataframe.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/4a8aaeb8f4e696d8bfcae68a5b819bbde5f7a1bb9be064565dd66d6b6dcb3cfe.png" src="../_images/4a8aaeb8f4e696d8bfcae68a5b819bbde5f7a1bb9be064565dd66d6b6dcb3cfe.png" />
+<img alt="../_images/fe856c56127cf6a1e0111f77a121659e4bf683c2f11cb7fd4102902380ce26f4.png" src="../_images/fe856c56127cf6a1e0111f77a121659e4bf683c2f11cb7fd4102902380ce26f4.png" />
 </div>
 </div>
 <p>And we can make a plot for a good silhouette score</p>
@@ -1044,7 +1048,7 @@ remember most data frame operations return a copy of the dataframe.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/1260d46dd5dc64ea10a34a5ec9eb32d31f66020709b0e1c3b7a83110dca79073.png" src="../_images/1260d46dd5dc64ea10a34a5ec9eb32d31f66020709b0e1c3b7a83110dca79073.png" />
+<img alt="../_images/e78865bec1dffc592faab01a2416dbd34af845c3e3c99a48592484ef605ea4f9.png" src="../_images/e78865bec1dffc592faab01a2416dbd34af845c3e3c99a48592484ef605ea4f9.png" />
 </div>
 </div>
 <p>Then we can use the silhouette score on our existing clustering solutions.</p>

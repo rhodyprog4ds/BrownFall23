@@ -188,6 +188,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-07.html">17. Cross Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-16.html">20. Learning Curves and more Model Comparison</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -980,7 +984,7 @@ See Also” shows the links to the documentation of most of the individual funct
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="nn">/tmp/ipykernel_2238/957071290.py</span> in <span class="ni">?</span><span class="nt">()</span>
+<span class="nn">/tmp/ipykernel_2023/957071290.py</span> in <span class="ni">?</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coffee_df</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">descirbe</span><span class="p">()</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pandas/core/generic.py</span> in <span class="ni">?</span><span class="nt">(self, name)</span>
@@ -1248,7 +1252,7 @@ Name: count, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="../_images/9300b68f519a4eaabbeb53aa3f28c47105c14a548b547d678c9bc45f6c8b4778.png" src="../_images/9300b68f519a4eaabbeb53aa3f28c47105c14a548b547d678c9bc45f6c8b4778.png" />
+<img alt="../_images/26a34f139c0104949428f568748f539970dcfb3271283a4f9617364146089c83.png" src="../_images/26a34f139c0104949428f568748f539970dcfb3271283a4f9617364146089c83.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1261,7 +1265,7 @@ Name: count, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: ylabel=&#39;Frequency&#39;&gt;
 </pre></div>
 </div>
-<img alt="../_images/ce56657adde23e4b456798f1a645895d5acb19214712c075d9ef63fc8bdb3f13.png" src="../_images/ce56657adde23e4b456798f1a645895d5acb19214712c075d9ef63fc8bdb3f13.png" />
+<img alt="../_images/c916aef4b4c4cdf3ed74745dd304710ee9d4626d3398c4328578acc2cd451932.png" src="../_images/c916aef4b4c4cdf3ed74745dd304710ee9d4626d3398c4328578acc2cd451932.png" />
 </div>
 </div>
 <p>Seaborn give us <a class="reference external" href="https://seaborn.pydata.org/tutorial/introduction.html#opinionated-defaults-and-flexible-customization"><em>opinionated defaults</em></a></p>
@@ -1282,10 +1286,10 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f23abdbbfd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f8f4cfd3d00&gt;
 </pre></div>
 </div>
-<img alt="../_images/530e2ad1a94d23beca76b66da010fe0bab8c917bb40e24ebcd7a08358fd3b11c.png" src="../_images/530e2ad1a94d23beca76b66da010fe0bab8c917bb40e24ebcd7a08358fd3b11c.png" />
+<img alt="../_images/e1f1011621a1e99af2aad5d673944b086566f48eca27b4217e13d59ff5589613.png" src="../_images/e1f1011621a1e99af2aad5d673944b086566f48eca27b4217e13d59ff5589613.png" />
 </div>
 </div>
 <section id="are-any-coffees-more-than-one-standard-deviation-above-the-average-in-flavor">
