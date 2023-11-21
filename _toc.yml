@@ -49,7 +49,7 @@ parts:
     - file: assignments/09-regression
     - file: assignments/10-optimize
     - file: assignments/11-compare
-    # - file: assignments/12-fake-news
+    - file: assignments/12-fake-news
   - caption: Portfolio
     chapters:
       - file: portfolio/index
