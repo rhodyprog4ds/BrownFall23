@@ -192,6 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-16.html">20. Learning Curves and more Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-21.html">21. Representing Text</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -818,7 +819,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f79cc068f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5d0ca1e80&gt;
 </pre></div>
 </div>
 <img alt="../_images/286c1ff95741ccb4f715e2102c769767c8c48d82c737ef37294186f401fc9590.png" src="../_images/286c1ff95741ccb4f715e2102c769767c8c48d82c737ef37294186f401fc9590.png" />
@@ -832,7 +833,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f79ce14aa90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5ce613bb0&gt;
 </pre></div>
 </div>
 <img alt="../_images/ea372c48d95db48a80a0309930530ca49a2737b6e27c6ac04d776ad69e6f9ac2.png" src="../_images/ea372c48d95db48a80a0309930530ca49a2737b6e27c6ac04d776ad69e6f9ac2.png" />
@@ -858,7 +859,7 @@ Colorblind is a good default, but you can choose others that you like more too.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7983b45670&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5ce607190&gt;
 </pre></div>
 </div>
 <img alt="../_images/c1646efd32fd4ef42611f1eefe5cbb53dd98f294e9be240b7ce57ae19e15ce5f.png" src="../_images/c1646efd32fd4ef42611f1eefe5cbb53dd98f294e9be240b7ce57ae19e15ce5f.png" />
@@ -1016,7 +1017,7 @@ Name: Number.of.Bags, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7f7983611df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x7ff5ce05d220&gt;
 </pre></div>
 </div>
 </div>
@@ -1330,7 +1331,7 @@ Name: Flavor, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f798362ef10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5cc559430&gt;
 </pre></div>
 </div>
 <img alt="../_images/f8038e56dcd31ee459668541b1f631138d844b03d473d8a305af578e355f3dcf.png" src="../_images/f8038e56dcd31ee459668541b1f631138d844b03d473d8a305af578e355f3dcf.png" />
@@ -1343,7 +1344,7 @@ Name: Flavor, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f79860a1eb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5ce05d580&gt;
 </pre></div>
 </div>
 <img alt="../_images/c77907c626abc4df830ba41a417d055a967e2aad573a85a7721aaf62b73ad111.png" src="../_images/c77907c626abc4df830ba41a417d055a967e2aad573a85a7721aaf62b73ad111.png" />
@@ -2574,7 +2575,7 @@ Name: Country.of.Origin, Length: 1311, dtype: bool
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f797bb55ee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7ff5c5a77c10&gt;
 </pre></div>
 </div>
 <img alt="../_images/8f1d7f2519d939b899f3b3ee27051523104deee55b30e413480039bc20f277ae.png" src="../_images/8f1d7f2519d939b899f3b3ee27051523104deee55b30e413480039bc20f277ae.png" />

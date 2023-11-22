@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-11-16';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="next" title="21. Representing Text" href="2023-11-21.html" />
     <link rel="prev" title="19. Model Comparison" href="2023-11-14.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="None"/>
@@ -192,6 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Learning Curves and more Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-21.html">21. Representing Text</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -543,12 +544,12 @@ programming and how to effectively teach it.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    14.000000
-mean      0.971429
-std       0.009649
-min       0.958333
-25%       0.966667
-50%       0.975000
-75%       0.975000
+mean      0.983929
+std       0.008310
+min       0.966667
+25%       0.977083
+50%       0.983333
+75%       0.991667
 max       0.991667
 Name: mean_test_score, dtype: float64
 </pre></div>
@@ -563,12 +564,12 @@ Name: mean_test_score, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    90.000000
-mean      0.907130
-std       0.017199
-min       0.891667
-25%       0.891667
-50%       0.900000
-75%       0.916667
+mean      0.941296
+std       0.003514
+min       0.933333
+25%       0.941667
+50%       0.941667
+75%       0.941667
 max       0.950000
 Name: mean_test_score, dtype: float64
 </pre></div>
@@ -595,10 +596,10 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec32896a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19cd41ffa0&gt;
 </pre></div>
 </div>
-<img alt="../_images/87d20ee6b7fbf4315faa0c96fe4505d89fc1bd085003712b84253b90a3a1cf3f.png" src="../_images/87d20ee6b7fbf4315faa0c96fe4505d89fc1bd085003712b84253b90a3a1cf3f.png" />
+<img alt="../_images/7b52a6d05e33692f088ece88eadfb41b20fd83dd5a4c808d6a4094bf18402d48.png" src="../_images/7b52a6d05e33692f088ece88eadfb41b20fd83dd5a4c808d6a4094bf18402d48.png" />
 </div>
 </div>
 <section id="how-does-the-timing-vary">
@@ -654,26 +655,26 @@ of parameters.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000671</td>
-      <td>0.000054</td>
-      <td>0.000433</td>
-      <td>0.000016</td>
+      <td>0.000666</td>
+      <td>0.000039</td>
+      <td>0.000441</td>
+      <td>0.000011</td>
       <td>0.5</td>
       <td>linear</td>
       <td>{'C': 0.5, 'kernel': 'linear'}</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>0.916667</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.916667</td>
-      <td>0.916667</td>
-      <td>0.975</td>
-      <td>0.038188</td>
-      <td>7</td>
+      <td>0.991667</td>
+      <td>0.025</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -689,10 +690,10 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec3292700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19cd4181f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/87d20ee6b7fbf4315faa0c96fe4505d89fc1bd085003712b84253b90a3a1cf3f.png" src="../_images/87d20ee6b7fbf4315faa0c96fe4505d89fc1bd085003712b84253b90a3a1cf3f.png" />
+<img alt="../_images/7b52a6d05e33692f088ece88eadfb41b20fd83dd5a4c808d6a4094bf18402d48.png" src="../_images/7b52a6d05e33692f088ece88eadfb41b20fd83dd5a4c808d6a4094bf18402d48.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -734,7 +735,7 @@ of parameters.</p>
       <td>linear</td>
       <td>{'C': 0.5, 'kernel': 'linear'}</td>
       <td>mean_fit_time</td>
-      <td>0.000671</td>
+      <td>0.000666</td>
     </tr>
     <tr>
       <th>1</th>
@@ -750,7 +751,7 @@ of parameters.</p>
       <td>linear</td>
       <td>{'C': 0.75, 'kernel': 'linear'}</td>
       <td>mean_fit_time</td>
-      <td>0.000636</td>
+      <td>0.000640</td>
     </tr>
     <tr>
       <th>3</th>
@@ -758,7 +759,7 @@ of parameters.</p>
       <td>rbf</td>
       <td>{'C': 0.75, 'kernel': 'rbf'}</td>
       <td>mean_fit_time</td>
-      <td>0.000713</td>
+      <td>0.000714</td>
     </tr>
     <tr>
       <th>4</th>
@@ -766,7 +767,7 @@ of parameters.</p>
       <td>linear</td>
       <td>{'C': 1, 'kernel': 'linear'}</td>
       <td>mean_fit_time</td>
-      <td>0.000623</td>
+      <td>0.000634</td>
     </tr>
   </tbody>
 </table>
@@ -779,10 +780,10 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec317af10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19caf778b0&gt;
 </pre></div>
 </div>
-<img alt="../_images/a9e5b2432fb6e2005f4e4540179c4fc4009e34725e7a3dcd57234746ba83fdec.png" src="../_images/a9e5b2432fb6e2005f4e4540179c4fc4009e34725e7a3dcd57234746ba83fdec.png" />
+<img alt="../_images/cd2e9f742d812c631329700b21e7b942e223f89add4d0852d953bafa8130e84d.png" src="../_images/cd2e9f742d812c631329700b21e7b942e223f89add4d0852d953bafa8130e84d.png" />
 </div>
 </div>
 </section>
@@ -806,22 +807,22 @@ of parameters.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([38, 48, 57, 76]),
- array([[0.97368421, 1.        , 0.94736842, 0.94736842, 0.94736842],
-        [0.97916667, 1.        , 0.95833333, 0.95833333, 0.95833333],
-        [0.98245614, 0.96491228, 0.94736842, 0.98245614, 0.98245614],
-        [0.98684211, 0.97368421, 0.98684211, 0.97368421, 0.98684211]]),
- array([[0.95833333, 1.        , 0.91666667, 0.95833333, 0.875     ],
-        [0.95833333, 1.        , 1.        , 0.95833333, 0.91666667],
-        [0.95833333, 1.        , 1.        , 0.95833333, 0.91666667],
-        [0.95833333, 1.        , 1.        , 1.        , 0.91666667]]),
- array([[0.00113297, 0.00060916, 0.00059152, 0.00062323, 0.00058484],
-        [0.00065517, 0.0006206 , 0.00059104, 0.00060916, 0.00059938],
-        [0.00062823, 0.00061274, 0.00060463, 0.00061965, 0.00060987],
-        [0.00063944, 0.00067592, 0.00062156, 0.00062919, 0.00064564]]),
- array([[0.0006845 , 0.00043273, 0.00042462, 0.00043559, 0.00042582],
-        [0.0004437 , 0.00043201, 0.00044894, 0.00042987, 0.00042391],
-        [0.00046682, 0.00042725, 0.00042272, 0.00045252, 0.00042152],
-        [0.00043154, 0.00043058, 0.0004251 , 0.00043416, 0.00043869]])]
+ array([[1.        , 1.        , 1.        , 1.        , 1.        ],
+        [1.        , 1.        , 1.        , 1.        , 1.        ],
+        [1.        , 0.96491228, 0.98245614, 1.        , 1.        ],
+        [1.        , 0.98684211, 1.        , 1.        , 0.98684211]]),
+ array([[1.        , 1.        , 1.        , 0.91666667, 1.        ],
+        [1.        , 1.        , 1.        , 0.91666667, 1.        ],
+        [1.        , 1.        , 1.        , 0.91666667, 0.95833333],
+        [1.        , 1.        , 1.        , 0.91666667, 1.        ]]),
+ array([[0.0009551 , 0.00060177, 0.00058103, 0.00058889, 0.00058031],
+        [0.00062656, 0.00058889, 0.00058603, 0.00058866, 0.00060129],
+        [0.00065279, 0.00059676, 0.00061417, 0.00059557, 0.00059438],
+        [0.00062799, 0.00065827, 0.00060749, 0.00061941, 0.00062966]]),
+ array([[0.00049758, 0.00044942, 0.00042558, 0.00042391, 0.00043535],
+        [0.000453  , 0.00043011, 0.00045729, 0.00042725, 0.00042677],
+        [0.00043821, 0.00042892, 0.00043011, 0.00045371, 0.00042677],
+        [0.00042868, 0.00043678, 0.00043154, 0.00043583, 0.00043416]])]
 </pre></div>
 </div>
 </div>
@@ -841,7 +842,7 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.96315789, 0.97083333, 0.97192982, 0.98157895])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 1.        , 0.98947368, 0.99473684])
 </pre></div>
 </div>
 </div>
@@ -856,10 +857,10 @@ of parameters.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([38, 48, 57, 76]),
- array([0.96315789, 0.97083333, 0.97192982, 0.98157895]),
- array([0.94166667, 0.96666667, 0.96666667, 0.975     ]),
- array([0.00070834, 0.00061507, 0.00061502, 0.00064235]),
- array([0.00048065, 0.00043569, 0.00043817, 0.00043201])]
+ array([1.        , 1.        , 0.98947368, 0.99473684]),
+ array([0.98333333, 0.98333333, 0.975     , 0.98333333]),
+ array([0.00066142, 0.00059829, 0.00061073, 0.00062857]),
+ array([0.00044637, 0.00043888, 0.00043554, 0.0004334 ])]
 </pre></div>
 </div>
 </div>
@@ -873,14 +874,14 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.80000000e+01, 9.63157895e-01, 9.41666667e-01, 7.08341599e-04,
-        4.80651855e-04],
-       [4.80000000e+01, 9.70833333e-01, 9.66666667e-01, 6.15072250e-04,
-        4.35686111e-04],
-       [5.70000000e+01, 9.71929825e-01, 9.66666667e-01, 6.15024567e-04,
-        4.38165665e-04],
-       [7.60000000e+01, 9.81578947e-01, 9.75000000e-01, 6.42347336e-04,
-        4.32014465e-04]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.80000000e+01, 1.00000000e+00, 9.83333333e-01, 6.61420822e-04,
+        4.46367264e-04],
+       [4.80000000e+01, 1.00000000e+00, 9.83333333e-01, 5.98287582e-04,
+        4.38880920e-04],
+       [5.70000000e+01, 9.89473684e-01, 9.75000000e-01, 6.10733032e-04,
+        4.35543060e-04],
+       [7.60000000e+01, 9.94736842e-01, 9.83333333e-01, 6.28566742e-04,
+        4.33397293e-04]])
 </pre></div>
 </div>
 </div>
@@ -925,34 +926,34 @@ of parameters.</p>
     <tr>
       <th>0</th>
       <td>38.0</td>
-      <td>0.963158</td>
-      <td>0.941667</td>
-      <td>0.000708</td>
-      <td>0.000481</td>
+      <td>1.000000</td>
+      <td>0.983333</td>
+      <td>0.000661</td>
+      <td>0.000446</td>
     </tr>
     <tr>
       <th>1</th>
       <td>48.0</td>
-      <td>0.970833</td>
-      <td>0.966667</td>
-      <td>0.000615</td>
-      <td>0.000436</td>
+      <td>1.000000</td>
+      <td>0.983333</td>
+      <td>0.000598</td>
+      <td>0.000439</td>
     </tr>
     <tr>
       <th>2</th>
       <td>57.0</td>
-      <td>0.971930</td>
-      <td>0.966667</td>
-      <td>0.000615</td>
-      <td>0.000438</td>
+      <td>0.989474</td>
+      <td>0.975000</td>
+      <td>0.000611</td>
+      <td>0.000436</td>
     </tr>
     <tr>
       <th>3</th>
       <td>76.0</td>
-      <td>0.981579</td>
-      <td>0.975000</td>
-      <td>0.000642</td>
-      <td>0.000432</td>
+      <td>0.994737</td>
+      <td>0.983333</td>
+      <td>0.000629</td>
+      <td>0.000433</td>
     </tr>
   </tbody>
 </table>
@@ -967,10 +968,10 @@ of parameters.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec0cfdd00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19cae73580&gt;
 </pre></div>
 </div>
-<img alt="../_images/acdf2b567ee26dc110772270a8682ed85292414823852f693e6ea4c9a150b9b7.png" src="../_images/acdf2b567ee26dc110772270a8682ed85292414823852f693e6ea4c9a150b9b7.png" />
+<img alt="../_images/f26acfe14da8454fb715e400d470f0df7f54b3227d02531f4ac4210c5dff7b6d.png" src="../_images/f26acfe14da8454fb715e400d470f0df7f54b3227d02531f4ac4210c5dff7b6d.png" />
 </div>
 </div>
 <p>We can see here that the training score and test score are basically the same. This means we’re doing about as well as we cana at learning the a generalizable model and we probably hav enough data for this task.</p>
@@ -1217,7 +1218,7 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f7ec0c30bb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f19cad56b80&gt;
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
@@ -1235,7 +1236,7 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f7ec0af3c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f19cace9a90&gt;
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
@@ -1324,88 +1325,88 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
       <td>143.0</td>
       <td>0.991608</td>
       <td>0.817487</td>
-      <td>0.002288</td>
-      <td>0.003722</td>
+      <td>0.002353</td>
+      <td>0.004282</td>
     </tr>
     <tr>
       <th>1</th>
       <td>287.0</td>
       <td>0.993031</td>
       <td>0.855317</td>
-      <td>0.003975</td>
-      <td>0.005517</td>
+      <td>0.004113</td>
+      <td>0.005595</td>
     </tr>
     <tr>
       <th>2</th>
       <td>431.0</td>
       <td>0.998144</td>
       <td>0.906541</td>
-      <td>0.006240</td>
-      <td>0.007598</td>
+      <td>0.005858</td>
+      <td>0.007643</td>
     </tr>
     <tr>
       <th>3</th>
       <td>574.0</td>
       <td>0.996167</td>
       <td>0.932690</td>
-      <td>0.009122</td>
-      <td>0.009321</td>
+      <td>0.008407</td>
+      <td>0.009389</td>
     </tr>
     <tr>
       <th>4</th>
       <td>718.0</td>
       <td>0.998886</td>
       <td>0.942696</td>
-      <td>0.011599</td>
-      <td>0.011486</td>
+      <td>0.011272</td>
+      <td>0.010931</td>
     </tr>
     <tr>
       <th>5</th>
       <td>862.0</td>
       <td>0.996984</td>
       <td>0.948813</td>
-      <td>0.015737</td>
-      <td>0.012371</td>
+      <td>0.014358</td>
+      <td>0.012405</td>
     </tr>
     <tr>
       <th>6</th>
       <td>1149.0</td>
       <td>0.997041</td>
       <td>0.957722</td>
-      <td>0.020751</td>
-      <td>0.014678</td>
+      <td>0.020597</td>
+      <td>0.014659</td>
     </tr>
     <tr>
       <th>7</th>
       <td>1293.0</td>
       <td>0.997525</td>
       <td>0.959947</td>
-      <td>0.024708</td>
-      <td>0.015869</td>
+      <td>0.025059</td>
+      <td>0.015931</td>
     </tr>
     <tr>
       <th>8</th>
       <td>1365.0</td>
       <td>0.996923</td>
       <td>0.962730</td>
-      <td>0.026365</td>
-      <td>0.016461</td>
+      <td>0.027201</td>
+      <td>0.016702</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1393.0</td>
       <td>0.997128</td>
       <td>0.962728</td>
-      <td>0.027483</td>
-      <td>0.016819</td>
+      <td>0.027919</td>
+      <td>0.016799</td>
     </tr>
     <tr>
       <th>10</th>
       <td>1422.0</td>
       <td>0.997046</td>
       <td>0.962171</td>
-      <td>0.028089</td>
-      <td>0.016941</td>
+      <td>0.028579</td>
+      <td>0.016966</td>
     </tr>
   </tbody>
 </table>
@@ -1419,7 +1420,7 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec0aba0d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19cac49730&gt;
 </pre></div>
 </div>
 <img alt="../_images/d2a5275f2c35ec0653e07da306d08ca65ddf1c50372f5fe3b55a82d5d560f621.png" src="../_images/d2a5275f2c35ec0653e07da306d08ca65ddf1c50372f5fe3b55a82d5d560f621.png" />
@@ -1497,89 +1498,89 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
       <th>0</th>
       <td>143.0</td>
       <td>1.0</td>
-      <td>0.530913</td>
-      <td>0.001853</td>
-      <td>0.000493</td>
+      <td>0.535357</td>
+      <td>0.001811</td>
+      <td>0.000490</td>
     </tr>
     <tr>
       <th>1</th>
       <td>287.0</td>
       <td>1.0</td>
-      <td>0.555921</td>
-      <td>0.003179</td>
-      <td>0.000482</td>
+      <td>0.556472</td>
+      <td>0.003153</td>
+      <td>0.000484</td>
     </tr>
     <tr>
       <th>2</th>
       <td>431.0</td>
       <td>1.0</td>
-      <td>0.659468</td>
-      <td>0.004598</td>
-      <td>0.000488</td>
+      <td>0.660576</td>
+      <td>0.004560</td>
+      <td>0.000486</td>
     </tr>
     <tr>
       <th>3</th>
       <td>574.0</td>
       <td>1.0</td>
-      <td>0.729573</td>
-      <td>0.006113</td>
-      <td>0.000496</td>
+      <td>0.730681</td>
+      <td>0.006075</td>
+      <td>0.000491</td>
     </tr>
     <tr>
       <th>4</th>
       <td>718.0</td>
       <td>1.0</td>
-      <td>0.694511</td>
-      <td>0.007643</td>
+      <td>0.692854</td>
+      <td>0.007609</td>
       <td>0.000490</td>
     </tr>
     <tr>
       <th>5</th>
       <td>862.0</td>
       <td>1.0</td>
-      <td>0.736243</td>
-      <td>0.009741</td>
-      <td>0.000500</td>
+      <td>0.736795</td>
+      <td>0.009686</td>
+      <td>0.000498</td>
     </tr>
     <tr>
       <th>6</th>
       <td>1149.0</td>
       <td>1.0</td>
-      <td>0.780249</td>
-      <td>0.012894</td>
-      <td>0.000499</td>
+      <td>0.773558</td>
+      <td>0.012822</td>
+      <td>0.000496</td>
     </tr>
     <tr>
       <th>7</th>
       <td>1293.0</td>
       <td>1.0</td>
-      <td>0.787979</td>
-      <td>0.015035</td>
-      <td>0.000530</td>
+      <td>0.789096</td>
+      <td>0.014826</td>
+      <td>0.000499</td>
     </tr>
     <tr>
       <th>8</th>
       <td>1365.0</td>
       <td>1.0</td>
-      <td>0.771320</td>
-      <td>0.015871</td>
-      <td>0.000531</td>
+      <td>0.783002</td>
+      <td>0.015846</td>
+      <td>0.000499</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1393.0</td>
       <td>1.0</td>
-      <td>0.792445</td>
-      <td>0.016287</td>
-      <td>0.000536</td>
+      <td>0.784652</td>
+      <td>0.016216</td>
+      <td>0.000511</td>
     </tr>
     <tr>
       <th>10</th>
       <td>1422.0</td>
       <td>1.0</td>
-      <td>0.793590</td>
-      <td>0.016413</td>
-      <td>0.000543</td>
+      <td>0.781908</td>
+      <td>0.016294</td>
+      <td>0.000500</td>
     </tr>
   </tbody>
 </table>
@@ -1593,10 +1594,10 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f7ec0a61430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.FacetGrid at 0x7f19cabef8b0&gt;
 </pre></div>
 </div>
-<img alt="../_images/cdf48897b99b80cacfd67fc52d02ade66c8f6488d6ee21ea256e8fb1668ac177.png" src="../_images/cdf48897b99b80cacfd67fc52d02ade66c8f6488d6ee21ea256e8fb1668ac177.png" />
+<img alt="../_images/7f9b92e6597f1bd09efb025c8b48539675687191963e9005c02322847aed2ed1.png" src="../_images/7f9b92e6597f1bd09efb025c8b48539675687191963e9005c02322847aed2ed1.png" />
 </div>
 </div>
 <p>This one does much worse that above.</p>
@@ -1649,11 +1650,11 @@ L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
       </div>
     </a>
     <a class="right-next"
-       href="../assignments/01-syllabus-install.html"
+       href="2023-11-21.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Representing Text</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
