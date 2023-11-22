@@ -3,10 +3,12 @@
 
 ## Quick Facts
 - [accept the assignment](https://classroom.github.com/a/QRTv4_g_)
-__first:2023-11-29__
-__final: 2023-12-07__
+- __first: 2023-11-29__
+- __final: 2023-12-07__
 
-```{note}```
+```{note}
+there are 2 deadlines for this instead of an assignment 13
+```
 <!-- - First feedback: {{ early }}
 __Final due date: {{ date }}__ -->
 
