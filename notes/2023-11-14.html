@@ -551,12 +551,12 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    90.000000
-mean      0.952500
-std       0.005649
-min       0.950000
-25%       0.950000
-50%       0.950000
-75%       0.950000
+mean      0.926944
+std       0.012743
+min       0.916667
+25%       0.916667
+50%       0.925000
+75%       0.933333
 max       0.966667
 Name: mean_test_score, dtype: float64
 </pre></div>
@@ -571,13 +571,13 @@ Name: mean_test_score, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    14.000000
-mean      0.964286
-std       0.013248
-min       0.941667
-25%       0.954167
-50%       0.966667
-75%       0.975000
-max       0.983333
+mean      0.984524
+std       0.011255
+min       0.958333
+25%       0.977083
+50%       0.991667
+75%       0.991667
+max       0.991667
 Name: mean_test_score, dtype: float64
 </pre></div>
 </div>
@@ -634,51 +634,51 @@ Name: mean_test_score, dtype: float64
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.000637</td>
-      <td>0.000283</td>
-      <td>0.000446</td>
-      <td>0.000088</td>
+      <td>0.000524</td>
+      <td>0.000067</td>
+      <td>0.000432</td>
+      <td>0.000033</td>
       <td>gini</td>
       <td>2</td>
       <td>2</td>
       <td>{'criterion': 'gini', 'max_depth': 2, 'min_sam...</td>
-      <td>1.0</td>
       <td>0.916667</td>
+      <td>0.833333</td>
       <td>...</td>
       <td>0.916667</td>
-      <td>0.916667</td>
-      <td>1.0</td>
       <td>0.833333</td>
       <td>0.916667</td>
+      <td>0.916667</td>
       <td>1.0</td>
+      <td>0.916667</td>
       <td>1.0</td>
-      <td>0.95</td>
-      <td>0.055277</td>
-      <td>17</td>
+      <td>0.916667</td>
+      <td>0.052705</td>
+      <td>54</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.000492</td>
-      <td>0.000016</td>
+      <td>0.000486</td>
+      <td>0.000007</td>
       <td>0.000415</td>
-      <td>0.000017</td>
+      <td>0.000008</td>
       <td>gini</td>
       <td>2</td>
       <td>4</td>
       <td>{'criterion': 'gini', 'max_depth': 2, 'min_sam...</td>
-      <td>1.0</td>
       <td>0.916667</td>
+      <td>0.833333</td>
       <td>...</td>
       <td>0.916667</td>
-      <td>0.916667</td>
-      <td>1.0</td>
       <td>0.833333</td>
       <td>0.916667</td>
+      <td>0.916667</td>
       <td>1.0</td>
+      <td>0.916667</td>
       <td>1.0</td>
-      <td>0.95</td>
-      <td>0.055277</td>
-      <td>17</td>
+      <td>0.916667</td>
+      <td>0.052705</td>
+      <td>54</td>
     </tr>
   </tbody>
 </table>
@@ -751,9 +751,13 @@ Name: mean_test_score, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rank_test_score
-17    74
-1     11
-12     5
+54    37
+25    29
+4     10
+17     8
+14     3
+1      2
+3      1
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -767,11 +771,11 @@ Name: count, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rank_test_score
-6     5
-2     4
+1     9
 11    2
-13    2
-1     1
+14    1
+13    1
+10    1
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -807,13 +811,13 @@ We can compare if it is generative (describes the data, could generate synthetic
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    90.000000
-mean      0.000495
-std       0.000029
-min       0.000470
-25%       0.000483
-50%       0.000489
-75%       0.000497
-max       0.000657
+mean      0.000509
+std       0.000067
+min       0.000473
+25%       0.000490
+50%       0.000498
+75%       0.000506
+max       0.000979
 Name: mean_fit_time, dtype: float64
 </pre></div>
 </div>
@@ -827,12 +831,12 @@ Name: mean_fit_time, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    14.000000
-mean      0.000679
-std       0.000035
-min       0.000637
-25%       0.000651
-50%       0.000674
-75%       0.000690
+mean      0.000685
+std       0.000037
+min       0.000645
+25%       0.000656
+50%       0.000677
+75%       0.000702
 max       0.000752
 Name: mean_fit_time, dtype: float64
 </pre></div>
@@ -848,13 +852,13 @@ Name: mean_fit_time, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    90.000000
-mean      0.000407
-std       0.000025
-min       0.000394
-25%       0.000400
-50%       0.000402
-75%       0.000406
-max       0.000584
+mean      0.000420
+std       0.000022
+min       0.000408
+25%       0.000413
+50%       0.000415
+75%       0.000418
+max       0.000579
 Name: mean_score_time, dtype: float64
 </pre></div>
 </div>
@@ -868,13 +872,13 @@ Name: mean_score_time, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    14.000000
-mean      0.000439
-std       0.000008
-min       0.000429
-25%       0.000434
-50%       0.000437
-75%       0.000446
-max       0.000452
+mean      0.000452
+std       0.000010
+min       0.000436
+25%       0.000446
+50%       0.000450
+75%       0.000458
+max       0.000474
 Name: mean_score_time, dtype: float64
 </pre></div>
 </div>

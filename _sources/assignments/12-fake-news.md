@@ -7,7 +7,7 @@
 - __final: 2023-12-07__
 
 ```{note}
-there are 2 deadlines for this instead of an assignment 13
+there are 2 deadlines for this instead of an assignment 13. This means that we will review whatever you have done by the 29th on 11/30 and give you personalized feedback in order to finish the assignment.  
 ```
 <!-- - First feedback: {{ early }}
 __Final due date: {{ date }}__ -->
@@ -15,7 +15,8 @@ __Final due date: {{ date }}__ -->
 
 ## Related notes
 
-- [](../notes/2023-11-21)
+- [representing text](../notes/2023-11-21)
+<!-- - [more text representations](../notes/2023-11-28) -->
 
 ## Assessment
 
