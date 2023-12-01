@@ -1,0 +1,2662 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>23. Neural Networks &#8212; Programming for Data Science at URI Fall 2023</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/course-admonitions.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/2023-11-30';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Assignment 1: Setup, Syllabus, and Review" href="../assignments/01-syllabus-install.html" />
+    <link rel="prev" title="22. More text representations" href="2023-11-28.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/310_2021.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/310_2021.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About this Book
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Syllabus</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/tools.html">Tools and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/achievements.html">Data Science Achievements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/grading.html">Grading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/policies.html">Grading Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/style.html">Course  Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_resources.html">Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/uri_statements.html">General URI Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../syllabus/communication.html">Communications &amp; Office Hours</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2023-09-07.html">1. Welcome &amp; What is Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-12.html">2. Iterables and Pandas Data Frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-14.html">3. DataFrames from other sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-19.html">4. Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-21.html">5. Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-26.html">6. Tidy Data and Structural Repairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-09-28.html">7. Reparing values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-03.html">8. Merging Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-05.html">9. Web Scraping</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-12.html">10. Evaluating ML Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-17.html">11. Intro to ML &amp; Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-19.html">12. Understanding Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-24.html">13. Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-26.html">14. Clustering Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-10-31.html">15. Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-02.html">16. Interpretting Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-07.html">17. Cross Validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-09.html">18. Model Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-14.html">19. Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-16.html">20. Learning Curves and more Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-21.html">21. Representing Text</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023-11-28.html">22. More text representations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">23. Neural Networks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../assignments/01-syllabus-install.html">1. Assignment 1: Setup, Syllabus, and Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/02-python-access.html">2. Assignment 2: Practicing Python and Accessing Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/03-eda.html">3. Assignment 3: Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/04-prepare.html">4. Assignment 4: Cleaning Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/05-construct.html">5. Assignment 5: Constructing Datasets and Using Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/06-evaluate.html">6. Assignment 6: Auditing Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/07-classification.html">7. Assignment 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/08-clustering.html">8. Assignment 8: Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/09-regression.html">9. Assignment 9: Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/10-optimize.html">10. Assignment 10: Tuning Model Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/11-compare.html">11. Assignment 11: Model Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assignments/12-fake-news.html">12. Assignment 12: Fake News</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Portfolio</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/index.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/formatting.html">Formatting Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check1ideas.html">Portfolio Check 1 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check2ideas.html">Check 2 Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../portfolio/check3ideas.html">Check 3 Ideas</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">FAQ</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/syllabus.html">Syllabus and Grading FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/github.html">Git and GitHub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/debugging.html">Code Errors</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../resources/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/python.html">References on Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/cheatsheet.html">Cheatsheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/datasets.html">Data Sources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/tips.html">General Tips and Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/learning.html">How to Study in this class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/gettinghelp.html">Getting Help with Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/terminal.html">Terminals and Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/organization.html">Getting Organized for class</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall20/letters/">Advice from FA2020 Students</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://rhodyprog4ds.github.io/BrownFall21/letters/">Advice from FA2021 Students</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/edit/main/notes/2023-11-30.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rhodyprog4ds/BrownFall23/issues/new?title=Issue%20on%20page%20%2Fnotes/2023-11-30.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/2023-11-30.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#admin">23.1. Admin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">23.2. What is a Neural Network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-in-sklearn">23.3. NN in Sklearn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-nn-to-mlp">23.4. Comparing nn to mlp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-predictions">23.5. Neural Network Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-replicate">23.6. Another way to replicate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complicated-example">23.7. A more complicated example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">23.8. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-neural-networks-wherein-each-layer-does-a-different-type-of-transformation-such-as-logistic-or-identity">23.8.1. Are there neural networks wherein each layer does a different type of transformation, such as logistic or identity?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-benefits-of-neural-networks-compared-to-machine-learning">23.8.2. What are the benefits of neural networks compared to machine learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-larger-contributing-in-advancements-in-deep-learning-hardware-or-software">23.8.3. What is the larger contributing in advancements in deep learning - hardware or software?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-other-visualizations-of-neural-networks-such-as-images-articles-videos-that-would-be-good-for-introductions-i-would-like-some-that-do-go-into-some-of-the-math-behind-how-it-works">23.8.4. Are there any other visualizations of neural networks such as images,articles,videos that would be good for introductions? I would like some that do go into some of the math behind how it works.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-you-able-to-keep-training-data-from-a-previous-session-with-deep-learning">23.8.5. Are you able to keep training data from a previous session with deep learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-other-functions-can-we-use-instead-of-explit-sigmoid">23.8.6. What other functions can we use instead of explit (sigmoid)?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks">
+<h1><span class="section-number">23. </span>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">#</a></h1>
+<section id="admin">
+<h2><span class="section-number">23.1. </span>Admin<a class="headerlink" href="#admin" title="Permalink to this headline">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>We will have 2 speakers to wrap up the semester:</p>
+<ul class="simple">
+<li><p>12/7: <a class="reference external" href="https://www.linkedin.com/in/nirmal-keshava-0180012/">Nirmal Keshava</a></p></li>
+<li><p>12/12: <a class="reference external" href="https://www.linkedin.com/in/tiffanysithiphone/">Tiffany Sithiphone</a></p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>P3 is due 12/4 unless you got a note from me saying that I saw your P2, but I have not graded it yet.</p>
+</div>
+</section>
+<section id="what-is-a-neural-network">
+<h2><span class="section-number">23.2. </span>What is a Neural Network<a class="headerlink" href="#what-is-a-neural-network" title="Permalink to this headline">#</a></h2>
+<p>We started thinking about machine learning with the idea that the basic idea is
+that we assume that our target variable (<span class="math notranslate nohighlight">\(y_i\)</span>) is related to the features <span class="math notranslate nohighlight">\(\mathbf{x}_i\)</span>
+by some function (for sample <span class="math notranslate nohighlight">\(i\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[ y_i =f(\mathbf{x}_i;\theta)\]</div>
+<p>But we don’t know that function exactly, so we assume a type (a decision
+tree, a boundary for SVM, a probability distribution) that has some parameters
+<span class="math notranslate nohighlight">\(\theta\)</span> and then use a machine
+learning algorithm <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> to estimate the parameters for <span class="math notranslate nohighlight">\(f\)</span>.  In the
+decision tree the parameters are the thresholds to compare to, in the GaussianNB the parameters are the mean and variance, in SVM it’s the support vectors that define the margin.</p>
+<div class="math notranslate nohighlight">
+\[\theta = \mathcal{A}(X,y) \]</div>
+<p>That we can use to test on our test data:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y}_i = f(x_i;\theta) \]</div>
+<p>A neural net allows us to not assume a specific form for <span class="math notranslate nohighlight">\(f\)</span> first, it does
+universal function approximation.  For one hidden layer and a binary classification problem:</p>
+<div class="math notranslate nohighlight">
+\[f(x) = W_2g(W_1^T x +b_1) + b_2 \]</div>
+<p>where the function <span class="math notranslate nohighlight">\(g\)</span> is called the activation function. We approximate some
+unknown, complicated function <span class="math notranslate nohighlight">\(f\)</span> by taking a weighted sum of all of the inputs,
+and passing those through another, known function, <span class="math notranslate nohighlight">\(g\)</span>.</p>
+<p>The learning step involves finding the weights and biases (or coeffificents and intercepts). It does so by finding the weights that minimize some loss function on the data:</p>
+<div class="math notranslate nohighlight">
+\[ min_{W_1,W_2,b_1,b_2} \ell(f(x),y)\]</div>
+<p>where the loss function <span class="math notranslate nohighlight">\(\ell\)</span> describes the “cost” of errors. For example it might be simple does the prediction match or more complex like how close it is.</p>
+</section>
+<section id="nn-in-sklearn">
+<h2><span class="section-number">23.3. </span>NN in Sklearn<a class="headerlink" href="#nn-in-sklearn" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">expit</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">model_selection</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">palette</span><span class="o">=</span><span class="s1">&#39;colorblind&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the digits dataset again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">()</span>
+<span class="n">digits_X</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span>
+<span class="n">digits_y</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">digits_X</span><span class="p">,</span><span class="n">digits_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">digits</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.],
+       [ 0.,  0., 13., 15., 10., 15.,  5.,  0.],
+       [ 0.,  3., 15.,  2.,  0., 11.,  8.,  0.],
+       [ 0.,  4., 12.,  0.,  0.,  8.,  8.,  0.],
+       [ 0.,  5.,  8.,  0.,  0.,  9.,  8.,  0.],
+       [ 0.,  4., 11.,  0.,  1., 12.,  7.,  0.],
+       [ 0.,  2., 14.,  5., 10., 12.,  0.,  0.],
+       [ 0.,  0.,  6., 13., 10.,  0.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sklearn</span></code> provides a neural network by the name <code class="docutils literal notranslate"><span class="pre">MLPClassifier</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlp</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span>
+  <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+  <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+  <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span>
+  <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+  <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+  <span class="n">learning_rate_init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We specify:</p>
+<ul class="simple">
+<li><p>the number of neurons in each hidden layer</p></li>
+<li><p>the number of steps in the optimizaiton to do</p></li>
+<li><p>the solver is the algorithm used to find the parameters</p></li>
+<li><p>for it to output interim info as it works</p></li>
+<li><p>fix the random state so we all use the same initialization</p></li>
+<li><p>the initial learning rate (how fast to change parameter values while searching)</p></li>
+</ul>
+<p>Then we use it just like we use all other sklearn estimators.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =         1210     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  9.38693D+00    |proj g|=  7.09206D+00
+
+At iterate    1    f=  8.15156D+00    |proj g|=  7.36156D+00
+
+At iterate    2    f=  3.18563D+00    |proj g|=  1.91363D+00
+
+At iterate    3    f=  2.36060D+00    |proj g|=  3.84018D-01
+
+At iterate    4    f=  2.24755D+00    |proj g|=  2.30768D-01
+
+At iterate    5    f=  2.11293D+00    |proj g|=  2.53754D-01
+
+At iterate    6    f=  1.98843D+00    |proj g|=  4.81619D-01
+
+At iterate    7    f=  1.82838D+00    |proj g|=  2.74247D-01
+
+At iterate    8    f=  1.68914D+00    |proj g|=  7.40180D-01
+
+At iterate    9    f=  1.57443D+00    |proj g|=  5.14678D-01
+
+At iterate   10    f=  1.49638D+00    |proj g|=  5.09628D-01
+
+At iterate   11    f=  1.38876D+00    |proj g|=  4.55836D-01
+
+At iterate   12    f=  1.27142D+00    |proj g|=  3.48865D-01
+
+At iterate   13    f=  1.18806D+00    |proj g|=  2.52296D-01
+
+At iterate   14    f=  1.11926D+00    |proj g|=  3.24829D-01
+
+At iterate   15    f=  1.05572D+00    |proj g|=  3.44529D-01
+
+At iterate   16    f=  1.01137D+00    |proj g|=  2.78065D-01
+
+At iterate   17    f=  9.53976D-01    |proj g|=  4.00339D-01
+
+At iterate   18    f=  8.45621D-01    |proj g|=  4.52653D-01
+
+At iterate   19    f=  8.01820D-01    |proj g|=  1.04435D+00
+
+At iterate   20    f=  7.44885D-01    |proj g|=  2.26544D-01
+
+At iterate   21    f=  7.28289D-01    |proj g|=  2.43203D-01
+
+At iterate   22    f=  6.95867D-01    |proj g|=  1.98729D-01
+
+At iterate   23    f=  6.33586D-01    |proj g|=  3.31152D-01
+
+At iterate   24    f=  6.04083D-01    |proj g|=  3.00772D-01
+
+At iterate   25    f=  5.78867D-01    |proj g|=  1.27902D-01
+
+At iterate   26    f=  5.67086D-01    |proj g|=  1.42118D-01
+
+At iterate   27    f=  5.33243D-01    |proj g|=  2.15049D-01
+
+At iterate   28    f=  5.08212D-01    |proj g|=  4.26490D-01
+
+At iterate   29    f=  4.87597D-01    |proj g|=  2.05647D-01
+
+At iterate   30    f=  4.77267D-01    |proj g|=  1.21000D-01
+
+At iterate   31    f=  4.62171D-01    |proj g|=  8.94163D-02
+
+At iterate   32    f=  4.51952D-01    |proj g|=  3.93156D-01
+
+At iterate   33    f=  4.39374D-01    |proj g|=  2.38768D-01
+
+At iterate   34    f=  4.28416D-01    |proj g|=  1.37684D-01
+
+At iterate   35    f=  4.16790D-01    |proj g|=  9.74031D-02
+
+At iterate   36    f=  4.09037D-01    |proj g|=  2.66538D-01
+
+At iterate   37    f=  3.99489D-01    |proj g|=  2.64645D-01
+
+At iterate   38    f=  3.82281D-01    |proj g|=  1.69303D-01
+
+At iterate   39    f=  3.63574D-01    |proj g|=  1.64841D-01
+
+At iterate   40    f=  3.52840D-01    |proj g|=  1.23337D-01
+
+At iterate   41    f=  3.43795D-01    |proj g|=  3.62185D-01
+
+At iterate   42    f=  3.30816D-01    |proj g|=  1.27892D-01
+
+At iterate   43    f=  3.17659D-01    |proj g|=  1.09352D-01
+
+At iterate   44    f=  3.06183D-01    |proj g|=  1.13966D-01
+
+At iterate   45    f=  2.96114D-01    |proj g|=  2.25017D-01
+
+At iterate   46    f=  2.87146D-01    |proj g|=  2.67933D-01
+
+At iterate   47    f=  2.73789D-01    |proj g|=  1.04987D-01
+
+At iterate   48    f=  2.69057D-01    |proj g|=  9.13683D-02
+
+At iterate   49    f=  2.63870D-01    |proj g|=  1.29607D-01
+
+At iterate   50    f=  2.49886D-01    |proj g|=  1.08258D-01
+
+At iterate   51    f=  2.41974D-01    |proj g|=  6.50096D-02
+
+At iterate   52    f=  2.34353D-01    |proj g|=  1.31949D-01
+
+At iterate   53    f=  2.28437D-01    |proj g|=  1.32677D-01
+
+At iterate   54    f=  2.25692D-01    |proj g|=  6.08632D-02
+
+At iterate   55    f=  2.23007D-01    |proj g|=  5.22349D-02
+
+At iterate   56    f=  2.15805D-01    |proj g|=  1.15540D-01
+
+At iterate   57    f=  2.10383D-01    |proj g|=  7.87560D-02
+
+At iterate   58    f=  2.03307D-01    |proj g|=  1.22079D-01
+
+At iterate   59    f=  1.97482D-01    |proj g|=  7.12210D-02
+
+At iterate   60    f=  1.92928D-01    |proj g|=  6.00128D-02
+
+At iterate   61    f=  1.89821D-01    |proj g|=  8.00460D-02
+
+At iterate   62    f=  1.84695D-01    |proj g|=  1.10561D-01
+
+At iterate   63    f=  1.80991D-01    |proj g|=  8.58655D-02
+
+At iterate   64    f=  1.76253D-01    |proj g|=  4.96065D-02
+
+At iterate   65    f=  1.72857D-01    |proj g|=  1.23072D-01
+
+At iterate   66    f=  1.70169D-01    |proj g|=  2.79674D-02
+
+At iterate   67    f=  1.68781D-01    |proj g|=  3.34043D-02
+
+At iterate   68    f=  1.66744D-01    |proj g|=  6.82436D-02
+
+At iterate   69    f=  1.64657D-01    |proj g|=  6.19420D-02
+
+At iterate   70    f=  1.62737D-01    |proj g|=  5.10871D-02
+
+At iterate   71    f=  1.61111D-01    |proj g|=  4.16168D-02
+
+At iterate   72    f=  1.59602D-01    |proj g|=  3.77851D-02
+
+At iterate   73    f=  1.57695D-01    |proj g|=  4.71018D-02
+
+At iterate   74    f=  1.54624D-01    |proj g|=  1.05790D-01
+
+At iterate   75    f=  1.52288D-01    |proj g|=  3.50732D-02
+
+At iterate   76    f=  1.50954D-01    |proj g|=  2.40391D-02
+
+At iterate   77    f=  1.48358D-01    |proj g|=  6.65079D-02
+
+At iterate   78    f=  1.46427D-01    |proj g|=  4.67285D-02
+
+At iterate   79    f=  1.44083D-01    |proj g|=  3.47170D-02
+
+At iterate   80    f=  1.42564D-01    |proj g|=  1.13545D-01
+
+At iterate   81    f=  1.41236D-01    |proj g|=  2.61618D-02
+
+At iterate   82    f=  1.40157D-01    |proj g|=  5.04362D-02
+
+At iterate   83    f=  1.39032D-01    |proj g|=  5.23177D-02
+
+At iterate   84    f=  1.37372D-01    |proj g|=  9.88868D-02
+
+At iterate   85    f=  1.35474D-01    |proj g|=  3.32477D-02
+
+At iterate   86    f=  1.34578D-01    |proj g|=  2.43987D-02
+
+At iterate   87    f=  1.32499D-01    |proj g|=  8.04203D-02
+
+At iterate   88    f=  1.31120D-01    |proj g|=  4.41995D-02
+
+At iterate   89    f=  1.30259D-01    |proj g|=  6.14797D-02
+
+At iterate   90    f=  1.28794D-01    |proj g|=  2.84942D-02
+
+At iterate   91    f=  1.27623D-01    |proj g|=  3.46044D-02
+
+At iterate   92    f=  1.26723D-01    |proj g|=  2.39105D-02
+
+At iterate   93    f=  1.25639D-01    |proj g|=  2.01272D-02
+
+At iterate   94    f=  1.23955D-01    |proj g|=  4.62092D-02
+
+At iterate   95    f=  1.22574D-01    |proj g|=  5.94374D-02
+
+At iterate   96    f=  1.21349D-01    |proj g|=  2.89893D-02
+
+At iterate   97    f=  1.20153D-01    |proj g|=  2.22026D-02
+
+At iterate   98    f=  1.18571D-01    |proj g|=  3.88159D-02
+
+At iterate   99    f=  1.17008D-01    |proj g|=  4.13127D-02
+
+At iterate  100    f=  1.15176D-01    |proj g|=  3.06582D-02
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+ 1210    100    107      1     0     0   3.066D-02   1.152D-01
+  F =  0.11517566830721053     
+
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT                 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This problem is unconstrained.
+/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:546: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result(&quot;lbfgs&quot;, opt_res, self.max_iter)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8866666666666667
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-nn-to-mlp">
+<h2><span class="section-number">23.4. </span>Comparing nn to mlp<a class="headerlink" href="#comparing-nn-to-mlp" title="Permalink to this headline">#</a></h2>
+<p>Letsw fit an SVM</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm_clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">gamma</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="n">svm_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">svm_clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9844444444444445
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we get better performance with this, but we can alos check the complexity to compare them.</p>
+<p>We can see how many support vectors that this had to store.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">svm_clf</span><span class="o">.</span><span class="n">support_vectors_</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(670, 64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>and then multiply all together to get the total numbers stored:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">svm_clf</span><span class="o">.</span><span class="n">support_vectors_</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42880
+</pre></div>
+</div>
+</div>
+</div>
+<p>for the MLP, we’ll use the weights:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">coefs_</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1184
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see these shapes are determined by the data and the size of the hidden that we specifies and the number of classes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mlp</span><span class="o">.</span><span class="n">coefs_</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[64, 16], [16, 10]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case we have:</p>
+<ul class="simple">
+<li><p>64 features (8x8 pixels)</p></li>
+<li><p>16 hidden layer neurons</p></li>
+<li><p>10 classes</p></li>
+</ul>
+<p>we have 10 neurons in the output layer because each output neuron is related to one class. Each output neuron relates to one class, so for it to be one that class is predicted and the others are 0 for training.  At prediction time, we say the highest value one is the ones that we read as the prediction.  We interpret the outpus as the probability that the sample belongs to each class.</p>
+</section>
+<section id="neural-network-predictions">
+<h2><span class="section-number">23.5. </span>Neural Network Predictions<a class="headerlink" href="#neural-network-predictions" title="Permalink to this headline">#</a></h2>
+<p>We’ll start with some toy data for classification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+             <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">hue</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../_images/af7cacba3bff1698dadbe7bc98b428213c86c0583a58eed0995b7ed753700d58.png" src="../_images/af7cacba3bff1698dadbe7bc98b428213c86c0583a58eed0995b7ed753700d58.png" />
+</div>
+</div>
+<p>it’s two simple features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span>
+ <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># 1 hidden layer, 1 aritficial neuron</span>
+ <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="c1"># maximum 100 interations in optimization</span>
+ <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="c1"># regularization</span>
+ <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span> <span class="c1">#optimization algorithm  </span>
+ <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="c1"># how much detail to print</span>
+ <span class="n">activation</span><span class="o">=</span> <span class="s1">&#39;identity&#39;</span> <span class="c1"># how to transform the hidden layer beofore passing it to the next layer</span>
+<span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            5     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  1.67510D+00    |proj g|=  1.13880D+00
+
+At iterate    1    f=  9.36281D-01    |proj g|=  2.64405D-01
+
+At iterate    2    f=  8.56411D-01    |proj g|=  2.50204D-01
+
+At iterate    3    f=  6.69461D-01    |proj g|=  1.44631D-01
+
+At iterate    4    f=  5.56440D-02    |proj g|=  1.99312D-02
+
+At iterate    5    f=  5.41297D-02    |proj g|=  1.39186D-02
+
+At iterate    6    f=  5.21583D-02    |proj g|=  1.00826D-02
+
+At iterate    7    f=  5.12565D-02    |proj g|=  9.71497D-03
+
+At iterate    8    f=  4.90604D-02    |proj g|=  1.57475D-02
+
+At iterate    9    f=  4.81826D-02    |proj g|=  3.92508D-03
+
+At iterate   10    f=  4.79640D-02    |proj g|=  9.48362D-04
+
+At iterate   11    f=  4.79049D-02    |proj g|=  5.44517D-04
+
+At iterate   12    f=  4.79041D-02    |proj g|=  1.94438D-04
+
+At iterate   13    f=  4.79040D-02    |proj g|=  2.28372D-05
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    5     13     16      1     0     0   2.284D-05   4.790D-02
+  F =   4.7904047790113924E-002
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL            
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This problem is unconstrained.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>this does very well</p>
+<p>We can see that this network has one activation for the hidden layers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">activation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;identity&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>and a different one for the output layer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">out_activation_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;logistic&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>The sigmoid function looks like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_logistic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y_logistic</span> <span class="o">=</span> <span class="n">expit</span><span class="p">(</span><span class="n">x_logistic</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_logistic</span><span class="p">,</span><span class="n">y_logistic</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ff2db280d30&gt;]
+</pre></div>
+</div>
+<img alt="../_images/3f54361fdb8264dc3ec0bbf139c48946663d1d0d82053dad3decf22f990a2c30.png" src="../_images/3f54361fdb8264dc3ec0bbf139c48946663d1d0d82053dad3decf22f990a2c30.png" />
+</div>
+</div>
+<p>The object also has coefficients</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-3.15245912],
+        [ 0.09075514]]),
+ array([[-4.1702417]])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>and intercepts as attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([0.02769655]), array([5.81394286])]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To test this, we will make a new sample, the point (-1,2)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The hidden neuron in this case does the following calculation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3.36166594]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>then the output neuron takes that as input and uses its own weights, and the sigmoid function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expit</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0002732]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This calculates the probability the output is 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9.99726795e-01, 2.73204522e-04]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This method predicts the probabity of both 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span> <span class="n">expit</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.9997268]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>and we can confirm that we have replicated the function of the predictions for the neural network.</p>
+</section>
+<section id="another-way-to-replicate">
+<h2><span class="section-number">23.6. </span>Another way to replicate<a class="headerlink" href="#another-way-to-replicate" title="Permalink to this headline">#</a></h2>
+<p>We can consider a neuron like a tempalte function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aritificial_neuron_template</span><span class="p">(</span><span class="n">activation</span><span class="p">,</span><span class="n">weights</span><span class="p">,</span><span class="n">bias</span><span class="p">,</span><span class="n">inputs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    simple artificial neuron</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    activation : function</span>
+<span class="sd">    activation function of the neuron</span>
+<span class="sd">    weights : numpy aray</span>
+<span class="sd">    wights for summing inputs one per input</span>
+<span class="sd">    bias: numpy array</span>
+<span class="sd">    bias term added to the weighted sum</span>
+<span class="sd">    inputs : numpy array</span>
+<span class="sd">    input to the neuron, must be same size as weights</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">activation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span><span class="n">weights</span><span class="p">)</span> <span class="o">+</span><span class="n">bias</span><span class="p">)</span>
+
+<span class="c1"># two common activation functions</span>
+<span class="n">identity_activation</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+<span class="n">logistic_activation</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">expit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that this function takes in:</p>
+<ul class="simple">
+<li><p>inputs (features)</p></li>
+<li><p>weights</p></li>
+<li><p>bias</p></li>
+<li><p>activation function</p></li>
+</ul>
+<p>We also define two activation functions.</p>
+<p>When we set up to train a neural network, we tell the learning algorithm what activation function to use and then it learns the weights.</p>
+<p>This is equivalent to our neural network above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_neuron</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">identity_activation</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">output_neuron</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">expit</span><span class="p">,</span><span class="n">clf</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">clf</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">output_neuron</span><span class="p">(</span><span class="n">hidden_neuron</span><span class="p">(</span><span class="n">pt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0002732]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-more-complicated-example">
+<h2><span class="section-number">23.7. </span>A more complicated example<a class="headerlink" href="#a-more-complicated-example" title="Permalink to this headline">#</a></h2>
+<p>This time we’ll make similar data with 4 features instead of 2  and we’ll set up a test point <code class="docutils literal notranslate"><span class="pre">pt_4d</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">n_features</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n_informative</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                          <span class="n">random_state</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">pt_4d</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">clf_4d</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span>
+  <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+  <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+  <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+  <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span>
+  <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+  <span class="n">activation</span><span class="o">=</span> <span class="s1">&#39;identity&#39;</span>
+<span class="p">)</span>
+
+<span class="n">clf_4d</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">clf_4d</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =            7     M =           10
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This problem is unconstrained.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.84
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  7.98783D-01    |proj g|=  2.46438D-01
+
+At iterate    1    f=  5.91682D-01    |proj g|=  1.30941D-01
+
+At iterate    2    f=  5.06580D-01    |proj g|=  1.04633D-01
+
+At iterate    3    f=  4.65166D-01    |proj g|=  6.33040D-02
+
+At iterate    4    f=  4.38068D-01    |proj g|=  2.96396D-02
+
+At iterate    5    f=  4.35335D-01    |proj g|=  1.37829D-02
+
+At iterate    6    f=  4.34709D-01    |proj g|=  3.44598D-03
+
+At iterate    7    f=  4.34658D-01    |proj g|=  7.19738D-04
+
+At iterate    8    f=  4.34656D-01    |proj g|=  1.49166D-04
+
+At iterate    9    f=  4.34656D-01    |proj g|=  8.35626D-06
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+    7      9     11      1     0     0   8.356D-06   4.347D-01
+  F =  0.43465603414656157     
+
+CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL            
+</pre></div>
+</div>
+</div>
+</div>
+<p>this does well again</p>
+<p>we can see the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x0&#39;</span><span class="p">,</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span><span class="s1">&#39;x3&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x7ff2db25d9a0&gt;
+</pre></div>
+</div>
+<img alt="../_images/5a3507a0f7604736a85d5290b63567be81c52c7fc3003ea0d1d826c0e7cc3c5a.png" src="../_images/5a3507a0f7604736a85d5290b63567be81c52c7fc3003ea0d1d826c0e7cc3c5a.png" />
+</div>
+</div>
+<p>we can do it again with our template function by defining two functions: one for the hidden neuron and one for output, then the prediction</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_neuron_4d</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">identity_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">clf_4d</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">output_neuron_4d</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">clf_4d</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">output_neuron_4d</span><span class="p">(</span><span class="n">hidden_neuron_4d</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.95356341],
+       [0.853323  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_4d</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.04643659, 0.95356341],
+       [0.146677  , 0.853323  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>and confirm it’s correct.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pt_4d_2</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">output_neuron_4d</span><span class="p">(</span><span class="n">hidden_neuron_4d</span><span class="p">(</span><span class="n">pt_4d_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.99144632],
+       [0.90642669]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_4d</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">pt_4d_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00855368, 0.99144632],
+       [0.09357331, 0.90642669]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can build up what we need for a 4 hidden neuron MLP too.  First we’ll train the MLP</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_4d_4h</span> <span class="o">=</span> <span class="n">MLPClassifier</span><span class="p">(</span>
+  <span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+  <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+  <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+  <span class="n">solver</span><span class="o">=</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span>
+  <span class="n">verbose</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+  <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;logistic&#39;</span>
+<span class="p">)</span>
+
+<span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =           25     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  9.23412D-01    |proj g|=  2.88014D-01
+
+At iterate    1    f=  6.91059D-01    |proj g|=  3.01763D-02
+
+At iterate    2    f=  6.65173D-01    |proj g|=  4.28664D-02
+
+At iterate    3    f=  5.65989D-01    |proj g|=  7.76138D-02
+
+At iterate    4    f=  4.98817D-01    |proj g|=  4.80666D-02
+
+At iterate    5    f=  4.76621D-01    |proj g|=  4.39761D-02
+
+At iterate    6    f=  4.57458D-01    |proj g|=  3.26867D-02
+
+At iterate    7    f=  4.47278D-01    |proj g|=  5.17749D-02
+
+At iterate    8    f=  4.37644D-01    |proj g|=  2.12424D-02
+
+At iterate    9    f=  4.23535D-01    |proj g|=  1.22172D-02
+
+At iterate   10    f=  4.17087D-01    |proj g|=  1.43749D-02
+
+At iterate   11    f=  4.03267D-01    |proj g|=  3.32809D-02
+
+At iterate   12    f=  3.95414D-01    |proj g|=  3.86180D-02
+
+At iterate   13    f=  3.91942D-01    |proj g|=  4.67726D-02
+
+At iterate   14    f=  3.89693D-01    |proj g|=  3.42141D-02
+
+At iterate   15    f=  3.85819D-01    |proj g|=  2.52385D-02
+
+At iterate   16    f=  3.79131D-01    |proj g|=  5.51779D-02
+
+At iterate   17    f=  3.74838D-01    |proj g|=  4.10567D-02
+
+At iterate   18    f=  3.71026D-01    |proj g|=  5.57910D-02
+
+At iterate   19    f=  3.67537D-01    |proj g|=  6.68959D-02
+
+At iterate   20    f=  3.61938D-01    |proj g|=  3.98062D-02
+
+At iterate   21    f=  3.58267D-01    |proj g|=  3.65972D-02
+
+At iterate   22    f=  3.55701D-01    |proj g|=  1.03595D-01
+
+At iterate   23    f=  3.53139D-01    |proj g|=  5.58307D-02
+
+At iterate   24    f=  3.52133D-01    |proj g|=  4.62552D-02
+
+At iterate   25    f=  3.50857D-01    |proj g|=  2.83734D-02
+
+At iterate   26    f=  3.48559D-01    |proj g|=  2.95525D-02
+
+At iterate   27    f=  3.45047D-01    |proj g|=  4.80616D-02
+
+At iterate   28    f=  3.36168D-01    |proj g|=  6.40912D-02
+
+At iterate   29    f=  3.11740D-01    |proj g|=  2.13112D-01
+
+At iterate   30    f=  2.96977D-01    |proj g|=  8.52914D-02
+
+At iterate   31    f=  2.93272D-01    |proj g|=  3.31789D-02
+
+At iterate   32    f=  2.90363D-01    |proj g|=  2.28633D-02
+
+At iterate   33    f=  2.87908D-01    |proj g|=  4.73330D-02
+
+At iterate   34    f=  2.78212D-01    |proj g|=  5.55900D-02
+
+At iterate   35    f=  2.76306D-01    |proj g|=  5.78258D-02
+
+At iterate   36    f=  2.73743D-01    |proj g|=  3.11246D-02
+
+At iterate   37    f=  2.68907D-01    |proj g|=  6.92987D-02
+
+At iterate   38    f=  2.62378D-01    |proj g|=  8.13124D-02
+
+At iterate   39    f=  2.56860D-01    |proj g|=  3.47044D-02
+
+At iterate   40    f=  2.55908D-01    |proj g|=  9.01201D-02
+
+At iterate   41    f=  2.52852D-01    |proj g|=  4.55428D-02
+
+At iterate   42    f=  2.48853D-01    |proj g|=  4.05363D-02
+
+At iterate   43    f=  2.43062D-01    |proj g|=  9.87236D-02
+
+At iterate   44    f=  2.28394D-01    |proj g|=  1.34765D-01
+
+At iterate   45    f=  2.19356D-01    |proj g|=  1.46078D-01
+
+At iterate   46    f=  1.99914D-01    |proj g|=  1.09948D-01
+
+At iterate   47    f=  1.92747D-01    |proj g|=  2.24211D-01
+
+At iterate   48    f=  1.85975D-01    |proj g|=  2.16027D-02
+
+At iterate   49    f=  1.83791D-01    |proj g|=  1.95696D-02
+
+At iterate   50    f=  1.80957D-01    |proj g|=  9.18201D-02
+
+At iterate   51    f=  1.77208D-01    |proj g|=  3.06701D-02
+
+At iterate   52    f=  1.74230D-01    |proj g|=  3.34256D-02
+
+At iterate   53    f=  1.68418D-01    |proj g|=  4.48423D-02
+
+At iterate   54    f=  1.63766D-01    |proj g|=  5.96980D-02
+
+At iterate   55    f=  1.60937D-01    |proj g|=  4.89750D-02
+
+At iterate   56    f=  1.58687D-01    |proj g|=  2.86735D-02
+
+At iterate   57    f=  1.55827D-01    |proj g|=  2.47815D-02
+
+At iterate   58    f=  1.54750D-01    |proj g|=  4.16716D-02
+
+At iterate   59    f=  1.53940D-01    |proj g|=  6.99190D-02
+
+At iterate   60    f=  1.53183D-01    |proj g|=  8.01463D-03
+
+At iterate   61    f=  1.52804D-01    |proj g|=  8.16257D-03
+
+At iterate   62    f=  1.51828D-01    |proj g|=  1.07554D-02
+
+At iterate   63    f=  1.51549D-01    |proj g|=  1.03968D-02
+
+At iterate   64    f=  1.51255D-01    |proj g|=  4.04702D-03
+
+At iterate   65    f=  1.50831D-01    |proj g|=  4.10619D-03
+
+At iterate   66    f=  1.49767D-01    |proj g|=  4.35566D-02
+
+At iterate   67    f=  1.48204D-01    |proj g|=  2.54449D-02
+
+At iterate   68    f=  1.45878D-01    |proj g|=  4.54573D-02
+
+At iterate   69    f=  1.45025D-01    |proj g|=  2.74401D-02
+
+At iterate   70    f=  1.44781D-01    |proj g|=  1.85730D-02
+
+At iterate   71    f=  1.44626D-01    |proj g|=  2.72567D-02
+
+At iterate   72    f=  1.44417D-01    |proj g|=  1.28854D-02
+
+At iterate   73    f=  1.44249D-01    |proj g|=  1.16134D-02
+
+At iterate   74    f=  1.44102D-01    |proj g|=  7.35838D-03
+
+At iterate   75    f=  1.43641D-01    |proj g|=  9.42086D-03
+
+At iterate   76    f=  1.42376D-01    |proj g|=  4.40645D-02
+
+At iterate   77    f=  1.40175D-01    |proj g|=  2.89064D-02
+
+At iterate   78    f=  1.37181D-01    |proj g|=  1.43695D-01
+
+At iterate   79    f=  1.34691D-01    |proj g|=  4.32904D-02
+
+At iterate   80    f=  1.32797D-01    |proj g|=  3.05646D-02
+
+At iterate   81    f=  1.32681D-01    |proj g|=  1.60230D-02
+
+At iterate   82    f=  1.32503D-01    |proj g|=  1.52483D-02
+
+At iterate   83    f=  1.32444D-01    |proj g|=  1.93273D-02
+
+At iterate   84    f=  1.32419D-01    |proj g|=  6.93248D-03
+
+At iterate   85    f=  1.32380D-01    |proj g|=  7.76321D-03
+
+At iterate   86    f=  1.32314D-01    |proj g|=  1.62637D-02
+
+At iterate   87    f=  1.32173D-01    |proj g|=  2.04134D-02
+
+At iterate   88    f=  1.31890D-01    |proj g|=  1.01239D-02
+
+At iterate   89    f=  1.31744D-01    |proj g|=  4.61335D-02
+
+At iterate   90    f=  1.31622D-01    |proj g|=  3.27894D-02
+
+At iterate   91    f=  1.31540D-01    |proj g|=  8.83048D-03
+
+At iterate   92    f=  1.31515D-01    |proj g|=  1.24783D-02
+
+At iterate   93    f=  1.31485D-01    |proj g|=  1.05616D-02
+
+At iterate   94    f=  1.31458D-01    |proj g|=  9.64275D-03
+
+At iterate   95    f=  1.31434D-01    |proj g|=  1.17856D-02
+
+At iterate   96    f=  1.31390D-01    |proj g|=  8.15075D-03
+
+At iterate   97    f=  1.31334D-01    |proj g|=  6.66054D-03
+
+At iterate   98    f=  1.31314D-01    |proj g|=  8.72645D-03
+
+At iterate   99    f=  1.31282D-01    |proj g|=  1.49867D-02
+
+At iterate  100    f=  1.31264D-01    |proj g|=  3.74944D-03
+
+At iterate  101    f=  1.31255D-01    |proj g|=  4.62422D-03
+
+At iterate  102    f=  1.31207D-01    |proj g|=  1.37341D-02
+
+At iterate  103    f=  1.31080D-01    |proj g|=  2.14853D-02
+
+At iterate  104    f=  1.30892D-01    |proj g|=  2.36850D-02
+
+At iterate  105    f=  1.30564D-01    |proj g|=  4.07354D-02
+
+At iterate  106    f=  1.30374D-01    |proj g|=  4.65904D-02
+
+At iterate  107    f=  1.30067D-01    |proj g|=  2.92168D-02
+
+At iterate  108    f=  1.29897D-01    |proj g|=  1.50782D-02
+
+At iterate  109    f=  1.29764D-01    |proj g|=  2.59756D-02
+
+At iterate  110    f=  1.29448D-01    |proj g|=  2.39864D-02
+
+At iterate  111    f=  1.29285D-01    |proj g|=  3.12606D-02
+
+At iterate  112    f=  1.29189D-01    |proj g|=  1.77331D-02
+
+At iterate  113    f=  1.29127D-01    |proj g|=  6.02942D-03
+
+At iterate  114    f=  1.29114D-01    |proj g|=  2.21635D-03
+
+At iterate  115    f=  1.29113D-01    |proj g|=  9.65973D-03
+
+At iterate  116    f=  1.29108D-01    |proj g|=  1.66574D-03
+
+At iterate  117    f=  1.29107D-01    |proj g|=  1.41087D-03
+
+At iterate  118    f=  1.29103D-01    |proj g|=  3.18062D-03
+
+At iterate  119    f=  1.29101D-01    |proj g|=  3.95282D-03
+
+At iterate  120    f=  1.29100D-01    |proj g|=  5.29408D-03
+
+At iterate  121    f=  1.29097D-01    |proj g|=  3.57483D-03
+
+At iterate  122    f=  1.29085D-01    |proj g|=  1.97587D-03
+
+At iterate  123    f=  1.29070D-01    |proj g|=  1.16575D-02
+
+At iterate  124    f=  1.29057D-01    |proj g|=  1.61954D-02
+
+At iterate  125    f=  1.29028D-01    |proj g|=  5.23937D-03
+
+At iterate  126    f=  1.29019D-01    |proj g|=  2.78944D-03
+
+At iterate  127    f=  1.29013D-01    |proj g|=  1.82360D-03
+
+At iterate  128    f=  1.29008D-01    |proj g|=  4.41619D-03
+
+At iterate  129    f=  1.29002D-01    |proj g|=  4.11454D-03
+
+At iterate  130    f=  1.28988D-01    |proj g|=  1.42318D-02
+
+At iterate  131    f=  1.28962D-01    |proj g|=  1.52376D-02
+
+At iterate  132    f=  1.28933D-01    |proj g|=  5.25169D-02
+
+At iterate  133    f=  1.28791D-01    |proj g|=  1.31588D-02
+
+At iterate  134    f=  1.28744D-01    |proj g|=  1.45095D-02
+
+At iterate  135    f=  1.28700D-01    |proj g|=  4.87148D-03
+
+At iterate  136    f=  1.28658D-01    |proj g|=  7.50338D-03
+
+At iterate  137    f=  1.28614D-01    |proj g|=  1.37193D-02
+
+At iterate  138    f=  1.28523D-01    |proj g|=  2.47107D-02
+
+At iterate  139    f=  1.28361D-01    |proj g|=  2.74428D-02
+
+At iterate  140    f=  1.28005D-01    |proj g|=  3.24357D-02
+
+At iterate  141    f=  1.27617D-01    |proj g|=  2.34206D-02
+
+At iterate  142    f=  1.26822D-01    |proj g|=  4.06071D-02
+
+At iterate  143    f=  1.26718D-01    |proj g|=  5.01574D-02
+
+At iterate  144    f=  1.26615D-01    |proj g|=  1.45703D-02
+
+At iterate  145    f=  1.26408D-01    |proj g|=  1.22608D-02
+
+At iterate  146    f=  1.26332D-01    |proj g|=  4.47830D-03
+
+At iterate  147    f=  1.26269D-01    |proj g|=  4.03919D-03
+
+At iterate  148    f=  1.26258D-01    |proj g|=  2.42694D-02
+
+At iterate  149    f=  1.26222D-01    |proj g|=  4.21650D-03
+
+At iterate  150    f=  1.26212D-01    |proj g|=  6.68322D-03
+
+At iterate  151    f=  1.26200D-01    |proj g|=  5.74855D-03
+
+At iterate  152    f=  1.26190D-01    |proj g|=  5.82023D-03
+
+At iterate  153    f=  1.26178D-01    |proj g|=  7.51280D-03
+
+At iterate  154    f=  1.26163D-01    |proj g|=  4.47993D-03
+
+At iterate  155    f=  1.26155D-01    |proj g|=  2.54048D-03
+
+At iterate  156    f=  1.26151D-01    |proj g|=  3.66685D-03
+
+At iterate  157    f=  1.26148D-01    |proj g|=  2.46622D-03
+
+At iterate  158    f=  1.26146D-01    |proj g|=  1.26839D-03
+
+At iterate  159    f=  1.26143D-01    |proj g|=  1.61300D-03
+
+At iterate  160    f=  1.26142D-01    |proj g|=  9.97708D-04
+
+At iterate  161    f=  1.26141D-01    |proj g|=  3.78190D-03
+
+At iterate  162    f=  1.26140D-01    |proj g|=  1.57688D-03
+
+At iterate  163    f=  1.26138D-01    |proj g|=  1.56001D-03
+
+At iterate  164    f=  1.26138D-01    |proj g|=  1.63203D-03
+
+At iterate  165    f=  1.26136D-01    |proj g|=  1.65235D-03
+
+At iterate  166    f=  1.26136D-01    |proj g|=  2.72593D-03
+
+At iterate  167    f=  1.26134D-01    |proj g|=  1.48758D-03
+
+At iterate  168    f=  1.26132D-01    |proj g|=  1.22205D-03
+
+At iterate  169    f=  1.26131D-01    |proj g|=  1.20420D-03
+
+At iterate  170    f=  1.26130D-01    |proj g|=  1.94289D-03
+
+At iterate  171    f=  1.26129D-01    |proj g|=  8.95946D-04
+
+At iterate  172    f=  1.26128D-01    |proj g|=  1.29550D-03
+
+At iterate  173    f=  1.26126D-01    |proj g|=  1.21205D-03
+
+At iterate  174    f=  1.26126D-01    |proj g|=  4.14838D-03
+
+At iterate  175    f=  1.26124D-01    |proj g|=  2.76912D-03
+
+At iterate  176    f=  1.26122D-01    |proj g|=  1.33805D-03
+
+At iterate  177    f=  1.26119D-01    |proj g|=  1.91436D-03
+
+At iterate  178    f=  1.26116D-01    |proj g|=  2.88719D-03
+
+At iterate  179    f=  1.26115D-01    |proj g|=  4.09689D-03
+
+At iterate  180    f=  1.26113D-01    |proj g|=  1.38438D-03
+
+At iterate  181    f=  1.26112D-01    |proj g|=  5.10357D-04
+
+At iterate  182    f=  1.26111D-01    |proj g|=  1.27118D-03
+
+At iterate  183    f=  1.26110D-01    |proj g|=  1.98762D-03
+
+At iterate  184    f=  1.26108D-01    |proj g|=  2.67702D-03
+
+At iterate  185    f=  1.26105D-01    |proj g|=  3.17366D-03
+
+At iterate  186    f=  1.26100D-01    |proj g|=  4.42930D-03
+
+At iterate  187    f=  1.26092D-01    |proj g|=  3.74052D-03
+
+At iterate  188    f=  1.26087D-01    |proj g|=  9.98208D-03
+
+At iterate  189    f=  1.26083D-01    |proj g|=  3.21849D-03
+
+At iterate  190    f=  1.26082D-01    |proj g|=  2.41874D-03
+
+At iterate  191    f=  1.26080D-01    |proj g|=  1.06952D-03
+
+At iterate  192    f=  1.26079D-01    |proj g|=  1.27208D-03
+
+At iterate  193    f=  1.26074D-01    |proj g|=  3.22268D-03
+
+At iterate  194    f=  1.26067D-01    |proj g|=  6.45294D-03
+
+At iterate  195    f=  1.26054D-01    |proj g|=  6.01499D-03
+
+At iterate  196    f=  1.26048D-01    |proj g|=  9.73604D-03
+
+At iterate  197    f=  1.26040D-01    |proj g|=  4.73302D-03
+
+At iterate  198    f=  1.26036D-01    |proj g|=  1.95134D-03
+
+At iterate  199    f=  1.26035D-01    |proj g|=  1.75885D-03
+
+At iterate  200    f=  1.26032D-01    |proj g|=  1.14776D-02
+
+At iterate  201    f=  1.26025D-01    |proj g|=  4.81124D-03
+
+At iterate  202    f=  1.26015D-01    |proj g|=  2.28988D-03
+
+At iterate  203    f=  1.26007D-01    |proj g|=  4.31943D-03
+
+At iterate  204    f=  1.26004D-01    |proj g|=  2.38892D-03
+
+At iterate  205    f=  1.26002D-01    |proj g|=  1.92392D-03
+
+At iterate  206    f=  1.26000D-01    |proj g|=  3.02430D-03
+
+At iterate  207    f=  1.25992D-01    |proj g|=  7.43401D-03
+
+At iterate  208    f=  1.25979D-01    |proj g|=  1.17855D-02
+
+At iterate  209    f=  1.25956D-01    |proj g|=  1.55390D-02
+
+At iterate  210    f=  1.25931D-01    |proj g|=  1.44048D-02
+
+At iterate  211    f=  1.25924D-01    |proj g|=  1.00865D-02
+
+At iterate  212    f=  1.25907D-01    |proj g|=  3.31462D-03
+
+At iterate  213    f=  1.25900D-01    |proj g|=  2.70428D-03
+
+At iterate  214    f=  1.25893D-01    |proj g|=  5.68829D-03
+
+At iterate  215    f=  1.25883D-01    |proj g|=  8.57657D-03
+
+At iterate  216    f=  1.25866D-01    |proj g|=  7.25769D-03
+
+At iterate  217    f=  1.25863D-01    |proj g|=  1.22220D-02
+
+At iterate  218    f=  1.25853D-01    |proj g|=  4.85167D-03
+
+At iterate  219    f=  1.25850D-01    |proj g|=  1.28723D-03
+
+At iterate  220    f=  1.25849D-01    |proj g|=  1.43171D-03
+
+At iterate  221    f=  1.25848D-01    |proj g|=  1.68926D-03
+
+At iterate  222    f=  1.25847D-01    |proj g|=  1.21165D-03
+
+At iterate  223    f=  1.25846D-01    |proj g|=  2.60830D-03
+
+At iterate  224    f=  1.25844D-01    |proj g|=  1.59260D-03
+
+At iterate  225    f=  1.25839D-01    |proj g|=  4.79645D-03
+
+At iterate  226    f=  1.25829D-01    |proj g|=  8.33938D-03
+
+At iterate  227    f=  1.25808D-01    |proj g|=  1.27467D-02
+
+At iterate  228    f=  1.25773D-01    |proj g|=  1.56988D-02
+
+At iterate  229    f=  1.25761D-01    |proj g|=  1.63814D-02
+
+At iterate  230    f=  1.25733D-01    |proj g|=  1.01775D-02
+
+At iterate  231    f=  1.25717D-01    |proj g|=  5.70074D-03
+
+At iterate  232    f=  1.25713D-01    |proj g|=  2.21588D-03
+
+At iterate  233    f=  1.25710D-01    |proj g|=  2.60358D-03
+
+At iterate  234    f=  1.25704D-01    |proj g|=  4.50261D-03
+
+At iterate  235    f=  1.25693D-01    |proj g|=  9.06899D-03
+
+At iterate  236    f=  1.25667D-01    |proj g|=  1.51948D-02
+
+At iterate  237    f=  1.25616D-01    |proj g|=  1.86925D-02
+
+At iterate  238    f=  1.25592D-01    |proj g|=  1.99294D-02
+
+At iterate  239    f=  1.25562D-01    |proj g|=  9.00641D-03
+
+At iterate  240    f=  1.25546D-01    |proj g|=  6.14230D-03
+
+At iterate  241    f=  1.25540D-01    |proj g|=  7.14640D-04
+
+At iterate  242    f=  1.25539D-01    |proj g|=  1.20809D-03
+
+At iterate  243    f=  1.25538D-01    |proj g|=  2.72703D-03
+
+At iterate  244    f=  1.25535D-01    |proj g|=  4.23916D-03
+
+At iterate  245    f=  1.25529D-01    |proj g|=  5.81284D-03
+
+At iterate  246    f=  1.25515D-01    |proj g|=  6.10371D-03
+
+At iterate  247    f=  1.25506D-01    |proj g|=  1.02378D-02
+
+At iterate  248    f=  1.25488D-01    |proj g|=  6.31588D-03
+
+At iterate  249    f=  1.25458D-01    |proj g|=  4.62514D-03
+
+At iterate  250    f=  1.25439D-01    |proj g|=  8.93321D-03
+
+At iterate  251    f=  1.25405D-01    |proj g|=  1.26513D-02
+
+At iterate  252    f=  1.25360D-01    |proj g|=  1.94624D-02
+
+At iterate  253    f=  1.25278D-01    |proj g|=  1.11753D-02
+
+At iterate  254    f=  1.25166D-01    |proj g|=  1.02546D-02
+
+At iterate  255    f=  1.25065D-01    |proj g|=  8.20809D-03
+
+At iterate  256    f=  1.24996D-01    |proj g|=  8.11139D-03
+
+At iterate  257    f=  1.24971D-01    |proj g|=  6.89763D-03
+
+At iterate  258    f=  1.24959D-01    |proj g|=  3.62287D-03
+
+At iterate  259    f=  1.24951D-01    |proj g|=  3.04802D-03
+
+At iterate  260    f=  1.24939D-01    |proj g|=  3.34464D-03
+
+At iterate  261    f=  1.24930D-01    |proj g|=  6.72343D-03
+
+At iterate  262    f=  1.24918D-01    |proj g|=  1.15791D-03
+
+At iterate  263    f=  1.24915D-01    |proj g|=  8.54536D-04
+
+At iterate  264    f=  1.24913D-01    |proj g|=  1.65845D-03
+
+At iterate  265    f=  1.24909D-01    |proj g|=  1.63990D-03
+
+At iterate  266    f=  1.24904D-01    |proj g|=  4.76541D-03
+
+At iterate  267    f=  1.24898D-01    |proj g|=  2.75425D-03
+
+At iterate  268    f=  1.24889D-01    |proj g|=  3.43623D-03
+
+At iterate  269    f=  1.24874D-01    |proj g|=  7.15653D-03
+
+At iterate  270    f=  1.24833D-01    |proj g|=  1.36842D-02
+
+At iterate  271    f=  1.24753D-01    |proj g|=  2.04943D-02
+
+At iterate  272    f=  1.24596D-01    |proj g|=  2.89178D-02
+
+At iterate  273    f=  1.24274D-01    |proj g|=  3.09136D-02
+
+At iterate  274    f=  1.23890D-01    |proj g|=  4.15363D-02
+
+At iterate  275    f=  1.23687D-01    |proj g|=  3.47302D-02
+
+At iterate  276    f=  1.23611D-01    |proj g|=  4.21629D-02
+
+At iterate  277    f=  1.23215D-01    |proj g|=  1.71855D-02
+
+At iterate  278    f=  1.23020D-01    |proj g|=  6.85399D-03
+
+At iterate  279    f=  1.22995D-01    |proj g|=  4.42656D-03
+
+At iterate  280    f=  1.22982D-01    |proj g|=  2.85896D-03
+
+At iterate  281    f=  1.22967D-01    |proj g|=  1.56349D-03
+
+At iterate  282    f=  1.22960D-01    |proj g|=  2.22356D-03
+
+At iterate  283    f=  1.22936D-01    |proj g|=  3.37044D-03
+
+At iterate  284    f=  1.22909D-01    |proj g|=  8.93643D-03
+
+At iterate  285    f=  1.22813D-01    |proj g|=  6.45112D-03
+
+At iterate  286    f=  1.22647D-01    |proj g|=  1.05638D-02
+
+At iterate  287    f=  1.22484D-01    |proj g|=  1.31939D-02
+
+At iterate  288    f=  1.22455D-01    |proj g|=  8.69354D-03
+
+At iterate  289    f=  1.22386D-01    |proj g|=  2.50916D-03
+
+At iterate  290    f=  1.22366D-01    |proj g|=  2.45746D-03
+
+At iterate  291    f=  1.22359D-01    |proj g|=  2.96509D-03
+
+At iterate  292    f=  1.22348D-01    |proj g|=  2.26121D-03
+
+At iterate  293    f=  1.22335D-01    |proj g|=  1.43859D-03
+
+At iterate  294    f=  1.22329D-01    |proj g|=  3.65570D-03
+
+At iterate  295    f=  1.22321D-01    |proj g|=  2.07802D-03
+
+At iterate  296    f=  1.22309D-01    |proj g|=  1.71523D-03
+
+At iterate  297    f=  1.22295D-01    |proj g|=  3.32702D-03
+
+At iterate  298    f=  1.22270D-01    |proj g|=  4.64654D-03
+
+At iterate  299    f=  1.22265D-01    |proj g|=  2.38108D-02
+
+At iterate  300    f=  1.22222D-01    |proj g|=  6.77096D-03
+
+At iterate  301    f=  1.22201D-01    |proj g|=  4.09739D-03
+
+At iterate  302    f=  1.22187D-01    |proj g|=  2.99088D-03
+
+At iterate  303    f=  1.22171D-01    |proj g|=  2.07348D-03
+
+At iterate  304    f=  1.22169D-01    |proj g|=  1.39139D-03
+
+At iterate  305    f=  1.22167D-01    |proj g|=  1.41298D-03
+
+At iterate  306    f=  1.22159D-01    |proj g|=  4.53051D-03
+
+At iterate  307    f=  1.22152D-01    |proj g|=  6.88095D-03
+
+At iterate  308    f=  1.22141D-01    |proj g|=  7.20492D-03
+
+At iterate  309    f=  1.22139D-01    |proj g|=  7.95532D-03
+
+At iterate  310    f=  1.22131D-01    |proj g|=  4.48210D-03
+
+At iterate  311    f=  1.22124D-01    |proj g|=  2.47294D-03
+
+At iterate  312    f=  1.22116D-01    |proj g|=  5.07728D-03
+
+At iterate  313    f=  1.22105D-01    |proj g|=  9.06600D-03
+
+At iterate  314    f=  1.22089D-01    |proj g|=  9.71013D-03
+
+At iterate  315    f=  1.22086D-01    |proj g|=  1.04358D-02
+
+At iterate  316    f=  1.22076D-01    |proj g|=  3.09368D-03
+
+At iterate  317    f=  1.22072D-01    |proj g|=  1.48931D-03
+
+At iterate  318    f=  1.22070D-01    |proj g|=  3.51638D-03
+
+At iterate  319    f=  1.22067D-01    |proj g|=  6.01978D-03
+
+At iterate  320    f=  1.22058D-01    |proj g|=  9.72401D-03
+
+At iterate  321    f=  1.22039D-01    |proj g|=  1.32002D-02
+
+At iterate  322    f=  1.22005D-01    |proj g|=  1.33847D-02
+
+At iterate  323    f=  1.21994D-01    |proj g|=  1.71299D-02
+
+At iterate  324    f=  1.21957D-01    |proj g|=  1.08612D-02
+
+At iterate  325    f=  1.21945D-01    |proj g|=  2.88897D-03
+
+At iterate  326    f=  1.21937D-01    |proj g|=  1.90615D-03
+
+At iterate  327    f=  1.21933D-01    |proj g|=  1.19071D-03
+
+At iterate  328    f=  1.21929D-01    |proj g|=  4.79771D-03
+
+At iterate  329    f=  1.21924D-01    |proj g|=  2.67337D-03
+
+At iterate  330    f=  1.21915D-01    |proj g|=  1.98990D-03
+
+At iterate  331    f=  1.21904D-01    |proj g|=  3.22522D-03
+
+At iterate  332    f=  1.21885D-01    |proj g|=  4.33676D-03
+
+At iterate  333    f=  1.21857D-01    |proj g|=  9.14046D-03
+
+At iterate  334    f=  1.21822D-01    |proj g|=  4.63596D-03
+
+At iterate  335    f=  1.21796D-01    |proj g|=  1.29217D-03
+
+At iterate  336    f=  1.21778D-01    |proj g|=  3.53204D-03
+
+At iterate  337    f=  1.21771D-01    |proj g|=  4.74339D-03
+
+At iterate  338    f=  1.21769D-01    |proj g|=  1.59418D-03
+
+At iterate  339    f=  1.21766D-01    |proj g|=  7.57784D-04
+
+At iterate  340    f=  1.21766D-01    |proj g|=  3.21854D-03
+
+At iterate  341    f=  1.21764D-01    |proj g|=  1.65344D-03
+
+At iterate  342    f=  1.21763D-01    |proj g|=  8.66595D-04
+
+At iterate  343    f=  1.21759D-01    |proj g|=  2.36249D-03
+
+At iterate  344    f=  1.21751D-01    |proj g|=  4.14919D-03
+
+At iterate  345    f=  1.21733D-01    |proj g|=  5.78160D-03
+
+At iterate  346    f=  1.21693D-01    |proj g|=  7.83165D-03
+
+At iterate  347    f=  1.21626D-01    |proj g|=  1.60368D-02
+
+At iterate  348    f=  1.21533D-01    |proj g|=  9.21095D-03
+
+At iterate  349    f=  1.21452D-01    |proj g|=  6.96419D-03
+
+At iterate  350    f=  1.21400D-01    |proj g|=  1.15093D-02
+
+At iterate  351    f=  1.21383D-01    |proj g|=  7.31797D-03
+
+At iterate  352    f=  1.21368D-01    |proj g|=  4.26202D-03
+
+At iterate  353    f=  1.21330D-01    |proj g|=  3.35203D-03
+
+At iterate  354    f=  1.21285D-01    |proj g|=  5.49522D-03
+
+At iterate  355    f=  1.21169D-01    |proj g|=  1.57613D-02
+
+At iterate  356    f=  1.21024D-01    |proj g|=  2.23946D-02
+
+At iterate  357    f=  1.20978D-01    |proj g|=  2.50799D-02
+
+At iterate  358    f=  1.20924D-01    |proj g|=  8.19593D-03
+
+At iterate  359    f=  1.20872D-01    |proj g|=  2.93132D-03
+
+At iterate  360    f=  1.20860D-01    |proj g|=  9.52361D-03
+
+At iterate  361    f=  1.20841D-01    |proj g|=  5.07478D-03
+
+At iterate  362    f=  1.20802D-01    |proj g|=  6.76936D-03
+
+At iterate  363    f=  1.20756D-01    |proj g|=  1.07250D-02
+
+At iterate  364    f=  1.20695D-01    |proj g|=  1.38950D-02
+
+At iterate  365    f=  1.20586D-01    |proj g|=  1.21681D-02
+
+At iterate  366    f=  1.18691D-01    |proj g|=  3.88470D-02
+
+At iterate  367    f=  1.18680D-01    |proj g|=  3.97125D-02
+
+At iterate  368    f=  1.18591D-01    |proj g|=  4.14238D-02
+
+At iterate  369    f=  1.18213D-01    |proj g|=  3.28177D-02
+
+At iterate  370    f=  1.17543D-01    |proj g|=  3.58626D-02
+
+At iterate  371    f=  1.17420D-01    |proj g|=  2.74227D-02
+
+At iterate  372    f=  1.17167D-01    |proj g|=  2.33120D-02
+
+At iterate  373    f=  1.17125D-01    |proj g|=  1.41727D-02
+
+At iterate  374    f=  1.17081D-01    |proj g|=  5.24851D-03
+
+At iterate  375    f=  1.17063D-01    |proj g|=  6.33680D-03
+
+At iterate  376    f=  1.17003D-01    |proj g|=  9.80761D-03
+
+At iterate  377    f=  1.16910D-01    |proj g|=  7.45020D-03
+
+At iterate  378    f=  1.16825D-01    |proj g|=  5.19693D-03
+
+At iterate  379    f=  1.16738D-01    |proj g|=  1.01924D-02
+
+At iterate  380    f=  1.16645D-01    |proj g|=  1.01715D-02
+
+At iterate  381    f=  1.16510D-01    |proj g|=  1.03471D-02
+
+At iterate  382    f=  1.16475D-01    |proj g|=  8.31782D-03
+
+At iterate  383    f=  1.16429D-01    |proj g|=  4.76558D-03
+
+At iterate  384    f=  1.16400D-01    |proj g|=  2.60117D-03
+
+At iterate  385    f=  1.16390D-01    |proj g|=  2.94141D-03
+
+At iterate  386    f=  1.16370D-01    |proj g|=  2.84829D-03
+
+At iterate  387    f=  1.16326D-01    |proj g|=  4.64667D-03
+
+At iterate  388    f=  1.16268D-01    |proj g|=  5.33305D-03
+
+At iterate  389    f=  1.16227D-01    |proj g|=  8.90285D-03
+
+At iterate  390    f=  1.16135D-01    |proj g|=  8.07262D-03
+
+At iterate  391    f=  1.15989D-01    |proj g|=  6.65042D-03
+
+At iterate  392    f=  1.15882D-01    |proj g|=  5.84965D-03
+
+At iterate  393    f=  1.15789D-01    |proj g|=  4.99638D-03
+
+At iterate  394    f=  1.15751D-01    |proj g|=  5.47027D-03
+
+At iterate  395    f=  1.15722D-01    |proj g|=  2.53508D-03
+
+At iterate  396    f=  1.15695D-01    |proj g|=  2.88446D-03
+
+At iterate  397    f=  1.15659D-01    |proj g|=  3.28872D-03
+
+At iterate  398    f=  1.15647D-01    |proj g|=  3.21107D-03
+
+At iterate  399    f=  1.15630D-01    |proj g|=  2.36731D-03
+
+At iterate  400    f=  1.15580D-01    |proj g|=  3.25496D-03
+
+At iterate  401    f=  1.15546D-01    |proj g|=  1.58311D-02
+
+At iterate  402    f=  1.15469D-01    |proj g|=  9.14611D-03
+
+At iterate  403    f=  1.15399D-01    |proj g|=  4.10784D-03
+
+At iterate  404    f=  1.15351D-01    |proj g|=  4.91253D-03
+
+At iterate  405    f=  1.15320D-01    |proj g|=  4.18001D-03
+
+At iterate  406    f=  1.15286D-01    |proj g|=  2.11181D-03
+
+At iterate  407    f=  1.15252D-01    |proj g|=  2.23318D-03
+
+At iterate  408    f=  1.15227D-01    |proj g|=  2.58766D-03
+
+At iterate  409    f=  1.15198D-01    |proj g|=  1.05239D-03
+
+At iterate  410    f=  1.15174D-01    |proj g|=  1.89047D-03
+
+At iterate  411    f=  1.15147D-01    |proj g|=  3.03909D-03
+
+At iterate  412    f=  1.15111D-01    |proj g|=  4.22467D-03
+
+At iterate  413    f=  1.15056D-01    |proj g|=  4.16506D-03
+
+At iterate  414    f=  1.15048D-01    |proj g|=  5.41391D-03
+
+At iterate  415    f=  1.15023D-01    |proj g|=  2.34937D-03
+
+At iterate  416    f=  1.15015D-01    |proj g|=  5.84877D-04
+
+At iterate  417    f=  1.15011D-01    |proj g|=  5.62819D-04
+
+At iterate  418    f=  1.15006D-01    |proj g|=  2.40103D-03
+
+At iterate  419    f=  1.14998D-01    |proj g|=  2.06476D-03
+
+At iterate  420    f=  1.14976D-01    |proj g|=  2.85780D-03
+
+At iterate  421    f=  1.14943D-01    |proj g|=  4.37662D-03
+
+At iterate  422    f=  1.14893D-01    |proj g|=  5.43878D-03
+
+At iterate  423    f=  1.14880D-01    |proj g|=  5.93096D-03
+
+At iterate  424    f=  1.14859D-01    |proj g|=  1.99048D-03
+
+At iterate  425    f=  1.14856D-01    |proj g|=  4.22408D-04
+
+At iterate  426    f=  1.14856D-01    |proj g|=  2.57193D-04
+
+At iterate  427    f=  1.14855D-01    |proj g|=  2.71592D-04
+
+At iterate  428    f=  1.14854D-01    |proj g|=  1.45601D-03
+
+At iterate  429    f=  1.14852D-01    |proj g|=  1.23137D-03
+
+At iterate  430    f=  1.14842D-01    |proj g|=  1.18205D-03
+
+At iterate  431    f=  1.14821D-01    |proj g|=  1.87170D-03
+
+At iterate  432    f=  1.14796D-01    |proj g|=  2.78001D-03
+
+At iterate  433    f=  1.14790D-01    |proj g|=  2.08295D-03
+
+At iterate  434    f=  1.14779D-01    |proj g|=  1.51578D-03
+
+At iterate  435    f=  1.14772D-01    |proj g|=  9.87374D-04
+
+At iterate  436    f=  1.14749D-01    |proj g|=  2.26676D-03
+
+At iterate  437    f=  1.14725D-01    |proj g|=  4.30721D-03
+
+At iterate  438    f=  1.14681D-01    |proj g|=  2.75549D-03
+
+At iterate  439    f=  1.14665D-01    |proj g|=  5.51574D-03
+
+At iterate  440    f=  1.14618D-01    |proj g|=  1.70459D-03
+
+At iterate  441    f=  1.14133D-01    |proj g|=  2.39538D-02
+  ys=-1.508E-04  -gs= 1.616E-04 BFGS update SKIPPED
+
+At iterate  442    f=  1.14106D-01    |proj g|=  2.50607D-02
+
+At iterate  443    f=  1.14071D-01    |proj g|=  2.37363D-02
+
+At iterate  444    f=  1.13707D-01    |proj g|=  1.53396D-02
+
+At iterate  445    f=  1.13327D-01    |proj g|=  5.64902D-03
+
+At iterate  446    f=  1.12710D-01    |proj g|=  9.97828D-03
+
+At iterate  447    f=  1.11835D-01    |proj g|=  3.39037D-02
+
+At iterate  448    f=  1.11145D-01    |proj g|=  1.53904D-02
+
+At iterate  449    f=  1.10923D-01    |proj g|=  6.90677D-03
+
+At iterate  450    f=  1.10671D-01    |proj g|=  4.84633D-03
+
+At iterate  451    f=  1.09791D-01    |proj g|=  3.02968D-02
+
+At iterate  452    f=  1.09078D-01    |proj g|=  4.19764D-02
+
+At iterate  453    f=  1.08115D-01    |proj g|=  3.74324D-02
+
+At iterate  454    f=  1.07233D-01    |proj g|=  2.36160D-02
+
+At iterate  455    f=  1.07075D-01    |proj g|=  9.39718D-03
+
+At iterate  456    f=  1.06644D-01    |proj g|=  2.06385D-02
+
+At iterate  457    f=  1.06350D-01    |proj g|=  1.54279D-02
+
+At iterate  458    f=  1.05991D-01    |proj g|=  1.16485D-02
+
+At iterate  459    f=  1.05764D-01    |proj g|=  1.39322D-02
+
+At iterate  460    f=  1.05614D-01    |proj g|=  2.88180D-02
+
+At iterate  461    f=  1.05165D-01    |proj g|=  1.39357D-02
+
+At iterate  462    f=  1.05095D-01    |proj g|=  4.41320D-03
+
+At iterate  463    f=  1.05050D-01    |proj g|=  2.83503D-03
+
+At iterate  464    f=  1.05034D-01    |proj g|=  1.43965D-03
+
+At iterate  465    f=  1.05018D-01    |proj g|=  3.49166D-03
+
+At iterate  466    f=  1.04976D-01    |proj g|=  4.09330D-03
+
+At iterate  467    f=  1.04852D-01    |proj g|=  6.35101D-03
+
+At iterate  468    f=  1.04527D-01    |proj g|=  1.61015D-02
+
+At iterate  469    f=  1.04065D-01    |proj g|=  1.96000D-02
+
+At iterate  470    f=  1.03535D-01    |proj g|=  1.61624D-02
+
+At iterate  471    f=  1.03476D-01    |proj g|=  1.39391D-02
+
+At iterate  472    f=  1.03355D-01    |proj g|=  3.62369D-03
+
+At iterate  473    f=  1.03338D-01    |proj g|=  5.45765D-03
+
+At iterate  474    f=  1.03328D-01    |proj g|=  1.96102D-03
+
+At iterate  475    f=  1.03322D-01    |proj g|=  1.25296D-03
+
+At iterate  476    f=  1.03301D-01    |proj g|=  3.34510D-03
+
+At iterate  477    f=  1.03288D-01    |proj g|=  5.76807D-03
+
+At iterate  478    f=  1.03265D-01    |proj g|=  3.09015D-03
+
+At iterate  479    f=  1.03197D-01    |proj g|=  4.69909D-03
+
+At iterate  480    f=  1.03158D-01    |proj g|=  6.45999D-03
+
+At iterate  481    f=  1.03113D-01    |proj g|=  5.10763D-03
+
+At iterate  482    f=  1.03059D-01    |proj g|=  4.37524D-03
+
+At iterate  483    f=  1.03049D-01    |proj g|=  7.88885D-03
+
+At iterate  484    f=  1.03016D-01    |proj g|=  6.10118D-03
+
+At iterate  485    f=  1.03004D-01    |proj g|=  5.16292D-03
+
+At iterate  486    f=  1.02985D-01    |proj g|=  4.09986D-03
+
+At iterate  487    f=  1.02939D-01    |proj g|=  6.82232D-03
+
+At iterate  488    f=  1.02889D-01    |proj g|=  8.14068D-03
+
+At iterate  489    f=  1.02847D-01    |proj g|=  5.93811D-03
+
+At iterate  490    f=  1.02810D-01    |proj g|=  6.09121D-03
+
+At iterate  491    f=  1.02744D-01    |proj g|=  3.31906D-03
+
+At iterate  492    f=  1.02729D-01    |proj g|=  1.51912D-03
+
+At iterate  493    f=  1.02700D-01    |proj g|=  2.75579D-03
+
+At iterate  494    f=  1.02682D-01    |proj g|=  4.70155D-03
+
+At iterate  495    f=  1.02648D-01    |proj g|=  3.75593D-03
+
+At iterate  496    f=  1.02577D-01    |proj g|=  4.10448D-03
+
+At iterate  497    f=  1.02498D-01    |proj g|=  1.21595D-02
+
+At iterate  498    f=  1.02359D-01    |proj g|=  1.11483D-02
+
+At iterate  499    f=  1.02257D-01    |proj g|=  7.72240D-03
+
+At iterate  500    f=  1.02085D-01    |proj g|=  5.04498D-03
+
+           * * *
+
+Tit   = total number of iterations
+Tnf   = total number of function evaluations
+Tnint = total number of segments explored during Cauchy searches
+Skip  = number of BFGS updates skipped
+Nact  = number of active bounds at final generalized Cauchy point
+Projg = norm of the final projected gradient
+F     = final function value
+
+           * * *
+
+   N    Tit     Tnf  Tnint  Skip  Nact     Projg        F
+   25    500    574      1     1     0   5.045D-03   1.021D-01
+  F =  0.10208463248022726     
+
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT                 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> This problem is unconstrained.
+/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/sklearn/neural_network/_multilayer_perceptron.py:546: ConvergenceWarning: lbfgs failed to converge (status=1):
+STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
+
+Increase the number of iterations (max_iter) or scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+  self.n_iter_ = _check_optimize_result(&quot;lbfgs&quot;, opt_res, self.max_iter)
+</pre></div>
+</div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>MLPClassifier(activation=&#x27;logistic&#x27;, hidden_layer_sizes=4, max_iter=500,
+              solver=&#x27;lbfgs&#x27;, verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">MLPClassifier</label><div class="sk-toggleable__content"><pre>MLPClassifier(activation=&#x27;logistic&#x27;, hidden_layer_sizes=4, max_iter=500,
+              solver=&#x27;lbfgs&#x27;, verbose=10)</pre></div></div></div></div></div></div></div>
+</div>
+<p>Then use our function to build up the predictions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_neuron_4d_h0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">hidden_neuron_4d_h1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">hidden_neuron_4d_h2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">2</span><span class="p">],</span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">hidden_neuron_4d_h3</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span><span class="mi">3</span><span class="p">],</span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+<span class="n">output_neuron_4d_4h</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">aritificial_neuron_template</span><span class="p">(</span><span class="n">logistic_activation</span><span class="p">,</span>
+                             <span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">coefs_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">intercepts_</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and finally call it all togther</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_neuron_4d_4h</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">hidden_neuron_4d_h0</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">),</span>
+         <span class="n">hidden_neuron_4d_h1</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">),</span>
+         <span class="n">hidden_neuron_4d_h2</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">),</span>
+         <span class="n">hidden_neuron_4d_h3</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.31852002],
+       [0.35827785]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>and compare with the MLP’s own predications</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clf_4d_4h</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">pt_4d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.68147998, 0.31852002],
+       [0.64172215, 0.35827785]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="questions">
+<h2><span class="section-number">23.8. </span>Questions<a class="headerlink" href="#questions" title="Permalink to this headline">#</a></h2>
+<section id="are-there-neural-networks-wherein-each-layer-does-a-different-type-of-transformation-such-as-logistic-or-identity">
+<h3><span class="section-number">23.8.1. </span>Are there neural networks wherein each layer does a different type of transformation, such as logistic or identity?<a class="headerlink" href="#are-there-neural-networks-wherein-each-layer-does-a-different-type-of-transformation-such-as-logistic-or-identity" title="Permalink to this headline">#</a></h3>
+<p>There are different types of layers and some are defined by activations, others are more complex calculations in other ways.</p>
+</section>
+<section id="what-are-the-benefits-of-neural-networks-compared-to-machine-learning">
+<h3><span class="section-number">23.8.2. </span>What are the benefits of neural networks compared to machine learning?<a class="headerlink" href="#what-are-the-benefits-of-neural-networks-compared-to-machine-learning" title="Permalink to this headline">#</a></h3>
+<p>Neural networks are one type of machine learning model.</p>
+</section>
+<section id="what-is-the-larger-contributing-in-advancements-in-deep-learning-hardware-or-software">
+<h3><span class="section-number">23.8.3. </span>What is the larger contributing in advancements in deep learning - hardware or software?<a class="headerlink" href="#what-is-the-larger-contributing-in-advancements-in-deep-learning-hardware-or-software" title="Permalink to this headline">#</a></h3>
+<p>Hardware advances were essential for</p>
+</section>
+<section id="are-there-any-other-visualizations-of-neural-networks-such-as-images-articles-videos-that-would-be-good-for-introductions-i-would-like-some-that-do-go-into-some-of-the-math-behind-how-it-works">
+<h3><span class="section-number">23.8.4. </span>Are there any other visualizations of neural networks such as images,articles,videos that would be good for introductions? I would like some that do go into some of the math behind how it works.<a class="headerlink" href="#are-there-any-other-visualizations-of-neural-networks-such-as-images-articles-videos-that-would-be-good-for-introductions-i-would-like-some-that-do-go-into-some-of-the-math-behind-how-it-works" title="Permalink to this headline">#</a></h3>
+<p>This <a class="reference external" href="https://www.deeplearningbook.org/">free textbook</a> is a good source by leaders in the feild.</p>
+</section>
+<section id="are-you-able-to-keep-training-data-from-a-previous-session-with-deep-learning">
+<h3><span class="section-number">23.8.5. </span>Are you able to keep training data from a previous session with deep learning?<a class="headerlink" href="#are-you-able-to-keep-training-data-from-a-previous-session-with-deep-learning" title="Permalink to this headline">#</a></h3>
+<p>For any machine learning algorithm you can save the object or serialize the parameters to a file and then load them back in.</p>
+<p>For deep learning you can save the weight matrices and you can also then reinstantiate the object.</p>
+<p><a class="reference external" href="https://huggingface.co/models">Hugging face</a> contains pretrained models.</p>
+</section>
+<section id="what-other-functions-can-we-use-instead-of-explit-sigmoid">
+<h3><span class="section-number">23.8.6. </span>What other functions can we use instead of explit (sigmoid)?<a class="headerlink" href="#what-other-functions-can-we-use-instead-of-explit-sigmoid" title="Permalink to this headline">#</a></h3>
+<p>The most common other one is RELU, we’ll see more about that next week.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2023-11-28.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">22. </span>More text representations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../assignments/01-syllabus-install.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Assignment 1: Setup, Syllabus, and Review</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#admin">23.1. Admin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-neural-network">23.2. What is a Neural Network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nn-in-sklearn">23.3. NN in Sklearn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-nn-to-mlp">23.4. Comparing nn to mlp</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-predictions">23.5. Neural Network Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-way-to-replicate">23.6. Another way to replicate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-complicated-example">23.7. A more complicated example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">23.8. Questions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-neural-networks-wherein-each-layer-does-a-different-type-of-transformation-such-as-logistic-or-identity">23.8.1. Are there neural networks wherein each layer does a different type of transformation, such as logistic or identity?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-benefits-of-neural-networks-compared-to-machine-learning">23.8.2. What are the benefits of neural networks compared to machine learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-larger-contributing-in-advancements-in-deep-learning-hardware-or-software">23.8.3. What is the larger contributing in advancements in deep learning - hardware or software?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-there-any-other-visualizations-of-neural-networks-such-as-images-articles-videos-that-would-be-good-for-introductions-i-would-like-some-that-do-go-into-some-of-the-math-behind-how-it-works">23.8.4. Are there any other visualizations of neural networks such as images,articles,videos that would be good for introductions? I would like some that do go into some of the math behind how it works.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#are-you-able-to-keep-training-data-from-a-previous-session-with-deep-learning">23.8.5. Are you able to keep training data from a previous session with deep learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-other-functions-can-we-use-instead-of-explit-sigmoid">23.8.6. What other functions can we use instead of explit (sigmoid)?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Professor Sarah M Brown
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
